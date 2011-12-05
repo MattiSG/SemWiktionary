@@ -1,0 +1,33 @@
+## Build products #
+*.class
+build
+bin
+jars
+dist
+*.exe
+
+
+## OS X #
+.DS_Store
+._*
+
+
+## Windows #
+Thumbs.db 
+Desktop.ini
+
+
+## Linux #
+.*
+!.gitignore
+*~
+*.bak
+.directory
+
+
+## SCM #
+.svn/
+
+
+##IDE #
+*.xcodeproj

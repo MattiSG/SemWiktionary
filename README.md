@@ -15,19 +15,19 @@ Objectifs
 
 Fournir une API Java permettant d'accéder aux informations suivantes sur un mot de la langue française :
 
-1. "nature":http://fr.wikipedia.org/wiki/Classe_lexicale (ou “classe lexicale”) ;
+1. [nature](http://fr.wikipedia.org/wiki/Classe_lexicale) (ou “classe lexicale”) ;
 2. relations avec d'autres mots de la base de données (liste non exhaustive : synonymie, homonymie…) ;
 3. définition.
 
 ### Objectifs secondaires ###
 
-*Performance.* Durées maximales envisageables : 1 journée pour le chargement de la base de données ; 5 minutes pour l'exécution d'une requête.
+**Performance.** Durées maximales envisageables : 1 journée pour le chargement de la base de données ; 5 minutes pour l'exécution d'une requête.
 
 Contraintes
 -----------
 
-1. Source de données : "Wiktionnaire":http://fr.wiktionary.org.
-2. Technologies : API disponible en Java. Base de données "non-relationnelle":http://en.wikipedia.org/wiki/Graph_database, de préférence Neo4j.
+1. Source de données : [Wiktionnaire](http://fr.wiktionary.org).
+2. Technologies : API disponible en Java. Base de données [non-relationnelle](http://en.wikipedia.org/wiki/Graph_database), de préférence Neo4j.
 
 
 License

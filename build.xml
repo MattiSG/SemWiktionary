@@ -2,7 +2,7 @@
 <project name="semwiktionary" default="junit" basedir=".">
 	<!-- JAVA CLASSES -->	
 		<!-- package prefix -->
-		<property name="package" value="edu.unice.polytech.si5.kis.semwiktionary"/>
+		<property name="package" value="edu.unice.polytech.kis.semwiktionary"/>
 
 		<!-- main class to be executed -->
 		<property name="main_class" value="${package}.SemWiktionary"/>

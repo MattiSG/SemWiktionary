@@ -149,9 +149,10 @@
 		<mkdir dir="${tmp}"/>
 		<mkdir dir="${tmp}/config"/>
 		<copy file="${build_file}" todir="${tmp}"/>
-		<copy todir="${tmp}/config">
-				<fileset dir="${config}"/> <!-- TODO: do not fail if directory does not exist -->
+<!--		<copy todir="${tmp}/config">
+				<fileset dir="${config}"/>  // TODO: do not fail if directory does not exist
 		</copy>
+-->
 		<zip destfile="${dist}/${ant.project.name}${project_suffix}.zip">
 			<fileset dir="${jars}"/>
 			<fileset dir="${doc}"/>

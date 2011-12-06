@@ -6,6 +6,7 @@ jars
 dist
 *.exe
 build.num
+tmp
 
 
 ## OS X #

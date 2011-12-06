@@ -1,4 +1,4 @@
-package test;
+package edu.unice.polytech.si5.kis.semwiktionary.test;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

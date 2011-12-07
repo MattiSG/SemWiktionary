@@ -97,3 +97,5 @@ Credits
 - Carine Fédèle
 
 ### Used projects ###
+- [Neo4j](http://neo4j.org/) (GPL)
+- [JFlex](http://jflex.de/) (GPL)

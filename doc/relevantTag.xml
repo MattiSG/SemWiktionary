@@ -1,0 +1,13 @@
+
+<!-- Relevant tags of XML file.
+     All tags that we need who be parsed.-->
+
+<mediawiki>
+	<page>
+		<title></title>
+		<revision>
+			<timestamp></timestamp>
+			<text xml:space="preserve"></text>
+		<revision>
+	</page>
+</mediawiki>

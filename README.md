@@ -33,7 +33,7 @@ Contraintes
 License
 -------
 
-To be determined.
+GNU [General Public License](http://www.gnu.org/licenses/gpl.html).
 
 Equivalent projects and rationale
 ---------------------------------

@@ -89,7 +89,7 @@
 	<target name="jflex" depends="init" description="Generate parser"> <!-- http://jflex.de/jflex_anttask.html -->
 		<jflex
 			file="${src}/parser/WikimediaDump.flex"
-			destdir="${bin}/parser/"
+			destdir="${src}"
 		/>
 	</target>
 

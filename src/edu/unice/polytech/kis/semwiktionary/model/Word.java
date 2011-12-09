@@ -14,6 +14,19 @@ public class Word {
 	private String name;
 	private List<Definition> definitions;
 	
+	// Static constructors
+	public static Word from(String word) {
+		if (Word.exists(word)) //TODO: check if it should not be the other way around, depending on Neo4j getter implementation
+			return new Word(word);
+		
+		return null;
+	}
+	
+	public static boolean exists(String word) {
+		//TODO do an actual test
+		return true;
+	}
+	
 	// Constructors
 	public Word(String name) {
 		this.name = name;
@@ -26,6 +39,7 @@ public class Word {
 		//TODO
 	}
 
+	
 	// Accessors
 	public String getName() {
 		return name;
@@ -38,17 +52,13 @@ public class Word {
 		return definitions;
 	}
 
-	// Modifiers
-	public Word addDefinition(Definition definition) {
-		this.definitions.add(definition);
-		return this;
-	}
 	
 	// Database access
 	protected void fetchNode() {
 		//TODO
 		//this.node = ...
 	}
+	
 	protected void fetchDefinitions() {
 		//TODO
 		//this.definitions = ...

@@ -93,7 +93,7 @@
 		/>
 	</target>
 
-	<target name="compile" depends="jflex" description="Compile code">
+	<target name="compile" depends="init" description="Compile code">
 		<mkdir dir="${bin}"/>
 		<javac deprecation="on" srcdir="${src}" destdir="${bin}"
 			source="${jdk.dev}" target="${jdk.target}"

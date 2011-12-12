@@ -1,11 +1,6 @@
 package edu.unice.polytech.kis.semwiktionary.model;
 
-
-import java.util.List;
-import java.util.LinkedList;
-
-import org.neo4j.graphdb.Node;
-
+import edu.unice.polytech.kis.semwiktionary.database.Database;
 
 public class MutableWord extends Word {
 	
@@ -18,8 +13,9 @@ public class MutableWord extends Word {
 	}
 	
 	public static MutableWord create(String word) {
-		//TODO database
-		return new MutableWord(word);
+		MutableWord result = new MutableWord(word);
+		result.node = Database.createNodeWithProperty("title", word);
+		return result;
 	}
 	
 	// Constructor
@@ -31,6 +27,12 @@ public class MutableWord extends Word {
 	// Update
 	public MutableWord addDefinition(Definition definition) {
 		//TODO database
+		/*
+		 	for (Definition currentDef : word.getDefinitions()) {
+			Node definitionNode = graphDb.createNode();
+			definitionNode.setProperty("definition", currentDef);
+			wordNode.createRelationshipTo(definitionNode, Relations.DEFINITION);
+		*/
 		this.definitions.add(definition);
 		return this;
 	}

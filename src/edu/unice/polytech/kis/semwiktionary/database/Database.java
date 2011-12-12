@@ -17,7 +17,7 @@ import edu.unice.polytech.kis.semwiktionary.model.Word;
 public class Database {
 	/**Singleton unique instance.
 	*/
-	private Database instance;
+	private static Database instance;
 	
 	/**Singleton constructor, therefore private.
 	*/
@@ -28,7 +28,7 @@ public class Database {
 	/**Singleton accessor.
 	*/
 	public static Database getInstance() {
-		if (! Database.instance)
+		if (Database.instance == null)
 			Database.instance = new Database();
 		
 		return Database.instance;

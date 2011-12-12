@@ -1,4 +1,4 @@
-package edu.unice.polytech.kis.parser;
+package test.edu.unice.polytech.kis.semwiktionary.parser;
 
 import java.io.*;
 import java.util.Iterator;
@@ -26,7 +26,7 @@ try {
 		new File( dirName, "program.err" ) ) ) );
 		System.setOut( new PrintStream( new FileOutputStream(
 		new File( dirName, "program.out" ) ) ) );
-		MiniwikiPage lexer = new MiniwikiPage( fileInputStream );
+		Miniwiki lexer = new Miniwiki( fileInputStream );
 		lexer.yylex();
 		for (Iterator it = lexer.listTitle.iterator (); it.hasNext ();) {
 			String s = (String)it.next ();

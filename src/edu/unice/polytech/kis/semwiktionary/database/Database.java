@@ -90,4 +90,18 @@ public class Database {
 		
 		return node; 
 	}
+	
+	public static Relationship link(Node from, Node to, Relation relationType) {
+		Transaction tx = instance.graphDb.beginTx();
+		Relationship relationship;
+		
+		try {
+			relationship = from.createRelationshipTo(to, relationType);
+			tx.success();
+		} finally {
+		    tx.finish();
+		}
+		
+		return relationship;
+	}
 }

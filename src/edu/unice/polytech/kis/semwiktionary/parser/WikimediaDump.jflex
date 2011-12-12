@@ -18,8 +18,8 @@ import java.util.ArrayList;
 %}
 
 %public
-%class MiniwikiPage
-%type Void
+%class	WikimediaDump
+%type	Void
 %unicode
 
 %init{

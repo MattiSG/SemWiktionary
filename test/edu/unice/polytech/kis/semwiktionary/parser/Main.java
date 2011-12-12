@@ -17,14 +17,5 @@ public class Main {
 															 new File("log/jflex.out" ) ) ) );
 		WikimediaDump lexer = new WikimediaDump( fileInputStream );
 		lexer.yylex();
-		for (Iterator it = lexer.listTitle.iterator (); it.hasNext ();) {
-			String s = (String)it.next ();
-			System.out.println (s);
-		}
-		
-		for (Iterator it = lexer.listPage.iterator (); it.hasNext ();) {
-			String s = (String)it.next ();
-			System.out.println (s);
-		}
 	}
 }

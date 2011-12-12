@@ -3,7 +3,11 @@ package edu.unice.polytech.kis.semwiktionary.parser;
 import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
+
+
 %%
+
+
 %{
 	List<String> listPage = new ArrayList<String>();
 	List<String> listTitle = new ArrayList<String>();
@@ -28,7 +32,11 @@ space = [\ \t\r\n]
 newline = (\r|\n|\r\n)
 
 %state NORMAL, PAGE
+
+
 %%
+
+
 <NORMAL> {
 	"<page>"
 		{
@@ -46,16 +54,23 @@ newline = (\r|\n|\r\n)
 		listPage.add(str);
 		yybegin( NORMAL );
 	}
-	"<title>"~"</title>" {
+
+	"<title>"~"</title>"
+	{
 		strTitle = yytext().substring(7, yytext().length()-8);
 		listTitle.add( strTitle );
 	}
-	{newline} {
+
+	{newline}
+	{
 		append ("\r\n");
 	}
-	.	{ 
-			append ( yytext() );
-		}
+
+	.
+	{ 
+		append ( yytext() );
+	}
 
 }
+
 {space} {}

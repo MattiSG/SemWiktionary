@@ -2,6 +2,7 @@ package test.edu.unice.polytech.kis.semwiktionary.parser;
 
 import java.io.*;
 import java.util.Iterator;
+import edu.unice.polytech.kis.semwiktionary.parser.Miniwiki;
 
 public class Main {
 public static void main( String[] argv ) {

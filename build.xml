@@ -65,6 +65,12 @@
 	<!-- /LOCATIONS -->
 	
 	
+	<!-- TASKS -->
+	
+	<taskdef name="jflex" classname="JFlex.anttask.JFlexTask" classpath="${lib}/JFlex.jar"/>
+	
+	<!-- /TASKS -->
+	
 	<!-- lib directory should contain any pre-built jar files needed to build the project -->
 	<fileset id="lib.jars" dir="${lib}">
 		<include name="**/*.jar"/>
@@ -78,6 +84,13 @@
 	<target name="init" description="Preparation">
 		<mkdir dir="${src}"/>
 		<mkdir dir="${lib}"/>
+	</target>
+	
+	<target name="jflex" depends="init" description="Generate parser"> <!-- http://jflex.de/jflex_anttask.html -->
+		<jflex
+			file="${src}/parser/WikimediaDump.flex"
+			destdir="${src}"
+		/>
 	</target>
 
 	<target name="compile" depends="init" description="Compile code">

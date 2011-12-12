@@ -1,4 +1,4 @@
-package edu.unice.polytech.kis.parseur;
+package edu.unice.polytech.kis.parser;
 
 import java.io.*;
 import java.util.Iterator;

@@ -43,14 +43,14 @@ public class MutableWord extends Word {
 
 
 	// Delete
-	public static void erase(Word w) {
-		w.clearDefinitions();
+	public static void erase(MutableWord word) {
+		word.clearDefinitions();
 		//TODO call other delete functions
 	}
 	
 	public MutableWord clearDefinitions() {
 		//TODO database
-		this.definitions.removeAll();
+		this.definitions.clear();
 		return this;
 	}
 

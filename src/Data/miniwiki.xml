@@ -1,0 +1,771 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.5/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.5/ http://www.mediawiki.org/xml/export-0.5.xsd" version="0.5" xml:lang="fr">
+  <siteinfo>
+    <sitename>Wiktionnaire</sitename>
+    <base>http://fr.wiktionary.org/wiki/Wiktionnaire:Page_d%E2%80%99accueil</base>
+    <generator>MediaWiki 1.18wmf1</generator>
+    <case>case-sensitive</case>
+    <namespaces>
+      <namespace key="-2" case="case-sensitive">Média</namespace>
+      <namespace key="-1" case="first-letter">Spécial</namespace>
+      <namespace key="0" case="case-sensitive" />
+      <namespace key="1" case="case-sensitive">Discussion</namespace>
+      <namespace key="2" case="first-letter">Utilisateur</namespace>
+      <namespace key="3" case="first-letter">Discussion utilisateur</namespace>
+      <namespace key="4" case="case-sensitive">Wiktionnaire</namespace>
+      <namespace key="5" case="case-sensitive">Discussion Wiktionnaire</namespace>
+      <namespace key="6" case="case-sensitive">Fichier</namespace>
+      <namespace key="7" case="case-sensitive">Discussion fichier</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">Discussion MediaWiki</namespace>
+      <namespace key="10" case="case-sensitive">Modèle</namespace>
+      <namespace key="11" case="case-sensitive">Discussion modèle</namespace>
+      <namespace key="12" case="case-sensitive">Aide</namespace>
+      <namespace key="13" case="case-sensitive">Discussion aide</namespace>
+      <namespace key="14" case="case-sensitive">Catégorie</namespace>
+      <namespace key="15" case="case-sensitive">Discussion catégorie</namespace>
+      <namespace key="100" case="case-sensitive">Annexe</namespace>
+      <namespace key="101" case="case-sensitive">Discussion Annexe</namespace>
+      <namespace key="102" case="case-sensitive">Transwiki</namespace>
+      <namespace key="103" case="case-sensitive">Discussion Transwiki</namespace>
+      <namespace key="104" case="case-sensitive">Portail</namespace>
+      <namespace key="105" case="case-sensitive">Discussion Portail</namespace>
+      <namespace key="106" case="case-sensitive">Thésaurus</namespace>
+      <namespace key="107" case="case-sensitive">Discussion Thésaurus</namespace>
+      <namespace key="108" case="case-sensitive">Projet</namespace>
+      <namespace key="109" case="case-sensitive">Discussion Projet</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>accueil</title>
+    <id>1</id>
+    <revision>
+      <id>9594304</id>
+      <timestamp>2011-10-30T13:50:58Z</timestamp>
+      <contributor>
+        <username>Luckas-bot</username>
+        <id>9945</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.1) (robot Ajoute : [[ko:accueil]], [[nl:accueil]]</comment>
+      <text xml:space="preserve">{{voir|Accueil|accueil}}
+== {{=fr=}} ==
+
+{{-étym-}}
+: {{siècle|XII}} Dérivé de [[accueillir]].
+
+{{-nom-|fr}}
+{{fr-rég|a.kœj}}
+'''accueil''' {{pron|a.kœj|fr}} {{m}}
+# [[cérémonie|Cérémonie]] ou [[prestation]] réservée à un nouvel [[arrivant]], consistant généralement à lui [[souhaiter]] la [[bienvenue]] et à l’aider dans son [[intégration]] ou ses [[démarche]]s.
+#* ''Nous réservâmes aux nouveaux venus un '''accueil''' qui fut cordial et empressé, mais le temps n'était pas aux effusions et d'un commun avis, il fallait agir vite.'' {{source|{{w|Jean-Baptiste Charcot}}, ''Dans la mer du Groenland'', 1928}}
+#* ''Partout elle avait trouvé bon '''accueil''', prompt assentiment, mais elle se propose d'aller plus outre.'' {{source|{{w|Jean Rogissart}}, ''Passantes d'Octobre'', 1958}}
+#* ''Le Maire rappelle au conseil municipal que l’'''accueil''' périscolaire aura lieu à la rentrée de septembre 2008-2009 dans la salle de réunions et le petit local attenant.'' {{source|[[Le Chesne]], Conseil municipal du 27 juin 2008}}
+# [[lieu|Lieu]] où sont accueillies les [[personne]]s.
+#* ''À l’'''accueil''', ils t’expliqueront comment aller à son bureau.''
+# {{vieilli|fr}} Fait d’[[accueillir]] ou [[héberger]].
+#* ''Il fait '''accueil''' à tous ceux qui vont chez lui.''
+#* ''Je vous remercie de m’avoir fait '''accueil'''.''
+
+{{-apr-}}
+* [[accueillir]]
+* [[accueillant]]
+
+{{-trad-}}
+{{(|Cérémonie}}
+*{{T|en}} : {{trad+|en|welcome}} {{vieilli|nocat=1}}, {{trad+|en|reception}}, {{trad+|en|acceptance}}
+{{)}}
+{{(|Lieu}}
+*{{T|en}} : {{trad+|en|reception}} (desk: d'une société), {{trad+|en|courtesy}} (counter, booth, desk) {{États-Unis|nocat=1}}, {{trad+|en|customer service}} (desk, booth, center) {{États-Unis|nocat=1}}
+{{)}}
+{{(|Fait d'accueillir}}
+{{cf|accueillir}}
+{{)}}
+{{trad-trier}}
+{{(}}
+* {{T|af|trier}} : {{trad-|af|ontvangs}}
+* {{T|de|trier}} : {{trad+|de|Empfang}} {{m}}, {{trad+|de|Annahme}}, {{trad+|de|Aufnahme}}, {{trad+|de|Zusage}}, {{trad-|de|Entgegennahme}}, {{trad-|de|Akzept}}
+* {{T|ar|trier}} : {{trad-|ar|istikbale}}
+* {{T|es|trier}} : {{trad+|es|aceptación}}, {{trad-|es|admisión}}
+* {{T|eo|trier}} : {{trad-|eo|bonvenon}}, {{trad-|eo|akcepto}}
+* {{T|fi|trier}} : {{trad-|fi|hyväksyminen}}
+* {{T|fy|trier}} : {{trad-|fy|oanfurdigjen}}
+* {{T|ht|trier}} : {{trad--|ht|bèlantre}}
+{{-}}
+* {{T|hu|trier}} : {{trad+|hu|elfogadás}}
+* {{T|id|trier}} : {{trad-|id|sambutan}}, {{trad+|id|rumah}}
+* {{T|it|trier}} : {{trad+|it|accoglienza}}, {{trad-|it|accoglimento}}
+* {{T|la|trier}} : {{trad-|la|acceptatio}}
+* {{T|ms|trier}} : {{trad-|ms|penerimaan}}
+* {{T|nl|trier}} : {{trad+|nl|ontvangst}}, {{trad-|nl|acceptatie}}, {{trad-|nl|aanneming}}, {{trad-|nl|aanvaarding}}
+* {{T|pcd|trier}} : {{trad--|pcd|aceùy}}
+* {{T|pt|trier}} : {{trad+|pt|bem-vindo}}, {{trad+|pt|aceitação}}, {{trad+|pt|acolhida}}, {{trad+|pt|acolhimento}}, {{trad+|pt|admissão}}
+* {{T|sv|trier}} : {{trad+|sv|accept}}
+{{)}}
+
+{{-pron-}}
+* {{pron|a.kœj|fr}}
+* {{pron-rég|France &lt;!--  précisez svp la ville ou la région --&gt;|titre=un accueil|ɛ̃.n‿akœj|audio=Fr-accueil.ogg}}
+
+{{-anagr-}}
+* [[acicule]]
+
+{{-voir-}}
+* {{WP|Accueil (homonymie)|titre=accueil}}
+
+{{-réf-}}
+* {{R:TLFi}}
+* {{Import:DAF8}}
+* Petit Robert 1, dictionnaire de la langue française,1990.
+
+[[de:accueil]]
+[[el:accueil]]
+[[en:accueil]]
+[[es:accueil]]
+[[et:accueil]]
+[[fi:accueil]]
+[[hu:accueil]]
+[[io:accueil]]
+[[it:accueil]]
+[[ko:accueil]]
+[[nl:accueil]]
+[[pl:accueil]]
+[[pt:accueil]]
+[[ru:accueil]]
+[[vi:accueil]]
+[[zh:accueil]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>dictionnaire</title>
+    <id>2</id>
+    <revision>
+      <id>9713023</id>
+      <timestamp>2011-12-01T16:53:19Z</timestamp>
+      <contributor>
+        <ip>212.55.42.123</ip>
+      </contributor>
+      <text xml:space="preserve">== {{=fr=}} ==
+
+{{-étym-}}
+: {{date|1501}} Du [[latin médiéval]] ''[[dictionarium#la|dictionarium]]'', venant du {{étyl|la|fr|mot=dictio|dif=dictĭo|sens=mot, expression}} avec le suffixe locatif ''[[-arium]]''.
+
+{{-nom-|fr}}
+{{fr-rég|dik.sjɔ.nɛʁ}}
+[[Image:Latin dictionary.jpg|thumb|Un '''dictionnaire''' de latin ouvert.]]
+'''dictionnaire''' {{pron|dik.sjɔ.nɛʁ|fr}} {{m}}
+# {{ling|fr}} [[ouvrage|Ouvrage]] de [[référence]] qui [[répertorier|répertorie]] des [[mot]]s dans un ordre convenu ([[alphabétique]] en général) pour leur [[associer]] par exemple :
+## une [[définition]], un [[sens]]
+##* ''Le '''dictionnaire''' de l’Académie française.''
+##* ''Les articles d’un '''dictionnaire'''.''
+##*  ''Les '''dictionnaires''' sont irremplaçables parce qu’ils sont l’expression des connaissances et de l’idéologie dominante à un moment donné de l’histoire.'' {{source|Elisabeth Badinter, préface de : Samuel Souffi et Jean Pruvost, ''La mère'', Honoré Champion}}.
+## un ou plusieurs [[synonyme]]s, [[antonyme]]s, etc.
+##* ''Je te recommande ce '''dictionnaire''' des synonymes.''
+##* '''''Dictionnaire''' des homonymes.''
+## une [[étymologie]]
+##* ''Un '''dictionnaire''' étymologique.''
+## [[et/ou]] une [[traduction]].
+##* ''Le '''dictionnaire''' latin-français, français-latin.''
+## Il peut se contenter d’attester la simple existence d’un mot de façon [[normatif|normative]], sans donner aucune autre information.
+##*''Le '''dictionnaire''' du Scrabble.''
+# {{par ext}} [[recueil|Recueil]] fait par [[ordre]] [[alphabétique]] sur des [[matière]]s de [[littérature]], de [[science]]s ou d’arts.
+#* '''''Dictionnaire''' de la Fable, de médecine, de chimie, de chirurgie.''
+#* '''''Dictionnaire''' raisonné des arts et des sciences.''
+# {{littérature|fr}} [[livre|Livre]], recueil de pensées, d’opinions, d’un auteur, publié dans un ordre alphabétique.
+#*''Le '''dictionnaire''' des idées reçues.''
+#*''Le '''dictionnaire''' philosophique de Voltaire.''
+# {{figuré|fr}} {{familier|fr}} Personne de grande [[érudition]], qui a des connaissances étendues et qui les communique [[aisément]].
+#* ''C’est un '''dictionnaire''' vivant !''
+# {{désuet|fr}} [[vocabulaire|Vocabulaire]], ensemble des mots dont se sert un [[écrivain]].
+#* ''Le '''dictionnaire''' de Bossuet est très étendu.''
+
+{{-syn-}}
+* [[dico]] {{familier|nocat=1}}
+{{(|Mots ayant pu être employés avec le sens de « liste alphabétique de mots renseignant sur leur nature »}}
+* [[encomium]]
+* [[encyclopédie]]
+* [[glossaire]]
+* [[index]]
+{{-}}
+* [[lexique]]
+* [[thésaurus]], [[thesaurus]]
+* [[trésor]]
+* [[vocabulaire]]
+* [[usuel]]
+{{)}}
+
+{{-drv-}}
+* [[dictionnaire de langue]]
+* [[dictionnaire encyclopédique]]
+* [[dictionnaire théologique]]
+* [[dictionnaire visuel]]
+* [[dictionnairique]]
+* [[dictionnarisé]]
+* [[dictionnariser]]
+* [[dictionnariste]]
+
+{{-apr-}}
+{{(}}
+* [[dictée]]
+* [[diction]]
+{{-}}
+* [[dicton]]
+* [[dicter]]
+{{)}}
+
+{{-exp-}}
+* [[traduire à coups de dictionnaire]]
+
+{{-hyper-}}
+* [[glossaire]]
+* [[lexique]]
+
+{{-hypo-}}
+* [[dictionnaire des rimes]]
+* [[dictionnaire des synonymes]]
+* [[dictionnaire en ligne]]
+* [[dictionnaire mots croisés]]
+* [[Wiktionnaire]]
+
+{{-trad-}}
+{{(|Ouvrage qui répertorie les mots}}
+* {{T|af}} : {{trad+|af|woordeboek}}
+* {{T|sq}} : {{trad+|sq|fjalor}} {{m}}
+* {{T|de}} : {{trad+|de|Wörterbuch}} {{n}}
+* {{T|en}} : {{trad+|en|dictionary}}
+* {{T|an}} : {{trad-|an|dizionario}}
+* {{T|hy}} : {{trad+|hy|բառարան|R=baŕaran}}
+* {{T|ast}} : {{trad-|ast|diccionariu}}
+* {{T|ay}} : {{trad-|ay|aru}}
+* {{T|dsb}} : {{trad--|dsb|słownik}}
+* {{T|eu}} : {{trad+|eu|hiztegi}}
+* {{T|bs}} : {{trad+|bs|rječnik}} {{m}}
+* {{T|br}} : {{trad+|br|geriadur}} {{m}}
+* calabrais : [[diziunariu]]&lt;!-- {{T|nap}} utilisant {{nap}} --&gt;
+* {{T|ca}} : {{trad+|ca|diccionari}} {{m}}
+* {{T|zh}} : {{trad+|zh|词典|R=cídiǎn|tradi=詞典}} ; {{trad+|zh|字典|R=zìdiǎn}} (dictionnaire des sinogrammes)
+* {{T|ko}} : {{trad+|ko|사전|R=sajeon}}
+* {{T|kw}} : {{trad-|kw|gérlyver}}
+* {{T|co}} : {{trad+|co|dizziunariu}}
+* {{T|hr}} : {{trad+|hr|rječnik}} {{m}}
+* {{T|da}} : {{trad+|da|ordbog}}
+* {{T|es}} : {{trad+|es|diccionario}} {{m}}
+* {{T|eo}} : {{trad+|eo|vortaro}}
+* {{T|et}} : {{trad+|et|sõnaraamat}}
+* {{T|fo}} : {{trad+|fo|orðabók}} {{f}}
+* {{T|fi}} : {{trad+|fi|sanakirja}}
+* {{T|fur}} : {{trad--|fur|dizionari}}
+* {{T|fy}} : {{trad+|fy|wurdboek}}
+* {{T|gd}} : {{trad-|gd|faclair}}
+* {{T|gl}} : {{trad+|gl|dicionario}}, {{trad+|gl|diccionario}}
+* {{T|cy}} : {{trad+|cy|geiriadur}}
+* {{T|ka}} : {{trad+|ka|ლექსიკონი}}
+* {{T|el}} : {{trad+|el|λεξικό|R=lexikó}} {{n}}
+* {{T|grc}} : {{trad--|grc|λεξικόν|R=lexikon}}
+* {{T|gn}} : {{trad-|gn|ñeʼẽndy}}
+* {{T|lij}} : {{trad--|lij|dizionäio}}
+* {{T|hsb}} : {{trad-|hsb|słownik}}
+* {{T|he}} : {{trad+|he|מילון|R=milawn}}
+{{-}}
+* {{T|hi}} : {{trad+|hi|शब्दकोश}}, {{trad-|hi|शब्दकोष}} {{m}}
+* {{T|hu}} : {{trad+|hu|szótár}}
+* {{T|io}} : {{trad+|io|vortaro}}
+* {{T|id}} : {{trad+|id|kamus}}
+* {{T|ia}} : {{trad-|ia|dictionario}}
+* {{T|is}} : {{trad+|is|orðabók}} {{f}}
+* {{T|it}} : {{trad+|it|dizionario}}
+* {{T|ja}} : {{trad+|ja|辞書|R=jisho}}, {{trad+|ja|辞典|R=jiten}}
+* {{T|kab}} : {{trad--|kab|a maual}}
+* {{T|lad}} : {{trad--|lad|diksionario}} {{m}}, {{trad--|lad|vokabulario}}
+* {{T|ku}} : {{trad+|ku|ferheng}}, {{trad-|ku|khebernivis}}
+* {{T|lmo}} : {{trad--|lmo|dizionari}}
+* {{T|mr}} : {{trad-|mr|शब्दकोष}}
+* {{T|mdf}} : {{trad--|mdf|валкс|R=valks}} 
+* {{T|nl}} : {{trad+|nl|woordenboek}}
+* {{T|pms}} : {{trad--|pms|dissionari}} 
+* {{T|pl}} : {{trad+|pl|słownik}}
+* {{T|pt}} : {{trad+|pt|dicionário}} {{m}}
+* {{T|ru}} : {{trad+|ru|словарь}}
+* {{T|sa}} : {{trad-|sa|शब्दकोश|R=śābdakośāḥ}}
+* {{T|sc}} : {{trad--|sc|dizionariu}}
+* {{T|sr}} : {{trad-|sr|речник|R=rečnik}} {{m}}
+* {{T|scn}} : {{trad+|scn|dizziunariu}}
+* {{T|sk}} : {{trad+|sk|slovník}}
+* {{T|sl}} : {{trad+|sl|slovar}}
+* {{T|so}} : {{trad-|so|qaamuus}}
+* {{T|sv}} : {{trad+|sv|ordbok}}
+* {{T|sw}} : {{trad+|sw|kamusi}}
+* {{T|ss}} : {{trad-|ss|sí-chazamagâma}}
+* {{T|tl}} : {{trad-|tl|diksiyunáriyo}}
+* {{T|tt}} : {{trad-|tt|süzlek}}
+* {{T|cs}} : {{trad+|cs|slovník}}
+* {{T|th}} : {{trad+|th|พจนานุกรม|R=potjananukrom}}
+* {{T|bo}} : {{trad--|bo|ཚིག་མཛོད་|R=ṣĩ.ẓɵ}} {{pron|ʦĩ.ʣø}}
+* {{T|tr}} : {{trad+|tr|sözlük}}
+* {{T|uk}} : {{trad+|uk|словник|R=slovnyk}}
+* {{T|vi}} : {{trad+|vi|từ điển}}
+* {{T|wls}} : {{trad--|wls|tikisionalio}}
+* {{T|wa}} : {{trad+|wa|diccionaire}}
+{{)}}
+{{(|Recueil par ordre alphabétique}}
+* {{T|en}} : {{trad+|en|vocabulary}}
+{{)}}
+{{(|Personne érudite}}
+{{)}}
+{{(|{{trad-trier}}}}
+* {{T|ar|trier}} : {{trad+|ar|قاموس|R=qāmws}}
+* {{T|hy|trier}} : {{trad-|hy|բառգիրք|R=baŕgirk’}}, {{trad-|hy|բառագիրք|R=baŕagirk’}}
+* {{T|ay|trier}} : {{trad-|ay|pirwa}}
+* {{T|az|trier}} : {{trad+|az|lüğət}}
+* {{T|bm|trier}} : {{trad--|bm|daɳɛkorofogafɛ}}, {{trad--|bm|kumadengafɛ}}
+* {{T|bg|trier}} : {{trad+|bg|речник|R=retchnik}} {{m}}
+* {{T|es|trier}} : {{trad+|es|vocabulario}}, {{trad+|es|léxico}}
+* {{T|fo|trier}} : {{trad-|fo|orðbók}}, {{trad+|fo|orðabók}}
+* {{T|gu|trier}} : {{trad-|gu|શબ્દ-કોષ}}
+* {{T|ht|trier}} : {{trad--|ht|diksyonè}}
+* {{T|kab|trier}} : {{trad--|kab|a maual}}
+* {{T|ku|trier}} : {{trad-|ku|loghet}}
+* {{T|lv|trier}} : {{trad+|lv|vārdnīca}}
+{{-}}
+* {{T|ln|trier}} : {{trad-|ln|bagó}}
+* {{T|lt|trier}} : {{trad+|lt|žodynas}}
+* {{T|ms|trier}} : {{trad+|ms|kamus}}
+* {{T|mg|trier}} : {{trad+|mg|diksionera}}
+* {{T|mt|trier}} : {{trad+|mt|dizzjunarju}}
+* {{T|gv|trier}} : {{trad-|gv|focklioar}}
+* {{T|nap|trier}} : {{trad--|nap|calepino}}
+* {{T|nl|trier}} : {{trad+|nl|woordenboek}} {{n}}, {{trad-|nl|dictionaire}}
+* {{T|fra-nor|trier}} : {{trad--|fra-nor|dictionnaithe}} (en jersiais)
+* {{T|no|trier}} : {{trad+|no|ordbok}}
+* {{T|oc|trier}} : {{trad+|oc|diccionari}}
+* {{T|ur|trier}} : {{trad-|ur|قاموس|R=qāmws}}
+* {{T|pap|trier}} : {{trad--|pap|dikshonario}}
+* {{T|pa|trier}} : {{trad-|pa|ਸ਼ਬਦਾ}} {{trad-|pa|ਕੋਸ਼}}
+{{-}}
+* {{T|fa|trier}} : {{trad-|fa|لغتنامه|R=}} 
+* {{T|oc|trier}} : {{trad+|oc|diccionari}}
+* {{T|qu|trier}} : {{trad-|qu|rimayqillqa}}
+* {{T|rm|trier}} : {{trad--|rm|dicziunari}}, {{trad--|rm|pledari}}
+* {{T|ro|trier}} : {{trad+|ro|dicționar}} {{n}}
+* {{T|se|trier}} : {{trad--|se|sátnegirji}}
+* {{T|sm|trier}} : {{trad-|sm|lolomi}}, {{trad-|sm|fefiloi}}
+* {{T|sa|trier}} : {{trad-|sa|निघण्टु|R=nighantu}}
+* {{T|nso|trier}} : {{trad--|nso|pukuntšu}}
+* {{T|tl|trier}} : {{trad-|tl|talatinígan}}
+{{)}}
+
+{{-pron-}}
+* {{pron|dik.sjɔ.nɛʁ|fr}}
+* {{pron-rég|France (Ouest)|titre=un dictionnaire|ɛ̃ dik.sjɔ.nɛʁ|audio=Fr-un dictionnaire-fr-ouest.ogg}}
+
+{{-anagr-}}
+* [[ordinaticien]]
+
+{{-voir-}}
+* {{WP}}
+* {{WS|Catégorie:Dictionnaires}}
+
+{{-réf-}}
+* {{Import:DAF8}}
+* {{R:Littré}}
+* {{R:TLFi}}
+
+[[kab:dictionnaire]]
+
+[[af:dictionnaire]]
+[[br:dictionnaire]]
+[[bs:dictionnaire]]
+[[ca:dictionnaire]]
+[[cy:dictionnaire]]
+[[da:dictionnaire]]
+[[de:dictionnaire]]
+[[el:dictionnaire]]
+[[en:dictionnaire]]
+[[es:dictionnaire]]
+[[et:dictionnaire]]
+[[fi:dictionnaire]]
+[[gl:dictionnaire]]
+[[hu:dictionnaire]]
+[[hy:dictionnaire]]
+[[io:dictionnaire]]
+[[is:dictionnaire]]
+[[it:dictionnaire]]
+[[ja:dictionnaire]]
+[[ko:dictionnaire]]
+[[ku:dictionnaire]]
+[[lo:dictionnaire]]
+[[lt:dictionnaire]]
+[[lv:dictionnaire]]
+[[nl:dictionnaire]]
+[[no:dictionnaire]]
+[[oc:dictionnaire]]
+[[pl:dictionnaire]]
+[[ps:dictionnaire]]
+[[pt:dictionnaire]]
+[[ro:dictionnaire]]
+[[ru:dictionnaire]]
+[[sv:dictionnaire]]
+[[sw:dictionnaire]]
+[[ta:dictionnaire]]
+[[tl:dictionnaire]]
+[[tpi:dictionnaire]]
+[[tr:dictionnaire]]
+[[vi:dictionnaire]]
+[[zh:dictionnaire]]
+[[zh-min-nan:dictionnaire]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>cercle</title>
+    <id>841</id>
+    <revision>
+      <id>9665065</id>
+      <timestamp>2011-11-17T01:03:39Z</timestamp>
+      <contributor>
+        <username>MalafayaBot</username>
+        <id>20439</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.2) (robot Ajoute : [[ko:cercle]], [[mg:cercle]]</comment>
+      <text xml:space="preserve">{{voir|cerclé}}
+== {{=fr=}}==
+
+{{-étym-}}
+:Du {{étyl|la|fr|mot=circulus}}, diminutif de ''[[circus#la|circus]]''.
+
+{{-nom-|fr}}
+{{fr-rég|sɛʁkl}}
+[[Image:Cercle trigo.png|thumb|Le [[cercle unité]] est centré sur l'origine du [[repère]] et de [[rayon]] 1.]]
+'''cercle''' {{pron|sɛʁkl|fr}} {{m}}
+# {{géométrie|fr}} [[ellipse|Ellipse]] constituée de tous les [[point]]s [[équidistant]]s d’un point donné, nommé [[centre]].
+#* ''Le '''cercle''' peut être considéré comme un polygone avec un nombre infini de côtés.''
+# {{méton|fr}} [[ligne|Ligne]] [[circulaire]], [[circonférence]].
+#* ''Le '''cercle''' se divise en trois cent soixante degrés.''
+#* ''Tracer un '''cercle'''.''
+# {{par ext|fr}} Toute [[pièce]] de [[métal]] ou d’autre [[matière]], formant un '''cercle''', qu’on met [[autour]] d’une chose pour la [[serrer]], la [[lier]] ou l’[[orner]].
+#* ''Mettre un '''cercle''' de fer à une colonne, à une poutre pour l’empêcher d’éclater.''
+# {{particulier}} {{cuisine|fr}} [[nonette|Nonette]] de forme [[cylindrique]], servant à [[confectionner]] des [[gâteau]]x ou des [[entrée]]s.
+#* ''Un '''cercle''' redimensionnable est indispensable pour confectionner un bavarois.''
+# {{particulier}} [[cerceau|Cerceau]] de [[tonneau]], de [[cuve]].
+#* ''Un '''cercle''' de fer. — Un tonneau qui a rompu ses '''cercles'''.''
+# {{méton|fr}} [[tonneau|Tonneau]], [[cuve]]
+#* ''Vin en '''cercles'''.''
+#  Objet ou [[instrument]] de forme [[circulaire]].
+#* '''''Cercle''' d’arpenteur.''
+# {{astro|fr}} Ligne [[circulaire]] [[fictif|fictives]] qui [[servir|sert]] à [[représenter]] le [[mouvement]] des [[astre]]s, la [[succession]] des [[saison]]s, les [[division]]s de la sphère, etc.
+#* ''Le '''cercle''' polaire arctique.''
+#* ''Le '''cercle''' polaire antarctique.''
+# Toute [[disposition]] d’[[objet]]s qui [[offre]] à peu près la [[figure]] d’une [[circonférence]].
+#* ''Ils formèrent un '''cercle''' autour de lui.''
+# {{figuré|fr}} [[réunion|Réunion]], [[assemblée]] d’un petit [[nombre]] de personnes ayant les [[même]]s [[idée]]s, les [[même]]s [[goût]]s ou partageant la même [[activité]].
+#* ''Il faut convenir que voilà un '''cercle''' républicain qui a tout l’air d’une sacristie ! Ne pas être catholique pratiquant, apostolique convaincu et romain de derrière les fagots, suffirait-il, en l’an de grâce 1881, pour se voir fermer les portes d’ '''cercle''' républicain ?'' {{source|L'Univers israélite: journal des principes conservateurs du judaïsme, p.185, 1882}}
+# {{particulier}} [[association|Association]] dont les [[membre]]s se [[réunir|réunissent]] dans un [[local]] [[louer|loué]] à [[frais]] [[commun]]s pour [[causer]], [[jouer]], [[lire]] les journaux, etc.
+#* ''Il y a cinq ou six '''cercles''' de jeu autorisés, rien qu’à Cavaillon où l'on compte 12000 habitants.'' {{source|{{w|Ludovic Naudeau}}, ''La France se regarde. Le problème de la natalité'' -1931}}
+# {{particulier}} {{Belgique|fr}} [[endroit|Endroit]] où se [[retrouvent]] des [[étudiant]]s dans un but [[festif]], [[bibitif]] et [[culturel]].
+#* ''On va squetter des pintes au '''cercle''' pour commencer la guindaille.''
+# {{figuré|fr}} [[domaine|Domaine]], [[étendue]], [[limite]]s.
+#* ''Cet homme n’est jamais sorti du '''cercle''' de ses occupations habituelles.''
+#* ''Agrandir, étendre le '''cercle''' de ses idées, de ses connaissances.''
+# {{term|Mali}} [[district|District]] [[administratif]].
+# {{vieilli|fr}} [[cycle|Cycle]].
+#* ''Le '''cercle''' des saisons.''
+
+{{-syn-}}
+;Forme géométrique
+* [[disque]]
+* [[rond]]
+; Assemblée
+* [[cénacle]]
+
+{{-drv-}}
+{{(}}
+* [[cerclage]]
+* [[cercle de qualité]]
+* [[cercler]]
+* cercle de [[Popilius]]
+* [[cercle polaire]]
+* [[cercle roulant]]
+* [[cercle vicieux]]
+{{-}}
+* [[cerclier]]
+* [[décercler]]
+* [[demi-cercle]]
+* [[encerclement]]
+* [[encercler]]
+* [[quadrature du cercle]]
+{{)}}
+
+{{-apr-}}
+* [[circulaire]]
+* [[circulation]]
+* [[circuler]]
+
+{{-trad-}}
+{{(}}
+* {{T|de}} : {{trad+|de|Kreis}} (1), {{trad+|de|Bezirk}}, {{trad+|de|Runde}}, {{trad-|de|Kreislinie}}
+* {{T|en}} : {{trad+|en|circle}} (1), {{trad+|en|ring}}, {{trad+|en|round}}
+* {{T|ar}} : {{trad+|ar|دائرة}} {{f}}
+* {{T|bm}} : {{trad--|bm|mara}} (2)
+* {{T|br}} : {{trad+|br|kelc'h}}
+* {{T|ca}} : {{trad+|ca|cercle}}, {{trad-|ca|rodona}}
+* {{T|da}} : {{trad+|da|cirkel}}
+* {{T|es}} : {{trad+|es|círculo}}, {{trad-|es|redondel}}, {{trad-|es|corro}}, {{trad+|es|peña}}, {{trad+|es|tertulia}}
+* {{T|eo}} : {{trad-|eo|rondo}}, {{trad-|eo|cirklo}}
+* {{T|fo}} : {{trad-|fo|klingra}}, {{trad-|fo|kringur}}
+* {{T|fi}} : {{trad+|fi|ympyrä}}
+* {{T|el}} : {{trad+|el|κύκλος}} {{m}}
+* {{T|hu}} : {{trad+|hu|kör}}
+* {{T|io}} : {{trad+|io|cirklo}} (1)
+{{-}}
+* {{T|iu}} : {{trad-|iu|ᐊᒻᒪᓗᖅᑐᖅ|R=[[ammaluqtuq]]}}
+* {{T|it}} : {{trad+|it|circolo}}
+* {{T|la}} : {{trad-|la|circulus}}, {{trad+|la|orbis}}, {{trad-|la|circus}}
+* {{T|ln}} : {{trad-|ln|nzínga}}
+* {{T|nl}} : {{trad+|nl|cirkel}} (1), {{trad+|nl|gezelschap}}, {{trad+|nl|kring}}
+* {{T|no}} : {{trad+|no|sirkel}}
+* {{T|pap}} : {{trad--|pap|serkel}}
+* {{T|fa}} : {{trad+|fa|دایره}}
+* {{T|pl}} : {{trad+|pl|koło}} (1)
+* {{T|pt}} : {{trad+|pt|círculo}}, {{trad+|pt|circunferência}}, {{trad+|pt|roda}}
+* {{T|se}} : {{trad--|se|gierdu}} 
+* {{T|sv}} : {{trad+|sv|krets}}, {{trad+|sv|rund}}, {{trad+|sv|cirkel}}
+* {{T|tr}} : {{trad+|tr|daire}}
+{{)}}
+
+{{-hyper-}}
+* [[courbe]] (1)
+
+{{-méro-}}
+[[Image:Cercle definitions.png|thumb|définition d'objets géométriques liés au cercle]]
+* [[arc]]
+* [[corde]]
+* [[diamètre]]
+* [[rayon]]
+
+{{-flex-verb-|fr}}
+{{fr-verbe-flexion|ind.p.1s=oui|ind.p.3s=oui|sub.p.1s=oui|sub.p.3s=oui|imp.p.2s=oui}}
+'''cercle''' {{pron|sɛʁkl|fr}}
+# ''Première personne du singulier de l’indicatif présent du verbe'' [[cercler]].
+# ''Troisième personne du singulier de l’indicatif présent du verbe'' [[cercler]].
+# ''Première personne du singulier du subjonctif présent du verbe'' [[cercler]].
+# ''Troisième personne du singulier du subjonctif présent du verbe'' [[cercler]].
+# ''Deuxième personne du singulier de l’impératif du verbe'' [[cercler]].
+
+{{-pron-}}
+* {{pron|sɛʁkl|fr}}
+* {{pron-rég|France &lt;!--  précisez svp la ville ou la région --&gt;|sɛʁkl|audio=Fr-cercle.ogg}}
+
+{{-voir-}}
+* {{WP|Cercle (homonymie)}}
+
+{{-réf-}}
+*{{Import:DAF8}}
+
+[[Catégorie:Lexique en français de la cuisine]]
+[[Catégorie:Lexique en français des mathématiques]]
+[[Catégorie:Lexique en français de la géographie]]
+
+== {{=ca=}}==
+{{-étym-}}
+:Du {{étyl|la|ca}} ''circulus''.
+
+{{-nom-|ca}}
+'''cercle''' {{pron||ca}}
+# [[cercle|Cercle]], [[rond]].
+# [[ronde|Ronde]].
+
+{{-syn-}}
+* [[rodona]]
+
+[[ca:cercle]]
+[[de:cercle]]
+[[el:cercle]]
+[[en:cercle]]
+[[et:cercle]]
+[[fi:cercle]]
+[[gl:cercle]]
+[[hu:cercle]]
+[[id:cercle]]
+[[io:cercle]]
+[[ko:cercle]]
+[[lo:cercle]]
+[[mg:cercle]]
+[[pl:cercle]]
+[[pt:cercle]]
+[[ru:cercle]]
+[[sv:cercle]]
+[[ta:cercle]]
+[[vi:cercle]]
+[[zh:cercle]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>lire</title>
+    <id>13</id>
+    <revision>
+      <id>9684284</id>
+      <timestamp>2011-11-23T03:13:32Z</timestamp>
+      <contributor>
+        <username>MalafayaBot</username>
+        <id>20439</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.2) (robot Ajoute : [[mg:lire]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+{{-étym-}}
+: ([[#fr-verb|Verbe]]) Du {{étyl|la|fr|mot=lego|dif=lĕgĕre|sens=''id.''}}.
+: ([[#fr-nom|Nom]]) De l’{{étyl|it|fr|mot=lira}}, du latin ''[[libra]]'' (« [[livre]] » : le poids). 
+
+{{-verb-|fr}}
+'''lire''' {{pron|liʁ|fr}} {{conjugaison|grp=3}}
+# [[interpréter|Interpréter]] des [[information]]s écrites sous forme de [[mot]]s ou de [[dessin]]s sur un [[support]].
+#* ''[…]; je me souviens d’'''avoir lu''' autrefois, dans un manuel de Paul Bert, que le principe fondamental de la morale s'appuie sur les enseigne­ments de Zoroastre et sur la Constitution de l'an III ; […].''  {{source|{{w|Georges Sorel}}, ''Réflexions sur la violence'', Chap.VII, ''La morale des producteurs'', 1908, p.315}}
+#* ''[…], mais vous comprenez bien qu’on ne donne pas une égale attention à tout ce qu’on '''lit''' ou qu’on parcourt dans les colonnes des journaux […].'' {{source|{{w|Louis Pergaud}}, ''[[s:Un point d’histoire|Un point d’histoire]]'', dans ''{{w|Les Rustiques, nouvelles villageoises}}'', 1921}}
+#* '' Il était célèbre par une obstination admirable à apprendre à écrire et à '''lire''' ; le résultat ne fut pas étonnant ; il faut croire qu'il est bien difficile d'apprendre à '''lire''' ; […].'' {{source|[[w:Alain (philosophe)|Alain]], ''Souvenirs de guerre'', p.75, Hartmann, 1937}}
+# [[suivre|Suivre]] des [[yeux]] ce qui est [[écrit]] ou [[imprimer|imprimé]], [[avec]] la [[connaissance]] des sons que les [[lettre]]s [[figurent]]; [[soit]] en ne [[proférer|proférant]] pas les mots, [[être|soit]] en les proférant à [[haut]]e [[voix]].
+#* ''Apprendre à '''lire'''.''
+#* '''''Lire''' couramment.''
+#* ''Il ne sait ni '''lire''' ni écrire.''
+#* ''Il '''lit''' bien le grec, l’hébreu.''
+#* ''Il s’est fatigué la vue à '''lire''' de vieux manuscrits.''
+#* ''Une écriture difficile à '''lire'''.''
+# [[prendre connaissance|Prendre connaissance]] et [[comprendre]] un texte écrit.
+#* ''Il est de jeunes écrivains qui ne '''lisent''' pas Hugo. C'est pourquoi ils ont tant de certitudes heureuses et atteignent promptement au talent.'' {{source|{{w|Victor Méric}}, ''Les compagnons de l'Escopette'', 1930, p.67}}
+# [[comprendre|Comprendre]] ce qui est écrit ou imprimé dans une [[langue]] [[étranger|étrangère]].
+#* ''Il ne parle pas l’anglais, mais il le '''lit''' avec assez de facilité.''
+# {{musique|fr}} {{analogie|fr}} Parcourir des yeux une musique notée, avec la connaissance des sons que les notes figurent et des diverses modifications que ces sons doivent recevoir.
+#* '''''Lire''' une partition''
+# [[prononcer|Prononcer]] à haute [[voix]], avec l’[[intonation]] voulue, ce qui est écrit ou imprimé.
+#* ''Il '''lit''' bien, il '''lit''' mal.''
+#* ''Il '''lit''' distinctement.''
+#* ''Il ne sait pas '''lire'''.''
+#* ''Il nous a '''lu''' un long discours.''
+#* ''Je vais vous '''lire''' mes vers.''
+#* ''Ce prince avait l’habitude de se faire '''lire''' quelque bon livre pendant ses repas.''
+# S’[[instruire]], s’[[amuser]], s’[[informer]], etc. par la lecture.
+#* '''''Lire''' un volume de vers.''
+#* '''''Lire''' un roman.''
+#* '''''Lire''' un billet, une lettre.''
+#* '''''Lire''' la messe.''
+#* '''''Lire''' une dépêche chiffrée.''
+#* {{absolument}} ''Il passe son temps à '''lire'''.''
+#* {{figuré|fr}} ''C’est un ouvrage qu’on ne peut '''lire''','' se dit d’un Ouvrage ennuyeux, ou mal écrit, ou surtout licencieux.
+#* {{figuré|fr}} et {{familier|fr}} ''Ce livre, cet ouvrage se laisse '''lire''','' On le lit sans fatigue, sans ennui.
+# Se dit encore en parlant de Quelque [[livre]] qu’un [[professeur]] [[expliquer|explique]] ou fait expliquer à ses [[auditeur]]s et qu’il prend pour [[sujet]] des [[leçon]]s qu’il [[leur]] [[donne]].
+#* ''Notre professeur nous '''lisait''' Homère.''
+# {{figuré|fr}} [[pénétrer|Pénétrer]] [[quelque chose]] d’[[obscur]] ou de [[cacher|caché]].
+#* ''L'ivresse se '''lisait''' dans ses yeux, une ivresse crâne et satisfaite qui lui arrachait quelquefois de gros rires.'' {{source|{{w|Francis Carco}}, ''Messieurs les vrais de vrai'', 1927}}
+#* ''A quoi songes-tu donc ? s'informa la maîtresse du logis, surprise de l'inattention qu'elle '''lisait''' dans les yeux de l'artiste. Tu n'as pas de contrariétés.'' {{source|{{w|Francis Carco}}, ''L'Homme de Minuit'', 1938}}
+#* '''''Lire''' dans la pensée, dans le cœur, dans les yeux de quelqu’un.''
+#* ''Je '''lis''' sur votre visage que vous êtes mécontent.''
+#* '''''Lire''' dans les astres, dans l’avenir.''
+
+{{-exp-}}
+* [[lire sur les lèvres]]
+* [[lire entre les lignes]]
+* [[lire en diagonale]]
+
+{{-trad-}}
+{{(}}
+* {{T|ab}} : {{trad--|ab|аҧхьара}}
+* {{T|ady}} : {{trad--|ady|еджэн}}
+* {{T|de}} : {{trad+|de|lesen}}
+* {{T|en}} : to {{trad+|en|read}}
+* {{T|bs}} : {{trad-|bs|čitati}}
+* {{T|ca}} : {{trad+|ca|llegir}}
+* {{T|ko}} : {{trad+|ko|읽다}}, {{trad+|ko|독서하다}}
+* {{T|hr}} : {{trad+|hr|čitati}}
+* {{T|es}} : {{trad+|es|leer}}
+* {{T|eo}} : {{trad+|eo|legi}}
+* {{T|fi}} : {{trad+|fi|lukea}}
+* {{T|gd}} : {{trad-|gd|leugh}}
+* {{T|ga}} : {{trad-|ga|léigh}}
+* {{T|gn}} : {{trad-|gn|moñeʼẽ}}
+* {{T|he}} : {{trad-|he|לקרוא}} (laqarava)
+* {{T|hu}} : {{trad+|hu|olvas}}
+* {{T|io}} : {{trad+|io|lektar}}
+* {{T|id}} : {{trad-|id|baca}}, {{trad-|id|membaca}}
+* {{T|ia}} : {{trad-|ia|leger}}
+* {{T|it}} : {{trad+|it|leggere}}
+{{-}}
+* {{T|ja}} : {{trad+|ja|読む}} (よむ) (yomu)
+* {{T|kl}} : {{trad-|kl|atuarneq}}
+* {{T|rw}} : {{trad-|rw|soma}}
+* {{T|ku}} : {{trad+|ku|xwendin}}
+* {{T|ltg}} : {{trad--|ltg|skaiteit}}
+* {{T|la}} : {{trad-|la|legere}}
+* {{T|lt}} : {{trad+|lv|lasīt}}
+* {{T|nl}} : {{trad+|nl|lezen}}
+* {{T|oc}} : {{trad+|oc|legir}}
+* {{T|pl}} : {{trad+|pl|czytać}} (1), {{trad+|pl|przeczytać}}, {{trad+|pl|odczytać}}
+* {{T|pt}} : {{trad+|pt|ler}}
+* {{T|ro}} : {{trad+|ro|citi}}
+* {{T|ru}} : {{trad+|ru|читать}} (tchitat') ''imperf'', {{trad+|ru|прочитать}}  (protchitat') ''perf''
+* {{T|ses}} : {{trad--|ses|cew}}
+* {{T|sr}} : {{trad-|sr|читати}} (tchitati)
+* {{T|sk}} : {{trad-|sk|čítať}}
+* {{T|sv}} : {{trad+|sv|läsa}}
+* {{T|tl}} : {{trad+|tl|basa}}
+* {{T|cs}} : {{trad+|cs|číst}}
+{{)}}
+
+{{-nom-|fr}}
+{{fr-rég|liʁ}}
+'''lire''' {{pron|liʁ|fr}} {{f}}
+# [[monnaie|Monnaie]] utilisée en [[Italie]] avant l’usage de l’[[euro]].
+#* ''Un euro vaut environ 1936 '''lires'''.''
+
+{{-pron-}}
+* {{pron-rég|France &lt;!--  précisez svp la ville ou la région --&gt;|liʁ|audio=Fr-lire.ogg}}
+
+{{-homo-}}
+* [[lyre]]
+
+== {{=fro=}} ==
+{{-étym-}}
+: Du latin ''[[lyra]]''.
+
+{{-nom-|fro}}
+'''lire''' {{pron|liʁ|fro}}
+# [[lyre#fr|Lyre]].
+#*''De vièle sot et de rote,&lt;br&gt;De '''lire''' et de satérion,&lt;br&gt;De harpe sot et de choron,&lt;br&gt;(…)'' {{source|{{w|Wace}}, ''Roman de Brut'', 1155}}
+
+[[Catégorie:Instruments de musique en ancien français]]
+
+== {{=af=}} ==
+{{-étym-}}
+: {{ébauche-étym|af}}
+
+{{-nom-|af}}
+'''lire''' {{pron||af}}
+# [[lire#fr-nom|Lire]].
+
+[[ar:lire]]
+[[ca:lire]]
+[[da:lire]]
+[[de:lire]]
+[[el:lire]]
+[[en:lire]]
+[[es:lire]]
+[[et:lire]]
+[[fi:lire]]
+[[gl:lire]]
+[[hr:lire]]
+[[hu:lire]]
+[[id:lire]]
+[[io:lire]]
+[[it:lire]]
+[[ko:lire]]
+[[lt:lire]]
+[[mg:lire]]
+[[my:lire]]
+[[nl:lire]]
+[[oc:lire]]
+[[pl:lire]]
+[[ro:lire]]
+[[ru:lire]]
+[[sv:lire]]
+[[ta:lire]]
+[[vi:lire]]</text>
+    </revision>
+  </page>
+</mediawiki>

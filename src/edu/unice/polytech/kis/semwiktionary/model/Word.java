@@ -10,9 +10,9 @@ import org.neo4j.graphdb.Node;
 public class Word {
 
 	// Attributes
-	private Node node;
-	private String name;
-	private List<Definition> definitions;
+	protected Node node;
+	protected String name;
+	protected List<Definition> definitions;
 	
 	// Static constructors
 	public static Word from(String word) {

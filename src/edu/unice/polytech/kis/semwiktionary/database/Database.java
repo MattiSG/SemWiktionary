@@ -35,7 +35,7 @@ public class Database {
 	
 	/** The database object and the words index
 	 */
-	private final GraphDatabaseService graphDb;
+	protected final GraphDatabaseService graphDb;
 	private Index titleIndex;
 	
 	/**Singleton constructor, therefore private.
@@ -91,7 +91,7 @@ public class Database {
 		return node; 
 	}
 	
-	public static Relationship link(Node from, Node to, Relation relationType) {
+	public static Relationship link(Node from, Node to, RelationshipType relationType) {
 		Transaction tx = instance.graphDb.beginTx();
 		Relationship relationship;
 		

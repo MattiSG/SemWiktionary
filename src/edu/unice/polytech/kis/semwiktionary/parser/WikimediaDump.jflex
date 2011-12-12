@@ -12,18 +12,18 @@ import java.util.ArrayList;
 	List<String> listPage = new ArrayList<String>();
 	List<String> listTitle = new ArrayList<String>();
 	String	str, strTitle;
-	void append( String s ) {
+	void append(String s) {
 		str += s;
 	}
-
 %}
+
 %public
 %class MiniwikiPage
 %type Void
 %unicode
 
 %init{
-	yybegin( NORMAL );
+	yybegin(NORMAL);
 %init}
 
 letter = [A-Za-zéàèùâêîôûëïü]
@@ -39,26 +39,31 @@ newline = (\r|\n|\r\n)
 
 <NORMAL> {
 	"<page>"
-		{
-			str = "";
-			append ( yytext() );			
-			yybegin( PAGE );
-		}
-	{newline} {}
-	.	{}
+	{
+		str = "";
+		append(yytext());			
+		yybegin(PAGE);
 	}
+
+	{newline}
+	{}
+	
+	.
+	{}
+}
+
 <PAGE> {
 	"</page>"
 	{
-		append ( yytext() );
+		append (yytext());
 		listPage.add(str);
-		yybegin( NORMAL );
+		yybegin(NORMAL);
 	}
 
 	"<title>"~"</title>"
 	{
-		strTitle = yytext().substring(7, yytext().length()-8);
-		listTitle.add( strTitle );
+		strTitle = yytext().substring(7, yytext().length() - 8);
+		listTitle.add(strTitle);
 	}
 
 	{newline}
@@ -73,4 +78,5 @@ newline = (\r|\n|\r\n)
 
 }
 
-{space} {}
+{space}
+{}

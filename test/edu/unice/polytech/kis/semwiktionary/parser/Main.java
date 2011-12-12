@@ -1,47 +1,30 @@
-package test.edu.unice.polytech.kis.semwiktionary.parser;
+package edu.unice.polytech.kis.semwiktionary.parser;
 
 import java.io.*;
 import java.util.Iterator;
-import edu.unice.polytech.kis.semwiktionary.parser.Miniwiki;
+import edu.unice.polytech.kis.semwiktionary.parser.WikimediaDump;
 
-
+/**To test JFlex output, issue the following commands:
+ *$ mkdir log
+ *$ java -classpath bin edu.unice.polytech.kis.semwiktionary.parser.Main
+ */
 public class Main {
-	public static void main( String[] argv ) {
-		String dirName = null;
-		try {
-			for (int i = 0; i < argv.length; i++) {
-				if (argv[i].equals("-dir")) {
-					i++;
-					if (i >= argv.length)
-					throw new Error("Missing directory name");
-					dirName = argv[i];
-				}
-				else {
-					throw new Error("Usage: java Main -dir directory" );
-				}
-			}
-			if ( dirName == null )
-				throw new Error( "Directory not specified" );
-			FileInputStream fileInputStream = new FileInputStream(
-			new File( dirName, "miniwiki.xml" ) );
-			System.setErr( new PrintStream( new FileOutputStream(
-			new File( dirName, "program.err" ) ) ) );
-			System.setOut( new PrintStream( new FileOutputStream(
-			new File( dirName, "program.out" ) ) ) );
-			Miniwiki lexer = new Miniwiki( fileInputStream );
-			lexer.yylex();
-			for (Iterator it = lexer.listTitle.iterator (); it.hasNext ();) {
-				String s = (String)it.next ();
-				System.out.println (s);
-			}
-			
-			for (Iterator it = lexer.listPage.iterator (); it.hasNext ();) {
-				String s = (String)it.next ();
-				System.out.println (s);
-			}
-		} catch ( Exception exception ) {
-			System.err.println( "Exception in Main " + exception.toString() );
-			exception.printStackTrace();
+	public static void main(String[] argv) throws Exception {
+		FileInputStream fileInputStream = new FileInputStream(new File("test/resources/miniwiki.xml"));
+		System.setErr( new PrintStream( new FileOutputStream(
+															 new File("log/jflex.err" ) ) ) );
+		System.setOut( new PrintStream( new FileOutputStream(
+															 new File("log/jflex.out" ) ) ) );
+		WikimediaDump lexer = new WikimediaDump( fileInputStream );
+		lexer.yylex();
+		for (Iterator it = lexer.listTitle.iterator (); it.hasNext ();) {
+			String s = (String)it.next ();
+			System.out.println (s);
+		}
+		
+		for (Iterator it = lexer.listPage.iterator (); it.hasNext ();) {
+			String s = (String)it.next ();
+			System.out.println (s);
 		}
 	}
 }

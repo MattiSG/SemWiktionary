@@ -34,7 +34,7 @@ public class Word {
 // STATIC METHODS
 	
 	/** Finds a word in the database from its title.
-	 * Constructs a Word object with all its properties (definition, synonyms…).
+	 * Constructs a Word object with all its properties (definition, synonyms).
 	 *
 	 * @param	word	The word to model
 	 * @return	The complete Word object created or null if the word is not in the database

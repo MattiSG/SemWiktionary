@@ -89,7 +89,7 @@ newline = (\r|\n|\r\n)
 	{
 		for(Definition def : currentWord.getDefinitions())
 		{
-			System.out.println (currentWord.getName());
+			System.out.println (currentWord.getTitle());
 		 	System.out.println("Definition:\n" + def.getDefinition());
 		}
 		yybegin(NORMAL);

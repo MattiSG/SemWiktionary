@@ -18,7 +18,7 @@ public class MutableWord extends Word {
 // STATIC METHODS
 	
 	/** Finds a word in the database from its title.
-	 * Constructs a MutableWord object with all its properties (definition, synonyms…).
+	 * Constructs a MutableWord object with all its properties (definition, synonyms).
 	 * Such an object _may_ modify the database. See `Word` for a safer use.
 	 *
 	 * @param	word	The word to model

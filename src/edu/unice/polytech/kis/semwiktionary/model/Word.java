@@ -1,42 +1,43 @@
 package edu.unice.polytech.kis.semwiktionary.model;
 
+
 import java.util.List;
 import java.util.LinkedList;
 
 import org.neo4j.graphdb.Node;
 
-/** Represents a simple word in the database.
- * The class provides all access methods to the word.
+
+/** Models a word in the dictionary and abstracts its database storage.
  * Some properties are only loaded when their associated get methods are called.
- * 
- * @author Fabien BROSSIER
- * @author Matti SCHNEIDER
- * @author Steven SANCHO
- * @author Thinh DONG
- * @version 1.0
+ * Instances of this class are safe to use, and will never modify the database. See `MutableWord` to modify the database.
+ *
+ * @author	[Fabien Brossier](http://fabienbrossier.fr)
+ * @author	[Matti Schneider-Ghibaudo](http://mattischneider.fr)
  */
 public class Word {
 
 // PROPERTIES
 	
-	/** The node in the Neo4J database
+	/** The database storage for this Word.
+	 *	See conceptual documentation for database layout.
 	 */
 	protected Node node;
 	
-	/** The title of the Word
+	/** The actual natural language word this instance represents.
 	 */
 	protected String title;
 	
-	/** The definitions of the Wordord 
+	/** Definitions of this Word, in parsing order.
 	 */
 	protected List<Definition> definitions;
 	
 // STATIC METHODS
 	
-	/** Finds a word in the database from his title.
-	 * Constructs a World object with all his properties (definition, synonyms, ...). 
-	 * @param word The title of the world to find in the database
-	 * @return The complete Word object created or null if the word is not in the database (unlikely)
+	/** Finds a word in the database from its title.
+	 * Constructs a Word object with all its properties (definition, synonyms…).
+	 *
+	 * @param	word	The word to model
+	 * @return	The complete Word object created or null if the word is not in the database
 	 */
 	public static Word from(String word) {
 		if (Word.exists(word)) //TODO: check if it should not be the other way around, depending on Neo4j getter implementation
@@ -45,9 +46,10 @@ public class Word {
 		return null;
 	}
 	
-	/** Tests if a given Word exists in the database from his title. 
-	 * @param word The title of the Word to search in the database
-	 * @return True if the Word exists, false otherwise
+	/** Tests if the given Word exists in the database.
+	 *
+	 * @param	word	The word to search for in the database
+	 * @return	`true` if the word exists in the database, `false` otherwise
 	 */
 	public static boolean exists(String word) {
 		//TODO do an actual test
@@ -56,17 +58,20 @@ public class Word {
 	
 // CONSTRUCTORS
 	
-	/** Constructs a Word from his title.
-	 * @param title The title of the Word
+	/** Models a natural-language word.
+	 * Does not store it in the database. See `MutableWord.create` to create a word in the database.
+	 *
+	 * @param	word	The natural language word to model
 	 */
-	public Word(String title) {
+	public Word(String word) {
 		this.title = title;
 		this.definitions = new LinkedList<Definition>();
 		//TODO
 	}
 
 	/** Constructs a Word object from a Node in the database.
-	 * Can be particularly interesting in propagation cases.
+	 * Useful in propagation cases.
+	 *
 	 * @param node The node object of the database
 	 */
 	private Word(Node node) {
@@ -76,15 +81,13 @@ public class Word {
 
 // ACCESSORS
 	
-	/** Returns a String which represents the title of the Word.
-	 * @return The title of the Word.
+	/** Returns the natural language word this instance models.
 	 */
 	public String getTitle() {
 		return title;
 	}
 
-	/** Returns a list of all the definitions associated to the Word title.
-	 * @return The list of Definition objects for the current Word 
+	/** Returns all available definitions for this Word.
 	 */
 	public List<Definition> getDefinitions() {
 		if (definitions.isEmpty())
@@ -95,16 +98,14 @@ public class Word {
 	
 // DATABASE ACCESS
 	
-	/** Loads the node of the Word object.
-	 * Can be usefull for some methods like from(String title). 
+	/** Loads the node for this Word from the database.
 	 */
-	// TODO : complete this documentation.
 	protected void fetchNode() {
 		//TODO
 		//this.node = ...
 	}
 	
-	/** Loads the definitions of the Word objects from the database.
+	/** Loads the definitions for this Word from the database.
 	 */
 	protected void fetchDefinitions() {
 		//TODO

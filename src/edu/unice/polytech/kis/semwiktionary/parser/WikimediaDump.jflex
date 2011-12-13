@@ -39,7 +39,7 @@ space = [\ \t\r\n]
 whitespace = [\ ]
 newline = (\r|\n|\r\n)
 
-%state NORMAL, PAGE, ENDPAGE, DEFINITION, FIRSTWORD, NEXTWORD
+%state NORMAL, PAGE, ENDPAGE, TITLE, DEFINITION, FIRSTWORD, NEXTWORD
 
 
 %%
@@ -66,10 +66,10 @@ newline = (\r|\n|\r\n)
 		strDef = "";	
 		yybegin(DEFINITION);
 	}
-	"<title>"~"</title>" 
+	"<title>"
 	{
-		strTitle = yytext().substring(7, yytext().length()-8);
-		currentWord = MutableWord.create(strTitle);
+		strTitle = "";
+		yybegin(TITLE);
 	}
 	"</page>" 
 	{ 
@@ -87,13 +87,26 @@ newline = (\r|\n|\r\n)
 {	/* Call the methods to create the Database here */
 	.
 	{
-		li = currentWord.getDefinitions().listIterator(0);
-		while (li.hasNext())
+		for(Definition def : currentWord.getDefinitions())
 		{
 			System.out.println (currentWord.getName());
-		 	System.out.println("Definition:\n" + ((Definition)li.next()).getDefinition());
+		 	System.out.println("Definition:\n" + def.getDefinition());
 		}
 		yybegin(NORMAL);
+	}
+}
+
+<TITLE>
+{
+	{word}"</title>"
+	{
+		strTitle = yytext().substring(0, yytext().length()-8);
+		currentWord = MutableWord.create(strTitle);
+		yybegin(PAGE);
+	}
+	.
+	{
+		yybegin(ENDPAGE);
 	}
 }
 

@@ -768,4 +768,38 @@
 [[vi:lire]]</text>
     </revision>
   </page>
+  <page>
+    <title>MediaWiki:Disclaimers</title>
+    <id>4</id>
+    <revision>
+      <id>33009</id>
+      <timestamp>2004-03-22T10:45:00Z</timestamp>
+      <contributor>
+        <username>Ryo</username>
+        <id>2</id>
+      </contributor>
+      <minor />
+      <comment>=&gt; vrai texte</comment>
+      <text xml:space="preserve">Licence</text>
+    </revision>
+  </page>
+  <page>
+    <title>Discussion utilisateur:Hippietrail</title>
+    <id>18</id>
+    <revision>
+      <id>1116029</id>
+      <timestamp>2006-08-20T15:32:15Z</timestamp>
+      <contributor>
+        <username>Daahbot</username>
+        <id>1041</id>
+      </contributor>
+      <minor />
+      <comment>Mention WikidÃ©mie</comment>
+      <text xml:space="preserve">Salut &amp; bienvenue :)
+
+Quelques infos sur [[Discuter:accueil|cette page]] &lt;small&gt;Attention : les discussions se font dÃ©sormais sur la [[Wiktionnaire:WikidÃ©mie|WikidÃ©mie]]&lt;/small&gt;.
+
+[[Utilisateur:Ryo|Ryo]] 22 mar 2004 Ã  14:44 (CET)</text>
+    </revision>
+  </page>
 </mediawiki>

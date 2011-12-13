@@ -64,7 +64,7 @@ public class Word {
 	 * @param	word	The natural language word to model
 	 */
 	public Word(String word) {
-		this.title = title;
+		this.title = word;
 		this.definitions = new LinkedList<Definition>();
 		//TODO
 	}

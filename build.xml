@@ -50,6 +50,9 @@
 		<!-- local libraries linked against -->
 		<property name="lib" location="lib"/>
 		
+		<!-- folder for execution output -->
+		<property name="log" location="log"/>
+		
 		 <!-- intermediate folder for final zipping -->
 		<property name="tmp" location="tmp"/>
 		
@@ -172,6 +175,17 @@
 			<fileset dir="${tmp}"/>
 		</zip>
 		<delete dir="${tmp}"/>
+	</target>
+
+	<target name="parse" depends="compile_tests" description="Run the parser">
+		<mkdir dir="${log}"/>
+		
+		<java classname="edu.unice.polytech.kis.semwiktionary.parser.Main" fork="false">
+			<classpath>
+				<pathelement location="${bin}" />
+				<fileset refid="lib.jars"/>
+			</classpath>
+		</java>
 	</target>
 
 	<target name="run" depends="compile" description="Run the tool">

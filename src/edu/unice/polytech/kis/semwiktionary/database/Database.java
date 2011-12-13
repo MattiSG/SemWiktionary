@@ -76,7 +76,7 @@ public class Database {
 	 * @return the created node or null in case of error (unlikely)
 	 */
 	public static Node createNodeWithProperty(String property, String propValue) {
-		Transaction tx = instance.graphDb.beginTx();
+		Transaction tx = getInstance().graphDb.beginTx();
 		Node node;
 		
 		try {

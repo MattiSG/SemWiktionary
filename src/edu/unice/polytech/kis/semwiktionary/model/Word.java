@@ -1,6 +1,5 @@
 package edu.unice.polytech.kis.semwiktionary.model;
 
-
 import java.util.List;
 import java.util.LinkedList;
 
@@ -34,10 +33,10 @@ public class Word {
 	
 // STATIC METHODS
 	
-	/** Search a word in the database from his title.
+	/** Finds a word in the database from his title.
 	 * Constructs a World object with all his properties (definition, synonyms, ...). 
 	 * @param word The title of the world to find in the database
-	 * @return The complete Word object created or null if the word is not in the database 
+	 * @return The complete Word object created or null if the word is not in the database (unlikely)
 	 */
 	public static Word from(String word) {
 		if (Word.exists(word)) //TODO: check if it should not be the other way around, depending on Neo4j getter implementation

@@ -48,6 +48,7 @@ public class DatabaseTest {
 	
 	@Test
 	public void linkTest() {
+		subjectNode1 = db.createNodeWithProperty("title", EXPECTED_TITLE);
 		subjectNode2 = db.createNodeWithProperty("title", "toto");
 		RelationshipType rel = DynamicRelationshipType.withName(EXPECTED_RELATIONSHIP_NAME);
 		
@@ -59,7 +60,7 @@ public class DatabaseTest {
 		assertTrue("The first tested node's relationship is not properly oriented.", subjectNode1.hasRelationship(rel, Direction.OUTGOING));
 		assertTrue("The second tested node's relationship is not properly oriented.", subjectNode2.hasRelationship(rel, Direction.INCOMING));
 				 
-		assertEquals("The first and second node are not properly related (1)", subjectNode1.getSingleRelationship(rel, Direction.OUTGOING), subjectNode2);
-		assertEquals("The first and second node are not properly related (2)", subjectNode2.getSingleRelationship(rel, Direction.INCOMING), subjectNode1);
+		assertEquals("The first and second node are not properly related (1)", subjectNode1.getSingleRelationship(rel, Direction.OUTGOING).getEndNode(), subjectNode2);
+		assertEquals("The first and second node are not properly related (2)", subjectNode2.getSingleRelationship(rel, Direction.INCOMING).getStartNode(), subjectNode1);
 	}
 }

@@ -8,14 +8,13 @@
 
 package edu.unice.polytech.kis.semwiktionary.database;
 
-
+import org.neo4j.kernel.EmbeddedGraphDatabase;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.index.Index;
-import org.neo4j.kernel.EmbeddedGraphDatabase;
 
 import edu.unice.polytech.kis.semwiktionary.model.Definition;
 import edu.unice.polytech.kis.semwiktionary.model.MutableWord;
@@ -47,19 +46,19 @@ public class Database {
 	}
 	
 	/**Method to close the database correctly whatever the close action made by the user.
+	 *Registers a shutdown hook for the Neo4j instance so that it
+	 * shuts down nicely when the VM exits (even if you "Ctrl-C" the
+	 * running example before it's completed).
+	 *
 	 * @param graphDb The database object
 	 */
 	private static void registerShutdownHook(final GraphDatabaseService graphDb) {
-	    // Registers a shutdown hook for the Neo4j instance so that it
-	    // shuts down nicely when the VM exits (even if you "Ctrl-C" the
-	    // running example before it's completed)
-	    Runtime.getRuntime().addShutdownHook(new Thread() {
-	        @Override
-	        public void run()
-	        {
-	            graphDb.shutdown();
-	        }
-	    });
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			@Override
+			public void run() {
+				graphDb.shutdown();
+			}
+		});
 	}
 	
 	/**Singleton accessor.

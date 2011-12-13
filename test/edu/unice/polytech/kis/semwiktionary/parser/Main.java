@@ -1,12 +1,15 @@
 package edu.unice.polytech.kis.semwiktionary.parser;
 
+
 import java.io.*;
 import java.util.Iterator;
+
 import edu.unice.polytech.kis.semwiktionary.parser.WikimediaDump;
 
-/**To test JFlex output, issue the following commands:
- *$ mkdir log
- *$ java -classpath bin edu.unice.polytech.kis.semwiktionary.parser.Main
+
+/**To test JFlex output, issue the following command:
+ *$ ant parse
+ * The results are in the `log` folder.
  */
 public class Main {
 	public static void main(String[] argv) throws Exception {

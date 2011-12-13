@@ -34,7 +34,7 @@ import edu.unice.polytech.kis.semwiktionary.model.*;
 
 letter = [A-ZÀÉÈÂÊÔÙa-zéàèùâêîôûëïüçœ]
 word = {letter}+
-otherPunct = [\,\;\:\.]
+otherPunct = [\,\;\:\.\(\)\…]
 space = [\ \t\r\n]
 whitespace = [\ ]
 newline = (\r|\n|\r\n)
@@ -61,7 +61,7 @@ newline = (\r|\n|\r\n)
 
 <PAGE> 
 {
-	"{{-nom-|fr}}" | "{{-adj-|fr}}" | "{{-verb-|fr}}"
+	"{{-nom-|fr}}" | "{{-adj-|fr}}" | "{{-verb-|fr}}" | "{{-nom-|fro}}"
 	{
 		strDef = "";	
 		yybegin(DEFINITION);
@@ -84,7 +84,7 @@ newline = (\r|\n|\r\n)
 }
 
 <ENDPAGE>
-{	/* Call the methods to create the Database here */
+{	/* To test by display all the words together defines */
 	.
 	{
 		for(Definition def : currentWord.getDefinitions())
@@ -112,22 +112,28 @@ newline = (\r|\n|\r\n)
 
 <DEFINITION> 
 {
-	#
+	"#"
 	{
-		append("*");
+		if(strDef!="")
+		{
+			def = new Definition(strDef);
+			currentWord.addDefinition(def);
+			strDef = "";
+		}
+		append("* ");
 		yybegin(FIRSTWORD);
 	}
-	"#*" 
+	"#*"
 	{
 		append("Ex: ");
 		yybegin(FIRSTWORD);
 	}
-	## 	
+	"##"
 	{
 		append("**");
 		yybegin(FIRSTWORD);
 	}
-	"##*" 
+	"##*"
 	{
 		append("Ex: ");
 		yybegin(FIRSTWORD);
@@ -136,6 +142,7 @@ newline = (\r|\n|\r\n)
 	{
 		def = new Definition(strDef);
 		currentWord.addDefinition(def);
+		yypushback(3);
 		yybegin(PAGE);
 	}
 	{newline} 
@@ -151,7 +158,7 @@ newline = (\r|\n|\r\n)
 	"{{"~"}}"
 	{
 	}
-	"[["{word}\|{word}"]]"
+	"[["~\|{word}"]]"
 	{
 		append(yytext().substring(yytext().indexOf("|")+1, yytext().length()-2));
 		yybegin(NEXTWORD);
@@ -166,7 +173,7 @@ newline = (\r|\n|\r\n)
 	}
 	{letter}(\'|\’){word}
 	{
-		append( yytext() );
+		append(yytext());
 		yybegin(NEXTWORD);
 	}
 	{whitespace}{letter}(\'|\’)"[["{word}
@@ -192,7 +199,7 @@ newline = (\r|\n|\r\n)
 	}
 	{whitespace}{word}(\'|\’){word}
 	{
-		append( yytext() );
+		append(yytext());
 	}
 	{whitespace}{letter}(\'|\’)|{whitespace}{letter}(\'|\’){word}
 	{
@@ -206,6 +213,10 @@ newline = (\r|\n|\r\n)
 	{
 		append(" " + yytext().substring(2, yytext().indexOf("]]")) + yytext().substring(yytext().indexOf("]]")+2));
 	}
+	"[["{word}\|{word}"]]"
+	{
+		append(" " + yytext().substring(yytext().indexOf("|")+1, yytext().length()-2));
+	}
 	"{{source"~{newline} 
 	{
 		append("\n");
@@ -214,6 +225,13 @@ newline = (\r|\n|\r\n)
 	{whitespace}{letter}(\'|\’)"'''"{word}"'''"
 	{
 		append(yytext().substring(0,3) + yytext().substring(6, yytext().length()-3));
+	}
+	"&lt;br&gt;"
+	{
+		append("\n");
+	}
+	"&lt;"~"&gt;"
+	{
 	}
 	{otherPunct}
 	{
@@ -233,4 +251,3 @@ newline = (\r|\n|\r\n)
 {space} 
 {
 }
-

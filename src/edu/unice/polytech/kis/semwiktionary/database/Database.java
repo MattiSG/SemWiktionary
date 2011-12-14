@@ -26,13 +26,13 @@ import edu.unice.polytech.kis.semwiktionary.model.Word;
  */
 public class Database {
 	
+	/** Folder containing the database files.
+	 */
+	protected static final String DB_PATH = "./data"; // also update ${data} in ant buildfile
+	
 	/** The underlying database object.
 	 */
 	protected final GraphDatabaseService graphDb;
-	
-	/** Folder containing the database files.
-	 */
-	private static final String DB_PATH = "./data"; // also update ${data} in ant buildfile
 	
 	/** Singleton unique instance.
 	 */

@@ -3,6 +3,7 @@ package edu.unice.polytech.kis.semwiktionary.model;
 
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.AfterClass;
 import org.junit.Test;
 
 import java.util.List;
@@ -13,12 +14,25 @@ import java.util.HashMap;
 import edu.unice.polytech.kis.semwiktionary.model.Word;
 import edu.unice.polytech.kis.semwiktionary.model.Definition;
 import edu.unice.polytech.kis.semwiktionary.parser.ParserTest;
+import edu.unice.polytech.kis.semwiktionary.database.DatabaseTest;
 
 
 public class WordTest {
 	
 	private static Map<String, List<Definition>> expected;
 	
+	@BeforeClass
+	public static void classSetUp() throws Exception {
+		expected = ParserTest.generateExpectedContent();
+		
+		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet())
+			MutableWord.create(currentEntry.getKey()).addDefinitions(currentEntry.getValue());
+	}
+	
+	@AfterClass
+	public static void classTearDown() {
+		DatabaseTest.deleteDb();
+	}
 	
 	@Test
 	public void fromTest() {
@@ -49,13 +63,5 @@ public class WordTest {
 			for (int i = 0; i < expectedDefinitions.size(); i++)
 				assertEquals("Incorrect definition (#" + (i + 1) + ") for word '" + currentEntry.getKey() + "'", expectedDefinitions.get(i), myWord.getDefinitions().get(i));
 		}
-	}
-	
-	@BeforeClass
-	public static void classSetUp() throws Exception {
-		expected = ParserTest.generateExpectedContent();
-		
-		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet())
-			MutableWord.create(currentEntry.getKey()).addDefinitions(currentEntry.getValue());
 	}
 }

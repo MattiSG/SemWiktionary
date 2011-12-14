@@ -19,6 +19,11 @@ public class ParserTest {
 	private static Map<String, List<Definition>> expected;
 	
 	
+	@BeforeClass
+	public static void classSetUp() throws Exception {
+		expected = generateExpectedContent();
+	}
+	
 	@Test
 	public void allWordsExist() {
 		for (String someWord : expected.keySet())
@@ -34,10 +39,6 @@ public class ParserTest {
 		}
 	}
 	
-	@BeforeClass
-	public static void classSetUp() throws Exception {
-		expected = generateExpectedContent();
-	}
 	
 	public static Map<String, List<Definition>> generateExpectedContent() {
 		Map<String, List<Definition>> result = new HashMap<String, List<Definition>>();

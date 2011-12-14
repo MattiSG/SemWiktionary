@@ -21,7 +21,7 @@ public class WordTest {
 	
 	
 	@Test
-	public void allWordsExistWithFrom() {
+	public void fromTest() {
 		for (String someWord : expected.keySet())
 			assertNotNull("'" + someWord + "' was not found in the database!", Word.from(someWord));
 	}
@@ -33,9 +33,9 @@ public class WordTest {
 	}
 	
 	@Test
-	public void fromTest() {
+	public void constructorTest() {
 		for (String someWord : expected.keySet())
-			assertEquals("'" + someWord + "' was not properly fetched from database!", someWord, Word.from(someWord).getTitle());
+			assertEquals("Title of word '" + someWord + "' was not properly fetched from database!", someWord, Word.from(someWord).getTitle());
 	}
 	
 	@Test

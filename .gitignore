@@ -9,8 +9,6 @@ build.num
 tmp
 log
 
-# JFlex
-src/edu/unice/polytech/kis/semwiktionary/parser/WikimediaDump.java
 
 
 ## OS X #

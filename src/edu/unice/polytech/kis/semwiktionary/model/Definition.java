@@ -14,4 +14,18 @@ public class Definition {
 		return definition;
 	}
 	
+	public String toString() {
+		return definition;
+	}
+	
+	public boolean equals(Object o) {
+		if (this.getClass().isInstance(o))
+			return this.definition.equals(((Definition) o).getDefinition());
+		
+		if (String.class.isInstance(o))
+			return this.definition.equals(o);
+		
+		return false;
+	}
+	
 }

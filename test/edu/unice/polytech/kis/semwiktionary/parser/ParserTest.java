@@ -29,7 +29,7 @@ public class ParserTest {
 	public void titlesDefinitionsMatch() {
 		for (Map.Entry<String, List<Definition>> currentEntry : EXPECTED.entrySet()) {
 			Word myWord = Word.from(currentEntry.getKey());
-			assertEquals(myWord.getDefinitions(), currentEntry.getValue());
+			assertEquals("Incorrect definitions for word '" + currentEntry.getKey() + "'", currentEntry.getValue(), myWord.getDefinitions());
 		}
 	}
 	

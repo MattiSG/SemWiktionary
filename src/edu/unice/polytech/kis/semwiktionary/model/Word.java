@@ -113,7 +113,7 @@ public class Word {
 	/** Returns all available definitions for this Word.
 	 */
 	public List<Definition> getDefinitions() {
-		if (definitions.isEmpty())
+		if (definitions == null || definitions.isEmpty())
 			this.fetchDefinitions();
 		
 		return definitions;
@@ -124,6 +124,8 @@ public class Word {
 	/** Loads the definitions for this Word from the database.
 	 */
 	protected void fetchDefinitions() {
+		this.definitions = new LinkedList<Definition>();
+		
 		for (Relationship relation : node.getRelationships(Direction.OUTGOING, Relation.DEFINITION)) {
 			String definitionStr = (String) relation.getEndNode().getProperty("definition");
 			definitions.add(new Definition(definitionStr));

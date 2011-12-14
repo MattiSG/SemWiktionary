@@ -4,7 +4,12 @@ package edu.unice.polytech.kis.semwiktionary.model;
 import java.util.List;
 import java.util.LinkedList;
 
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.Traverser.Order;
+
+import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
 
 /** Models a word in the dictionary and abstracts its database storage.
@@ -108,8 +113,10 @@ public class Word {
 	/** Loads the definitions for this Word from the database.
 	 */
 	protected void fetchDefinitions() {
-		//TODO
-		//this.definitions = ...
+		for ( Relationship relation : node.getRelationships(
+				Direction.OUTGOING, Relation.DEFINITION)) {
+			String definitionStr = (String) relation.getEndNode().getProperty("definition");
+			definitions.add(new Definition(definitionStr));
+		}
 	}
-
 }

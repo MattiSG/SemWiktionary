@@ -99,7 +99,7 @@ public class Word {
 	 */
 	private Word(Node node) {
 		this.node = node;
-		//TODO
+		this.title = (String) node.getProperty("title");
 	}
 
 // ACCESSORS
@@ -120,13 +120,6 @@ public class Word {
 	}
 	
 // DATABASE ACCESS
-	
-	/** Loads the node for this Word from the database.
-	 */
-	protected void fetchNode() {
-		//TODO
-		//this.node = ...
-	}
 	
 	/** Loads the definitions for this Word from the database.
 	 */

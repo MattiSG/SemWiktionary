@@ -30,7 +30,7 @@ public class Database {
 	private static Database instance;
 	
 	// TODO : define how to set the database path
-	private static final String DB_PATH = "./SemWiktionary/DB";
+	private static final String DB_PATH = "./data";
 	
 	/** The database object and the words index
 	 */

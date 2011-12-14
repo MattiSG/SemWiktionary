@@ -61,7 +61,7 @@ newline = (\r|\n|\r\n)
 
 <PAGE> 
 {
-	"{{-nom-|fr}}" | "{{-adj-|fr}}" | "{{-verb-|fr}}" | "{{-nom-|fro}}"
+	"{{-nom-|fr}}" | "{{-adj-|fr}}" | "{{-verb-|fr}}"
 	{
 		strDef = "";	
 		yybegin(DEFINITION);
@@ -84,11 +84,13 @@ newline = (\r|\n|\r\n)
 }
 
 <ENDPAGE>
-{	/* To test by display all the words together defines */
+{	/* To test by display all the words together definitions */
 	.
 	{
+		int count = 1;
 		for(Definition def : currentWord.getDefinitions())
 		{
+			System.out.println(count++);
 			System.out.println (currentWord.getTitle());
 		 	System.out.println("Definition:\n" + def.getDefinition());
 		}
@@ -104,9 +106,13 @@ newline = (\r|\n|\r\n)
 		currentWord = MutableWord.create(strTitle);
 		yybegin(PAGE);
 	}
+	{word}[\:]{word}"</title>"
+	{
+		yybegin(NORMAL);
+	}	
 	.
 	{
-		yybegin(ENDPAGE);
+		yybegin(NORMAL);
 	}
 }
 
@@ -140,8 +146,11 @@ newline = (\r|\n|\r\n)
 	}
 	"{{-"
 	{
-		def = new Definition(strDef);
-		currentWord.addDefinition(def);
+		if(strDef != "")
+		{
+			def = new Definition(strDef);
+			currentWord.addDefinition(def);
+		}
 		yypushback(3);
 		yybegin(PAGE);
 	}

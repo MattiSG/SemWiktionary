@@ -76,7 +76,7 @@ public class Word {
 	 * @return	`true` if the word exists in the database, `false` otherwise
 	 */
 	public static boolean exists(String word) {
-		return Word.from(word) == null;
+		return from(word) != null;
 	}
 	
 // CONSTRUCTORS

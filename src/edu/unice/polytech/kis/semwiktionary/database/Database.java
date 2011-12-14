@@ -42,7 +42,6 @@ public class Database {
 	/**Singleton constructor, therefore private.
 	 */
 	private Database() {
-		titleIndex = graphDb.index().forNodes("nodes");
 		this.graphDb = new EmbeddedGraphDatabase(DB_PATH);
 		registerShutdownHook(this.graphDb);
 	}

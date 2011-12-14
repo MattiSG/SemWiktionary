@@ -1,7 +1,10 @@
 package edu.unice.polytech.kis.semwiktionary.model;
 
 
+import java.util.List;
+
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Transaction;
 
 import edu.unice.polytech.kis.semwiktionary.database.Database;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
@@ -25,10 +28,8 @@ public class MutableWord extends Word {
 	 * @return	The complete MutableWord object created or null if the word is not in the database
 	 */
 	public static MutableWord from(String word) {
-		if (Word.exists(word))
-			return new MutableWord(word);
-		
-		return null;
+		Word immutableWord = Word.from(word);
+		return (immutableWord == null ? null : new MutableWord(immutableWord));
 	}
 	
 	/** Creates a new word in the database.
@@ -39,12 +40,34 @@ public class MutableWord extends Word {
 	 */
 	public static MutableWord create(String word) {
 		MutableWord result = new MutableWord(word);
-		result.node = Database.createNodeWithProperty("title", word);
+		
+		Transaction tx = Database.getDbService().beginTx();
+		
+		try {
+			result.node = Database.getDbService().createNode();
+			result.node.setProperty("title", word);
+			
+			Word.index.add(result.node, Word.INDEX_KEY, word);
+			
+			tx.success();
+		} finally {
+		    tx.finish();
+		}
+
 		return result;
 	}
 	
 // CONSTRUCTORS
 
+	/** Models an editable natural-language word.
+	 *
+	 * @param	model	An immutable version of a word you want to modify.
+	 */
+	public MutableWord(Word model) {
+		super(model.getTitle());
+		this.node = model.node;
+	}
+	
 	/** Models an editable natural-language word.
 	 *
 	 * @param	word	The natural language word to model

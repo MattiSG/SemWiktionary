@@ -52,6 +52,9 @@
 		
 		<!-- folder for execution output -->
 		<property name="log" location="log"/>
+
+		 <!-- database storage folder -->
+		<property name="data" location="data"/>
 		
 		 <!-- intermediate folder for final zipping -->
 		<property name="tmp" location="tmp"/>
@@ -91,6 +94,7 @@
 		<mkdir dir="${src}"/>
 		<mkdir dir="${lib}"/>
 		<mkdir dir="${build}"/>
+		<mkdir dir="${data}"/>
 	</target>
 	
 	 <!-- For more information about this task, see http://jflex.de/jflex_anttask.html -->
@@ -200,6 +204,10 @@
 	
 	<target name="srun" depends="junit, run" description="Securely run the tool" />
 
+	<target name="erase_db" description="Drop all database content">
+		<delete dir="${data}" />
+	</target>
+	
 	<target name="clean" description="Remove all generated directories">
 		<delete dir="${build}"/>
 		<delete dir="${bin}"/>

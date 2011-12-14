@@ -50,6 +50,9 @@
 		<!-- local libraries linked against -->
 		<property name="lib" location="lib"/>
 		
+		 <!-- database storage folder -->
+		<property name="data" location="data"/>
+		
 		 <!-- intermediate folder for final zipping -->
 		<property name="tmp" location="tmp"/>
 		
@@ -84,6 +87,7 @@
 	<target name="init" description="Preparation">
 		<mkdir dir="${src}"/>
 		<mkdir dir="${lib}"/>
+		<mkdir dir="${data}"/>
 	</target>
 	
 	<target name="jflex" depends="init" description="Generate parser"> <!-- http://jflex.de/jflex_anttask.html -->
@@ -181,6 +185,10 @@
 	
 	<target name="srun" depends="junit, run" description="Securely run the tool" />
 
+	<target name="erase_db" description="Drop all database content">
+		<delete dir="${data}" />
+	</target>
+	
 	<target name="clean" description="Remove all generated directories">
 		<delete dir="${bin}"/>
 		<delete dir="${jars}"/>

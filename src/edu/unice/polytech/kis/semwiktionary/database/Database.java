@@ -8,6 +8,7 @@
 
 package edu.unice.polytech.kis.semwiktionary.database;
 
+
 import org.neo4j.kernel.EmbeddedGraphDatabase;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
@@ -25,24 +26,25 @@ import edu.unice.polytech.kis.semwiktionary.model.Word;
  */
 public class Database {
 	
-	/**Singleton unique instance.
+	/** The underlying database object.
+	 */
+	protected final GraphDatabaseService graphDb;
+	
+	/** Folder containing the database files.
+	 */
+	private static final String DB_PATH = "./data"; // also update ${data} in ant buildfile
+	
+	/** Singleton unique instance.
 	 */
 	private static Database instance;
 	
-	// TODO : define how to set the database path
-	private static final String DB_PATH = "./data";
-	
-	/** The database object and the words index
-	 */
-	protected final GraphDatabaseService graphDb;
-	private Index titleIndex;
 	
 	/**Singleton constructor, therefore private.
 	 */
 	private Database() {
-		graphDb = new EmbeddedGraphDatabase(DB_PATH);
 		titleIndex = graphDb.index().forNodes("nodes");
-		registerShutdownHook(graphDb);
+		this.graphDb = new EmbeddedGraphDatabase(DB_PATH);
+		registerShutdownHook(this.graphDb);
 	}
 	
 	/**Method to close the database correctly whatever the close action made by the user.
@@ -70,17 +72,23 @@ public class Database {
 		return Database.instance;
 	}
 	
+	/** Accessor to the main Neo4j manipulating class
+	 */
+	public static GraphDatabaseService getDbService() {
+		return getInstance().graphDb;
+	}
+	
 	/**Create a new node in the database with the given property.
 	 * @param property The node property 
 	 * @param propValue The property value
 	 * @return the created node or null in case of error (unlikely)
 	 */
 	public static Node createNodeWithProperty(String property, String propValue) {
-		Transaction tx = getInstance().graphDb.beginTx();
+		Transaction tx = getDbService().beginTx();
 		Node node;
 		
 		try {
-			node = instance.graphDb.createNode();
+			node = getDbService().createNode();
 			node.setProperty(property, propValue);
 			tx.success();
 		} finally {
@@ -90,8 +98,16 @@ public class Database {
 		return node; 
 	}
 	
+	/** Returns the database's nodes' index for the given key.
+	 */
+	public static Index<Node> getIndexForName(String indexKey) {
+		return getDbService().index().forNodes(indexKey);
+	}
+	
+	/** Adds the given relationship between the two given nodes.
+	 */
 	public static Relationship link(Node from, Node to, RelationshipType relationType) {
-		Transaction tx = instance.graphDb.beginTx();
+		Transaction tx = getDbService().beginTx();
 		Relationship relationship;
 		
 		try {

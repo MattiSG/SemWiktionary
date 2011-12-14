@@ -52,11 +52,17 @@
 		
 		<!-- folder for execution output -->
 		<property name="log" location="log"/>
+
+		 <!-- database storage folder -->
+		<property name="data" location="data"/>
 		
 		 <!-- intermediate folder for final zipping -->
 		<property name="tmp" location="tmp"/>
 		
 		 <!-- intermediate build products -->
+		<property name="build" location="build"/>
+		
+		 <!-- final build products -->
 		<property name="bin" location="bin"/>
 		
 		 <!-- jar files -->
@@ -87,18 +93,21 @@
 	<target name="init" description="Preparation">
 		<mkdir dir="${src}"/>
 		<mkdir dir="${lib}"/>
+		<mkdir dir="${build}"/>
+		<mkdir dir="${data}"/>
 	</target>
 	
-	<target name="jflex" depends="init" description="Generate parser"> <!-- http://jflex.de/jflex_anttask.html -->
+	 <!-- For more information about this task, see http://jflex.de/jflex_anttask.html -->
+	<target name="jflex" depends="init" description="Generate parser">
 		<jflex
 			file="${src}/edu/unice/polytech/kis/semwiktionary/parser/WikimediaDump.jflex"
-			destdir="${src}"
+			destdir="${build}"
 		/>
 	</target>
 
 	<target name="compile" depends="jflex" description="Compile code">
 		<mkdir dir="${bin}"/>
-		<javac deprecation="on" srcdir="${src}" destdir="${bin}"
+		<javac deprecation="on" srcdir="${src}:${build}" destdir="${bin}"
 			source="${jdk.dev}" target="${jdk.target}"
 			includeAntRuntime="no"
 			debug="${compile.debug}"
@@ -195,7 +204,12 @@
 	
 	<target name="srun" depends="junit, run" description="Securely run the tool" />
 
+	<target name="erase_db" description="Drop all database content">
+		<delete dir="${data}" />
+	</target>
+	
 	<target name="clean" description="Remove all generated directories">
+		<delete dir="${build}"/>
 		<delete dir="${bin}"/>
 		<delete dir="${jars}"/>
 		<delete dir="${dist}"/>

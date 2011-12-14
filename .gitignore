@@ -9,9 +9,9 @@ build.num
 tmp
 log
 
-# JFlex
-src/edu/unice/polytech/kis/semwiktionary/parser/WikimediaDump.java
 
+## Database #
+data
 
 ## OS X #
 .DS_Store

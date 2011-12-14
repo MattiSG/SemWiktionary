@@ -16,14 +16,21 @@ import edu.unice.polytech.kis.semwiktionary.model.Definition;
 
 public class ParserTest {
 	
-	private static Map<String, List<Definition>> EXPECTED;
+        private static List<String> UNEXPECTED_TITLES;
+	private static Map<String, List<Definition>> EXPECTED;   
 	
-	
+        
+	@Test
+        public void unExpectedTitlesNotExist() {
+                for (String someWord : UNEXPECTED_TITLES)
+                        assertFalse(someWord + " should exist in the database!", Word.exists(someWord));
+        }
+        
 	@Test
 	public void allWordsExist() {
 		for (String someWord : EXPECTED.keySet())
 			assertNotNull("'" + someWord + "' was not found in the database!", Word.from(someWord));
-	}
+        }
 	
 	@Test
 	public void titlesDefinitionsMatch() {
@@ -35,6 +42,11 @@ public class ParserTest {
 	
 	@BeforeClass
 	public static void classSetUp() throws Exception {
+                UNEXPECTED_TITLES = new ArrayList<String>(2);
+                
+                UNEXPECTED_TITLES.add("MediaWiki:Disclaimers");
+                UNEXPECTED_TITLES.add("Discussion utilisateur:Hippietrail");
+                
 		EXPECTED = new HashMap<String, List<Definition>>();
 		
 		List<Definition> definitions = new ArrayList<Definition>(3);

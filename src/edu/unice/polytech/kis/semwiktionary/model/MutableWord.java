@@ -91,8 +91,23 @@ public class MutableWord extends Word {
 			return null;
 		
 		Database.link(this.node, defNode, Relation.DEFINITION);
+		// TODO performance: check if the use of a single transaction instead of two impacts performance
 		this.definitions.add(definition);
 		
+		return this;
+	}
+
+	/** Adds the given set of Definitions to this Word.
+	 * The definitions are immediately and transparently stored in the database. No need to `commit` modifications.
+	 * 
+	 * @param	definitions	The list of Definitions to add to this Word
+	 * @return	This MutableWord, for chainability
+	 * @see		addDefinition
+	 */
+	public MutableWord addDefinitions(List<Definition> definitions) {
+		for (Definition definition : definitions)
+			this.addDefinition(definition);
+		// TODO performance: use a single transaction
 		return this;
 	}
 

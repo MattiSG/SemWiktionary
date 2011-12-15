@@ -11,13 +11,24 @@ import edu.unice.polytech.kis.semwiktionary.model.*;
 
 
 %{
+	List<String> listExample = new ArrayList<String>();
 	MutableWord currentWord;
 	Definition def;
 	ListIterator li;
-	String	strDef, strTitle;
+	int flagExam = 0, flagChild = 0, hasChild = 0;
+	String	strDef, strTitle, strExam, strChildDef;
 	void append(String s) 
 	{
-		strDef += s;
+		if(flagExam == 0)
+		{
+			if(flagChild == 0)
+				strDef += s;
+			else
+				strChildDef += s;
+		}
+		else
+			strExam += s;
+		
 	}
 
 %}
@@ -34,7 +45,7 @@ import edu.unice.polytech.kis.semwiktionary.model.*;
 
 letter = [A-ZÀÉÈÂÊÔÙa-zéàèùâêîôûëïüçœ]
 word = {letter}+
-otherPunct = [\,\;\:\.\(\)\…]
+otherPunct = [\,\;\:\.\(\)\/\…]
 space = [\ \t\r\n]
 whitespace = [\ ]
 newline = (\r|\n|\r\n)
@@ -63,7 +74,9 @@ newline = (\r|\n|\r\n)
 {
 	"{{-nom-|fr}}" | "{{-adj-|fr}}" | "{{-verb-|fr}}"
 	{
-		strDef = "";	
+		strDef = "";
+		strChildDef = "";
+		strExam = "";
 		yybegin(DEFINITION);
 	}
 	"<title>"
@@ -94,6 +107,11 @@ newline = (\r|\n|\r\n)
 			System.out.println (currentWord.getTitle());
 		 	System.out.println("Definition:\n" + def.getDefinition());
 		}
+		for(String exam : listExample)
+		{
+			System.out.println(exam);
+		}
+		listExample.clear();
 		yybegin(NORMAL);
 	}
 }
@@ -120,36 +138,95 @@ newline = (\r|\n|\r\n)
 {
 	"#"
 	{
+		if(strExam!="")
+		{
+			listExample.add(strExam);
+			strExam = "";
+		}
+		if(strDef!="")
+		{
+			if(hasChild == 0)
+			{	
+				def = new Definition(strDef);
+				currentWord.addDefinition(def);
+			}
+			else
+				hasChild = 0;
+		}
+		if(strChildDef!="")
+		{
+			def = new Definition(strChildDef);
+			currentWord.addDefinition(def);
+			strChildDef = "";
+		}
+		strDef = "";
+		flagExam = 0;
+		flagChild = 0;
+		append("* ");
+		yybegin(FIRSTWORD);
+	}
+	"#*"
+	{
 		if(strDef!="")
 		{
 			def = new Definition(strDef);
 			currentWord.addDefinition(def);
 			strDef = "";
 		}
-		append("* ");
-		yybegin(FIRSTWORD);
-	}
-	"#*"
-	{
-		append("Ex: ");
+		flagExam = 1;
+		append("Ex(" + strTitle + "):");
 		yybegin(FIRSTWORD);
 	}
 	"##"
 	{
+		if(strExam!="")
+		{
+			listExample.add(strExam);
+			strExam = "";
+		}
+		if(strChildDef!="")
+		{
+			def = new Definition(strChildDef);
+			currentWord.addDefinition(def);
+			strChildDef = "";
+		}
+		strChildDef = strDef;
+		flagExam = 0;
+		flagChild = 1;
+		hasChild = 1;
 		append("**");
 		yybegin(FIRSTWORD);
 	}
 	"##*"
 	{
-		append("Ex: ");
+		if(strChildDef!="")
+		{
+			def = new Definition(strChildDef);
+			currentWord.addDefinition(def);
+			strChildDef = "";
+		}
+		flagExam = 1;
+		append("Ex(" + strTitle + "):");
 		yybegin(FIRSTWORD);
 	}
 	"{{-"
 	{
-		if(strDef != "")
+		if(strExam!="")
+		{
+			listExample.add(strExam);
+			strExam = "";
+		}
+		if(strDef!="")
 		{
 			def = new Definition(strDef);
 			currentWord.addDefinition(def);
+			strDef = "";
+		}
+		if(strChildDef!="")
+		{
+			def = new Definition(strChildDef);
+			currentWord.addDefinition(def);
+			strChildDef = "";
 		}
 		yypushback(3);
 		yybegin(PAGE);
@@ -167,7 +244,7 @@ newline = (\r|\n|\r\n)
 	"{{"~"}}"
 	{
 	}
-	"[["~\|{word}"]]"
+	"[["{word}\|{word}"]]"
 	{
 		append(yytext().substring(yytext().indexOf("|")+1, yytext().length()-2));
 		yybegin(NEXTWORD);

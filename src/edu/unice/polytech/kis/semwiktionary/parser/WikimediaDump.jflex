@@ -14,10 +14,20 @@ import edu.unice.polytech.kis.semwiktionary.model.*;
 	MutableWord currentWord;
 	Definition def;
 	ListIterator li;
-	String	strDef, strTitle;
+	int flagExam = 0, flagChild = 0, hasChild = 0, defCount = 1;
+	String	strDef, strTitle, strExam, strChildDef;
 	void append(String s) 
 	{
-		strDef += s;
+		if(flagExam == 0)
+		{
+			if(flagChild == 0)
+				strDef += s;
+			else
+				strChildDef += s;
+		}
+		else
+			strExam += s;
+		
 	}
 
 %}
@@ -34,7 +44,7 @@ import edu.unice.polytech.kis.semwiktionary.model.*;
 
 letter = [A-ZÀÉÈÂÊÔÙa-zéàèùâêîôûëïüçœ]
 word = {letter}+
-otherPunct = [\,\;\:\.\(\)\…]
+otherPunct = [\,\;\:\.\(\)\/\…]
 space = [\ \t\r\n]
 whitespace = [\ ]
 newline = (\r|\n|\r\n)
@@ -61,9 +71,12 @@ newline = (\r|\n|\r\n)
 
 <PAGE> 
 {
-	"{{-nom-|fr}}" | "{{-adj-|fr}}" | "{{-verb-|fr}}" | "{{-nom-|fro}}"
+	"{{-nom-|fr}}" | "{{-adj-|fr}}" | "{{-verb-|fr}}"
 	{
-		strDef = "";	
+		strDef = "";
+		strChildDef = "";
+		strExam = "";
+		defCount=1;
 		yybegin(DEFINITION);
 	}
 	"<title>"
@@ -84,29 +97,39 @@ newline = (\r|\n|\r\n)
 }
 
 <ENDPAGE>
-{	/* To test by display all the words together defines */
+{	/* To test by display all the words together definitions */
 	.
 	{
 		for(Definition def : currentWord.getDefinitions())
 		{
+			System.out.println(def.getPosition());
 			System.out.println (currentWord.getTitle());
-		 	System.out.println("Definition:\n" + def.getDefinition());
+		 	System.out.println("Definition:\n" + def.getContent());
+		 	for(String str : def.getExamples())
+		 	{
+				System.out.println(str);
+		 	}
 		}
+		
 		yybegin(NORMAL);
 	}
 }
 
 <TITLE>
 {
-	{word}"</title>"
+	{word}("_"{word})*"</title>"
 	{
 		strTitle = yytext().substring(0, yytext().length()-8);
 		currentWord = MutableWord.create(strTitle);
 		yybegin(PAGE);
 	}
+	{word}[\:]{word}"</title>"
+	{
+		yybegin(NORMAL);
+	}	
 	.
 	{
-		yybegin(ENDPAGE);
+		yybegin(NORMAL);
 	}
 }
 
@@ -114,34 +137,104 @@ newline = (\r|\n|\r\n)
 {
 	"#"
 	{
+		if(strExam!="")
+		{
+			def.addExample(strExam);
+			strExam = "";
+		}
 		if(strDef!="")
 		{
-			def = new Definition(strDef);
-			currentWord.addDefinition(def);
-			strDef = "";
+			if(hasChild == 0)
+			{	
+				def = new Definition(strDef, defCount);
+				currentWord.addDefinition(def);
+			}
+			else
+				hasChild = 0;
+				
+			defCount++;
 		}
+		if(strChildDef!="")
+		{
+			def = new Definition(strChildDef, defCount);
+			currentWord.addDefinition(def);
+			strChildDef = "";
+			defCount++;
+		}
+		strDef = "";
+		flagExam = 0;
+		flagChild = 0;
 		append("* ");
 		yybegin(FIRSTWORD);
 	}
 	"#*"
 	{
-		append("Ex: ");
+		if(strDef!="")
+		{
+			def = new Definition(strDef, defCount);
+			currentWord.addDefinition(def);
+			strDef = "";
+			defCount++;
+		}
+		flagExam = 1;
+		append("Ex(" + strTitle + "):");
 		yybegin(FIRSTWORD);
 	}
 	"##"
 	{
+		if(strExam!="")
+		{
+			def.addExample(strExam);
+			strExam = "";
+		}
+		if(strChildDef!="")
+		{
+			def = new Definition(strChildDef, defCount);
+			currentWord.addDefinition(def);
+			strChildDef = "";
+			defCount++;
+		}
+		strChildDef = strDef;
+		flagExam = 0;
+		flagChild = 1;
+		hasChild = 1;
 		append("**");
 		yybegin(FIRSTWORD);
 	}
 	"##*"
 	{
-		append("Ex: ");
+		if(strChildDef!="")
+		{
+			def = new Definition(strChildDef, defCount);
+			currentWord.addDefinition(def);
+			strChildDef = "";
+			defCount++;
+		}
+		flagExam = 1;
+		append("Ex(" + strTitle + "):");
 		yybegin(FIRSTWORD);
 	}
 	"{{-"
 	{
-		def = new Definition(strDef);
-		currentWord.addDefinition(def);
+		if(strExam!="")
+		{
+			def.addExample(strExam);
+			strExam = "";
+		}
+		if(strDef!="")
+		{
+			def = new Definition(strDef, defCount);
+			currentWord.addDefinition(def);
+			strDef = "";
+			defCount++;
+		}
+		if(strChildDef!="")
+		{
+			def = new Definition(strChildDef, defCount);
+			currentWord.addDefinition(def);
+			strChildDef = "";
+			defCount++;
+		}
 		yypushback(3);
 		yybegin(PAGE);
 	}
@@ -158,7 +251,7 @@ newline = (\r|\n|\r\n)
 	"{{"~"}}"
 	{
 	}
-	"[["~\|{word}"]]"
+	"[["{word}\|{word}"]]"
 	{
 		append(yytext().substring(yytext().indexOf("|")+1, yytext().length()-2));
 		yybegin(NEXTWORD);

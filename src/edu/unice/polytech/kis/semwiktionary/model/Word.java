@@ -108,7 +108,7 @@ public class Word extends NodeMappedObject {
 
 	/** Returns all available definitions for this Word.
 	 */
-	public Iterable<Definition> getDefinitions() {
+	public List<Definition> getDefinitions() {
 		if (definitions == null || definitions.isEmpty())
 			this.fetchDefinitions();
 		

@@ -16,12 +16,17 @@ import edu.unice.polytech.kis.semwiktionary.model.Definition;
 
 public class ParserTest {
 	
+	private static List<String> unexpectedTitles;
 	private static Map<String, List<Definition>> expected;
 	
 	
 	@BeforeClass
 	public static void classSetUp() throws Exception {
 		expected = generateExpectedContent();
+		
+		unexpectedTitles = new ArrayList<String>(2);
+		unexpectedTitles.add("MediaWiki:Disclaimers");
+		unexpectedTitles.add("Discussion utilisateur:Hippietrail");
 	}
 	
 	@Test
@@ -30,13 +35,18 @@ public class ParserTest {
 			assertTrue("'" + someWord + "' pretends not to exist in the database (check with WordTest first)!", Word.exists(someWord));
 	}
 	
-	
 	@Test
 	public void titlesDefinitionsMatch() {
 		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
 			Word myWord = Word.from(currentEntry.getKey());
 			assertEquals("Incorrect definitions for word '" + currentEntry.getKey() + "'", currentEntry.getValue(), myWord.getDefinitions());
 		}
+	}
+	
+	@Test
+	public void pagesThatAreNotWordsAreNotStored() {
+		for (String someWord : unexpectedTitles)
+			assertFalse(someWord + " should exist in the database!", Word.exists(someWord));
 	}
 	
 	

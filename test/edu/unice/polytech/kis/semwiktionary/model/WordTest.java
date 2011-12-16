@@ -7,9 +7,7 @@ import org.junit.AfterClass;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.HashMap;
 
 import edu.unice.polytech.kis.semwiktionary.model.Word;
 import edu.unice.polytech.kis.semwiktionary.model.Definition;
@@ -31,7 +29,7 @@ public class WordTest {
 	
 	@AfterClass
 	public static void classTearDown() {
-		DatabaseTest.deleteDb();
+		//DatabaseTest.deleteDb();
 	}
 	
 	@Test

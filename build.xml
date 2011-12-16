@@ -102,11 +102,13 @@
 		<javadoc linksource="true" docencoding="UTF-8"
 			destdir="${doc}/javadoc"
 			classpathref="lib.path"
+			stylesheetfile="${doc}/resources/javadoc-stylesheet.css"
 		>
 			<fileset dir="${src}">
 				<filename name="**/*.java"/>
 			</fileset>
-			<doclet name="com.visural.doclets.markdown.standard.Standard" path="${lib}/MarkdownDoclet-3.0.jar">
+			<doclet name="com.visural.doclets.markdown.standard.Standard"
+					path="${lib}/MarkdownDoclet-3.0.jar">
 			</doclet>
 		</javadoc>	
 	</target>

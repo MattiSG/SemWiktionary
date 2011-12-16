@@ -99,3 +99,6 @@ Credits
 ### Used projects ###
 - [Neo4j](http://neo4j.org/) (GPL)
 - [JFlex](http://jflex.de/) (GPL)
+
+### Miscellaneous ###
+- Javadoc stylesheet by [Apache Software Foundation](http://click-project-template.googlecode.com/svn-history/r2/trunk/documentation/javadoc-stylesheet.css).

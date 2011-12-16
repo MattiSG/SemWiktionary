@@ -7,10 +7,10 @@ public class Definition {
 
 // PROPERTIES
 	
-	/** The definition of a word.
+	/** The actual definition content.
 	 */
-	private String definition;
-	/** The examples of this definition.
+	private String content;
+	/** The examples of this content.
 	 */
 	private List<String> listExample;
 	/** The domains of this definition.
@@ -23,47 +23,41 @@ public class Definition {
 // CONSTRUCTORS
 	
 	/** Models a definition of a word.
+	 * Default position value is 0.
 	 *
-	 * @param	definition	The content for definition of a word to model
+	 * @param	definition	The actual definition content
 	 */
-	public Definition(String definition, int defCount) {
-		this.definition = definition;
+	public Definition(String definition) { //TODO: remove this constructor (here for backward compatibility at the moment)
+		this(definition, 0);
+	}
+	
+	/** Models a definition of a word.
+	 *
+	 * @param	definition	The actual definition content
+	 * @param	position	The position of this definition relatively to other definitions for the same word. Lower is better ranked.
+	 */
+	public Definition(String definition, int position) {
+		this.content = definition;
 		listExample = new ArrayList<String>();
 		listDomain = new ArrayList<String>();
-		position = defCount;
+		position = position;
 	}
 	
 // ACCESSORS
-
-		/** Adds the example to this defintion.
-	 *
-	 * @param	example	The examples to add
-	 */
-	public void addExample(String example) {
-		this.listExample.add(example);
-	}
 	
-	/** Adds the domain to this defintion.
-	 *
-	 * @param	domain	The domains to add
-	 */
-	public void addDomain(String domain) {
-		this.listDomain.add(domain);
-	}
-
-	/** Returns the content of this defintion.
+	/** Returns the content of this definition.
 	 */
 	public String getContent() {
-		return definition;
+		return content;
 	}
 	
-	/** Returns the examples of this defintion.
+	/** Returns all examples of this definition.
 	 */
 	public List<String> getExamples() {
 		return listExample;
 	}
 	
-	/** Returns the domains of this defintion.
+	/** Returns all domains of this defintion.
 	 */
 	public List<String> getDomains() {
 		return listDomain;
@@ -73,6 +67,43 @@ public class Definition {
 	 */
 	public int getPosition() {
 		return position;
+	}
+
+// MODIFIERS
+	
+	/** Adds the given example to this definition.
+	 *
+	 * @param	example	The example to add
+	 */
+	public void addExample(String example) {
+		this.listExample.add(example);
+	}
+	
+	/** Adds the given domain to this defintion.
+	 *
+	 * @param	domain	The domain to add
+	 */
+	public void addDomain(String domain) {
+		this.listDomain.add(domain);
+	}
+
+
+// OVERRIDES
+	
+	@Override
+	public String toString() {
+		return this.getContent();
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this.getClass().isInstance(o))
+			return this.content.equals(((Definition) o).getContent());
+		
+		if (String.class.isInstance(o))
+			return this.content.equals(o);
+		
+		return false;
 	}
 	
 }

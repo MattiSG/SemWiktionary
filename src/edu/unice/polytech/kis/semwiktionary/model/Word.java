@@ -4,7 +4,14 @@ package edu.unice.polytech.kis.semwiktionary.model;
 import java.util.List;
 import java.util.LinkedList;
 
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.index.Index;
+import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.Traverser.Order;
+
+import  edu.unice.polytech.kis.semwiktionary.database.Database;
+import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
 
 /** Models a word in the dictionary and abstracts its database storage.
@@ -17,6 +24,20 @@ import org.neo4j.graphdb.Node;
 public class Word {
 
 // PROPERTIES
+	
+	/** The Neo4j's index key to be used to index word nodes.
+	 * More info on [Neo4j Index doc](http://api.neo4j.org/current/org/neo4j/graphdb/index/Index.html).
+	 *
+	 *@see	org.neo4j.graphdb.index.IndexManager#forNodes
+	 */
+	public static final String INDEX_KEY = "words";
+	
+	/**Index of all words available in the database.
+	 * More info on [Neo4j Index doc](http://api.neo4j.org/current/org/neo4j/graphdb/index/Index.html).
+	 *
+	 *@see	org.neo4j.graphdb.index.IndexManager#forNodes
+	 */
+	protected static Index index = Database.getIndexForName(INDEX_KEY);
 	
 	/** The database storage for this Word.
 	 *	See conceptual documentation for database layout.
@@ -31,6 +52,7 @@ public class Word {
 	 */
 	protected List<Definition> definitions;
 	
+	
 // STATIC METHODS
 	
 	/** Finds a word in the database from its title.
@@ -40,10 +62,14 @@ public class Word {
 	 * @return	The complete Word object created or null if the word is not in the database
 	 */
 	public static Word from(String word) {
-		if (Word.exists(word)) //TODO: check if it should not be the other way around, depending on Neo4j getter implementation
-			return new Word(word);
+		Node result;
+		try {
+			 result = (Node) index.get(INDEX_KEY, word).getSingle();
+		} catch (java.util.NoSuchElementException e) { // there were multiple results for this query
+			throw new RuntimeException("Inconsistent database: multiple nodes found for word '" + word + "' in index!", e );
+		}
 		
-		return null;
+		return (result == null ? null : new Word(result));
 	}
 	
 	/** Tests if the given Word exists in the database.
@@ -52,8 +78,7 @@ public class Word {
 	 * @return	`true` if the word exists in the database, `false` otherwise
 	 */
 	public static boolean exists(String word) {
-		//TODO do an actual test
-		return true;
+		return from(word) != null;
 	}
 	
 // CONSTRUCTORS
@@ -76,7 +101,7 @@ public class Word {
 	 */
 	private Word(Node node) {
 		this.node = node;
-		//TODO
+		this.title = (String) node.getProperty("title");
 	}
 
 // ACCESSORS
@@ -90,7 +115,7 @@ public class Word {
 	/** Returns all available definitions for this Word.
 	 */
 	public List<Definition> getDefinitions() {
-		if (definitions.isEmpty())
+		if (definitions == null || definitions.isEmpty())
 			this.fetchDefinitions();
 		
 		return definitions;
@@ -98,18 +123,14 @@ public class Word {
 	
 // DATABASE ACCESS
 	
-	/** Loads the node for this Word from the database.
-	 */
-	protected void fetchNode() {
-		//TODO
-		//this.node = ...
-	}
-	
 	/** Loads the definitions for this Word from the database.
 	 */
 	protected void fetchDefinitions() {
-		//TODO
-		//this.definitions = ...
+		this.definitions = new LinkedList<Definition>();
+		
+		for (Relationship relation : node.getRelationships(Direction.OUTGOING, Relation.DEFINITION)) {
+			String definitionStr = (String) relation.getEndNode().getProperty("definition");
+			definitions.add(new Definition(definitionStr));
+		}
 	}
-
 }

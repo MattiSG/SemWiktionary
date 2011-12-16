@@ -9,6 +9,8 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.File;
+
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.graphdb.RelationshipType;
@@ -62,5 +64,26 @@ public class DatabaseTest {
 				 
 		assertEquals("The first and second node are not properly related (1)", subjectNode1.getSingleRelationship(rel, Direction.OUTGOING).getEndNode(), subjectNode2);
 		assertEquals("The first and second node are not properly related (2)", subjectNode2.getSingleRelationship(rel, Direction.INCOMING).getStartNode(), subjectNode1);
+	}
+	
+	public static void deleteDb() {
+		Database.getDbService().shutdown();
+		
+		deleteDirectory(new File(Database.DB_PATH));
+	}
+	
+	static public boolean deleteDirectory(File path) {
+		if (path.exists()) {
+			File[] files = path.listFiles();
+			for(int i=0; i<files.length; i++) {
+				if(files[i].isDirectory()) {
+					deleteDirectory(files[i]);
+				}
+				else {
+					files[i].delete();
+				}
+			}
+		}
+		return (path.delete());
 	}
 }

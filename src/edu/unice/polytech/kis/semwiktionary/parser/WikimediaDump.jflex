@@ -11,11 +11,10 @@ import edu.unice.polytech.kis.semwiktionary.model.*;
 
 
 %{
-	List<String> listExample = new ArrayList<String>();
 	MutableWord currentWord;
 	Definition def;
 	ListIterator li;
-	int flagExam = 0, flagChild = 0, hasChild = 0;
+	int flagExam = 0, flagChild = 0, hasChild = 0, defCount = 1;
 	String	strDef, strTitle, strExam, strChildDef;
 	void append(String s) 
 	{
@@ -77,6 +76,7 @@ newline = (\r|\n|\r\n)
 		strDef = "";
 		strChildDef = "";
 		strExam = "";
+		defCount=1;
 		yybegin(DEFINITION);
 	}
 	"<title>"
@@ -100,25 +100,24 @@ newline = (\r|\n|\r\n)
 {	/* To test by display all the words together definitions */
 	.
 	{
-		int count = 1;
 		for(Definition def : currentWord.getDefinitions())
 		{
-			System.out.println(count++);
+			System.out.println(def.getPosition());
 			System.out.println (currentWord.getTitle());
-		 	System.out.println("Definition:\n" + def.getDefinition());
+		 	System.out.println("Definition:\n" + def.getContent());
+		 	for(String str : def.getExamples())
+		 	{
+				System.out.println(str);
+		 	}
 		}
-		for(String exam : listExample)
-		{
-			System.out.println(exam);
-		}
-		listExample.clear();
+		
 		yybegin(NORMAL);
 	}
 }
 
 <TITLE>
 {
-	{word}"</title>"
+	{word}("_"{word})*"</title>"
 	{
 		strTitle = yytext().substring(0, yytext().length()-8);
 		currentWord = MutableWord.create(strTitle);
@@ -140,24 +139,27 @@ newline = (\r|\n|\r\n)
 	{
 		if(strExam!="")
 		{
-			listExample.add(strExam);
+			def.addExample(strExam);
 			strExam = "";
 		}
 		if(strDef!="")
 		{
 			if(hasChild == 0)
 			{	
-				def = new Definition(strDef);
+				def = new Definition(strDef, defCount);
 				currentWord.addDefinition(def);
 			}
 			else
 				hasChild = 0;
+				
+			defCount++;
 		}
 		if(strChildDef!="")
 		{
-			def = new Definition(strChildDef);
+			def = new Definition(strChildDef, defCount);
 			currentWord.addDefinition(def);
 			strChildDef = "";
+			defCount++;
 		}
 		strDef = "";
 		flagExam = 0;
@@ -169,9 +171,10 @@ newline = (\r|\n|\r\n)
 	{
 		if(strDef!="")
 		{
-			def = new Definition(strDef);
+			def = new Definition(strDef, defCount);
 			currentWord.addDefinition(def);
 			strDef = "";
+			defCount++;
 		}
 		flagExam = 1;
 		append("Ex(" + strTitle + "):");
@@ -181,14 +184,15 @@ newline = (\r|\n|\r\n)
 	{
 		if(strExam!="")
 		{
-			listExample.add(strExam);
+			def.addExample(strExam);
 			strExam = "";
 		}
 		if(strChildDef!="")
 		{
-			def = new Definition(strChildDef);
+			def = new Definition(strChildDef, defCount);
 			currentWord.addDefinition(def);
 			strChildDef = "";
+			defCount++;
 		}
 		strChildDef = strDef;
 		flagExam = 0;
@@ -201,9 +205,10 @@ newline = (\r|\n|\r\n)
 	{
 		if(strChildDef!="")
 		{
-			def = new Definition(strChildDef);
+			def = new Definition(strChildDef, defCount);
 			currentWord.addDefinition(def);
 			strChildDef = "";
+			defCount++;
 		}
 		flagExam = 1;
 		append("Ex(" + strTitle + "):");
@@ -213,20 +218,22 @@ newline = (\r|\n|\r\n)
 	{
 		if(strExam!="")
 		{
-			listExample.add(strExam);
+			def.addExample(strExam);
 			strExam = "";
 		}
 		if(strDef!="")
 		{
-			def = new Definition(strDef);
+			def = new Definition(strDef, defCount);
 			currentWord.addDefinition(def);
 			strDef = "";
+			defCount++;
 		}
 		if(strChildDef!="")
 		{
-			def = new Definition(strChildDef);
+			def = new Definition(strChildDef, defCount);
 			currentWord.addDefinition(def);
 			strChildDef = "";
+			defCount++;
 		}
 		yypushback(3);
 		yybegin(PAGE);

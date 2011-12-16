@@ -62,7 +62,7 @@ public class MutableWord extends Word {
 	 * @return	This MutableWord, for chainability
 	 */
 	public MutableWord addDefinition(Definition definition) {
-		Node defNode = Database.createNodeWithProperty("definition", definition.getDefinition());
+		Node defNode = Database.createNodeWithProperty("definition", definition.getContent());
 		
 		if (defNode == null)
 			return null;

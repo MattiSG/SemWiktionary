@@ -26,14 +26,16 @@ public class Word {
 // PROPERTIES
 	
 	/** The Neo4j's index key to be used to index word nodes.
+	 * More info on [Neo4j Index doc](http://api.neo4j.org/current/org/neo4j/graphdb/index/Index.html).
 	 *
-	 *@see	http://api.neo4j.org/current/org/neo4j/graphdb/index/Index.html
+	 *@see	org.neo4j.graphdb.index.IndexManager#forNodes
 	 */
 	public static final String INDEX_KEY = "words";
 	
 	/**Index of all words available in the database.
+	 * More info on [Neo4j Index doc](http://api.neo4j.org/current/org/neo4j/graphdb/index/Index.html).
 	 *
-	 *@see	http://api.neo4j.org/current/org/neo4j/graphdb/index/Index.html
+	 *@see	org.neo4j.graphdb.index.IndexManager#forNodes
 	 */
 	protected static Index index = Database.getIndexForName(INDEX_KEY);
 	

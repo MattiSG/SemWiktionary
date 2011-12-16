@@ -102,7 +102,7 @@ public class MutableWord extends Word {
 	 * 
 	 * @param	definitions	The list of Definitions to add to this Word
 	 * @return	This MutableWord, for chainability
-	 * @see		addDefinition
+	 * @see		MutableWord#addDefinition
 	 */
 	public MutableWord addDefinitions(List<Definition> definitions) {
 		for (Definition definition : definitions)

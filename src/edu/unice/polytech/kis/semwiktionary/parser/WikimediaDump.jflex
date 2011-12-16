@@ -11,13 +11,27 @@ import edu.unice.polytech.kis.semwiktionary.model.*;
 
 
 %{
+	List<String> listDomain = new ArrayList<String>();
 	MutableWord currentWord;
 	Definition def;
 	ListIterator li;
-	String	strDef, strTitle;
-	void append(String s) 
+	int flagExam = 0, flagChild = 0, flagDomain = 0, hasChild = 0, defCount = 1;
+	String	strDef, strTitle, strExam, strDomain, strChildDef;
+	void append(String str) 
 	{
-		strDef += s;
+		if(flagExam == 0)
+		{
+			if(flagChild == 0)
+				strDef += str;
+			else
+				strChildDef += str;
+		}
+		else
+			strExam += str;
+	}
+	void appendDomain(String str)
+	{
+		strDomain += str;
 	}
 
 %}
@@ -34,7 +48,7 @@ import edu.unice.polytech.kis.semwiktionary.model.*;
 
 letter = [A-ZÀÉÈÂÊÔÙa-zéàèùâêîôûëïüçœ]
 word = {letter}+
-otherPunct = [\,\;\:\.\(\)\…]
+otherPunct = [\,\;\:\.\(\)\/\…]
 space = [\ \t\r\n]
 whitespace = [\ ]
 newline = (\r|\n|\r\n)
@@ -48,7 +62,8 @@ newline = (\r|\n|\r\n)
 <NORMAL> 
 {
 	"<page>"
-	{			
+	{	
+		defCount=1;
 		yybegin(PAGE);
 	}
 	{newline} 
@@ -61,9 +76,12 @@ newline = (\r|\n|\r\n)
 
 <PAGE> 
 {
-	"{{-nom-|fr}}" | "{{-adj-|fr}}" | "{{-verb-|fr}}" | "{{-nom-|fro}}"
+	"{{-nom-|fr}}" | "{{-adj-|fr}}" | "{{-verb-|fr}}"
 	{
-		strDef = "";	
+		strDef = "";
+		strChildDef = "";
+		strExam = "";
+		
 		yybegin(DEFINITION);
 	}
 	"<title>"
@@ -84,29 +102,43 @@ newline = (\r|\n|\r\n)
 }
 
 <ENDPAGE>
-{	/* To test by display all the words together defines */
+{	/* To test by display all the words together definitions */
 	.
 	{
 		for(Definition def : currentWord.getDefinitions())
 		{
+			System.out.println(def.getPosition());
 			System.out.println (currentWord.getTitle());
-		 	System.out.println("Definition:\n" + def.getDefinition());
+			for(String domain : def.getDomains())
+		 	{
+				System.out.println("Domain: " + domain);
+		 	}
+		 	System.out.println("Definition:\n" + def.getContent());
+		 	for(String str : def.getExamples())
+		 	{
+				System.out.println(str);
+		 	}
 		}
+		
 		yybegin(NORMAL);
 	}
 }
 
 <TITLE>
 {
-	{word}"</title>"
+	{word}("_"{word})*"</title>"
 	{
 		strTitle = yytext().substring(0, yytext().length()-8);
 		currentWord = MutableWord.create(strTitle);
 		yybegin(PAGE);
 	}
+	{word}[\:]{word}"</title>"
+	{
+		yybegin(NORMAL);
+	}	
 	.
 	{
-		yybegin(ENDPAGE);
+		yybegin(NORMAL);
 	}
 }
 
@@ -114,34 +146,120 @@ newline = (\r|\n|\r\n)
 {
 	"#"
 	{
+		if(strExam!="")
+		{
+			def.addExample(strExam);
+			strExam = "";
+		}
 		if(strDef!="")
 		{
-			def = new Definition(strDef);
-			currentWord.addDefinition(def);
-			strDef = "";
+			if(hasChild == 0)
+			{	
+				def = new Definition(strDef, defCount);
+				currentWord.addDefinition(def);
+			}
+			else
+				hasChild = 0;
+				
+			defCount++;
 		}
+		if(strChildDef!="")
+		{
+			def = new Definition(strChildDef, defCount);
+			currentWord.addDefinition(def);
+			strChildDef = "";
+			defCount++;
+		}
+		strDef = "";
+		flagExam = 0;
+		flagChild = 0;
+		flagDomain = 1;
 		append("* ");
 		yybegin(FIRSTWORD);
 	}
 	"#*"
 	{
-		append("Ex: ");
+		if(strDef!="")
+		{
+			def = new Definition(strDef, defCount);
+			currentWord.addDefinition(def);
+			strDef = "";
+			defCount++;
+		}
+		if(!listDomain.isEmpty())
+		{
+			for(String domain : listDomain)
+				def.addDomain(domain);
+			listDomain.clear();
+		}
+		flagExam = 1;
+		flagDomain = 0;
+		append("Ex(" + strTitle + "):");
 		yybegin(FIRSTWORD);
 	}
 	"##"
 	{
+		if(strExam!="")
+		{
+			def.addExample(strExam);
+			strExam = "";
+		}
+		if(strChildDef!="")
+		{
+			def = new Definition(strChildDef, defCount);
+			currentWord.addDefinition(def);
+			strChildDef = "";
+			defCount++;
+		}
+		strChildDef = strDef;
+		flagExam = 0;
+		flagChild = 1;
+		flagDomain = 1;
+		hasChild = 1;
 		append("**");
 		yybegin(FIRSTWORD);
 	}
 	"##*"
 	{
-		append("Ex: ");
+		if(strChildDef!="")
+		{
+			def = new Definition(strChildDef, defCount);
+			currentWord.addDefinition(def);
+			strChildDef = "";
+			defCount++;
+		}
+		if(!listDomain.isEmpty())
+		{
+			for(String domain : listDomain)
+				def.addDomain(domain);
+			listDomain.clear();
+		}
+		flagExam = 1;
+		flagDomain = 0;
+		append("Ex(" + strTitle + "):");
 		yybegin(FIRSTWORD);
 	}
 	"{{-"
 	{
-		def = new Definition(strDef);
-		currentWord.addDefinition(def);
+		if(strExam!="")
+		{
+			def.addExample(strExam);
+			strExam = "";
+		}
+		if(strDef!="")
+		{
+			def = new Definition(strDef, defCount);
+			currentWord.addDefinition(def);
+			strDef = "";
+			defCount++;
+		}
+		if(strChildDef!="")
+		{
+			def = new Definition(strChildDef, defCount);
+			currentWord.addDefinition(def);
+			strChildDef = "";
+			defCount++;
+		}
 		yypushback(3);
 		yybegin(PAGE);
 	}
@@ -155,10 +273,31 @@ newline = (\r|\n|\r\n)
 
 <FIRSTWORD> 
 {
-	"{{"~"}}"
+	"{{"{word}"}}"
 	{
+		if(flagDomain == 1)
+		{
+			listDomain.add(yytext().substring(2, yytext().length()-2));
+		}
+		else
+		{
+			append("(" + yytext().substring(2, yytext().length()-2) + ")");
+		}
+		yybegin(NEXTWORD);
 	}
-	"[["~\|{word}"]]"
+	"{{"{word}[\|]{word}"}}"
+	{
+		if(flagDomain == 1)
+		{
+			listDomain.add(yytext().substring(2, yytext().indexOf("|")));
+		}
+		else
+		{
+			append("(" + yytext().substring(2, yytext().indexOf("|")) + ")");
+		}
+		yybegin(NEXTWORD);
+	}
+	"[["{word}({whitespace}{word})*\|{word}({whitespace}{word})*"]]"
 	{
 		append(yytext().substring(yytext().indexOf("|")+1, yytext().length()-2));
 		yybegin(NEXTWORD);
@@ -193,6 +332,28 @@ newline = (\r|\n|\r\n)
 
 <NEXTWORD> 
 {
+	"{{"{word}"}}"
+	{
+		if(flagDomain == 1)
+		{
+			listDomain.add(yytext().substring(2, yytext().length()-2));
+		}
+		else
+		{
+			append(" (" + yytext().substring(2, yytext().length()-2) + ")");
+		}
+	}
+	"{{"{word}[\|]{word}"}}"
+	{
+		if(flagDomain == 1)
+		{
+			listDomain.add(yytext().substring(2, yytext().indexOf("|")));
+		}
+		else
+		{
+			append(" (" + yytext().substring(2, yytext().indexOf("|")) + ")");
+		}
+	}
 	{word} 
 	{
 		append(" "+yytext());
@@ -201,9 +362,9 @@ newline = (\r|\n|\r\n)
 	{
 		append(yytext());
 	}
-	{whitespace}{letter}(\'|\’)|{whitespace}{letter}(\'|\’){word}
+	{letter}(\'|\’)({word})*
 	{
-		append( yytext() );
+		append(" " + yytext());
 	}
 	{whitespace}{letter}(\'|\’)"[["{word}
 	{
@@ -222,7 +383,7 @@ newline = (\r|\n|\r\n)
 		append("\n");
 		yybegin(DEFINITION);
 	}
-	{whitespace}{letter}(\'|\’)"'''"{word}"'''"
+	{whitespace}{letter}(\'|\’)"'''"{word}({whitespace}{word})*"'''"
 	{
 		append(yytext().substring(0,3) + yytext().substring(6, yytext().length()-3));
 	}

@@ -26,6 +26,18 @@ public class Definition {
 	 *
 	 * @param	definition	The content for definition of a word to model
 	 */
+	public Definition(String definition) {
+		this.definition = definition;
+		listExample = new ArrayList<String>();
+		listDomain = new ArrayList<String>();
+		position = 1;
+	}
+	
+	/** Models a definition of a word.
+	 *
+	 * @param	definition	The content for definition of a word to model
+	 * @param	defCount	The order of this definition to model
+	 */
 	public Definition(String definition, int defCount) {
 		this.definition = definition;
 		listExample = new ArrayList<String>();

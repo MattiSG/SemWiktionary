@@ -11,23 +11,27 @@ import edu.unice.polytech.kis.semwiktionary.model.*;
 
 
 %{
+	List<String> listDomain = new ArrayList<String>();
 	MutableWord currentWord;
 	Definition def;
 	ListIterator li;
-	int flagExam = 0, flagChild = 0, hasChild = 0, defCount = 1;
-	String	strDef, strTitle, strExam, strChildDef;
-	void append(String s) 
+	int flagExam = 0, flagChild = 0, flagDomain = 0, hasChild = 0, defCount = 1;
+	String	strDef, strTitle, strExam, strDomain, strChildDef;
+	void append(String str) 
 	{
 		if(flagExam == 0)
 		{
 			if(flagChild == 0)
-				strDef += s;
+				strDef += str;
 			else
-				strChildDef += s;
+				strChildDef += str;
 		}
 		else
-			strExam += s;
-		
+			strExam += str;
+	}
+	void appendDomain(String str)
+	{
+		strDomain += str;
 	}
 
 %}
@@ -58,7 +62,8 @@ newline = (\r|\n|\r\n)
 <NORMAL> 
 {
 	"<page>"
-	{			
+	{	
+		defCount=1;
 		yybegin(PAGE);
 	}
 	{newline} 
@@ -76,7 +81,7 @@ newline = (\r|\n|\r\n)
 		strDef = "";
 		strChildDef = "";
 		strExam = "";
-		defCount=1;
+		
 		yybegin(DEFINITION);
 	}
 	"<title>"
@@ -104,6 +109,10 @@ newline = (\r|\n|\r\n)
 		{
 			System.out.println(def.getPosition());
 			System.out.println (currentWord.getTitle());
+			for(String domain : def.getDomains())
+		 	{
+				System.out.println("Domain: " + domain);
+		 	}
 		 	System.out.println("Definition:\n" + def.getContent());
 		 	for(String str : def.getExamples())
 		 	{
@@ -164,6 +173,7 @@ newline = (\r|\n|\r\n)
 		strDef = "";
 		flagExam = 0;
 		flagChild = 0;
+		flagDomain = 1;
 		append("* ");
 		yybegin(FIRSTWORD);
 	}
@@ -176,7 +186,14 @@ newline = (\r|\n|\r\n)
 			strDef = "";
 			defCount++;
 		}
+		if(!listDomain.isEmpty())
+		{
+			for(String domain : listDomain)
+				def.addDomain(domain);
+			listDomain.clear();
+		}
 		flagExam = 1;
+		flagDomain = 0;
 		append("Ex(" + strTitle + "):");
 		yybegin(FIRSTWORD);
 	}
@@ -197,6 +214,7 @@ newline = (\r|\n|\r\n)
 		strChildDef = strDef;
 		flagExam = 0;
 		flagChild = 1;
+		flagDomain = 1;
 		hasChild = 1;
 		append("**");
 		yybegin(FIRSTWORD);
@@ -210,7 +228,14 @@ newline = (\r|\n|\r\n)
 			strChildDef = "";
 			defCount++;
 		}
+		if(!listDomain.isEmpty())
+		{
+			for(String domain : listDomain)
+				def.addDomain(domain);
+			listDomain.clear();
+		}
 		flagExam = 1;
+		flagDomain = 0;
 		append("Ex(" + strTitle + "):");
 		yybegin(FIRSTWORD);
 	}
@@ -248,10 +273,31 @@ newline = (\r|\n|\r\n)
 
 <FIRSTWORD> 
 {
-	"{{"~"}}"
+	"{{"{word}"}}"
 	{
+		if(flagDomain == 1)
+		{
+			listDomain.add(yytext().substring(2, yytext().length()-2));
+		}
+		else
+		{
+			append("(" + yytext().substring(2, yytext().length()-2) + ")");
+		}
+		yybegin(NEXTWORD);
 	}
-	"[["{word}\|{word}"]]"
+	"{{"{word}[\|]{word}"}}"
+	{
+		if(flagDomain == 1)
+		{
+			listDomain.add(yytext().substring(2, yytext().indexOf("|")));
+		}
+		else
+		{
+			append("(" + yytext().substring(2, yytext().indexOf("|")) + ")");
+		}
+		yybegin(NEXTWORD);
+	}
+	"[["{word}({whitespace}{word})*\|{word}({whitespace}{word})*"]]"
 	{
 		append(yytext().substring(yytext().indexOf("|")+1, yytext().length()-2));
 		yybegin(NEXTWORD);
@@ -286,6 +332,28 @@ newline = (\r|\n|\r\n)
 
 <NEXTWORD> 
 {
+	"{{"{word}"}}"
+	{
+		if(flagDomain == 1)
+		{
+			listDomain.add(yytext().substring(2, yytext().length()-2));
+		}
+		else
+		{
+			append(" (" + yytext().substring(2, yytext().length()-2) + ")");
+		}
+	}
+	"{{"{word}[\|]{word}"}}"
+	{
+		if(flagDomain == 1)
+		{
+			listDomain.add(yytext().substring(2, yytext().indexOf("|")));
+		}
+		else
+		{
+			append(" (" + yytext().substring(2, yytext().indexOf("|")) + ")");
+		}
+	}
 	{word} 
 	{
 		append(" "+yytext());
@@ -294,9 +362,9 @@ newline = (\r|\n|\r\n)
 	{
 		append(yytext());
 	}
-	{whitespace}{letter}(\'|\’)|{whitespace}{letter}(\'|\’){word}
+	{letter}(\'|\’)({word})*
 	{
-		append( yytext() );
+		append(" " + yytext());
 	}
 	{whitespace}{letter}(\'|\’)"[["{word}
 	{
@@ -315,7 +383,7 @@ newline = (\r|\n|\r\n)
 		append("\n");
 		yybegin(DEFINITION);
 	}
-	{whitespace}{letter}(\'|\’)"'''"{word}"'''"
+	{whitespace}{letter}(\'|\’)"'''"{word}({whitespace}{word})*"'''"
 	{
 		append(yytext().substring(0,3) + yytext().substring(6, yytext().length()-3));
 	}

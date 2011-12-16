@@ -38,9 +38,9 @@ public class Definition {
 	 */
 	public Definition(String definition, int position) {
 		this.content = definition;
-		listExample = new ArrayList<String>();
-		listDomain = new ArrayList<String>();
-		position = position;
+		this.listExample = new ArrayList<String>();
+		this.listDomain = new ArrayList<String>();
+		this.position = position;
 	}
 	
 // ACCESSORS

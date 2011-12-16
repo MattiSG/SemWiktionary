@@ -95,6 +95,20 @@
 		<mkdir dir="${lib}"/>
 		<mkdir dir="${build}"/>
 		<mkdir dir="${data}"/>
+		<mkdir dir="${doc}"/>
+	</target>
+	
+	<target name="doc">
+		<javadoc linksource="true" docencoding="UTF-8"
+			destdir="${doc}/javadoc"
+			classpathref="lib.path"
+		>
+			<fileset dir="${src}">
+				<filename name="**/*.java"/>
+			</fileset>
+			<doclet name="com.visural.doclets.markdown.standard.Standard" path="${lib}/MarkdownDoclet-3.0.jar">
+			</doclet>
+		</javadoc>	
 	</target>
 	
 	 <!-- For more information about this task, see http://jflex.de/jflex_anttask.html -->
@@ -169,7 +183,7 @@
 		</junit>
 	</target>
 
-	<target name="install" depends="clean, jar, jar_tests, junit" description="Create dist directory, include jars and doc if everything works">
+	<target name="install" depends="clean, jar, jar_tests, junit, doc" description="Create dist directory, include jars and doc if everything works">
 		<mkdir dir="${dist}"/>
 		<mkdir dir="${tmp}"/>
 		<mkdir dir="${tmp}/config"/>
@@ -189,7 +203,7 @@
 	<target name="parse" depends="compile_tests" description="Run the parser">
 		<mkdir dir="${log}"/>
 		
-		<java classname="edu.unice.polytech.kis.semwiktionary.parser.Main" fork="false">
+		<java classname="edu.unice.polytech.kis.semwiktionary.parser.Main" fork="false" failonerror="true">
 			<classpath>
 				<pathelement location="${bin}" />
 				<fileset refid="lib.jars"/>

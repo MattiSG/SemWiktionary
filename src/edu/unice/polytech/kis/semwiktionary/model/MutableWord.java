@@ -1,10 +1,10 @@
 package edu.unice.polytech.kis.semwiktionary.model;
 
 
-import java.util.List;
-
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
+import org.neo4j.graphdb.Direction;
+import org.neo4j.graphdb.Relationship;
 
 import edu.unice.polytech.kis.semwiktionary.database.Database;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
@@ -76,7 +76,7 @@ public class MutableWord extends Word {
 		super(word);
 	}
 	
-	// UPDATE FUNCTIONS
+// UPDATE FUNCTIONS
 	
 	/** Adds the given Definition to this Word.
 	 * The definition is immediately and transparently stored in the database. No need to `commit` modifications.
@@ -100,51 +100,54 @@ public class MutableWord extends Word {
 	/** Adds the given set of Definitions to this Word.
 	 * The definitions are immediately and transparently stored in the database. No need to `commit` modifications.
 	 * 
-	 * @param	definitions	The list of Definitions to add to this Word
+	 * @param	definitions	The set of Definitions to add to this Word
 	 * @return	This MutableWord, for chainability
 	 * @see		MutableWord#addDefinition
 	 */
-	public MutableWord addDefinitions(List<Definition> definitions) {
-		for (Definition definition : definitions)
+	public MutableWord addDefinitions(Iterable<Definition> definitions) {
+		for (Definition definition : this.definitions)
 			this.addDefinition(definition);
 		// TODO performance: use a single transaction
 		return this;
 	}
 
-	/** Removes the giben Definition from the definitions for this Word.
-	 * The definition is immediately and transparently removed from the database. No need to `commit` modifications.
-	 *
-	 * @param	definition	The definition object to remove
-	 * @return	This MutableWord, for chainability
-	 */
-	public MutableWord removeDefinition(Definition definition) {
-		//TODO database
-		this.definitions.remove(definition);
-		return this;
-	}
-
-
-	// DELETE FUNCTIONS
 	
-	/** Deletes a word and all of its properties from the database.
-	 *
-	 * @param word
+// DELETE FUNCTIONS
+	
+	/** Deletes this word and all of its properties from the database.
 	 */
-	// TODO define the behavior of the relations 
-	public static void erase(MutableWord word) {
-		word.clearDefinitions();
-		//TODO call other delete functions
+	public void delete() {
+		Transaction tx = Database.getDbService().beginTx();
+		try {
+			this.clearDefinitions();
+			Word.index.remove(this.node);
+			this.node.delete();
+		} finally {
+			tx.finish();
+		}
 	}
 	
 	/** Deletes all definitions for the current Word.
 	 * The definitions are immediately and transparently removed from the database. No need to `commit` modifications.
+	 * If you want to delete one single definition, get them with `getDefinitions`, remove it from within the set, `clearDefinitions` and then `addDefinitions` with your copied set.
 	 *
 	 * @return	This MutableWord, for chainability
 	 */
 	public MutableWord clearDefinitions() {
-		//TODO database
-		this.definitions.clear();
+		Transaction tx = Database.getDbService().beginTx();
+		
+		try {
+			for (Relationship relation : node.getRelationships(Direction.OUTGOING, Relation.DEFINITION))
+				relation.delete(); // delete the relationship first to be able to delete the linked nodes
+			for (Definition definition : this.definitions)
+				definition.delete(); // let the Definition delete itself
+			
+			tx.success();
+		} finally {
+			tx.finish();
+		}
+		
 		return this;
-	}
-
+	}	
+	
 }

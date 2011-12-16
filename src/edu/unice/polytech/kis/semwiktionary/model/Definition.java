@@ -2,7 +2,7 @@ package edu.unice.polytech.kis.semwiktionary.model;
 
 // For the moment, this class is a mockup.
 // A definition is represented by a simple string.
-public class Definition {
+public class Definition extends NodeMappedObject {
 
 	private String definition;
 	
@@ -12,6 +12,12 @@ public class Definition {
 
 	public String getDefinition() {
 		return definition;
+	}
+	
+	/** Deletes this Definition and all attached properties from the database.
+	 */
+	public void delete() {
+		this.node.delete();
 	}
 	
 	public String toString() {

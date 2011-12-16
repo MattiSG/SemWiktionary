@@ -21,7 +21,7 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
  * @author	[Fabien Brossier](http://fabienbrossier.fr)
  * @author	[Matti Schneider-Ghibaudo](http://mattischneider.fr)
  */
-public class Word {
+public class Word extends NodeMappedObject {
 
 // PROPERTIES
 	
@@ -38,11 +38,6 @@ public class Word {
 	 *@see	org.neo4j.graphdb.index.IndexManager#forNodes
 	 */
 	protected static Index index = Database.getIndexForName(INDEX_KEY);
-	
-	/** The database storage for this Word.
-	 *	See conceptual documentation for database layout.
-	 */
-	protected Node node;
 	
 	/** The actual natural language word this instance represents.
 	 */
@@ -91,7 +86,6 @@ public class Word {
 	public Word(String word) {
 		this.title = word;
 		this.definitions = new LinkedList<Definition>();
-		//TODO
 	}
 
 	/** Constructs a Word object from a Node in the database.
@@ -114,11 +108,11 @@ public class Word {
 
 	/** Returns all available definitions for this Word.
 	 */
-	public List<Definition> getDefinitions() {
+	public Iterable<Definition> getDefinitions() {
 		if (definitions == null || definitions.isEmpty())
 			this.fetchDefinitions();
 		
-		return definitions;
+		return this.definitions;
 	}
 	
 // DATABASE ACCESS

@@ -111,19 +111,6 @@ public class MutableWord extends Word {
 		return this;
 	}
 
-	/** Removes the giben Definition from the definitions for this Word.
-	 * The definition is immediately and transparently removed from the database. No need to `commit` modifications.
-	 *
-	 * @param	definition	The definition object to remove
-	 * @return	This MutableWord, for chainability
-	 */
-	public MutableWord removeDefinition(Definition definition) {
-		//TODO database
-		this.definitions.remove(definition);
-		return this;
-	}
-
-
 	// DELETE FUNCTIONS
 	
 	/** Deletes a word and all of its properties from the database.

@@ -9,10 +9,12 @@ build.num
 tmp
 log
 doc/javadoc
+doc/vendor
 
 
 ## Database #
 data
+
 
 ## OS X #
 .DS_Store

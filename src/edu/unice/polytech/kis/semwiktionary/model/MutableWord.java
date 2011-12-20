@@ -105,7 +105,7 @@ public class MutableWord extends Word {
 	 * @see		MutableWord#addDefinition
 	 */
 	public MutableWord addDefinitions(Iterable<Definition> definitions) {
-		for (Definition definition : this.definitions)
+		for (Definition definition : definitions)
 			this.addDefinition(definition);
 		// TODO performance: use a single transaction
 		return this;

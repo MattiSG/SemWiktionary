@@ -44,7 +44,7 @@ public class MutableWord extends Word {
 		Transaction tx = Database.getDbService().beginTx();
 		
 		try {
-			result.node = Database.getDbService().createNode();
+			result.createNode();
 			result.node.setProperty("title", word);
 			
 			Word.index.add(result.node, Word.INDEX_KEY, word);
@@ -65,7 +65,6 @@ public class MutableWord extends Word {
 	 */
 	public MutableWord(Word model) {
 		super(model.getTitle());
-		this.node = model.node;
 	}
 	
 	/** Models an editable natural-language word.
@@ -85,13 +84,7 @@ public class MutableWord extends Word {
 	 * @return	This MutableWord, for chainability
 	 */
 	public MutableWord addDefinition(Definition definition) {
-		Node defNode = Database.createNodeWithProperty("definition", definition.getContent());
-		
-		if (defNode == null)
-			return null;
-		
-		Database.link(this.node, defNode, Relation.DEFINITION);
-		// TODO performance: check if the use of a single transaction instead of two impacts performance
+		Database.link(this.node, definition.node, Relation.DEFINITION);
 		this.definitions.add(definition);
 		
 		return this;

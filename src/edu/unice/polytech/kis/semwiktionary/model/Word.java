@@ -10,7 +10,7 @@ import org.neo4j.graphdb.index.Index;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Traverser.Order;
 
-import  edu.unice.polytech.kis.semwiktionary.database.Database;
+import edu.unice.polytech.kis.semwiktionary.database.Database;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
 
@@ -95,7 +95,7 @@ public class Word extends NodeMappedObject {
 	 */
 	private Word(Node node) {
 		this.node = node;
-		this.title = (String) node.getProperty("title");
+		this.title = this.get("title");
 	}
 
 // ACCESSORS
@@ -120,11 +120,6 @@ public class Word extends NodeMappedObject {
 	/** Loads the definitions for this Word from the database.
 	 */
 	protected void fetchDefinitions() {
-		this.definitions = new LinkedList<Definition>();
-		
-		for (Relationship relation : node.getRelationships(Direction.OUTGOING, Relation.DEFINITION)) {
-			String definitionStr = (String) relation.getEndNode().getProperty("definition");
-			definitions.add(new Definition(definitionStr));
-		}
+		this.definitions = new LinkedList<Definition>(this.<Definition>get(Relation.DEFINITION));
 	}
 }

@@ -1,0 +1,68 @@
+Voir (mêmes lettres sans diacritiques)
+Langues
+	Etymologie
+		Un ou plusieurs mots liés au type de mot correspondant
+	Type de mot (nom, adjectif, ...)
+		Flexions (accord au pluriel, ...)
+		Prononciation
+		Indications de forme (masculin, féminin, ...)
+		Définitions (Ordre ?)
+			Exemples
+			Traductions
+		Variantes orthographiques
+		Transcriptions
+		Abréviations
+		Synonymes
+			Rappel du sens
+			Synonymes associés au sens
+		Antonymes
+			Rappel du sens
+			Antonymes associés au sens
+		Dérivés
+		Apparentés étymologiques
+		Vocabulaire apparenté
+		Dérivés en d'autres langues
+		Expressions
+		Variantes dialectales
+			Code langue
+			Orthographe
+			Phonétique
+		Traductions
+			Sens du mot
+				Langue
+				Mot
+				Nature
+				Variation selon la région, ...
+		Hyperonymes
+			Rappel du sens
+			Hyperonymes associés au sens (hiérarchie possible)
+		Hyponymes
+			Rappel du sens
+			Hyponymes associés au sens (hiérarchie possible)
+		Holonymes
+			Rappel du sens
+			Holonymes associés au sens (hiérarchie possible)
+		Mélonymes
+			Rappel du sens
+			Mélonymes associés au sens (hiérarchie possible)
+		Troponymes
+			Rappel du sens
+			Mélonymes associés au sens
+	Prononciations (audio)
+		Prononciations régionales
+			Localité
+			Prononciations phonétique
+			Fichier audio
+		Homophones
+		Paronymes
+		Faux-amis
+	Anagrammes
+	Voir aussi
+		Liste de liens
+	Références
+		Liste de liens
+Catégories
+Liens interwikis (même article dans un autre Wiktionnaire)
+
+Divers
+	Notes (n'importe ou)

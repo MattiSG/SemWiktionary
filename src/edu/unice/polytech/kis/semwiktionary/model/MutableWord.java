@@ -139,6 +139,8 @@ public class MutableWord extends Word {
 			tx.finish();
 		}
 		
+		this.definitions.clear();
+		
 		return this;
 	}	
 	

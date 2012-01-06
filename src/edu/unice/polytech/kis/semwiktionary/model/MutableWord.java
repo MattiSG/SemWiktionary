@@ -104,6 +104,12 @@ public class MutableWord extends Word {
 		return this;
 	}
 
+	public MutableWord addSynonym(Word synonym) {
+		Database.link(this.node, synonym.node, Relation.SYNONYM);
+		
+		return this;
+	}
+	
 // DELETE FUNCTIONS
 	
 	/** Deletes this word and all of its properties from the database.
@@ -143,5 +149,20 @@ public class MutableWord extends Word {
 		
 		return this;
 	}	
+	
+	public MutableWord clearSynonyms() {
+		Transaction tx = Database.getDbService().beginTx();
+		
+		try {
+			for (Relationship relation : node.getRelationships(Direction.OUTGOING, Relation.SYNONYM))
+				relation.delete(); // delete the synonym relationship
+			
+			tx.success();
+		} finally {
+			tx.finish();
+		}
+		
+		return this;
+	}
 	
 }

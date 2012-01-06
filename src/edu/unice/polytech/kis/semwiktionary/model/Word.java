@@ -1,6 +1,7 @@
 package edu.unice.polytech.kis.semwiktionary.model;
 
 
+import java.util.Collection;
 import java.util.List;
 import java.util.LinkedList;
 
@@ -113,6 +114,12 @@ public class Word extends NodeMappedObject {
 			this.fetchDefinitions();
 		
 		return this.definitions;
+	}
+	
+	/** Returns all synonyms of this Word.
+	 */
+	public Collection<Word> getSynonyms() {
+		return this.<Word>get(Relation.SYNONYM);
 	}
 	
 // DATABASE ACCESS

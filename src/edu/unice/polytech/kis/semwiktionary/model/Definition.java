@@ -1,9 +1,13 @@
 package edu.unice.polytech.kis.semwiktionary.model;
 
+
 import java.util.List;
 import java.util.ArrayList;
 
-public class Definition {
+import org.neo4j.graphdb.Node;
+
+
+public class Definition extends NodeMappedObject {
 
 // PROPERTIES
 	
@@ -23,24 +27,32 @@ public class Definition {
 // CONSTRUCTORS
 	
 	/** Models a definition of a word.
-	 * Default position value is 0.
-	 *
-	 * @param	definition	The actual definition content
-	 */
-	public Definition(String definition) { //TODO: remove this constructor (here for backward compatibility at the moment)
-		this(definition, 0);
-	}
-	
-	/** Models a definition of a word.
 	 *
 	 * @param	definition	The actual definition content
 	 * @param	position	The position of this definition relatively to other definitions for the same word. Lower is better ranked.
 	 */
 	public Definition(String definition, int position) {
+		this.initNode()
+			.setProperty("content", definition)
+			.setProperty("position", "" + position);
+		
 		this.content = definition;
+		this.position = position;
+		
 		this.listExample = new ArrayList<String>();
 		this.listDomain = new ArrayList<String>();
-		this.position = position;
+	}
+	
+	/** Models a definition of a word.
+	 * Default position value is 0.
+	 *
+	 * @param	definition	The actual definition content
+	 */
+	public Definition(Node node) {
+		this.node = node;
+		
+		this.content = this.get("content");
+		this.position = new Integer(this.get("position"));
 	}
 	
 // ACCESSORS
@@ -87,6 +99,13 @@ public class Definition {
 		this.listDomain.add(domain);
 	}
 
+// DESTRUCTORS
+	
+	/** Deletes this Definition and all attached properties from the database.
+	 */
+	public void delete() {
+		this.node.delete();
+	}
 
 // OVERRIDES
 	

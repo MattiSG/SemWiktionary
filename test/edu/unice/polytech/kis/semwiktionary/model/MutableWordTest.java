@@ -19,15 +19,15 @@ public class MutableWordTest {
 	private static MutableWord mutableWord_word1;
 	private static MutableWord mutableWord_word2;
 	
-	private static String MUTABLE_WORD_WORD_NAME_1 = "toto";
-	private static String MUTABLE_WORD_WORD_NAME_2 = "tata";
+	private static String MUTABLEWORD_WORD_1 = "MutableWord_test_word_1";
+	private static String MUTABLEWORD_WORD_2 = "MutableWord_test_word_2";
 	
-	private static String MUTABLE_WORD_DEFINITION_NAME_1 = "Bonjour, je suis une tata.";
-	private static String MUTABLE_WORD_DEFINITION_NAME_2 = "Et en plus je suis jolie.";
+	private static String MUTABLEWORD_DEFINITION_1 = "First definition MutableWord test content.";
+	private static String MUTABLEWORD_DEFINITION_2 = "Second definition MutableWord test content.";
 	
 	@BeforeClass
 	public static void classSetUp() throws Exception {
-		mutableWord_word1 = MutableWord.create(MUTABLE_WORD_WORD_NAME_1);
+		mutableWord_word1 = MutableWord.create(MUTABLEWORD_WORD_1);
 	}
 	
 	@AfterClass
@@ -42,26 +42,37 @@ public class MutableWordTest {
 	
 	@Test
 	public void createTest() {
-		mutableWord_word2 = MutableWord.create(MUTABLE_WORD_WORD_NAME_2);
-		assertEquals("'" + mutableWord_word2 + "' pretends not to exist in the database!", mutableWord_word2.getTitle(), MutableWord.from(MUTABLE_WORD_WORD_NAME_2).getTitle());
+		mutableWord_word2 = MutableWord.create(MUTABLEWORD_WORD_2);
+		assertEquals("'" + mutableWord_word2 + "' pretends not to exist in the database!", mutableWord_word2.getTitle(), MutableWord.from(MUTABLEWORD_WORD_2).getTitle());
 	}
 	
 	@Test
 	public void constructorTest() {
-		MutableWord word = new MutableWord(new Word(MUTABLE_WORD_WORD_NAME_1));
+		MutableWord word = new MutableWord(new Word(MUTABLEWORD_WORD_1));
 		assertNotNull("The created Mutableword is null !", word);
 		
-		assertEquals("Title of word '" + word + "' was not properly fetched from database!", MUTABLE_WORD_WORD_NAME_1, word.getTitle());
+		assertEquals("Title of word '" + word + "' was not properly fetched from database!", MUTABLEWORD_WORD_1, word.getTitle());
 	}
 	
 	@Test
 	public void addDefinitionTest() {
 		mutableWord_word1.clearDefinitions();
 		
-		assertNotNull("When we add a definition, the return word " + mutableWord_word1 + "is null !",
-				mutableWord_word1.addDefinition(new Definition(MUTABLE_WORD_DEFINITION_NAME_1)));
+		assertSame("When we add a definition, the return word " + mutableWord_word1 + "is not the original one!",
+				mutableWord_word1.addDefinition(new Definition(MUTABLEWORD_DEFINITION_1, 1)),
+				mutableWord_word1
+		);
 		
-		assertEquals("The definition was not registred correctly.", MUTABLE_WORD_DEFINITION_NAME_1, mutableWord_word1.getDefinitions().get(0).getContent());
+		assertEquals("The first definition was not registered correctly.",
+					 MUTABLEWORD_DEFINITION_1,
+					 mutableWord_word1.getDefinitions().get(0).getContent()
+		);
+
+		mutableWord_word1.addDefinition(new Definition(MUTABLEWORD_DEFINITION_2, 2));
+		assertEquals("The second definition was not registered correctly.",
+					 MUTABLEWORD_DEFINITION_2,
+					 mutableWord_word1.getDefinitions().get(1).getContent()
+		);
 	}
 	
 	@Test
@@ -69,19 +80,19 @@ public class MutableWordTest {
 		mutableWord_word1.clearDefinitions();
 		List<Definition> definitions = new LinkedList<Definition>();
 		
-		definitions.add(new Definition(MUTABLE_WORD_DEFINITION_NAME_1));
-		definitions.add(new Definition(MUTABLE_WORD_DEFINITION_NAME_2));
+		definitions.add(new Definition(MUTABLEWORD_DEFINITION_1, 1));
+		definitions.add(new Definition(MUTABLEWORD_DEFINITION_2, 2));
 		mutableWord_word1.addDefinitions(definitions);
 		
-		assertEquals("The first definition was not registred correctly.", MUTABLE_WORD_DEFINITION_NAME_1, mutableWord_word1.getDefinitions().get(0).getContent());
-		assertEquals("The second definition was not registred correctly.", MUTABLE_WORD_DEFINITION_NAME_2, mutableWord_word1.getDefinitions().get(1).getContent());
+		assertEquals("The first definition was not registered correctly.", MUTABLEWORD_DEFINITION_1, mutableWord_word1.getDefinitions().get(0).getContent());
+		assertEquals("The second definition was not registered correctly.", MUTABLEWORD_DEFINITION_2, mutableWord_word1.getDefinitions().get(1).getContent());
 	}
 	
 	@Test
 	public void eraseTest() {
 		/*MutableWord.erase(mutableWord_word1);
 		assertNull("The erased word " + mutableWord_word1 + " still exists in the database !", mutableWord_word1);
-		mutableWord_word1 = MutableWord.create(MUTABLE_WORD_WORD_NAME_1);*/
+		mutableWord_word1 = MutableWord.create(MUTABLEWORD_WORD_1);*/
 		// TODO : implement erase method and restore this test
 		assertTrue(true);
 	}
@@ -90,8 +101,8 @@ public class MutableWordTest {
 	public void clearDefinitions() {
 		/*List<Definition> definitions = new LinkedList<Definition>();
 		
-		definitions.add(new Definition(MUTABLE_WORD_DEFINITION_NAME_1));
-		definitions.add(new Definition(MUTABLE_WORD_DEFINITION_NAME_2));
+		definitions.add(new Definition(MUTABLEWORD_DEFINITION_1));
+		definitions.add(new Definition(MUTABLEWORD_DEFINITION_2));
 		mutableWord_word1.addDefinitions(definitions);
 		
 		mutableWord_word1.clearDefinitions();

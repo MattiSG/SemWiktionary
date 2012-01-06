@@ -10,7 +10,7 @@ import org.neo4j.graphdb.index.Index;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Traverser.Order;
 
-import  edu.unice.polytech.kis.semwiktionary.database.Database;
+import edu.unice.polytech.kis.semwiktionary.database.Database;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
 
@@ -21,7 +21,7 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
  * @author	[Fabien Brossier](http://fabienbrossier.fr)
  * @author	[Matti Schneider-Ghibaudo](http://mattischneider.fr)
  */
-public class Word {
+public class Word extends NodeMappedObject {
 
 // PROPERTIES
 	
@@ -38,11 +38,6 @@ public class Word {
 	 *@see	org.neo4j.graphdb.index.IndexManager#forNodes
 	 */
 	protected static Index index = Database.getIndexForName(INDEX_KEY);
-	
-	/** The database storage for this Word.
-	 *	See conceptual documentation for database layout.
-	 */
-	protected Node node;
 	
 	/** The actual natural language word this instance represents.
 	 */
@@ -91,7 +86,6 @@ public class Word {
 	public Word(String word) {
 		this.title = word;
 		this.definitions = new LinkedList<Definition>();
-		//TODO
 	}
 
 	/** Constructs a Word object from a Node in the database.
@@ -101,7 +95,7 @@ public class Word {
 	 */
 	private Word(Node node) {
 		this.node = node;
-		this.title = (String) node.getProperty("title");
+		this.title = this.get("title");
 	}
 
 // ACCESSORS
@@ -118,7 +112,7 @@ public class Word {
 		if (definitions == null || definitions.isEmpty())
 			this.fetchDefinitions();
 		
-		return definitions;
+		return this.definitions;
 	}
 	
 // DATABASE ACCESS
@@ -126,11 +120,6 @@ public class Word {
 	/** Loads the definitions for this Word from the database.
 	 */
 	protected void fetchDefinitions() {
-		this.definitions = new LinkedList<Definition>();
-		
-		for (Relationship relation : node.getRelationships(Direction.OUTGOING, Relation.DEFINITION)) {
-			String definitionStr = (String) relation.getEndNode().getProperty("definition");
-			definitions.add(new Definition(definitionStr));
-		}
+		this.definitions = new LinkedList<Definition>(this.<Definition>get(Relation.DEFINITION));
 	}
 }

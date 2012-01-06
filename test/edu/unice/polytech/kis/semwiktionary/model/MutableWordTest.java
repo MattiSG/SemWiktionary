@@ -61,7 +61,7 @@ public class MutableWordTest {
 		assertNotNull("When we add a definition, the return word " + mutableWord_word1 + "is null !",
 				mutableWord_word1.addDefinition(new Definition(MUTABLE_WORD_DEFINITION_NAME_1)));
 		
-		assertEquals("The definition was not registred correctly.", MUTABLE_WORD_DEFINITION_NAME_1, mutableWord_word1.getDefinitions().get(0).getDefinition());
+		assertEquals("The definition was not registred correctly.", MUTABLE_WORD_DEFINITION_NAME_1, mutableWord_word1.getDefinitions().get(0).getContent());
 	}
 	
 	@Test
@@ -73,8 +73,8 @@ public class MutableWordTest {
 		definitions.add(new Definition(MUTABLE_WORD_DEFINITION_NAME_2));
 		mutableWord_word1.addDefinitions(definitions);
 		
-		assertEquals("The first definition was not registred correctly.", MUTABLE_WORD_DEFINITION_NAME_1, mutableWord_word1.getDefinitions().get(0).getDefinition());
-		assertEquals("The second definition was not registred correctly.", MUTABLE_WORD_DEFINITION_NAME_2, mutableWord_word1.getDefinitions().get(1).getDefinition());
+		assertEquals("The first definition was not registred correctly.", MUTABLE_WORD_DEFINITION_NAME_1, mutableWord_word1.getDefinitions().get(0).getContent());
+		assertEquals("The second definition was not registred correctly.", MUTABLE_WORD_DEFINITION_NAME_2, mutableWord_word1.getDefinitions().get(1).getContent());
 	}
 	
 	@Test

@@ -36,8 +36,8 @@ public class Definition extends NodeMappedObject {
 	 */
 	public Definition(String definition, int position) {
 		this.initNode()
-			.setProperty("content", definition)
-			.setProperty("position", "" + position);
+			.set("content", definition)
+			.set("position", "" + position);
 		
 		this.content = definition;
 		this.position = position;

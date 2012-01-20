@@ -8,8 +8,9 @@ import edu.unice.polytech.kis.semwiktionary.model.*; // yes, they are (almost) a
 
 public enum Relation implements RelationshipType {
 	DEFINITION(Definition.class),
-	SYNONYM(Word.class);
-
+	SYNONYM(Word.class),
+	ANTONYM(Word.class);
+	
 	public Class getDestinationType() {
 		return this.maps;
 	}

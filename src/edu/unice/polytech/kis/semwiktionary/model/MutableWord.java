@@ -109,6 +109,12 @@ public class MutableWord extends Word {
 		return this;
 	}
 	
+	public MutableWord addAntonym(Word antonym) {
+		Database.link(this.node, antonym.node, Relation.ANTONYM);
+		
+		return this;
+	}
+	
 // DELETE FUNCTIONS
 	
 	/** Deletes this word and all of its properties from the database.
@@ -151,6 +157,12 @@ public class MutableWord extends Word {
 	
 	public MutableWord clearSynonyms() {
 		this.delete(Relation.SYNONYM);
+		
+		return this;
+	}
+	
+	public MutableWord clearAntonyms() {
+		this.delete(Relation.ANTONYM);
 		
 		return this;
 	}

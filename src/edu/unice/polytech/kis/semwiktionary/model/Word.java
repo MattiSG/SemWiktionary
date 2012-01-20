@@ -122,6 +122,12 @@ public class Word extends NodeMappedObject {
 		return this.<Word>get(Relation.SYNONYM);
 	}
 	
+	/** Returns all antonyms of this Word.
+	 */
+	public Collection<Word> getAntonyms() {
+		return this.<Word>get(Relation.ANTONYM);
+	}
+	
 // DATABASE ACCESS
 	
 	/** Loads the definitions for this Word from the database.

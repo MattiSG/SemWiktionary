@@ -4,8 +4,6 @@ package edu.unice.polytech.kis.semwiktionary.model;
 import java.util.Collection;
 import java.util.List;
 import java.util.LinkedList;
-import java.util.Map;
-import java.util.HashMap;
 import java.lang.reflect.Constructor;
 
 import org.neo4j.graphdb.Node;
@@ -44,7 +42,12 @@ public abstract class NodeMappedObject {
 		return this;
 	}
 	
-	protected NodeMappedObject setProperty(String key, String value) {
+	/**Stores the given property on this node.
+	*There is a restriction as compared to Neo4j: only strings are accepted.
+	*
+	*@returns	this, for chainability
+	*/
+	protected NodeMappedObject set(String key, String value) {
 		Transaction tx = Database.getDbService().beginTx();
 		
 		try {
@@ -57,13 +60,25 @@ public abstract class NodeMappedObject {
 		
 		return this;
 	}
+
+	/**Connects the given object to this one, with the given relation type.
+	 *
+	 *@returns	the created relationship, so you can annotate it if needs be
+	 */
+	protected Relationship set(Relation relType, NodeMappedObject target) {
+		return Database.link(this.node, target.node, relType);
+	}
 	
+	/**Fetches all NodeMappedObjects that are connected to this object with the given Relation type.
+	*You'll need to specify the expected output type, so as to avoid casts.
+	*Example: Collection<Word> synonyms = myWord.<Word>get(Relation.SYNONYM);
+	*/
 	public <T extends NodeMappedObject> Collection<T> get(Relation relType) {
 		Class<T> type = relType.getDestinationType();
 		List<T> result = new LinkedList<T>();
 		Constructor<T> constructor = null;
 		try {
-			// constructor = T.class.getConstructor(Node.class); // unfortunately, Java can't handle getting a Class from a Type…
+			// constructor = T.class.getConstructor(Node.class); // unfortunately, Java can't handle getting a Class from a Type
 			constructor = type.getConstructor(Node.class);
 		} catch (NoSuchMethodException e) {
 			throw new RuntimeException("The specified generic type does not offer a Node constructor.", e);
@@ -84,6 +99,8 @@ public abstract class NodeMappedObject {
 	   return result;
 	}
 	
+	/**Fetches the property for that key, always as a String.
+	*/
 	public String get(String key) {
 		return (String) node.getProperty(key);
 	}

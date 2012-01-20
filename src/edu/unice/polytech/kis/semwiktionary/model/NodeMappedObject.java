@@ -85,4 +85,17 @@ public abstract class NodeMappedObject {
 	public String get(String key) {
 		return (String) node.getProperty(key);
 	}
+	
+	public void delete(Relation relType) {
+		Transaction tx = Database.getDbService().beginTx();
+		
+		try {
+			for (Relationship relation : this.node.getRelationships(Direction.OUTGOING, relType))
+				relation.delete();
+
+			tx.success();
+		} finally {
+			tx.finish();
+		}
+	}
 }

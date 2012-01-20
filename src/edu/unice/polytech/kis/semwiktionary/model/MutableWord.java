@@ -1,7 +1,6 @@
 package edu.unice.polytech.kis.semwiktionary.model;
 
 
-import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Relationship;
@@ -149,16 +148,7 @@ public class MutableWord extends Word {
 	}	
 	
 	public MutableWord clearSynonyms() {
-		Transaction tx = Database.getDbService().beginTx();
-		
-		try {
-			for (Relationship relation : node.getRelationships(Direction.OUTGOING, Relation.SYNONYM))
-				relation.delete(); // delete the synonym relationship
-			
-			tx.success();
-		} finally {
-			tx.finish();
-		}
+		this.delete(Relation.SYNONYM);
 		
 		return this;
 	}

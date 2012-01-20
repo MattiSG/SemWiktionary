@@ -8,6 +8,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	edu.unice.polytech.kis.semwiktionary.database.DatabaseTest.class,
 	edu.unice.polytech.kis.semwiktionary.model.WordTest.class,
+	edu.unice.polytech.kis.semwiktionary.model.DefinitionTest.class,
 	edu.unice.polytech.kis.semwiktionary.model.MutableWordTest.class
 })
 

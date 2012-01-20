@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Transaction;
+
+import edu.unice.polytech.kis.semwiktionary.database.Database;
 
 
 public class Definition extends NodeMappedObject {
@@ -104,7 +107,15 @@ public class Definition extends NodeMappedObject {
 	/** Deletes this Definition and all attached properties from the database.
 	 */
 	public void delete() {
-		this.node.delete();
+		Transaction tx = Database.getDbService().beginTx();
+		
+		try {
+			this.node.delete();
+			
+			tx.success();
+		} finally {
+			tx.finish();
+		}
 	}
 
 // OVERRIDES

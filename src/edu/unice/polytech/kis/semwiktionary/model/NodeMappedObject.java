@@ -61,7 +61,7 @@ public abstract class NodeMappedObject {
 		List<T> result = new LinkedList<T>();
 		Constructor<T> constructor = null;
 		try {
-			// constructor = T.class.getConstructor(Node.class); // unfortunately, Java can't handle getting a Class from a Type�
+			// constructor = T.class.getConstructor(Node.class); // unfortunately, Java can't handle getting a Class from a Type
 			constructor = type.getConstructor(Node.class);
 		} catch (NoSuchMethodException e) {
 			throw new RuntimeException("The specified generic type does not offer a Node constructor.", e);

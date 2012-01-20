@@ -21,10 +21,10 @@ import edu.unice.polytech.kis.semwiktionary.model.*;
 	
 	
 	
-	private initWord(String word) {
+	private void initWord(String word) {
 		this.currentWord = MutableWord.create(word);
 		this.definitionCount = 0;
-		this.definitionsBuffer.removeAll();
+		this.definitionsBuffer.clear();
 	}
 %}
 
@@ -35,7 +35,7 @@ import edu.unice.polytech.kis.semwiktionary.model.*;
 %unicode
 
 %init{
-	yybegin(INIT);
+	yybegin(NORMAL);
 %init}
 
 word = [:letter:]+
@@ -44,7 +44,7 @@ whitespace = [\ ]
 newline = (\r|\n|\r\n)
 space = ({whitespace}|{newline})
 
-%state NORMAL, PAGE, TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DOMAIN, DEFINITION_BODY
+%state NORMAL, PAGE, TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DOMAIN, DEFINITION_BODY, EXAMPLE
 
 
 %%
@@ -54,7 +54,6 @@ space = ({whitespace}|{newline})
 {
 	"<page>"
 	{	
-		defCount=1;
 		yybegin(PAGE);
 	}
 	
@@ -95,7 +94,7 @@ space = ({whitespace}|{newline})
 		this.initWord(yytext());
 	}
 	
-	<
+	"<"
 	{
 		yybegin(PAGE);
 	}
@@ -261,7 +260,9 @@ space = ({whitespace}|{newline})
 		for (int i = this.definitionDepth - 1; i >= 0; i--)
 			result = this.definitionsBuffer.get(i) + result;
 		
-		currentWord.addDefinition(result);
+		currentDefinition.set("content", result);
+		
+		currentWord.addDefinition(currentDefinition);
 	}
 	
 	^\*

@@ -47,7 +47,7 @@ public abstract class NodeMappedObject {
 	*
 	*@returns	this, for chainability
 	*/
-	protected NodeMappedObject set(String key, String value) {
+	public NodeMappedObject set(String key, String value) {
 		Transaction tx = Database.getDbService().beginTx();
 		
 		try {
@@ -65,7 +65,7 @@ public abstract class NodeMappedObject {
 	 *
 	 *@returns	the created relationship, so you can annotate it if needs be
 	 */
-	protected Relationship set(Relation relType, NodeMappedObject target) {
+	public Relationship set(Relation relType, NodeMappedObject target) {
 		return Database.link(this.node, target.node, relType);
 	}
 	

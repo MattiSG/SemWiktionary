@@ -180,8 +180,8 @@ space = ({whitespace}|{newline})
 	^#+
 	{
 		this.definitionCount++;
-		this.currentDefinition = new Definition();
 		this.definitionDepth = yytext().length();
+		this.currentDefinition = new Definition().setPosition(this.definitionDepth);
 		
 		yybegin(DEFINITION);
 	}
@@ -240,7 +240,7 @@ space = ({whitespace}|{newline})
 {
 	[^|}]+
 	{
-		currentDefinition.set("domain", yytext());
+		currentDefinition.addDomain(yytext());
 	}
 	
 	(\|[^}]*)?"}}"
@@ -260,7 +260,7 @@ space = ({whitespace}|{newline})
 		for (int i = this.definitionDepth - 1; i >= 0; i--)
 			result = this.definitionsBuffer.get(i) + result;
 		
-		currentDefinition.set("content", result);
+		currentDefinition.setContent(result);
 		
 		currentWord.addDefinition(currentDefinition);
 	}
@@ -281,7 +281,7 @@ space = ({whitespace}|{newline})
 {
 	.+
 	{
-		this.currentDefinition.add("example", yytext());
+		this.currentDefinition.addExample(yytext());
 	}
 	
 	{newline}#+\*:

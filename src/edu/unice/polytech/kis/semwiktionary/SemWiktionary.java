@@ -4,8 +4,6 @@
 *@author	[Matti Schneider-Ghibaudo](http://mattischneider.fr)
 *@author	[Fabien Brossier](http://fabienbrossier.fr)
 *@author	Ngoc Nguyen Thinh Dong
-*
-*@version 0.0.0
 */
 
 package edu.unice.polytech.kis.semwiktionary;
@@ -35,7 +33,7 @@ public class SemWiktionary {
 	
 	public static void main(String[] args) {
 		println("Welcome to the SemWiktionary lookup interface!\n" +
-						   "===================================================");
+				"===================================================");
 		println("Hit ctrl-C to exit.\n");
 		
 		println(count() + " words in database");
@@ -53,9 +51,10 @@ public class SemWiktionary {
 	public static long count() {
 		print( "Counting… " );
 		
-		long start = System.currentTimeMillis();
-		long end;
-		long count = 0;
+		long start = System.currentTimeMillis(),
+			 end,
+			 count = 0;
+		
 		for (Node word : Database.getIndexForName(Word.INDEX_KEY).query(Word.INDEX_KEY, "*")) {
 			end = System.currentTimeMillis();
 			count++;

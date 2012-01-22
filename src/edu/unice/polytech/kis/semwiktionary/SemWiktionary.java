@@ -48,7 +48,7 @@ public class SemWiktionary {
 		println(count() + " words in database");
 		
 		while (true) {
-			print("\nEnter a word and press enter to look it up: ");
+			println("\nEnter a word and press enter or ctrl-D to look it up: ");
 			
 			Scanner sc = new Scanner(System.in);
 			String lookedup = sc.next();

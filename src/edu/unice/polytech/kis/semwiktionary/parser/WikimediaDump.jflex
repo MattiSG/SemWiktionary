@@ -63,11 +63,11 @@ space = ({whitespace}|{newline})
 <NORMAL>
 {
 	"<page>"
-	{	
+	{
 		yybegin(PAGE);
 	}
 	
-	.|{newline}
+	"<"|[^<]+
 	{
 		// suppress output
 	}
@@ -90,7 +90,7 @@ space = ({whitespace}|{newline})
 		yybegin(NORMAL); 
 	}
 	
-	.|{newline} 
+	"<"|[^<]+
 	{
 		// suppress output
 	}
@@ -173,7 +173,7 @@ space = ({whitespace}|{newline})
 
 <NATURE>
 {
-	"-}}"
+	-("|"[a-z]+)?"}}"
 	{
 		yybegin(SECTION);
 	}
@@ -195,6 +195,11 @@ space = ({whitespace}|{newline})
 		
 		yybegin(DEFINITION);
 	}
+	
+	.|{newline}
+	{
+		// suppress output
+	}
 }
 
 
@@ -205,7 +210,7 @@ space = ({whitespace}|{newline})
 		yybegin(PRONUNCIATION);
 	}
 	
-	"}}"
+	"}""}"?
 	{
 		yybegin(SECTION);
 	}

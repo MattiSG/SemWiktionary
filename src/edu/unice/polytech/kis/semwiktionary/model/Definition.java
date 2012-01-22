@@ -28,6 +28,10 @@ public class Definition extends NodeMappedObject {
 	private int position;
 
 // CONSTRUCTORS
+
+	public Definition() {
+		this("", 0);
+	}
 	
 	/** Models a definition of a word.
 	 *
@@ -35,12 +39,10 @@ public class Definition extends NodeMappedObject {
 	 * @param	position	The position of this definition relatively to other definitions for the same word. Lower is better ranked.
 	 */
 	public Definition(String definition, int position) {
-		this.initNode()
-			.setProperty("content", definition)
-			.setProperty("position", "" + position);
+		this.initNode();
 		
-		this.content = definition;
-		this.position = position;
+		this.setContent(definition)
+			.setPosition(position);
 		
 		this.listExample = new ArrayList<String>();
 		this.listDomain = new ArrayList<String>();
@@ -89,17 +91,43 @@ public class Definition extends NodeMappedObject {
 	/** Adds the given example to this definition.
 	 *
 	 * @param	example	The example to add
+	 * @returns	this	for chainability
 	 */
-	public void addExample(String example) {
+	public Definition addExample(String example) {
 		this.listExample.add(example);
+		
+		return this;
 	}
 	
 	/** Adds the given domain to this defintion.
 	 *
 	 * @param	domain	The domain to add
+	 * @returns	this	for chainability
 	 */
-	public void addDomain(String domain) {
+	public Definition addDomain(String domain) {
 		this.listDomain.add(domain);
+		
+		return this;
+	}
+
+	/**
+	* @returns	this	for chainability
+	*/
+	public Definition setPosition(int position) {
+		this.position = position;
+		this.set("position", "" + position);
+		
+		return this;
+	}
+	
+	/**
+	* @returns	this	for chainability
+	*/	
+	public Definition setContent(String content) {
+		this.content = content;
+		this.set("content", content);
+		
+		return this;
 	}
 
 // DESTRUCTORS

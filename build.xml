@@ -118,6 +118,8 @@
 		<jflex
 			file="${src}/edu/unice/polytech/kis/semwiktionary/parser/WikimediaDump.jflex"
 			destdir="${build}"
+			nobak="true"
+			verbose="true"
 		/>
 	</target>
 
@@ -205,16 +207,25 @@
 	<target name="parse" depends="compile_tests" description="Run the parser">
 		<mkdir dir="${log}"/>
 		
-		<java classname="edu.unice.polytech.kis.semwiktionary.parser.Main" fork="false" failonerror="true">
+		<java classname="edu.unice.polytech.kis.semwiktionary.parser.WikimediaDump"
+			  fork="true"
+			  failonerror="true"
+			  output="log/parser-output.txt"
+			  error="log/parser-error.txt">
 			<classpath>
 				<pathelement location="${bin}" />
 				<fileset refid="lib.jars"/>
 			</classpath>
+			<arg value="test/resources/miniwiki.xml"/>
 		</java>
 	</target>
 
 	<target name="run" depends="compile" description="Run the tool">
-		<java classname="${main_class}" classpath="${bin}" fork="true"> <!-- TODO: add lib to the classpath -->
+		<java classname="${main_class}" fork="true">
+			<classpath>
+				<pathelement location="${bin}" />
+				<fileset refid="lib.jars"/>
+			</classpath>
 		</java>
 	</target>
 	

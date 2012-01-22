@@ -44,7 +44,7 @@ public class MutableWord extends Word {
 		
 		try {
 			result.initNode()
-				  .setProperty("title", word);
+				  .set("title", word);
 			
 			Word.index.add(result.node, Word.INDEX_KEY, word);
 			

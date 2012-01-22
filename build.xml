@@ -221,7 +221,11 @@
 	</target>
 
 	<target name="run" depends="compile" description="Run the tool">
-		<java classname="${main_class}" classpath="${bin}" fork="true"> <!-- TODO: add lib to the classpath -->
+		<java classname="${main_class}" fork="true" spawn="true">
+			<classpath>
+				<pathelement location="${bin}" />
+				<fileset refid="lib.jars"/>
+			</classpath>
 		</java>
 	</target>
 	

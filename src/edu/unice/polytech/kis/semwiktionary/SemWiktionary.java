@@ -4,13 +4,82 @@
 *@author	[Matti Schneider-Ghibaudo](http://mattischneider.fr)
 *@author	[Fabien Brossier](http://fabienbrossier.fr)
 *@author	Ngoc Nguyen Thinh Dong
-*@author	Steven Sancho
 *
 *@version 0.0.0
 */
 
 package edu.unice.polytech.kis.semwiktionary;
 
+
+import java.util.Scanner;
+
+import org.neo4j.graphdb.Node;
+
+import edu.unice.polytech.kis.semwiktionary.model.Word;
+import edu.unice.polytech.kis.semwiktionary.model.Definition;
+import edu.unice.polytech.kis.semwiktionary.database.Relation;
+import edu.unice.polytech.kis.semwiktionary.database.Database;
+
+
 public class SemWiktionary {
+    private static final int MAX_COUNT_TIME = 2 * 1000; // microseconds
+
+
+	public static void print(String message) {
+		System.out.print(message);
+	}
 	
+	public static void println(String message) {
+		System.out.println(message);
+	}
+	
+	public static void main(String[] args) {
+		println("Welcome to the SemWiktionary lookup interface!\n" +
+						   "===================================================");
+		println("Hit ctrl-C to exit.\n");
+		
+		println(count() + " words in database");
+		
+		while (true) {
+			print("\nEnter a word and press enter to look it up: ");
+			
+			Scanner sc = new Scanner(System.in);
+			String lookedup = sc.next();
+			
+			lookup(lookedup);
+		}
+	}
+	
+	public static long count() {
+		print( "Counting… " );
+		
+		long start = System.currentTimeMillis();
+		long end;
+		long count = 0;
+		for (Node word : Database.getIndexForName(Word.INDEX_KEY).query(Word.INDEX_KEY, "*")) {
+			end = System.currentTimeMillis();
+			count++;
+			if ((end - start > MAX_COUNT_TIME)) {
+				print("(too long " + end + ", stopping now) ");
+				return count;
+			}
+		}
+		
+		return count;
+	}
+	
+	public static void lookup(String input) {
+		Word word = Word.from(input);
+		
+		if (word == null) {
+			println("The word '" + input + "' was not found in the database!");
+			return;
+		}
+		
+		println('"' + word.getTitle() + '"');
+		println("--------------------");
+		
+		for (Definition def : word.getDefinitions())
+			println("• " + def.getContent());
+	}
 }

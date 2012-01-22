@@ -127,8 +127,13 @@ space = ({whitespace}|{newline})
 	{
 		yybegin(H2);
 	}
+	
+	"</text>"
+	{
+		yybegin(NORMAL);
+	}
 
-	.|{newline} 
+	.|{newline}
 	{
 		// suppress output
 	}
@@ -194,6 +199,11 @@ space = ({whitespace}|{newline})
 		this.currentDefinition = new Definition().setPosition(this.definitionDepth);
 		
 		yybegin(DEFINITION);
+	}
+	
+	"</text>"
+	{
+		yybegin(NORMAL);
 	}
 	
 	.|{newline}

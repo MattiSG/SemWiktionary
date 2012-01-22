@@ -26,6 +26,15 @@ import edu.unice.polytech.kis.semwiktionary.model.*;
 		this.definitionCount = 0;
 		this.definitionsBuffer.clear();
 	}
+	
+	private void log(String text) {
+		System.err.print(text);
+	}
+	
+	private void out(String text) {
+		System.out.print(text);
+	}
+
 %}
 
 
@@ -33,6 +42,7 @@ import edu.unice.polytech.kis.semwiktionary.model.*;
 %class WikimediaDump
 %type Void
 %unicode
+%debug
 
 %init{
 	yybegin(NORMAL);
@@ -202,8 +212,7 @@ space = ({whitespace}|{newline})
 
 	.
 	{
-		// suppress output
-		// TODO: log malformation
+		log("**unexpected pattern value!** [ " + yytext() + " ]\n");
 	}
 }
 

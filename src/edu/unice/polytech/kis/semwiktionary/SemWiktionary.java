@@ -32,6 +32,15 @@ public class SemWiktionary {
 	}
 	
 	public static void main(String[] args) {
+		if (args.length > 0) {
+			for (String arg: args) {
+				lookup(arg);
+				println("\n");
+			}
+			return;
+		}
+			
+	
 		println("Welcome to the SemWiktionary lookup interface!\n" +
 				"===================================================");
 		println("Hit ctrl-C to exit.\n");
@@ -71,7 +80,7 @@ public class SemWiktionary {
 		Word word = Word.from(input);
 		
 		if (word == null) {
-			println("The word '" + input + "' was not found in the database!");
+			println("*The word '" + input + "' was not found in the database!*");
 			return;
 		}
 		

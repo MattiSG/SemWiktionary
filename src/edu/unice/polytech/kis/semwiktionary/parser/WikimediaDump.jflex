@@ -99,17 +99,14 @@ space = ({whitespace}|{newline})
 
 <TITLE>
 {
-	[^<:]+
+	[^<:]+"<"
 	{
-		this.initWord(yytext());
-	}
-	
-	"<"
-	{
+		String title = yytext();
+		this.initWord(title.substring(0, title.length() - 1));
 		yybegin(PAGE);
 	}
 	
-	:
+	.
 	{
 		yybegin(NORMAL);
 	}

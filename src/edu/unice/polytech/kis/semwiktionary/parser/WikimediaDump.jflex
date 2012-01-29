@@ -3,8 +3,10 @@ package edu.unice.polytech.kis.semwiktionary.parser;
 import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import edu.unice.polytech.kis.semwiktionary.model.*;
+import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
 
 %%
@@ -12,15 +14,23 @@ import edu.unice.polytech.kis.semwiktionary.model.*;
 
 %{
 	MutableWord currentWord;
-	
+	Relation currentRelation;
+
 	Definition currentDefinition;
 	int definitionCount;
 	int definitionDepth;
 	
-	List<String> definitionsBuffer = new ArrayList<String>(5);
-	
-	
-	
+	List<String> definitionsBuffer;
+	HashMap<String, Relation> relationsMap;
+
+	private void initParser() {
+		definitionsBuffer = new ArrayList<String>(5);
+		relationsMap = new HashMap<String, Relation>(2);
+
+		relationsMap.put("syn", Relation.SYNONYM);
+		relationsMap.put("ant", Relation.ANTONYM);
+	}
+
 	private void initWord(String word) {
 		this.currentWord = MutableWord.create(word);
 		this.definitionCount = 0;
@@ -45,6 +55,8 @@ import edu.unice.polytech.kis.semwiktionary.model.*;
 %debug
 
 %init{
+
+	initParser();
 	yybegin(NORMAL);
 %init}
 
@@ -54,7 +66,7 @@ whitespace = [\ ]
 newline = (\r|\n|\r\n)
 space = ({whitespace}|{newline})
 
-%state NORMAL, PAGE, TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DOMAIN, DEFINITION_BODY, EXAMPLE
+%state NORMAL, PAGE, TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DOMAIN, DEFINITION_BODY, EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD
 
 
 %%
@@ -166,6 +178,13 @@ space = ({whitespace}|{newline})
 		yybegin(NATURE);
 	}
 	
+	"syn"|"ant"
+	{
+		System.err.println(yytext());
+		currentRelation = relationsMap.get(yytext());
+		yybegin(SIMPLENYM);
+	}
+
 	.
 	{
 		yybegin(MEDIAWIKI);	// this is not an accepted type
@@ -202,7 +221,7 @@ space = ({whitespace}|{newline})
 	{
 		yybegin(NORMAL);
 	}
-	
+
 	.|{newline}
 	{
 		// suppress output
@@ -261,7 +280,7 @@ space = ({whitespace}|{newline})
 {
 	[^|}]+
 	{
-		currentDefinition.addDomain(yytext());
+	currentDefinition.addDomain(yytext());
 	}
 	
 	(\|[^}]*)?"}}"
@@ -291,6 +310,11 @@ space = ({whitespace}|{newline})
 		yybegin(EXAMPLE);
 	}
 
+	{newline}{newline}
+	{
+		yybegin(MEDIAWIKI);
+	}
+
 	{newline}
 	{
 		yybegin(SECTION);
@@ -308,13 +332,81 @@ space = ({whitespace}|{newline})
 	{newline}#+\*:
 	{
 		// don't leave state, the colon means we're in the same example, but on another line
+	}	
+
+	{newline}{newline}
+	{
+		yybegin(MEDIAWIKI);
 	}
-	
+
 	{newline}
 	{
 		yybegin(SECTION);
 	}
 }
 
+<SIMPLENYM>
+{
+	"-}}"
+	{
+		// Fin de la balise de synonymes
+	}
+
+	:{whitespace}''
+	{
+		yybegin(SPNM_CONTEXT);
+	}
+
+	\*{whitespace}"[["
+	{
+		yybegin(SPNM_WORD);
+	}
+
+	^{newline}"{{-"
+	{
+		yybegin(H2);
+	}
+
+	.|{newline}
+	{
+
+	}
+}
+
+<SPNM_CONTEXT>
+{
+	"[["
+	{
+		yybegin(SPNM_WORD);
+	}
+
+	[^:]+
+	{
+		// Context is not handled yet
+	}
+
+	.
+	{
+
+	}
+}
+
+<SPNM_WORD>
+{
+	"]]"
+	{
+		yybegin(SIMPLENYM);
+	}
+
+	[^\]]+
+	{
+		currentWord.set(currentRelation, MutableWord.create(yytext()));
+	}
+
+	.
+	{
+
+	}
+}
 
 

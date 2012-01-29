@@ -94,7 +94,8 @@ public class Word extends NodeMappedObject {
 	 *
 	 * @param node The node object of the database
 	 */
-	private Word(Node node) {
+	// Modified public to be accessible in the generic method get.
+	public Word(Node node) {
 		this.node = node;
 		this.title = this.get("title");
 	}

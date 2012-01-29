@@ -87,6 +87,16 @@ public class SemWiktionary {
 		println('"' + word.getTitle() + '"');
 		println("--------------------");
 		
+		for (Word syn : word.getSynonyms())
+			println("Syn : " + syn.getTitle());
+		
+		println("--------------------");
+		
+		for (Word ant : word.getAntonyms())
+			println("Ant : " + ant.getTitle());
+		
+		println("--------------------");
+		
 		for (Definition def : word.getDefinitions())
 			println("• " + def.getContent());
 	}

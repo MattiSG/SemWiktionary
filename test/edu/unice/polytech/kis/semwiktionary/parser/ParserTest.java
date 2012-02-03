@@ -122,6 +122,104 @@ public class ParserTest {
 						
 		result.put("dictionnaire", definitions);
 		
+		
+		
+		
+		definitions = new ArrayList<Definition>(15);
+		
+		
+		definitions.add(new Definition("D’un certain âge (relatif à un autre).", 1)
+						.addExample("Dernièrement, j'avais eu la maladresse de m’enrhumer en pleine chaleur. Voilà pourtant ce que c'est que de devenir vieux : on ne peut résister à rien. — (Émile Thirion, La Politique au village, p. 125, Fischbacher, 1896)")
+						.addExample("Il ne rendait visite qu'à sa mère et encore, cette dernière, entourée de vieilles personnes ridicules et sujette elle-même à des radotages, lui agaçait les nerfs […]. — (Francis Carco, L'Homme de Minuit, 1938)")
+						.addExample("Je suis le plus vieux de ma classe.")
+						.addExample("Un vieil homme, une vieille femme.")
+						.addExample("De vieilles gens.")
+						.addExample("Se faire vieux : Vieillir, prendre de l’âge : Cet acteur se fait vieux."));
+		
+		definitions.add(new Definition("Ancien, qui existe depuis longtemps.", 2)
+						.addExample("Un vieux manoir.")
+						.addExample("Le monde est bien vieux.")
+						.addExample("Le bon vieux temps.")
+						.addExample("De vieilles rapsodies.")
+						.addExample("Les vieilles coutumes.")
+						.addExample("Un vieux proverbe.")
+						.addExample("De vieux papiers, de vieux parchemins.")
+						.addExample("Ce mot, ce terme est vieux : Il a cessé d’être en usage.")
+						.addExample("On dit dans le même sens :")
+						.addExample("Une vieille locution, le vieux langage."));
+		
+		definitions.add(new Definition("…", 3)
+						.addDomain("Familier")
+						.addExample("Vieux comme Hérode, comme Mathusalem : Très vieux."));
+		
+		definitions.add(new Definition("…", 4)
+						.addDomain("Figuré")
+						.addDomain("Familier")
+						.addExample("Vieux comme les rues. → voir rue"));
+		
+		definitions.add(new Definition("…", 5)
+						.addDomain("Familier")
+						.addExample("Cet homme ne fera pas de vieux os. → voir os"));
+		
+		definitions.add(new Definition("…", 6)
+						.addDomain("Dévotion")
+						.addExample("Dépouiller le vieil homme. → voir dépouiller"));
+		
+		definitions.add(new Definition("Apparence de la vétusté, les dehors de la vieillesse.", 7)
+						.addExample("Il a un air vieux.")
+						.addExample("Être vieux avant l’âge : Présenter prématurément des symptômes de vieillesse."));
+		
+		definitions.add(new Definition("S’emploie avec les adverbes plus et moins, et autres semblables, pour marquer la différence d’âge entre deux personnes ou choses.", 8)
+						.addExample("Il n’a que vingt ans, et vous en avez vingt-cinq, vous êtes plus vieux que lui.")
+						.addExample("Il n’est pas si vieux que vous.")
+						.addExample("Il est plus vieux que lui de six ans."));
+		
+		definitions.add(new Definition("Personne qui exerce une profession, un métier, qui mène un certain genre de vie depuis longtemps.", 9)
+						.addExample("Vieux magistrat.")
+						.addExample("Vieux capitaine.")
+						.addExample("Vieux soldat.")
+						.addExample("La vieille garde.")
+						.addExample("Un vieux garçon, une vieille fille : Un garçon, une fille qui a passé la jeunesse et qui est encore célibataire.")
+						.addExample("Un vieil ami : Un ami de longue date.")
+						.addExample("Nous sommes de vieux amis.")
+						.addExample("De vieux époux : Des époux qui sont mariés depuis longtemps."));
+		
+		definitions.add(new Definition("Sert aussi à marquer les anciennes habitudes, et surtout les habitudes vicieuses.", 10)
+						.addExample("Vieil ivrogne.")
+						.addExample("Vieux débauché."));
+		
+		definitions.add(new Definition("Il s’emploie familièrement dans des phrases de dénigrement.", 11)
+						.addExample("Vieux coquin.")
+						.addExample("Vieux sorcier, vieille sorcière.")
+						.addExample("Vieux fou, Vieille folle.")
+						.addExample("Vieux radoteur.")
+						.addExample("Vieil avare."));
+		
+		definitions.add(new Definition("S’emploie pour exprimer la vénération qu’inspire le nom d’un homme célèbre mort depuis longtemps, en laissant une grande renommée.", 12)
+						.addExample("Le vieux Corneille.")
+						.addExample("Le vieil Homère."));
+		
+		definitions.add(new Definition("…", 13)
+						.addDomain("Figuré")
+						.addExample("Un homme de la vieille roche, noblesse de vieille roche. → voir roche"));
+		
+		definitions.add(new Definition("Par comparaison et opposition à nouveau.", 14)
+						.addExample("La vieille ville.")
+						.addExample("La vieille cour.")
+						.addExample("Du vin vieux.")
+						.addExample("La vieille mode.")
+						.addExample("Vieux style. → voir style"));
+		
+		definitions.add(new Definition("Choses qui sont usées, principalement des habits, des meubles, par opposition à neuf.", 15)
+						.addExample("Vieil habit.")
+						.addExample("Vieux chapeau.")
+						.addExample("Vieux linge.")
+						.addExample("Vieux coffre.")
+						.addExample("Vieille tapisserie."));
+						
+		result.put("vieux", definitions);
+
+		
 		return result;
 	}
 }

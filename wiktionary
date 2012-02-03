@@ -3,4 +3,4 @@
 # Shortcut to start up SemWiktionary
 # Author: Matti Schneider-Ghibaudo
 
-java -cp $(dirname $0)/bin:$(dirname $0)/lib/* edu.unice.polytech.kis.semwiktionary.SemWiktionary "$@"
+java -cp $(dirname $0)/bin:$(dirname $0)/lib/*:$(dirname $0)/lib/neo4j/* edu.unice.polytech.kis.semwiktionary.SemWiktionary "$@"

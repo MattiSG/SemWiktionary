@@ -44,7 +44,7 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	private void out(String text) {
 		System.out.print(text);
 	}
-
+	
 %}
 
 
@@ -55,7 +55,6 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 %debug
 
 %init{
-
 	initParser();
 	yybegin(NORMAL);
 %init}
@@ -180,7 +179,6 @@ space = ({whitespace}|{newline})
 	
 	"syn"|"ant"
 	{
-		System.err.println(yytext());
 		currentRelation = relationsMap.get(yytext());
 		yybegin(SIMPLENYM);
 	}

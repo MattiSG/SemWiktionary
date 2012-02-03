@@ -15,6 +15,7 @@ import edu.unice.polytech.kis.semwiktionary.database.DatabaseTest;
 	edu.unice.polytech.kis.semwiktionary.model.WordTest.class,
 	edu.unice.polytech.kis.semwiktionary.model.MutableWordTest.class,
 	edu.unice.polytech.kis.semwiktionary.model.DefinitionTest.class,
+	edu.unice.polytech.kis.semwiktionary.model.SynonymsTest.class
 	//database cleanup is done in the @AfterClass below
 })
 

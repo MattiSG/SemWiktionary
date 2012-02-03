@@ -88,16 +88,23 @@ public class SemWiktionary {
 		println("--------------------");
 		
 		for (Word syn : word.getSynonyms())
-			println("Syn : " + syn.getTitle());
+			println("= " + syn.getTitle());
 		
 		println("--------------------");
 		
 		for (Word ant : word.getAntonyms())
-			println("Ant : " + ant.getTitle());
+			println("≠ " + ant.getTitle());
 		
 		println("--------------------");
 		
-		for (Definition def : word.getDefinitions())
-			println("• " + def.getContent());
+		for (Definition def : word.getDefinitions()) {
+			println(def.getPosition() + ". \"" + def.getContent() + "\"");
+			
+			if (def.getExamples() != null)
+				for (String ex : def.getExamples())
+					print("\n\t• \"" + ex + "\"");
+			
+			println("\t---");
+		}
 	}
 }

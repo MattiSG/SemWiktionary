@@ -32,7 +32,7 @@ Currently, no choice is offered regarding the input file. You will first need to
 
     $ cd path/to/project/directory
     $ ant parse
-	$ java -cp bin:lib/* edu.unice.polytech.kis.semwiktionary.SemWiktionary
+	$ ./wiktionary [wordToLookUp [anotherWord [...]]]
 
 Constraints
 -----------

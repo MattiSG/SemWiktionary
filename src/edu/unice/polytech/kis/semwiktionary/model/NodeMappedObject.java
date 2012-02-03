@@ -127,4 +127,14 @@ public abstract class NodeMappedObject {
 			tx.finish();
 		}
 	}
+	
+	
+	public boolean equals(Object o) {
+		if (! this.getClass().isInstance(o))
+			return false;
+		
+		NodeMappedObject comparedTo = (NodeMappedObject) o;
+		
+		return comparedTo.node == this.node;
+	}
 }

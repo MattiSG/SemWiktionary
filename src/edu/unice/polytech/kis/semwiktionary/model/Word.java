@@ -136,4 +136,11 @@ public class Word extends NodeMappedObject {
 	protected void fetchDefinitions() {
 		this.definitions = new LinkedList<Definition>(this.<Definition>get(Relation.DEFINITION));
 	}
+	
+	
+// STANDARD METHODS
+	
+	public String toString() {
+		return this.getTitle();
+	}
 }

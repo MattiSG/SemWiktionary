@@ -22,16 +22,8 @@ public class WordTest {
 	@BeforeClass
 	public static void classSetUp() throws Exception {
 		expected = ParserTest.generateExpectedContent();
+	}
 		
-		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet())
-			MutableWord.create(currentEntry.getKey()).addDefinitions(currentEntry.getValue());
-	}
-	
-	@AfterClass
-	public static void classTearDown() {
-		//DatabaseTest.deleteDb();
-	}
-	
 	@Test
 	public void fromTest() {
 		for (String someWord : expected.keySet())

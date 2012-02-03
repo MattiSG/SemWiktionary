@@ -72,7 +72,7 @@ public class DatabaseTest {
 		deleteDirectory(new File(Database.DB_PATH));
 	}
 	
-	static public boolean deleteDirectory(File path) {
+	private static boolean deleteDirectory(File path) {
 		if (path.exists()) {
 			File[] files = path.listFiles();
 			for(int i=0; i<files.length; i++) {

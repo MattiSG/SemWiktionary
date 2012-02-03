@@ -35,11 +35,6 @@ public class MutableWordTest {
 		count++;
 	}
 	
-	@AfterClass
-	public static void classTearDown() {
-		DatabaseTest.deleteDb();
-	}
-	
 	@Test
 	public void createTest() {
 		assertEquals("'" + subject + "' pretends not to exist in the database!",

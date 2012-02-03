@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -15,6 +16,8 @@ import edu.unice.polytech.kis.semwiktionary.model.Definition;
 
 
 public class ParserTest {
+	
+	public static final String TEST_FILE = "test/resources/miniwiki.xml"; // relative to ant build file
 	
 	private static List<String> unexpectedTitles;
 	private static Map<String, List<Definition>> expected;
@@ -27,7 +30,19 @@ public class ParserTest {
 		unexpectedTitles = new ArrayList<String>(2);
 		unexpectedTitles.add("MediaWiki:Disclaimers");
 		unexpectedTitles.add("Discussion utilisateur:Hippietrail");
+		
+		FileInputStream fileInputStream = new FileInputStream(new File(TEST_FILE));
+
+		System.setErr(new PrintStream(new FileOutputStream(new File("log/jflex.err"))));
+		System.setOut(new PrintStream(new FileOutputStream(new File("log/jflex.out"))));
+
+		WikimediaDump lexer = new WikimediaDump(fileInputStream);
+		lexer.yylex(); // store in db
+
+		System.setErr(System.err);
+		System.setOut(System.out);
 	}
+	
 	
 	@Test
 	public void allWordsExist() {
@@ -38,8 +53,8 @@ public class ParserTest {
 	@Test
 	public void titlesDefinitionsMatch() {
 		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
-			Word myWord = Word.from(currentEntry.getKey());
-			assertEquals("Incorrect definitions for word '" + currentEntry.getKey() + "'", currentEntry.getValue(), myWord.getDefinitions());
+			Word currentWord = Word.from(currentEntry.getKey());
+			assertEquals("Incorrect definitions for word '" + currentEntry.getKey() + "'", new ArrayList<Definition>(currentEntry.getValue()), currentWord.getDefinitions());
 		}
 	}
 	

@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import org.unitils.reflectionassert.ReflectionAssert;
+import org.unitils.reflectionassert.ReflectionComparatorMode;
+
 import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -51,10 +54,11 @@ public class ParserTest {
 	}
 	
 	@Test
-	public void titlesDefinitionsMatch() {
+	public void definitionsWereProperlyParsed() {
 		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
 			Word currentWord = Word.from(currentEntry.getKey());
-			assertEquals("Incorrect definitions for word '" + currentEntry.getKey() + "'", new ArrayList<Definition>(currentEntry.getValue()), currentWord.getDefinitions());
+
+			ReflectionAssert.assertReflectionEquals(currentEntry.getValue(), currentWord.getDefinitions());
 		}
 	}
 	

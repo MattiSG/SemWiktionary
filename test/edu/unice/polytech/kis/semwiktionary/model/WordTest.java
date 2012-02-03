@@ -6,6 +6,9 @@ import org.junit.BeforeClass;
 import org.junit.AfterClass;
 import org.junit.Test;
 
+import org.unitils.reflectionassert.ReflectionAssert;
+import org.unitils.reflectionassert.ReflectionComparatorMode;
+
 import java.util.List;
 import java.util.Map;
 
@@ -43,15 +46,12 @@ public class WordTest {
 	}
 	
 	@Test
-	public void titlesDefinitionsMatch() {
+	public void definitionsMatch() {
 		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
-			Word myWord = Word.from(currentEntry.getKey());
+			Word currentWord = Word.from(currentEntry.getKey());
 			List<Definition> expectedDefinitions = currentEntry.getValue();
 			
-			assertEquals("Bad number of definitions for word '" + currentEntry.getKey() + "'", expectedDefinitions.size(), myWord.getDefinitions().size());
-			
-			for (int i = 0; i < expectedDefinitions.size(); i++)
-				assertEquals("Incorrect definition (#" + (i + 1) + ") for word '" + currentEntry.getKey() + "'", expectedDefinitions.get(i), myWord.getDefinitions().get(i));
+			ReflectionAssert.assertReflectionEquals(expectedDefinitions, currentWord.getDefinitions());
 		}
 	}
 }

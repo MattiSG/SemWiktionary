@@ -70,10 +70,20 @@ public abstract class NodeMappedObject {
 	}
 	
 	/**Fetches all NodeMappedObjects that are connected to this object with the given Relation type.
+	 *You'll need to specify the expected output type, so as to avoid casts.
+	 *Example: Collection<Word> synonyms = myWord.<Word>get(Relation.SYNONYM);
+	 *
+	 *This method defaults to ignoring relations' directions. If you want to follow one only,explicitly specify it as a second argument.
+	 */
+	public <T extends NodeMappedObject> Collection<T> get(Relation relType) {
+		return get(relType, Direction.BOTH);
+	}	 
+	
+	/**Fetches all NodeMappedObjects that are connected to this object with the given Relation type.
 	*You'll need to specify the expected output type, so as to avoid casts.
 	*Example: Collection<Word> synonyms = myWord.<Word>get(Relation.SYNONYM);
 	*/
-	public <T extends NodeMappedObject> Collection<T> get(Relation relType) {
+	public <T extends NodeMappedObject> Collection<T> get(Relation relType, Direction dir) {
 		Class<T> type = relType.getDestinationType();
 		List<T> result = new LinkedList<T>();
 		Constructor<T> constructor = null;
@@ -85,8 +95,8 @@ public abstract class NodeMappedObject {
 		}
 		
 		try {
-			for (Relationship relation : this.node.getRelationships(Direction.OUTGOING, relType)) {
-				result.add(constructor.newInstance(relation.getEndNode()));
+			for (Relationship relation : this.node.getRelationships(dir, relType)) {
+				result.add(constructor.newInstance(relation.getOtherNode(this.node)));
 			}
 		} catch (InstantiationException e) {
 			throw new RuntimeException("The Node constructor for the specified type failed.", e);

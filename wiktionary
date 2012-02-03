@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Shortcut to start up SemWiktionary
+# Author: Matti Schneider-Ghibaudo
+
+java -cp $(dirname $0)/bin:$(dirname $0)/lib/* edu.unice.polytech.kis.semwiktionary.SemWiktionary "$@"

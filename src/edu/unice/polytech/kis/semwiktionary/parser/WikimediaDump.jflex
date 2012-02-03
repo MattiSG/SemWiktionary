@@ -171,7 +171,7 @@ space = ({whitespace}|{newline})
 
 <H2>
 {
-	verb|nom|adj
+	"verb"|"nom"|"adj"
 	{
 		// TODO: add all types
 		// TODO: store type in word
@@ -349,7 +349,7 @@ space = ({whitespace}|{newline})
 {
 	"-}}"
 	{
-		// Fin de la balise de synonymes
+		// end of pattern
 	}
 
 	:{whitespace}''

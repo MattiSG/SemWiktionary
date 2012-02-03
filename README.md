@@ -1,12 +1,7 @@
 SemWiktionary
 =============
 
-Java API to access data from [wiktionary](http://fr.wiktionary.org). Specific target is the French wiktionary.
-
-Vision
-------
-
-À partir d'un texte rédigé en langue française, concernant un domaine défini, extraire des informations sémantiques sur le contenu.
+Java API to locally access data from [wiktionary](http://fr.wiktionary.org). Specific target is the French wiktionary.
 
 Objectifs
 ---------
@@ -23,65 +18,41 @@ Fournir une API Java permettant d'accéder aux informations suivantes sur un mot
 
 **Performance.** Durées maximales envisageables : 1 journée pour le chargement de la base de données ; 5 minutes pour l'exécution d'une requête.
 
-Contraintes
+How to use
+----------
+
+You will need:
+
+- [Ant](http://ant.apache.org) to build this project;
+- this project's source files;
+- a [Wiktionary dump file](http://dumps.wikimedia.org/frwiktionary/latest/) with all articles (direct link for French: [130MB archive](http://dumps.wikimedia.org/frwiktionary/latest/frwiktionary-latest-pages-articles.xml.bz2));
+- around 3 GB of free space.
+
+Currently, no choice is offered regarding the input file. You will first need to replace `test/resources/miniwiki.xml` by the dump file you previously downloaded, then:
+
+    $ cd path/to/project/directory
+    $ ant parse
+	$ ./wiktionary [wordToLookUp [anotherWord [...]]]
+
+Constraints
 -----------
 
-1. Source de données : [Wiktionnaire](http://fr.wiktionary.org).
-2. Technologies : API disponible en Java. Base de données [non-relationnelle](http://en.wikipedia.org/wiki/Graph_database), de préférence Neo4j.
+This project being academic, some technical constraints were applied to it.
 
+1. Data source: [French Wiktionary](http://fr.wiktionary.org). Internationalization could be thought about, but is not currently aimed at.
+2. Technologies: access API in Java. [Graph database](http://en.wikipedia.org/wiki/Graph_database), preferably Neo4j.
+
+Equivalent projects and rationale
+---------------------------------
+
+- [JWKTL](http://www.ukp.tu-darmstadt.de/software/jwktl/). Not documented, source code impossible to get, authors not reachable by email.
+
+Many tools parse MediaWiki markup and create an AST from it. However, most of them are overkill and would require several passes to properly fill the database, therefore leading to poor performance.
 
 License
 -------
 
 GNU [General Public License](http://www.gnu.org/licenses/gpl.html).
-
-Equivalent projects and rationale
----------------------------------
-
-Coding Style, Philosophy & Implemented standards
-------------------------------------------------
-
-### Repo management ###
-
-- [SemVer](http://semver.org), Semantic Versioning.
-- [README-Driven Development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html). Definitely applies to branches too.
-- [GitHub-flow](http://scottchacon.com/2011/08/31/github-flow.html)-like, that is:
-	- `master` branch should always be deployable.
-	- one branch per functionality, with explicit branch naming. Once functionality is implemented and tested, it is merged into `master`, and the branch is **deleted**.
-- code is considered valid only once it has been **documented** and **tested**. Automated tests are not mandatory for UI code (maintenance cost too high).
-- atomic commits: a commit is **one** change. It may be a documentation change, an API change, an implementation change, it may be split across several files or stand in one line, but it changes only **one aspect** of the application.
-
-### File hierarchy ###
-
-- `src` contains all source files.
-- `test` contains all test source files.
-- `doc` contains all documentation, except this README. [Markdown](http://daringfireball.net/projects/markdown) is to be used for documentation formatting.
-- `lib` contains all third-party libraries.
-- `bin` contains `class` files.
-- `build` contains all build products packaged in JARs.
-- `dist` contains deliverables.
-
-### Coding style ###
-
-OOP. DRY. Dynamicity. TDD with [JUnit](http://junit.sourceforge.net/).
-
-#### Writing ####
-
-- Follow Oracle's [Java Code Conventions](http://www.oracle.com/technetwork/java/codeconvtoc-136057.html).
-- Scope opening brackets are **on the same line** as the control element that opens the scope; scope closing brackets are on their own line, except when in an `if / else if / else` construct, where we want to achieve a `… } else { …` look.
-- **tabs**. Spaces allowed in very specific contexts **only**, such as aligning multi-line arguments. For converters, tab:space ratio is set to 1:4.
-- **[Javadoc](http://www.oracle.com/technetwork/java/javase/documentation/index-137868.html)**-style comments **with Markdown** instead of HTML. That seems to be [Markdown-doclet](http://www.richardnichols.net/2009/06/markdown-doclet-for-javadoc/)-parsable, but the main goal is to have the most usable documentation in the code itself. Public documentation elements (i.e. parts that provide details about variables, methods rather than algorithmic details) should be in double-star comments (`/**`).
-- inline comments (`//`) and single-star comments (`/*`) comment a specific part of the implementation, and do not give any public-interest information.
-
-#### Evils ####
-
-- code duplication;
-- hardcoded stuff;
-- coupling;
-- bad documentation;
-- non-explicit function names.
-
-Basically, everything that will end up biting you bad later on.
 
 Credits
 -------
@@ -90,7 +61,6 @@ Credits
 - [Matti Schneider-Ghibaudo](http://mattischneider.fr)
 - [Fabien Brossier](http://fabienbrossier.fr)
 - Ngoc Nguyen Thinh Dong
-- Steven Sancho
 
 ### Tutors ###
 - Michel Gautero

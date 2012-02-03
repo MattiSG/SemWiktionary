@@ -19,16 +19,16 @@ public class MutableWord extends Word {
 	
 // STATIC METHODS
 	
-	/** Finds a word in the database from its title.
+	/** Finds a word in the database from its title, or creates it if it does not exist yet.
 	 * Constructs a MutableWord object with all its properties (definition, synonyms).
 	 * Such an object _may_ modify the database. See `Word` for a safer use.
 	 *
 	 * @param	word	The word to model
-	 * @return	The complete MutableWord object created or null if the word is not in the database
+	 * @return	A MutableWord object, either referencing the current word in database or creating a new one
 	 */
 	public static MutableWord from(String word) {
 		Word immutableWord = Word.from(word);
-		return (immutableWord == null ? null : new MutableWord(immutableWord));
+		return (immutableWord == null ? MutableWord.create(word) : new MutableWord(immutableWord));
 	}
 	
 	/** Creates a new word in the database.

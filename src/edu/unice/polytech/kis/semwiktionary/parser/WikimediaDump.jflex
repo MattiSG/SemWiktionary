@@ -400,7 +400,7 @@ space = ({whitespace}|{newline})
 
 	[^\]]+
 	{
-		currentWord.set(currentRelation, MutableWord.create(yytext()));
+		currentWord.set(currentRelation, MutableWord.from(yytext()));
 	}
 
 	.

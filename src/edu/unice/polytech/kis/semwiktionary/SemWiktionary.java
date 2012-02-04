@@ -102,7 +102,7 @@ public class SemWiktionary {
 
 			for (String dom : def.getDomains())
 				if (! dom.isEmpty())
-					print("(" + dom + ") ");
+					println("(" + dom + ") ");
 			
 			for (String ex : def.getExamples())
 				if (! ex.isEmpty())

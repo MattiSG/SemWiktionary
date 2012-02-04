@@ -327,8 +327,8 @@ space = ({whitespace}|{newline})
 		this.definitionsBuffer.add(this.definitionDepth - 1, yytext());
 		
 		String result = "";
-		for (int i = this.definitionDepth - 1; i >= 0; i--)
-			result = this.definitionsBuffer.get(i) + result;
+		for (int i = definitionDepth - 1; i >= 0; i--)
+			result = definitionsBuffer.get(i) + (result.isEmpty() ? "" : (" " + result));
 		
 		currentDefinition.setContent(result);
 		

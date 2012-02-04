@@ -35,6 +35,13 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
 	private void initWord(String word) {
 		currentWord = MutableWord.create(word);
+		initSection();
+	}
+	
+	private void initSection() {
+		if (definitionDepth > 0)
+			saveCurrentDefinition(); // we matched some definitions, so the last one must be saved, since saving them is done when finding a new one
+		
 		definitionDepth = 0;
 		definitionCount = 0;
 		definitionsBuffer.clear();
@@ -236,8 +243,13 @@ space = ({whitespace}|{newline})
 	{
 		yybegin(YYINITIAL);
 	}
+	
+	{newline}
+	{
+		initSection();
+	}
 
-	.|{newline}
+	.
 	{
 		// in Section: suppress output
 	}
@@ -317,14 +329,6 @@ space = ({whitespace}|{newline})
 		buffer += "\n" + yytext();
 	}	
 
-	{newline}{newline}
-	{
-		currentDefinition.addExample(buffer);
-		saveCurrentDefinition();
-		
-		yybegin(MEDIAWIKI);
-	}
-
 	{newline}
 	{
 		currentDefinition.addExample(buffer);
@@ -344,13 +348,6 @@ space = ({whitespace}|{newline})
 			result = definitionsBuffer.get(i) + (result.isEmpty() ? "" : (" " + result));
 		
 		currentDefinition.setContent(result);
-	}
-
-	{newline}{newline}
-	{
-		saveCurrentDefinition();
-		
-		yybegin(MEDIAWIKI);
 	}
 
 	{newline}

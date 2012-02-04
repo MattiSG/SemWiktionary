@@ -34,9 +34,10 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	}
 
 	private void initWord(String word) {
-		this.currentWord = MutableWord.create(word);
-		this.definitionCount = 0;
-		this.definitionsBuffer.clear();
+		currentWord = MutableWord.create(word);
+		definitionDepth = 0;
+		definitionCount = 0;
+		definitionsBuffer.clear();
 	}
 	
 	private void log(String text) {
@@ -47,6 +48,11 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 		System.out.print(text);
 	}
 	
+	private void saveCurrentDefinition() {
+		definitionCount++;
+		currentDefinition.setPosition(definitionCount);
+		currentWord.addDefinition(currentDefinition);
+	}
 %}
 
 
@@ -114,7 +120,7 @@ space = ({whitespace}|{newline})
 	[^<:]+"<"
 	{
 		String title = yytext();
-		this.initWord(title.substring(0, title.length() - 1));
+		initWord(title.substring(0, title.length() - 1));
 		yybegin(PAGE);
 	}
 	
@@ -209,9 +215,14 @@ space = ({whitespace}|{newline})
 
 	^#+
 	{
-		this.definitionCount++;
-		this.definitionDepth = yytext().length();
-		this.currentDefinition = new Definition().setPosition(this.definitionCount);
+		int newDepth = yytext().length();
+		
+		if (newDepth <= definitionDepth)
+			saveCurrentDefinition();	// we don't want to add definitions that will be specified by inner lists, since we're concatenating the innermost strings with their parents
+			
+		definitionDepth = newDepth;
+		
+		currentDefinition = new Definition();
 		
 		yybegin(DEFINITION);
 	}
@@ -308,13 +319,15 @@ space = ({whitespace}|{newline})
 
 	{newline}{newline}
 	{
-		this.currentDefinition.addExample(buffer);
+		currentDefinition.addExample(buffer);
+		saveCurrentDefinition();
+		
 		yybegin(MEDIAWIKI);
 	}
 
 	{newline}
 	{
-		this.currentDefinition.addExample(buffer);
+		currentDefinition.addExample(buffer);
 		yybegin(SECTION);
 	}
 }
@@ -324,19 +337,19 @@ space = ({whitespace}|{newline})
 {
 	[^*\n\r]+
 	{
-		this.definitionsBuffer.add(this.definitionDepth - 1, yytext());
+		definitionsBuffer.add(definitionDepth - 1, yytext());
 		
 		String result = "";
 		for (int i = definitionDepth - 1; i >= 0; i--)
 			result = definitionsBuffer.get(i) + (result.isEmpty() ? "" : (" " + result));
 		
 		currentDefinition.setContent(result);
-		
-		currentWord.addDefinition(currentDefinition);
 	}
 
 	{newline}{newline}
 	{
+		saveCurrentDefinition();
+		
 		yybegin(MEDIAWIKI);
 	}
 

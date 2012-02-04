@@ -106,7 +106,7 @@ space = ({whitespace}|{newline})
 
 <PAGE> 
 {
-	"<text"
+	"<text xml:space=\"preserve\">"
 	{
 		yybegin(MEDIAWIKI);
 	}
@@ -347,7 +347,7 @@ space = ({whitespace}|{newline})
 
 <DEFINITION_BODY>
 {
-	[^*\n\r]+
+	.+
 	{
 		definitionsBuffer.add(definitionDepth - 1, yytext());
 		
@@ -383,6 +383,7 @@ space = ({whitespace}|{newline})
 
 	^{newline}"{{-"
 	{
+		//TODO: WTF?! This should redirect to <SECTION>
 		yybegin(H2);
 	}
 

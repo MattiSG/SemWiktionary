@@ -54,11 +54,41 @@ public class ParserTest {
 	}
 	
 	@Test
-	public void definitionsWereProperlyParsed() {
+	public void properNumberOfDefinitionsWereParsed() {
 		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
 			Word currentWord = Word.from(currentEntry.getKey());
 
-			ReflectionAssert.assertReflectionEquals(currentEntry.getValue(), currentWord.getDefinitions());
+			assertEquals("Bad number of definitions for word " + currentWord, currentEntry.getValue().size(), currentWord.getDefinitions().size());
+		}
+	}
+	
+	@Test
+	public void definitionsWereParsedInCorrectOrder() {
+		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
+			Word currentWord = Word.from(currentEntry.getKey());
+			List<Definition> expectedDefinitions = currentEntry.getValue();
+			
+			for (int i = 1; i <= expectedDefinitions.size(); i++) {
+				assertEquals("Bad definition index for word " + currentWord,
+							 i,
+							 currentWord.getDefinitions().get(i).getPosition()
+				);
+			}
+		}
+	}
+	
+	@Test
+	public void definitionsContentIsCorrect() {
+		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
+			Word currentWord = Word.from(currentEntry.getKey());
+			List<Definition> expectedDefinitions = currentEntry.getValue();
+			
+			for (int i = 1; i <= expectedDefinitions.size(); i++) {
+				assertEquals("Bad definition for word " + currentWord,
+							 expectedDefinitions.get(i),
+							 currentWord.getDefinitions().get(i)
+				);
+			}
 		}
 	}
 	

@@ -60,7 +60,7 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	initParser();
 %init}
 
-word = [:letter:]+
+word = ([:letter:]+)
 punct = [,;:.\()/…]
 whitespace = [\ \t]
 newline = (\r|\n|\r\n)
@@ -193,7 +193,7 @@ space = ({whitespace}|{newline})
 
 <NATURE>
 {
-	-("|"[a-z]+)?"}}"
+	-("|"{word})?"}}"
 	{
 		yybegin(SECTION);
 	}

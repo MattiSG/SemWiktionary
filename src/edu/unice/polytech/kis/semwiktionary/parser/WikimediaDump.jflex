@@ -41,10 +41,16 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	private void initSection() {
 		if (definitionDepth > 0)
 			saveCurrentDefinition(); // we matched some definitions, so the last one must be saved, since saving them is done when finding a new one
-		
+
 		definitionDepth = 0;
 		definitionCount = 0;
 		definitionsBuffer.clear();
+	}
+	
+	private void leaveSection() {
+		initSection();
+		
+		yybegin(MEDIAWIKI);
 	}
 	
 	private void log(String text) {
@@ -206,15 +212,16 @@ space = ({whitespace}|{newline})
 
 <NATURE>
 {
-	-("|"{word})?"}}"
+	-("|"{word})?"}}"{newline}
 	{
+		// the newline is reasonable: grep '{{-verb-' finds no occurrence of nature being on the same line as other info
 		yybegin(SECTION);
 	}
 }
 
 
 <SECTION>
-{
+{ // an entrance into that state with a non-consumed newline will switch to <MEDIAWIKI>
 	"{{"
 	{
 		yybegin(PATTERN);
@@ -246,11 +253,12 @@ space = ({whitespace}|{newline})
 	
 	{newline}
 	{
-		initSection();
+		leaveSection();
 	}
 
-	.
+	.{newline}?
 	{
+		// the optional newline is to avoid leaving section if we were just throwing useless chars until the end of the line
 		// in Section: suppress output
 	}
 }
@@ -263,12 +271,12 @@ space = ({whitespace}|{newline})
 		yybegin(PRONUNCIATION);
 	}
 	
-	"}""}"?
+	"}}"{newline}?
 	{
 		yybegin(SECTION);
 	}
 
-	.
+	[^|}]+|"|"
 	{
 		log("**unexpected pattern value!** [ " + yytext() + " ]\n");
 	}

@@ -210,7 +210,7 @@ space = ({whitespace}|{newline})
 	{
 		this.definitionCount++;
 		this.definitionDepth = yytext().length();
-		this.currentDefinition = new Definition().setPosition(this.definitionDepth);
+		this.currentDefinition = new Definition().setPosition(this.definitionCount);
 		
 		yybegin(DEFINITION);
 	}

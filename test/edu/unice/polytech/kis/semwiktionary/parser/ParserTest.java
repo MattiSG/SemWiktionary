@@ -93,6 +93,21 @@ public class ParserTest {
 	}
 	
 	@Test
+	public void examplesWereProperlyParsed() {
+		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
+			Word currentWord = Word.from(currentEntry.getKey());
+			List<Definition> expectedDefinitions = currentEntry.getValue();
+			
+			for (int i = 1; i <= expectedDefinitions.size(); i++) {
+				ReflectionAssert.assertReflectionEquals(
+														expectedDefinitions.get(i).getExamples(),
+														currentWord.getDefinitions().get(i).getExamples()
+														);
+			}
+		}
+	}
+	
+	@Test
 	public void pagesThatAreNotWordsAreNotStored() {
 		for (String someWord : unexpectedTitles)
 			assertFalse(someWord + " should exist in the database!", Word.exists(someWord));

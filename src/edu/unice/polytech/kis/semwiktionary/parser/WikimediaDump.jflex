@@ -65,13 +65,13 @@ whitespace = [\ ]
 newline = (\r|\n|\r\n)
 space = ({whitespace}|{newline})
 
-%state NORMAL, PAGE, TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DOMAIN, DEFINITION_BODY, EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD
+%state NORMAL, PAGE, TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_BODY, EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD
 
 
 %%
 
 
-<NORMAL>
+<YYINITIAL>
 {
 	"<page>"
 	{
@@ -264,21 +264,21 @@ space = ({whitespace}|{newline})
 {
 	"{{"
 	{
-		yybegin(DOMAIN);
+		yybegin(DEFINITION_DOMAIN);
 	}
 	
-	.
+	[^{]
 	{
 		yybegin(DEFINITION_BODY);
 	}
 }
 
 
-<DOMAIN>
+<DEFINITION_DOMAIN>
 {
 	[^|}]+
 	{
-	currentDefinition.addDomain(yytext());
+		currentDefinition.addDomain(yytext());
 	}
 	
 	(\|[^}]*)?"}}"

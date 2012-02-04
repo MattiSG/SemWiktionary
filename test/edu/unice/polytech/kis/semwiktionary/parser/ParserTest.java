@@ -71,7 +71,7 @@ public class ParserTest {
 			for (int i = 1; i <= expectedDefinitions.size(); i++) {
 				assertEquals("Bad definition index for word " + currentWord,
 							 i,
-							 currentWord.getDefinitions().get(i).getPosition()
+							 currentWord.getDefinitions().get(i - 1).getPosition()
 				);
 			}
 		}

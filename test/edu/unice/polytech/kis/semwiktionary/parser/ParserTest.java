@@ -262,6 +262,37 @@ public class ParserTest {
 						.addExample("Vieux coffre.")
 						.addExample("Vieille tapisserie."));
 						
+		definitions.add(new Definition("Personne âgée.", 1)
+						.addDomain("Péjoratif")
+						.addExample("Car enfin il ne m'emballe pas, moi, ce raplati de Karfeck et il est un peu dégoûtant, ce vieux qui guigne tout le temps les mollets de Clotte. — (Paul Margueritte, Jouir, 1918, T.2, p.78)")
+						.addExample("Le petit vieux s’est encore perdu.")
+						.addExample("Les jeunes et les vieux.")
+						.addExample("Faire le vieux : Prendre le ton, les habitudes de la vieillesse.")
+						.addExample("Mon vieux : Terme d’affection qui se dit familièrement à un vieil ami, à un ami intime. : J’irai bientôt te voir, mon vieux."));
+		
+		
+		definitions.add(new Definition("Et elliptiquement,", 2)
+						   .addDomain("Familier")
+						   .addExample("Un vieux de la vieille : Un soldat de la vieille garde et, par extension, un bon vieux compagnon."));
+						   
+		definitions.add(new Definition("Ce qui est vieux, usé.", 3)
+						   .addExample("Coudre du vieux avec du neuf.")
+						   .addExample("C’est du vieux qui vaut du neuf."));
+			
+		definitions.add(new Definition(" ou Père ou mère", 4)
+						.addDomain("Argot")
+						.addDomain("Populaire")
+						.addDomain("Au singulier")
+						.addExample("Mon vieux a regardé la télé hier.")
+						.addExample("Ma vieille me prend la tête en ce moment..."));
+		
+		definitions.add(new Definition(" ou Parents.", 5)
+						.addDomain("Argot")
+						.addDomain("Populaire")
+						.addDomain("Au pluriel")
+						.addExample("Mes vieux partent en vacances demain."));
+						
+						
 		result.put("vieux", definitions);
 
 		

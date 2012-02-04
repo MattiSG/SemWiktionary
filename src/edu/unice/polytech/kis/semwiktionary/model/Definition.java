@@ -2,6 +2,7 @@ package edu.unice.polytech.kis.semwiktionary.model;
 
 
 import java.util.List;
+import java.util.LinkedList;
 import java.util.ArrayList;
 
 import org.neo4j.graphdb.Node;
@@ -44,8 +45,8 @@ public class Definition extends NodeMappedObject {
 		this.setContent(definition)
 			.setPosition(position);
 		
-		this.listExample = new ArrayList<String>();
-		this.listDomain = new ArrayList<String>();
+		this.listExample = new LinkedList<String>();
+		this.listDomain = new LinkedList<String>();
 	}
 	
 	/** Models a definition of a word.
@@ -71,13 +72,23 @@ public class Definition extends NodeMappedObject {
 	/** Returns all examples of this definition.
 	 */
 	public List<String> getExamples() {
-		return listExample;
+		if (listExample == null) {
+			listExample = new ArrayList<String>(1);
+			listExample.add(this.get("example"));
+		}
+		
+		return this.listExample;
 	}
 	
 	/** Returns all domains of this defintion.
 	 */
 	public List<String> getDomains() {
-		return listDomain;
+		if (listDomain == null) {
+			listDomain = new ArrayList<String>(1);
+			listDomain.add(this.get("domain"));
+		}
+		
+		return this.listDomain;
 	}
 	
 	/** Returns the position of this defintion.
@@ -95,6 +106,7 @@ public class Definition extends NodeMappedObject {
 	 */
 	public Definition addExample(String example) {
 		this.listExample.add(example);
+		this.set("example", example); // TODO: this stores only the last one
 		
 		return this;
 	}
@@ -106,6 +118,7 @@ public class Definition extends NodeMappedObject {
 	 */
 	public Definition addDomain(String domain) {
 		this.listDomain.add(domain);
+		this.set("domain", domain); // TODO: this stores only the last one
 		
 		return this;
 	}

@@ -20,6 +20,8 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	int definitionCount;
 	int definitionDepth;
 	
+	String buffer = ""; // an all-purpose buffer, to be initialized by groups that need it
+	
 	List<String> definitionsBuffer;
 	HashMap<String, Relation> relationsMap;
 
@@ -60,12 +62,12 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
 word = [:letter:]+
 punct = [,;:.\()/…]
-whitespace = [\ ]
+whitespace = [\ \t]
 newline = (\r|\n|\r\n)
+optionalSpaces = ({whitespace}*)
 space = ({whitespace}|{newline})
 
-%state PAGE, TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_BODY, EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD
-
+%state PAGE, TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_BODY, DEFINITION_EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD
 
 %%
 
@@ -79,7 +81,7 @@ space = ({whitespace}|{newline})
 	
 	"<"|[^<]+
 	{
-		// suppress output
+		// in initial state: suppress output
 	}
 }
 
@@ -102,7 +104,7 @@ space = ({whitespace}|{newline})
 	
 	"<"|[^<]+
 	{
-		// suppress output
+		// in Page: suppress output
 	}
 }
 
@@ -142,7 +144,7 @@ space = ({whitespace}|{newline})
 
 	.|{newline}
 	{
-		// suppress output
+		// in MediaWiki: suppress output
 	}
 }
 
@@ -214,6 +216,11 @@ space = ({whitespace}|{newline})
 		yybegin(DEFINITION);
 	}
 	
+	^#+"*"{optionalSpaces}
+	{
+		yybegin(DEFINITION_EXAMPLE);
+	}
+	
 	"</text>"
 	{
 		yybegin(YYINITIAL);
@@ -221,7 +228,7 @@ space = ({whitespace}|{newline})
 
 	.|{newline}
 	{
-		// suppress output
+		// in Section: suppress output
 	}
 }
 
@@ -261,12 +268,12 @@ space = ({whitespace}|{newline})
 
 <DEFINITION> 
 {
-	"{{"
+	{optionalSpaces}"{{"
 	{
 		yybegin(DEFINITION_DOMAIN);
 	}
 	
-	[^{]
+	{optionalSpaces}
 	{
 		yybegin(DEFINITION_BODY);
 	}
@@ -280,9 +287,35 @@ space = ({whitespace}|{newline})
 		currentDefinition.addDomain(yytext());
 	}
 	
-	(\|[^}]*)?"}}"
+	(\|[^}]*)?"}}"{optionalSpaces}
 	{
 		yybegin(DEFINITION_BODY);
+	}
+}
+
+<DEFINITION_EXAMPLE>
+{
+	.+
+	{
+		buffer = yytext();
+	}
+
+	{newline}#+\*:
+	{
+		// the colon means we're in the same example, but on another line
+		buffer += "\n" + yytext();
+	}	
+
+	{newline}{newline}
+	{
+		this.currentDefinition.addExample(buffer);
+		yybegin(MEDIAWIKI);
+	}
+
+	{newline}
+	{
+		this.currentDefinition.addExample(buffer);
+		yybegin(SECTION);
 	}
 }
 
@@ -301,35 +334,6 @@ space = ({whitespace}|{newline})
 		
 		currentWord.addDefinition(currentDefinition);
 	}
-	
-	^\*
-	{
-		yybegin(EXAMPLE);
-	}
-
-	{newline}{newline}
-	{
-		yybegin(MEDIAWIKI);
-	}
-
-	{newline}
-	{
-		yybegin(SECTION);
-	}
-}
-
-
-<EXAMPLE>
-{
-	.+
-	{
-		this.currentDefinition.addExample(yytext());
-	}
-	
-	{newline}#+\*:
-	{
-		// don't leave state, the colon means we're in the same example, but on another line
-	}	
 
 	{newline}{newline}
 	{
@@ -405,5 +409,3 @@ space = ({whitespace}|{newline})
 
 	}
 }
-
-

@@ -99,10 +99,14 @@ public class SemWiktionary {
 		
 		for (Definition def : word.getDefinitions()) {
 			println(def.getPosition() + ". \"" + def.getContent() + "\"");
+
+			for (String dom : def.getDomains())
+				if (! dom.isEmpty())
+					print("(" + dom + ") ");
 			
-			if (def.getExamples() != null)
-				for (String ex : def.getExamples())
-					print("\n\t• \"" + ex + "\"");
+			for (String ex : def.getExamples())
+				if (! ex.isEmpty())
+					println("\t• \"" + ex + "\"");
 			
 			println("\t---");
 		}

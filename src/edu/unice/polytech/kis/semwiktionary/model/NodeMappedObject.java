@@ -110,9 +110,10 @@ public abstract class NodeMappedObject {
 	}
 	
 	/**Fetches the property for that key, always as a String.
+	* If the property is missing, will return an empty string.
 	*/
 	public String get(String key) {
-		return (String) node.getProperty(key);
+		return (node.hasProperty(key) ? (String) node.getProperty(key) : "");
 	}
 	
 	public void delete(Relation relType) {

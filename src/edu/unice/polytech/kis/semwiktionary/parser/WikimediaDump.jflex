@@ -56,7 +56,6 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
 %init{
 	initParser();
-	yybegin(NORMAL);
 %init}
 
 word = [:letter:]+
@@ -65,7 +64,7 @@ whitespace = [\ ]
 newline = (\r|\n|\r\n)
 space = ({whitespace}|{newline})
 
-%state NORMAL, PAGE, TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_BODY, EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD
+%state PAGE, TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_BODY, EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD
 
 
 %%
@@ -98,7 +97,7 @@ space = ({whitespace}|{newline})
 	
 	"</page>" 
 	{ 
-		yybegin(NORMAL); 
+		yybegin(YYINITIAL); 
 	}
 	
 	"<"|[^<]+
@@ -119,7 +118,7 @@ space = ({whitespace}|{newline})
 	
 	.
 	{
-		yybegin(NORMAL);
+		yybegin(YYINITIAL);
 	}
 }
 
@@ -138,7 +137,7 @@ space = ({whitespace}|{newline})
 	
 	"</text>"
 	{
-		yybegin(NORMAL);
+		yybegin(YYINITIAL);
 	}
 
 	.|{newline}
@@ -163,7 +162,7 @@ space = ({whitespace}|{newline})
 	
 	.
 	{
-		yybegin(NORMAL);	// this language is not accepted
+		yybegin(YYINITIAL);	// this language is not accepted
 	}
 }
 
@@ -217,7 +216,7 @@ space = ({whitespace}|{newline})
 	
 	"</text>"
 	{
-		yybegin(NORMAL);
+		yybegin(YYINITIAL);
 	}
 
 	.|{newline}

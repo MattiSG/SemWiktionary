@@ -16,10 +16,10 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	public static final String  OUTPUT_FILE = "log/parser-output.txt",
 								ERROR_FILE = "log/parser-error.txt";
 
-	private MutableWord currentWord;
 	private final PrintStream PREV_OUT = System.out,
 							  PREV_ERR = System.err;
 
+	private MutableWord currentWord = new MutableWord(new Word("Init & prolog")); // init for logging purposes
 	private Relation currentRelation;
 
 	private Definition currentDefinition;
@@ -30,6 +30,15 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	
 	private List<String> definitionsBuffer;
 	private HashMap<String, Relation> relationsMap;
+	
+	private long timer = System.nanoTime();
+	private static final long FIRST_TICK = System.nanoTime();
+	
+	
+	private void tick(String message) {
+		PREV_ERR.println(message + ": " + ((System.nanoTime() - timer) / 10E9) + " s");
+		timer = System.nanoTime();
+	}
 
 	private void initParser() {
 		definitionsBuffer = new LinkedList<String>();
@@ -40,6 +49,8 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	}
 
 	private void initWord(String word) {
+		tick(currentWord.toString());
+		
 		currentWord = MutableWord.create(word);
 		initSection();
 	}
@@ -94,6 +105,8 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 %init}
 
 %eof{
+	PREV_ERR.println("Total time: " + ((System.nanoTime() - FIRST_TICK) / 10E9) + "s");
+
 	// restore outputs
 	System.setOut(PREV_OUT);
 	System.setErr(PREV_ERR);

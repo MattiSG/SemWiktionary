@@ -17,6 +17,9 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 								ERROR_FILE = "log/parser-error.txt";
 
 	private MutableWord currentWord;
+	private final PrintStream PREV_OUT = System.out,
+							  PREV_ERR = System.err;
+
 	private Relation currentRelation;
 
 	private Definition currentDefinition;
@@ -92,8 +95,8 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
 %eof{
 	// restore outputs
-	System.setErr(System.err);
-	System.setOut(System.out);
+	System.setOut(PREV_OUT);
+	System.setErr(PREV_ERR);
 %eof}
 
 word = ([:letter:]+)

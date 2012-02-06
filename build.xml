@@ -204,7 +204,7 @@
 		<delete dir="${tmp}"/>
 	</target>
 
-	<target name="parse" depends="compile" description="Run the parser">
+	<target name="parse" depends="compile,erase_db" description="Run the parser">
 		<mkdir dir="${log}"/>
 		
 		<java classname="edu.unice.polytech.kis.semwiktionary.parser.WikimediaDump"

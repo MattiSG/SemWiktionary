@@ -20,7 +20,9 @@ import edu.unice.polytech.kis.semwiktionary.model.Definition;
 
 public class ParserTest {
 	
-	public static final String TEST_FILE = "test/resources/miniwiki.xml"; // relative to ant build file
+	public static final String TEST_FILE = "test/resources/miniwiki.xml", // relative to ant build file
+								OUTPUT_FILE = "log/parser-output.txt",
+								ERROR_FILE = "log/parser-error.txt";
 	
 	private static List<String> unexpectedTitles;
 	private static Map<String, List<Definition>> expected;
@@ -36,8 +38,8 @@ public class ParserTest {
 		
 		FileInputStream fileInputStream = new FileInputStream(new File(TEST_FILE));
 
-		System.setErr(new PrintStream(new FileOutputStream(new File("log/jflex.err"))));
-		System.setOut(new PrintStream(new FileOutputStream(new File("log/jflex.out"))));
+		System.setErr(new PrintStream(new FileOutputStream(new File(ERROR_FILE))));
+		System.setOut(new PrintStream(new FileOutputStream(new File(OUTPUT_FILE))));
 
 		WikimediaDump lexer = new WikimediaDump(fileInputStream);
 		lexer.yylex(); // store in db

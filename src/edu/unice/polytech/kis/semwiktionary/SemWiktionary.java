@@ -10,9 +10,12 @@ package edu.unice.polytech.kis.semwiktionary;
 
 
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileInputStream;
 
 import org.neo4j.graphdb.Node;
 
+import edu.unice.polytech.kis.semwiktionary.parser.WikimediaDump;
 import edu.unice.polytech.kis.semwiktionary.model.Word;
 import edu.unice.polytech.kis.semwiktionary.model.Definition;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
@@ -31,8 +34,28 @@ public class SemWiktionary {
 		System.out.println(message);
 	}
 	
+	private static void load(String path) {
+		try {
+			System.out.println("Loading file '" + path + "'…");
+			new WikimediaDump(new FileInputStream(new File(path))).yylex();
+		} catch (java.io.FileNotFoundException e) {
+			System.err.println("File '" + path + "' was not found!");
+			System.exit(1);
+		} catch (java.io.IOException e) {
+			System.err.println("File '" + path + "' could not be read properly  :(");
+			throw new RuntimeException(e);
+		}
+		
+		System.out.println("…done!");
+	}
+	
 	public static void main(String[] args) {
 		if (args.length > 0) {
+			if (args[0].equals("--load")) {
+				load(args[1]);
+				System.exit(0);
+			}
+			
 			for (String arg: args) {
 				lookup(arg);
 				println("\n");

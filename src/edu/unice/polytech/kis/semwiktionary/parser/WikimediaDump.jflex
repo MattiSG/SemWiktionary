@@ -2,7 +2,7 @@ package edu.unice.polytech.kis.semwiktionary.parser;
 
 import java.io.*;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.HashMap;
 
 import edu.unice.polytech.kis.semwiktionary.model.*;
@@ -26,7 +26,7 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	HashMap<String, Relation> relationsMap;
 
 	private void initParser() {
-		definitionsBuffer = new ArrayList<String>(5);
+		definitionsBuffer = new LinkedList<String>();
 		relationsMap = new HashMap<String, Relation>(2);
 
 		relationsMap.put("syn", Relation.SYNONYM);
@@ -349,10 +349,10 @@ space = ({whitespace}|{newline})
 {
 	.+
 	{
-		definitionsBuffer.add(definitionDepth - 1, yytext());
+		definitionsBuffer.add(yytext());
 		
 		String result = "";
-		for (int i = definitionDepth - 1; i >= 0; i--)
+		for (int i = definitionsBuffer.size() - 1; i >= 0; i--)
 			result = definitionsBuffer.get(i) + (result.isEmpty() ? "" : (" " + result));
 		
 		currentDefinition.setContent(result);

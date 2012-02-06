@@ -212,9 +212,8 @@ space = ({whitespace}|{newline})
 
 <NATURE>
 {
-	-("|"{word})?"}}"{newline}
+	-("|"{word})?"}}"
 	{
-		// the newline is reasonable: grep '{{-verb-' finds no occurrence of nature being on the same line as other info
 		yybegin(SECTION);
 	}
 }
@@ -227,7 +226,7 @@ space = ({whitespace}|{newline})
 		yybegin(PATTERN);
 	}
 
-	^#+
+	{newline}#+
 	{
 		int newDepth = yytext().length();
 		
@@ -241,7 +240,7 @@ space = ({whitespace}|{newline})
 		yybegin(DEFINITION);
 	}
 	
-	^#+"*"{optionalSpaces}
+	{newline}#+"*"{optionalSpaces}
 	{
 		yybegin(DEFINITION_EXAMPLE);
 	}
@@ -251,14 +250,13 @@ space = ({whitespace}|{newline})
 		yybegin(YYINITIAL);
 	}
 	
-	{newline}
+	{newline}{newline}
 	{
 		leaveSection();
 	}
 
-	.{newline}?
+	.|{newline}
 	{
-		// the optional newline is to avoid leaving section if we were just throwing useless chars until the end of the line
 		// in Section: suppress output
 	}
 }
@@ -271,7 +269,7 @@ space = ({whitespace}|{newline})
 		yybegin(PRONUNCIATION);
 	}
 	
-	"}}"{newline}?
+	"}}"
 	{
 		yybegin(SECTION);
 	}
@@ -340,6 +338,7 @@ space = ({whitespace}|{newline})
 	{newline}
 	{
 		currentDefinition.addExample(buffer);
+		yypushback(1);	// <SECTION> needs it to match
 		yybegin(SECTION);
 	}
 }
@@ -356,10 +355,7 @@ space = ({whitespace}|{newline})
 			result = definitionsBuffer.get(i) + (result.isEmpty() ? "" : (" " + result));
 		
 		currentDefinition.setContent(result);
-	}
-
-	{newline}
-	{
+		
 		yybegin(SECTION);
 	}
 }

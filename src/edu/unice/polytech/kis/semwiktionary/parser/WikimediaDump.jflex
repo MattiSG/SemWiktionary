@@ -13,19 +13,20 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
 
 %{
-	MutableWord currentWord;
-	Relation currentRelation;
 	public static final String  OUTPUT_FILE = "log/parser-output.txt",
 								ERROR_FILE = "log/parser-error.txt";
 
-	Definition currentDefinition;
-	int definitionCount;
-	int definitionDepth;
+	private MutableWord currentWord;
+	private Relation currentRelation;
+
+	private Definition currentDefinition;
+	private int definitionCount;
+	private int definitionDepth;
 	
-	String buffer = ""; // an all-purpose buffer, to be initialized by groups that need it
+	private String buffer = ""; // an all-purpose buffer, to be initialized by groups that need it
 	
-	List<String> definitionsBuffer;
-	HashMap<String, Relation> relationsMap;
+	private List<String> definitionsBuffer;
+	private HashMap<String, Relation> relationsMap;
 
 	private void initParser() {
 		definitionsBuffer = new LinkedList<String>();

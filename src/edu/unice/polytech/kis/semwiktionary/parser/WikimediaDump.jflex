@@ -15,6 +15,8 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 %{
 	MutableWord currentWord;
 	Relation currentRelation;
+	public static final String  OUTPUT_FILE = "log/parser-output.txt",
+								ERROR_FILE = "log/parser-error.txt";
 
 	Definition currentDefinition;
 	int definitionCount;
@@ -76,8 +78,22 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 %debug
 
 %init{
+	try {
+		System.setErr(new PrintStream(new FileOutputStream(new File(ERROR_FILE))));
+		System.setOut(new PrintStream(new FileOutputStream(new File(OUTPUT_FILE))));
+	} catch (java.io.FileNotFoundException e) {
+		System.err.println("Files '" + OUTPUT_FILE + "' and/or '" + ERROR_FILE + "' could not be created!");
+		throw new RuntimeException(e);
+	}
+
 	initParser();
 %init}
+
+%eof{
+	// restore outputs
+	System.setErr(System.err);
+	System.setOut(System.out);
+%eof}
 
 word = ([:letter:]+)
 punct = [,;:.\()/…]

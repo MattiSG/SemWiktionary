@@ -209,9 +209,7 @@
 		
 		<java classname="edu.unice.polytech.kis.semwiktionary.parser.WikimediaDump"
 			  fork="true"
-			  failonerror="true"
-			  output="log/parser-output.txt"
-			  error="log/parser-error.txt">
+			  failonerror="true">
 			<classpath>
 				<pathelement location="${bin}" />
 				<fileset refid="lib.jars"/>

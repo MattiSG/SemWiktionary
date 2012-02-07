@@ -255,7 +255,7 @@ space = ({whitespace}|{newline})
 
 <NATURE>
 {
-	-("|"{word})?"}}"
+	-[^}]*"}}"
 	{
 		yybegin(SECTION);
 	}

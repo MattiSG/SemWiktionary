@@ -15,12 +15,16 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 %{
 	public static final String  OUTPUT_FILE = "log/parser-output.txt",
 								ERROR_FILE = "log/parser-error.txt";
+								
+	public long wordCount = 0;
 
 	private final PrintStream PREV_OUT = System.out,
 							  PREV_ERR = System.err;
 
 	private MutableWord currentWord = new MutableWord(new Word("Init & prolog")); // init for logging purposes
 	private Relation currentRelation;
+	
+	private boolean errorFlag; // used to warn user about errors for a word without interrupting the process; reset between each word
 
 	private Definition currentDefinition;
 	private int definitionCount;
@@ -36,7 +40,8 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	
 	
 	private void tick(String message) {
-		PREV_ERR.println(message + ": " + ((System.nanoTime() - timer) / 10E9) + " s");
+		PREV_OUT.println(message + "\t\t" + ((System.nanoTime() - timer) / 10E9) + "s"
+						 + (errorFlag ? "\t\t\t /!\\" : ""));
 		timer = System.nanoTime();
 	}
 
@@ -49,10 +54,16 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	}
 
 	private void initWord(String word) {
-		tick(currentWord.toString());
+		tick(currentWord.getTitle());
 		
 		currentWord = MutableWord.create(word);
+		errorFlag = false;
 		initSection();
+		
+		wordCount++;
+		
+		if ((wordCount % 100) == 0)
+			PREV_OUT.println("\n\n=============================\n\t" + wordCount + " WORDS PARSED!\n=============================\n\n");
 	}
 	
 	private void initSection() {
@@ -448,9 +459,11 @@ space = ({whitespace}|{newline})
 	{
 		try {
 			currentWord.set(currentRelation, MutableWord.from(yytext()));
-		} catch (IllegalArgumentException e) {
-			log("**?? Got a null pointer while trying to add synonym '" + yytext() + "' to word '" + currentWord.getTitle() + "'  :( **");
+		} catch (Exception e) {
+			log("**Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( **");
 			e.printStackTrace(System.err);
+			
+			errorFlag = true;
 		}
 	}
 }

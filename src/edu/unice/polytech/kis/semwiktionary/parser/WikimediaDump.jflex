@@ -113,6 +113,8 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	}
 
 	initParser();
+	
+	yybegin(XML);
 %init}
 
 %eof{
@@ -132,7 +134,7 @@ space = ({whitespace}|{newline})
 
 %state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD
 
-%xstate PAGE
+%xstate XML, PAGE
 
 %%
 
@@ -141,11 +143,11 @@ space = ({whitespace}|{newline})
 {
 	// fallback for all cases
 	log("**Out of page, error on word '" + currentWord.getTitle() + "'**");
-	yybegin(YYINITIAL);
+	yybegin(XML);
 }
 
 
-<YYINITIAL>
+<XML>
 {
 	"<page>"
 	{
@@ -172,7 +174,7 @@ space = ({whitespace}|{newline})
 	
 	"</page>" 
 	{ 
-		yybegin(YYINITIAL);
+		yybegin(XML);
 	}
 	
 	"<"|[^<]+
@@ -193,7 +195,7 @@ space = ({whitespace}|{newline})
 	
 	.
 	{
-		yybegin(YYINITIAL);
+		yybegin(XML);
 	}
 }
 
@@ -212,7 +214,7 @@ space = ({whitespace}|{newline})
 	
 	"</text>"
 	{
-		yybegin(YYINITIAL);
+		yybegin(XML);
 	}
 
 	.|{newline}
@@ -237,7 +239,7 @@ space = ({whitespace}|{newline})
 	
 	.
 	{
-		yybegin(YYINITIAL);	// this language is not accepted
+		yybegin(XML);	// this language is not accepted
 	}
 }
 
@@ -302,7 +304,7 @@ space = ({whitespace}|{newline})
 	
 	"</text>"
 	{
-		yybegin(YYINITIAL);
+		yybegin(XML);
 	}
 	
 	{newline}{newline}

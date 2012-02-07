@@ -455,6 +455,11 @@ space = ({whitespace}|{newline})
 
 	[^\]]+
 	{
-		currentWord.set(currentRelation, MutableWord.from(yytext()));
+		try {
+			currentWord.set(currentRelation, MutableWord.from(yytext()));
+		} catch (IllegalArgumentException e) {
+			log("**?? Got a null pointer while trying to add synonym '" + yytext() + "' to word '" + currentWord.getTitle() + "'  :( **");
+			e.printStackTrace(System.err);
+		}
 	}
 }

@@ -71,7 +71,7 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	}
 	
 	private void log(String text) {
-		System.err.print(text);
+		System.err.println(text);
 	}
 	
 	private void out(String text) {
@@ -129,7 +129,7 @@ space = ({whitespace}|{newline})
 "</page>"
 {
 	// fallback for all cases
-	log("**Out of page, error on word '" + currentWord.getTitle() + "'**\n");
+	log("**Out of page, error on word '" + currentWord.getTitle() + "'**");
 	yybegin(YYINITIAL);
 }
 
@@ -161,7 +161,7 @@ space = ({whitespace}|{newline})
 	
 	"</page>" 
 	{ 
-		yybegin(YYINITIAL); 
+		yybegin(YYINITIAL);
 	}
 	
 	"<"|[^<]+
@@ -320,7 +320,7 @@ space = ({whitespace}|{newline})
 
 	[^|}]+|"|"
 	{
-		log("**unexpected pattern value!** [ " + yytext() + " ]\n");
+		log("**unexpected pattern value!** [ " + yytext() + " ]");
 	}
 }
 

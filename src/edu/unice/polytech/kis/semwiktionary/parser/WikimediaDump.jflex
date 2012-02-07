@@ -421,10 +421,10 @@ space = ({whitespace}|{newline})
 		yybegin(SPNM_WORD);
 	}
 
-	^{newline}"{{-"
+
+	{newline}{newline}
 	{
-		//TODO: WTF?! This should redirect to <SECTION>
-		yybegin(H2);
+		leaveSection();
 	}
 
 	.|{newline}

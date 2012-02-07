@@ -119,7 +119,7 @@ newline = (\r|\n|\r\n)
 optionalSpaces = ({whitespace}*)
 space = ({whitespace}|{newline})
 
-%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_BODY, DEFINITION_EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD
+%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD
 
 %xstate PAGE
 
@@ -269,7 +269,7 @@ space = ({whitespace}|{newline})
 		yybegin(PATTERN);
 	}
 
-	{newline}#+
+	{newline}#+{optionalSpaces}
 	{
 		int newDepth = yytext().length();
 		
@@ -339,20 +339,6 @@ space = ({whitespace}|{newline})
 }
 
 
-<DEFINITION> 
-{
-	{optionalSpaces}"{{"
-	{
-		yybegin(DEFINITION_DOMAIN);
-	}
-	
-	{optionalSpaces}
-	{
-		yybegin(DEFINITION_BODY);
-	}
-}
-
-
 <DEFINITION_DOMAIN>
 {
 	[^|}]+
@@ -362,7 +348,7 @@ space = ({whitespace}|{newline})
 	
 	(\|[^}]*)?"}}"{optionalSpaces}
 	{
-		yybegin(DEFINITION_BODY);
+		yybegin(DEFINITION);
 	}
 }
 
@@ -388,9 +374,9 @@ space = ({whitespace}|{newline})
 }
 
 
-<DEFINITION_BODY>
+<DEFINITION>
 {
-	.+
+	[^{]+
 	{
 		definitionsBuffer.add(yytext());
 		
@@ -401,6 +387,11 @@ space = ({whitespace}|{newline})
 		currentDefinition.setContent(result);
 		
 		yybegin(SECTION);
+	}
+	
+	"{{"
+	{
+		yybegin(DEFINITION_DOMAIN);
 	}
 }
 

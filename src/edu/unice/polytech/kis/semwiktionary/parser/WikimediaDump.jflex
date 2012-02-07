@@ -273,8 +273,9 @@ space = ({whitespace}|{newline})
 		yybegin(DEFINITION);
 	}
 	
-	{newline}#+"*"{optionalSpaces}
+	{newline}#+("*"|":"){optionalSpaces}
 	{
+		// the colon is not standard, but is used in some words ("siège")
 		yybegin(DEFINITION_EXAMPLE);
 	}
 	
@@ -400,12 +401,12 @@ space = ({whitespace}|{newline})
 		// end of pattern
 	}
 
-	:{whitespace}''
+	":"{optionalSpaces}
 	{
 		yybegin(SPNM_CONTEXT);
 	}
 
-	\*{whitespace}"[["
+	"*"{optionalSpaces}"[["
 	{
 		yybegin(SPNM_WORD);
 	}
@@ -424,19 +425,14 @@ space = ({whitespace}|{newline})
 
 <SPNM_CONTEXT>
 {
-	"[["
-	{
-		yybegin(SPNM_WORD);
-	}
-
 	[^:]+
 	{
 		// Context is not handled yet
 	}
 
-	.
+	":"
 	{
-
+		yybegin(SIMPLENYM);
 	}
 }
 
@@ -450,10 +446,5 @@ space = ({whitespace}|{newline})
 	[^\]]+
 	{
 		currentWord.set(currentRelation, MutableWord.from(yytext()));
-	}
-
-	.
-	{
-
 	}
 }

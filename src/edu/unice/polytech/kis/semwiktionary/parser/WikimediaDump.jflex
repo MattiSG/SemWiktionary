@@ -321,7 +321,7 @@ space = ({whitespace}|{newline})
 		currentWord.set("pronunciation", yytext());
 	}
 	
-	[|}]
+	"|"|"}}"
 	{
 		yybegin(PATTERN);
 	}

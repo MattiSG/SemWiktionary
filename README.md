@@ -26,13 +26,18 @@ You will need:
 - [Ant](http://ant.apache.org) to build this project;
 - this project's source files;
 - a [Wiktionary dump file](http://dumps.wikimedia.org/frwiktionary/latest/) with all articles (direct link for French: [130MB archive](http://dumps.wikimedia.org/frwiktionary/latest/frwiktionary-latest-pages-articles.xml.bz2));
-- around 3 GB of free space.
+- around 2 GB of free space;
+- around an hour to initialize the database.
 
-Currently, no choice is offered regarding the input file. You will first need to replace `test/resources/miniwiki.xml` by the dump file you previously downloaded, then:
+You will first need to deflate the dump file you previously downloaded, then:
 
-    $ cd path/to/project/directory
-    $ ant parse
-	$ ./wiktionary [wordToLookUp [anotherWord [...]]]
+    git clone git://github.com/MattiSG/SemWiktionary.git # or download the source files manually
+    cd SemWiktionary
+    ant compile
+    ./wiktionary --load path/to/dump/file.xml # this will take some time (see performance note beneath)
+	./wiktionary [wordToLookUp [anotherWord [...]]]
+	
+If you really want to parse a full dumpfile, though, you should first remove the `%debug` line in `src/edu/unice/polytech/kis/semwiktionary/parser/WikimediaDump.jflex`. That will give quite a speedup.
 
 Constraints
 -----------
@@ -45,9 +50,9 @@ This project being academic, some technical constraints were applied to it.
 Equivalent projects and rationale
 ---------------------------------
 
-- [JWKTL](http://www.ukp.tu-darmstadt.de/software/jwktl/). Not documented, source code impossible to get, authors not reachable by email.
+- [JWKTL](http://www.ukp.tu-darmstadt.de/software/jwktl/). Not documented, source code access was not allowed by authors (yet?).
 
-Many tools parse MediaWiki markup and create an AST from it. However, most of them are overkill and would require several passes to properly fill the database, therefore leading to poor performance.
+[Several](http://rendering.xwiki.org/xwiki/bin/view/Main/Architecture) [tools](http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/extraction_framework/file/2c1eea7da303/wiktionary) parse MediaWiki markup and create an AST from it. However, most of them are overkill and not specific enough for the Wiktionary dialects (much more strongly structured than Wikipedia, for which most tools are tailored).
 
 License
 -------

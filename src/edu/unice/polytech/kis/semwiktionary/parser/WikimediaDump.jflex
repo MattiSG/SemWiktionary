@@ -27,8 +27,8 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	private boolean errorFlag; // used to warn user about errors for a word without interrupting the process; reset between each word
 
 	private Definition currentDefinition;
-	private int definitionCount;
-	private int definitionDepth;
+	private int definitionCount = 0;
+	private int definitionDepth = -1; // the depth is the number of sharps (#) in front of a definition, minus one (that's optimization to have only one substraction for the 0-based indexed list). So, to trigger comparisons, we need to be negative.
 	
 	private String buffer = ""; // an all-purpose buffer, to be initialized by groups that need it
 	
@@ -67,10 +67,10 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	}
 	
 	private void initSection() {
-		if (definitionDepth > 0)
+		if (definitionDepth >= 0)
 			saveCurrentDefinition(); // we matched some definitions, so the last one must be saved, since saving them is done when finding a new one
 
-		definitionDepth = 0;
+		definitionDepth = -1;
 		definitionCount = 0;
 		definitionsBuffer.clear();
 	}
@@ -287,7 +287,7 @@ space = ({whitespace}|{newline})
 
 	{newline}#+{optionalSpaces}
 	{
-		int newDepth = yytext().length();
+		int newDepth = yytext().trim().length() - 1;
 		
 		if (newDepth <= definitionDepth)
 			saveCurrentDefinition();	// we don't want to add definitions that will be specified by inner lists, since we're concatenating the innermost strings with their parents
@@ -394,10 +394,10 @@ space = ({whitespace}|{newline})
 {
 	([^\r\n{]|"{"[^{])+
 	{
-		definitionsBuffer.add(yytext());
+		definitionsBuffer.add(definitionDepth, yytext());
 		
 		String result = "";
-		for (int i = definitionsBuffer.size() - 1; i >= 0; i--)
+		for (int i = definitionDepth; i >= 0; i--)
 			result = definitionsBuffer.get(i) + (result.isEmpty() ? "" : (" " + result));
 		
 		currentDefinition.setContent(result);

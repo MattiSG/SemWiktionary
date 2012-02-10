@@ -1843,4 +1843,81 @@ Quelques infos sur [[Discuter:accueil|cette page]] &lt;small&gt;Attention : les 
 [[zh:avant-midi]]</text>
     </revision>
   </page>
+  <page>
+    <title>Chordata</title>
+    <id>49521</id>
+    <revision>
+      <id>9263676</id>
+      <timestamp>2011-07-09T07:02:47Z</timestamp>
+      <contributor>
+        <username>JackBot</username>
+        <id>12968</id>
+      </contributor>
+      <minor />
+      <comment>[[Wiktionnaire:Structure_des_articles|Autoformatage]]</comment>
+      <text xml:space="preserve">== {{=conv=}} ==
+
+{{-étym-}}
+: {{cf|chorda|lang=la}}.
+
+{{-nom-sciences-|conv}}
+'''''Chordata'''''
+# {{term|phylogénétiue}} {{zoologie|conv}} [[chordés|Chordés]] ou [[cordés]] : [[embranchement#biologie|embranchement]] du [[règne#biologie|règne]] des ''[[Animalia]]''.
+
+{{-noms-vern-}}
+{{(}}
+* {{T|fr}} : {{trad+|fr|chordés|m}} ; {{trad+|fr|cordés|m}}
+{{)}}
+
+{{-hyper-}}
+** [[Animalia]]
+*** [[Bilateria]]
+**** [[Deuterostomia]]
+
+{{-hypo-}}
+* [[Cephalocorda]]
+* [[Tunicata]]
+* [[Craniata]]
+
+{{-voir-}}
+* {{WP}}
+* {{WSP}}
+
+[[Catégorie:Noms scientifiques]]
+[[Catégorie:Taxinomie:Ordres en {{conv}}]]
+
+== {{=de=}} ==
+{{-étym-}}
+: {{ébauche-étym|de}}
+
+{{-nom-|de}}
+{{de-tab-cas
+|ns= |np=die Chordata
+|as= |ap=die Chordata
+|gs= |gp=der Chordata
+|ds= |dp=den Chordata}}
+'''Chordata''' {{n}} {{p}}
+# {{term|phylogénétique}} {{zoologie|de}} [[chordés|Chordés]], [[cordés]].
+#* ''Die Wirbeltiere sind ein Unterstamm der '''Chordata'''.''
+
+{{-syn-}}
+* [[Chordatiere]]
+* [[Chordaten]]
+
+{{-hyper-}}
+* [[Phylum]]
+* [[Tierstamm]]
+
+[[Catégorie:Noms scientifiques en {{de}}]]
+[[Catégorie:Taxinomie:Ordres en {{de}}]]
+
+
+[[de:Chordata]]
+[[en:Chordata]]
+[[et:Chordata]]
+[[fa:Chordata]]
+[[ru:Chordata]]
+[[tr:Chordata]]</text>
+    </revision>
+  </page>
 </mediawiki>

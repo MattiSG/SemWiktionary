@@ -249,10 +249,9 @@ space = ({whitespace}|{newline})
 
 <H2>
 {
-	"verb"|"nom"|"adj"
+	"verb"|"nom"|"adj"|"noms-vern"
 	{
 		// TODO: add all types
-		// TODO: store type in word
 		yybegin(NATURE);
 	}
 	
@@ -273,6 +272,7 @@ space = ({whitespace}|{newline})
 {
 	-[^}]*"}}"
 	{
+		// TODO: store type in word
 		yybegin(SECTION);
 	}
 }

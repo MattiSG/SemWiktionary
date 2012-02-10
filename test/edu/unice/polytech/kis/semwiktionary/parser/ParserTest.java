@@ -20,7 +20,7 @@ import edu.unice.polytech.kis.semwiktionary.model.Definition;
 
 public class ParserTest {
 	
-	public static final String TEST_FILE = "test/resources/miniwiki.xml"; // relative to ant build file
+	public static final String TEST_FILE = "test/resources/frwiktionary-test-extracts.xml"; // relative to ant build file
 	
 	private static List<String> unexpectedTitles;
 	private static Map<String, List<Definition>> expected;

@@ -1044,4 +1044,803 @@ Quelques infos sur [[Discuter:accueil|cette page]] &lt;small&gt;Attention : les 
 [[zh:vieux]]</text>
     </revision>
   </page>
+  <page>
+    <title>encyclopédie</title>
+    <id>14</id>
+    <revision>
+      <id>9433959</id>
+      <timestamp>2011-09-16T00:25:34Z</timestamp>
+      <contributor>
+        <username>JackBot</username>
+        <id>12968</id>
+      </contributor>
+      <minor />
+      <comment>[[Wiktionnaire:Structure des articles|Autoformatage]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+{{-étym-}}
+: Du {{étyl|grc|fr|mot=ἔγκυκλος|tr=énkyklos|sens=qui est en cercle, rond}} et de {{polytonique|[[παιδεία]]}} ''paideía'', « instruction ». Ceci signifie mot à mot, « éducation en cercle », plus clairement « faire le tour de l’éducation ».
+
+{{-nom-|fr}}
+{{fr-rég|ɑ̃.si.klɔ.pe.di}}
+[[Image:PWN Encyclopedia.jpg|thumb|Rayonnage d’encyclopédie (2)]]
+'''encyclopédie''' {{pron|ɑ̃.si.klɔ.pe.di|fr}} {{f}}
+# [[ensemble|Ensemble]], [[enchaînement]] de toutes les [[connaissance]]s.
+#* ''L''''Encyclopédie''' aristotélicienne apparut comme la somme de connaissances humaines auxquelles l'esprit humain peut accéder par ses propres forces.'' {{source|Louis Rougier, ''Histoire d'une faillite philosophique: la Scolastique'', 1925, éd.1966}}
+#* '''''Encyclopédie''' des connaissances humaines.''
+#* ''Il est impossible qu’un seul homme possède l’'''encyclopédie''' du savoir humain.''
+# [[ouvrage|Ouvrage]] de [[référence]] contenant des [[articles]] de [[fond]] (souvent classés par [[ordre alphabétique]]) portant sur un grand nombre de sujets, généraux ou spécifiques.
+#* ''L’'''encyclopédie''' Wikipédia contient un article sur l’automobile. - Diderot et d’Alembert ont publié « ''L’'''Encyclopédie''' ou Dictionnaire raisonné des sciences, des arts et des métiers ».
+#* '''''ENCYCLOPÉDIE''', s.f. (''Philosophie''). Ce mot signifie ''enchaînement de connaissances'' ; il est composé de la préposition grecque ἐν, ''en'', et des substantifs κύκλος, ''cercle'', et παιδεία, ''connaissance''.'' {{source|{{w|Denis Diderot}}, [[s:Page:Diderot_-_Encyclopedie_1ere_edition_tome_5.djvu/654|Article « ENCYCLOPÉDIE »]]}}
+# {{par ext}} [[recueil|Recueil]] qui [[embrasse]] beaucoup de [[science]]s, beaucoup d’[[objet]]s, quel qu'en [[être|soit]] [[d’ailleurs]] le [[titre]].
+#* ''L’ouvrage de Pline l’Ancien est une véritable '''encyclopédie'''.''
+# {{figuré|fr}} [[savant|Savant]] [[universel]].
+#* ''Cet homme est une '''encyclopédie''' vivante.''
+
+{{-apr-}}
+* [[encyclopédique]]
+* [[encyclopédiste]]
+* [[encyclopédite]]
+
+{{-trad-}}
+{{(|Ouvrage de référence universel}}
+* {{T|af}} : {{trad+|af|ensiklopedie}}
+* {{T|de}} : {{trad+|de|Enzyklopädie}} {{f}}, {{trad-|de|Encyklopädie}}
+* {{T|gsw-FR}} : {{trad--|gsw-FR|Enzyklopädie}}
+* {{T|en}} : {{trad+|en|encyclopedia}}, {{trad+|en|encyclopaedia}}
+* {{T|ang}} : {{trad-|ang|wisdomboc|dif=wīsdōmbōc}}
+* {{T|ar}} : {{trad-|ar|موسوعة|R=mausú:ʕa}} {{f}}
+* {{T|hy}} : {{trad-|hy|հանրագիտարան|R=hanragitaran}}
+* {{T|nds}} : {{trad-|nds|nokieksel}}
+* {{T|eu}} : {{trad+|eu|entziklopedia}}
+* {{T|bs}} : {{trad-|bs|enciklopedija}} {{f}}
+* {{T|bg}} : {{trad-|bg|енциклопедия|R=entsiklopédija}} {{f}}
+* {{T|ca}} : {{trad-|ca|enciclopèdia}}
+* {{T|zh}} : {{trad+|zh|百科全书|R=bǎikēquánshū|tradi=百科全書}}
+* {{T|ko}} : {{trad+|ko|백과사전|R=baekkwasajeon|tradi=百科事典}}
+* {{T|hr}} : {{trad-|hr|enciklopedija|dif=enciklopédija}} {{f}}
+* {{T|da}} : {{trad-|da|encyklopædi}}
+* {{T|es}} : {{trad+|es|enciclopedia}} {{m}}
+* {{T|eo}} : {{trad+|eo|enciklopedio}}
+* {{T|et}} : {{trad-|et|entsüklopeedia}}
+* {{T|fo}} : {{trad-|fo|alfrøðibók}}
+* {{T|fi}} : {{trad+|fi|tietosanakirja}}, {{trad+|fi|ensyklopedia}}
+* {{T|fy}} : {{trad-|fy|ensyklopedy}}
+* {{T|el}} : {{trad+|el|εγκυκλοπαίδεια|R=enkiklopedhia}} {{f}}
+* {{T|he}} : {{trad+|el|אנציקלופדיה|R=אֶנְצִיקְלוֹפֶּדְיָה|R=entsiklopedya}} {{f}}
+* {{T|hi}} : {{trad-|hi|ज्ञानकोष|R=gyānkoś}}
+* {{T|io}} : {{trad+|io|enciklopedio}}
+* {{T|id}} : {{trad+|id|ensiklopedia}}
+* {{T|ia}} : {{trad-|ia|encyclopedia}}
+* {{T|is}} : {{trad+|is|alfræðiorðabók}} {{f}}
+* {{T|it}} : {{trad+|it|enciclopedia}} {{f}}
+{{-}}
+* {{T|ku}} : {{trad+|ku|zanistname}} {{f}}
+* {{T|ja}} : {{trad+|ja|百科事典|R=hyakkajiten}}
+* {{T|lad}} : {{trad--|lad|ansiklopedia}} {{f}}
+* {{T|la}} : {{trad-|la|encyclopaedia}}
+* {{T|lv}} : {{trad-|lv|enciklopēdija}} {{f}}
+* {{T|li}} : {{trad-|li|encyklopedie}}
+* {{T|lt}} : {{trad+|lt|enciklopedija}} {{f}}
+* {{T|lb}} : {{trad-|lb|encyklopedie}}
+* {{T|nl}} : {{trad+|nl|encyclopedie}} {{m}}
+* {{T|no}} : {{trad+|no|encyklopedi}}
+* {{T|ur}} : {{trad-|ur|جامع|R=jāme}}, {{trad-|ur|قاموس|R=qāmws}}
+* {{T|pap}} : {{trad--|pap|ensiklopedia}}
+* {{T|fa}} : {{trad+|fa|دانشنامه|R=dānešnāmeh}}
+* {{T|pl}} : {{trad+|pl|encyklopedia}} {{f}}
+* {{T|pt}} : {{trad+|pt|enciclopédia}} {{f}}
+* {{T|ro}} : {{trad+|ro|enciclopedie}} {{f}}
+* {{T|ru}} : {{trad+|ru|энциклопедия|R=èntsiklopediia}} {{f}}
+* {{T|sa}} : {{trad-|sa|विश्वकोश|R=viśvakośa}} {{m}}
+* {{T|sr}} : {{trad-|sr|енциклопедија|R=enciklopedija}} {{f}}
+* {{T|sk}} : {{trad-|sk|encyklopédia}}
+* {{T|sl}} : {{trad+|sl|enciklopedija}}
+* {{T|sv}} : {{trad+|sv|encyklopedi}} {{c}}
+* {{T|tl}} : {{trad-|tl|ensiklopedya}}
+* {{T|cs}} : {{trad+|cs|encyklopedie}} {{f}}, {{trad-|cs|naučný slovník}}
+* {{T|th}} : {{trad+|th|สารานุกรม|R=saranukrom}}
+* {{T|tr}} : {{trad+|tr|ansiklopedi}}
+* {{T|uk}} : {{trad-|uk|енциклопедія|R=entsyklopédija}} {{f}}
+* {{T|vi}} : {{trad-|vi|sách bách khoa|traid=R=冊百科}}, {{trad+|vi|bách khoa}}
+{{)}}
+
+{{-pron-}}
+* {{pron-rég|France (Prononciation sans liaison)|yn ɑ̃.si.klɔ.pe.di|titre=une encyclopédie|audio=Fr-encyclopédie.ogg}}
+
+{{-voir-}}
+* {{WP}}
+
+{{-réf-}}
+* {{R:DAF8}}
+{{clé de tri|encyclopedie}}
+
+[[de:encyclopédie]]
+[[el:encyclopédie]]
+[[en:encyclopédie]]
+[[es:encyclopédie]]
+[[eu:encyclopédie]]
+[[fi:encyclopédie]]
+[[hu:encyclopédie]]
+[[io:encyclopédie]]
+[[it:encyclopédie]]
+[[ko:encyclopédie]]
+[[lo:encyclopédie]]
+[[nl:encyclopédie]]
+[[pl:encyclopédie]]
+[[ro:encyclopédie]]
+[[tr:encyclopédie]]
+[[vi:encyclopédie]]
+[[zh-min-nan:encyclopédie]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>siège</title>
+    <id>35</id>
+    <revision>
+      <id>9703733</id>
+      <timestamp>2011-11-29T01:52:37Z</timestamp>
+      <contributor>
+        <username>MalafayaBot</username>
+        <id>20439</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.2) (robot Ajoute : [[mg:siège]]</comment>
+      <text xml:space="preserve">{{voir/siege}}
+== {{=fr=}} ==
+{{-étym-}}
+: Du {{étyl|la|fr|mot=sedile}} (« siège, [[chaise]], [[banquette]], [[gradin]]s, [[banc]] de rameurs, [[perchoir]], [[juchoir]] ») dont le diminutif ''[[sediculum]]'', est devenu en bas latin ''[[sedicum]]'' qui a donné '''siège'''. Il est lié au verbe {{la}} ''[[sedere]]'' (« [[asseoir]] »).
+
+{{-nom-|fr}}
+{{fr-rég|sjɛʒ}}
+'''siège''' {{pron|sjɛʒ|fr}} {{m}}
+# {{meuble|fr}} [[meuble|Meuble]] utilisé pour s’[[asseoir]].
+#* ''Sophie s’assoit sur le '''siège''' de la voiture.''
+#* ''Donnez un '''siège''', des '''sièges'''.''
+#* ''Apportez, avancez un '''siège'''.''
+#* ''Prenez un '''siège'''.''
+#* ''Un '''siège''' pliant.''
+#* '''''Sièges''' de paille, de jonc, de canne.''
+#* '''''Sièges''' de pierre, de marbre, de gazon'' : Bancs de [[pierre]] ou de [[marbre]], petites [[butte]]s de [[gazon]] dans des [[jardin]]s.
+#* ''Le '''siège''' d’un cocher'' : Banquette où le [[cocher]] est assis pour [[conduire]] les [[cheval|chevaux]] et mener la [[voiture]].
+#* ''Le '''siège''' d’une selle'' : La partie de la [[selle]] sur laquelle le [[cavalier]] est assis.
+# {{anatomie|fr}} [[partie|Partie]] du [[corps]] sur laquelle on s’assied.
+#* ''Bain de '''siège'''.''
+#* ''Le bébé s’est présenté par le '''siège''''' : Il est sorti par le [[bassin]] au lieu de la [[tête]].
+# {{justice|fr}} [[place|Place]] où le [[juge]] s’assied pour [[rendre]] la [[justice]]. {{vieilli|fr}} [[lieu|Lieu]] où l’on rendait la justice, dans les [[juridiction]]s [[subalterne]]s et {{par ext}} [[corps]] et [[juridiction]] des juges [[subalterne]]s.
+#* ''Le juge étant sur son '''siège'''.''
+#* ''Allez au '''siège'''.''
+#* ''Vous le trouverez au '''siège'''.''
+#* ''C’était l’usage de tel '''siège'''.''
+#* ''Le ressort de ce '''siège''' était de telle étendue.''
+# Place [[honorifique]], [[mandat]].
+#* ''S'il n'y a qu'une circonscription nationale, comprenant tous les '''sièges''', et que ces '''sièges''' sont tous attribués au parti qui a obtenu le plus de votes, le système sera tout à fait disproportionnel.''  {{source|Vincent Lemieux, ''Systèmes partisans &amp; partis politique'', 1985, p.233}}
+#* ''Un '''siège''' de député.''
+#* ''Il a perdu son '''siège''' au Sénat.''
+# [[endroit|Endroit]] [[où]] [[établir|est établi]] [[quelqu’un]] ou [[quelque chose]].
+#* ''Pessan, le '''siège''' d'une antique abbaye, a une superficie de 2588 hectares où végètent encore 430 habitants.'' {{source|{{w|Ludovic Naudeau}}, ''La France se regarde. Le problème de la natalité'' -1931}}
+# {{particulier}} [[lieu|Lieu]] où se [[réunit]] la [[direction]] d’un [[gouvernement]], d’une [[administration]], d’une [[entreprise]], etc.
+#* ''Il faut envoyer cette lettre au '''siège''' social, qui est situé à Toulouse.''
+#* ''Le '''siège''' d’un tribunal, d’une cour. — Le '''siège''' du gouvernement.''
+#* ''Rome était le '''siège''' de l’Empire romain.''
+#* ''Le '''siège''' d’une société.'' {{cf|siège social}}
+## {{particulier}} Un [[évêché]] et sa [[juridiction]] {{cf|Saint-Siège}}.
+##: '''''Siège''' patriarcal, primatial, épiscopal, pontifical.''
+##: ''Cet évêque a occupé le '''siège''' tant d’années.''
+##: ''Pendant la vacance du '''siège'''.''
+# {{figuré|fr}} [[lieu|Lieu]] où [[certain]]es choses [[résider|résident]] [[principalement]], où elles [[dominer|dominent]].
+#* ''L'odorat, qui a pour '''siège''' les poils olfactifs est, chez lui, rudimentaire, et partiellement inhibé par la vision.'' {{source|[[w:Jean Rostand|Jean Rostand]], ''La vie des crapauds'', 1933}}
+# {{militaire|fr}} [[action|Action]] [[consistant]] à [[bloquer]] son [[adversaire]] dans son [[propre]] [[camp]] et [[attendre]] qu’il [[manquer|manque]] de [[ressource]]s. 
+#* '' […], il se résolut non à la retraite, mais à changer le '''siège''' en blocus, espérant être plus heureux pendant la nuit par un hardi coup de main, ou, en désespoir de cause, certain de réduire tôt ou tard les assiégés par la famine.'' {{source|[[w:Gustave Aimard|Gustave Aimard]], ''[[s:Les Trappeurs de l’Arkansas|Les Trappeurs de l’Arkansas]]'', 1858}}
+#* ''Si les Spinaliens soutinrent vaillamment un '''siège''' contre Charles le Téméraire, il n'en fut pas de même, deux siècles plus tard, quand Louis XIV déploya contre eux  ses forces […].'' {{source|Gustave Fraipont; ''Les Vosges'', 1923}}
+
+{{-exp-}}
+* ''Batteries de '''siège''''' : [[batterie|Batterie]]s construites par l’[[armée]] assiégeante.
+* ''Pièces de '''siège''''' : [[bouche|Bouche]]s à [[feu]] particulièrement affectées à l’[[attaque]] des places.
+* ''Lever le '''siège''' d’une place'' : Se retirer de devant une place qu’on assiégeait.
+* ''Journal de '''siège''''' : [[journal|Journal]] qui, suivant les [[règlement]]s, doit être tenu par les autorités militaires dans une place assiégée.
+* [[mon siège est fait]] : mon opinion est faite, la cause est entendue pour moi.
+
+{{-syn-}}
+: ''Meuble'' (1) :
+* voir les hyponymes.
+: {{anatomie|nocat=1}} (2) :
+* [[cul]]
+* [[derrière]]
+* [[fondement]]
+: {{militaire|nocat=1}} (7) :
+* [[blocus]]
+
+{{-drv-}}
+* [[assiéger]]
+* [[état de siège]]
+* [[mon siège est fait]]
+* [[par le siège]]
+* [[siège arrière]]
+* [[siège avant]]
+* [[siège social]]
+
+{{-voc-}}
+* [[assiéger]]
+* [[Saint-Siège]]
+* [[sédile]]
+* [[siéger]]
+
+{{-trad-}}
+{{(|Meuble utilisé pour s’asseoir (1)}}
+* {{T|en}} : {{trad+|en|seat}}
+* {{T|es}} : {{trad+|es|asiento}}
+* {{T|el}} : {{trad+|el|θέση}}
+{{-}}
+* {{T|id}} : {{trad+|id|kursi}}
+* {{T|cs}} : {{trad-|cs|sedadlo}}
+{{)}}
+{{(|Place honorifique, mandat (4)}}
+* {{T|id}} : {{trad+|id|kursi}}
+{{-}}
+{{)}}
+{{(|Endroit où est établi quelqu’un, quelque chose (5)}}
+* {{T|es}} : {{trad+|es|sede}}
+{{-}}
+* {{T|cs}} : {{trad+|cs|sídlo}}
+{{)}}
+{{(|Action consistant à bloquer son adversaire dans son propre camp (7)}}
+* {{T|en}} : {{trad+|en|siege}}
+* {{T|es}} : {{trad+|es|sitio}}
+* {{T|el}} : {{trad+|el|πολιορκία}}
+{{-}}
+* {{T|id}} : {{trad-|id|pengepungan}}
+* {{T|cs}} : {{trad-|cs|obležení}}
+* {{T|vo}} : {{trad+|vo|beleseat}}
+{{)}}
+
+
+{{trad-trier}}
+{{(|Traductions à trier suivant le sens}}
+* {{T|af}} : {{trad-|af|beleëring}}, {{trad-|af|beleg}}, {{trad-|af|sitplek}}, {{trad-|af|stoel}}
+* {{T|sq}} : {{trad-|sq|karrige}}
+* {{de}} : {{trad-|de|(Vorder-/ Rück-) Sitz}} {{m}}, {{trad+|de|Stuhl}} {{m}}, {{trad+|de|Belagerung}} {{f}}
+* {{T|en}} : {{trad+|en|chair}}
+* {{T|ang}} : {{trad-|ang|stol}}
+* {{T|ca}} : {{trad-|ca|seient}}, {{trad+|ca|cadira}}
+* {{T|da}} : {{trad+|da|stol}}
+* {{T|es}} : {{trad-|es|asedio}}, {{trad+|es|local}}, {{trad+|es|silla}}
+* {{T|eo}} : {{trad-|eo|sieĝo}}, {{trad+|eo|sidejo}}, {{trad+|eo|seĝo}}
+* {{T|fo}} : {{trad-|fo|stólur}}
+* {{T|fi}} : {{trad+|fi|tuoli}}
+* {{T|fy}} : {{trad-|fy|belech}}, {{trad-|fy|stoel}}
+* {{T|gd}} : {{trad-|gd|suidheachan}}, {{trad-|gd|cathair}}
+* {{T|el}} : {{trad+|el|καρέκλα}}
+* {{T|hu}} : {{trad+|hu|szék}}
+* {{T|io}} : {{trad+|io|siejo}}, {{trad+|io|asiejo}}
+* {{T|is}} : {{trad+|is|stóll}}
+* {{T|it}} : {{trad+|it|assedio}}, {{trad+|it|posto}}, {{trad+|it|sedia}}
+{{-}}
+* {{T|ms}} : {{trad+|ms|kursi}}
+* {{T|yua}} : {{trad--|yua|k’anche’}}
+* {{T|mn}} : {{trad-|mn|суудал}}
+* {{T|nl}} : {{trad+|nl|beleg}}, {{trad-|nl|belegering}}, {{trad+|nl|bril}}, {{trad+|nl|zetel}}, {{trad+|nl|stoel}}, {{trad+|nl|zetel}}
+* {{T|no}} : {{trad+|no|stol}}
+* {{T|pap}} : {{trad--|pap|stul}}
+* {{T|pl}} : {{trad+|pl|siedziba}}, {{trad+|pl|krzesło}}
+* {{T|pt}} : {{trad+|pt|cerco}}, {{trad+|pt|sítio}}, {{trad+|pt|lugar}}, {{trad+|pt|assento}}, {{trad+|pt|cadeira}}
+* {{T|ro}} : {{trad-|ro|scaun}}
+* {{T|ru}} : {{trad+|ru|стул}}
+* {{T|ses}} : {{trad--|ses|gorohaya}}
+* {{T|srn}} : {{trad--|srn|sturu}}
+* {{T|sv}} : {{trad-|sv|belägring}}, {{trad+|sv|sittplats}}, {{trad+|sv|stol}}
+* {{T|sw}} : {{trad+|sw|kiti}}
+* {{T|tl}} : {{trad-|tl|sílya}}, {{trad-|tl|úpuan}}
+* {{T|tr}} : {{trad+|tr|sandalye}}
+* {{T|zu}} : {{trad+|zu|isihlalo}}
+{{)}}
+
+{{-hyper-}}
+* [[meuble]]
+
+{{-hypo-}}
+: ''une petite liste à compléter…''
+{{(}}
+* [[balançoire]]
+* [[banc]]
+* [[banquette]]
+* [[berceuse]]
+* [[bergère]]
+* [[boudeuse]]
+* [[brouette]]
+* [[cabriolet]]
+* [[canapé]]
+* [[caquetoire]]
+* [[cathèdre]]
+* [[causeuse]]
+* [[chaire]]
+{{-}}
+* [[chaise]]
+** [[chaise curule]]
+** [[chaise longue]]
+** [[chaise percée]]
+* [[chauffeuse]]
+* [[clic-clac]]
+* [[coffre]]
+* [[coussin]]
+* [[crapaud]]
+* [[dagobert]]
+* [[divan]]
+* [[escabeau]]
+* [[escarpolette]]
+* [[estrade]]
+* [[faldistoire]]
+{{-}}
+* [[fauteuil]]
+* [[filanzane]]
+* [[gradin]]
+* [[marquise]]
+* [[méridienne]]
+* [[miséricorde]]
+* [[montauban]]
+* [[ottomane]]
+* [[palanquin]]
+* [[pliant]]
+* [[pouf]]
+* [[récamier]]
+* [[rocking-chair]]
+* [[séant]]
+* [[selle]]
+{{-}}
+* [[sellette]]
+* [[sofa]]
+* [[stalle]]
+* [[strapontin]]
+* [[tabouret]]
+* [[tan-sad]]
+* [[tête-à-tête]]
+* [[transat]]
+* [[trépied]]
+* [[trône]]
+* [[vinaigrette]]
+* [[voltaire]]
+* [[voyeuse]]
+{{)}}
+
+{{-flex-verb-|fr}}
+{{fr-verbe-flexion|ind.p.1s=oui|ind.p.3s=oui|sub.p.1s=oui|sub.p.3s=oui|imp.p.2s=oui}}
+'''siège''' {{pron|sjɛʒ|fr}}
+# ''Première personne du singulier du  présent de l’indicatif de'' [[siéger]].
+# ''Troisième personne du singulier du  présent de l’indicatif de'' [[siéger]].
+# ''Première personne du singulier du présent du subjonctif de'' [[siéger]].
+# ''Troisième personne du singulier du présent du subjonctif de'' [[siéger]].
+# ''Deuxième personne du singulier de l’impératif de'' [[siéger]].
+
+{{-pron-}}
+* {{pron-rég|France &lt;!--  précisez svp la ville ou la région --&gt;|sjɛʒ|audio=Fr-siège.ogg}}
+
+{{-voir-}}
+* {{Import:DAF8}}
+* {{WP}}
+
+{{-réf-}}
+* {{R:DAF8}}
+
+[[Catégorie:Lexique en français de l’automobile]]
+
+{{clé de tri|siege}}
+
+[[ca:siège]]
+[[cy:siège]]
+[[de:siège]]
+[[el:siège]]
+[[en:siège]]
+[[et:siège]]
+[[fi:siège]]
+[[gl:siège]]
+[[hu:siège]]
+[[id:siège]]
+[[io:siège]]
+[[ko:siège]]
+[[mg:siège]]
+[[nl:siège]]
+[[th:siège]]
+[[vi:siège]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>manchot</title>
+    <id>58</id>
+    <revision>
+      <id>9687432</id>
+      <timestamp>2011-11-24T00:36:44Z</timestamp>
+      <contributor>
+        <username>MalafayaBot</username>
+        <id>20439</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.2) (robot Ajoute : [[ko:manchot]]</comment>
+      <text xml:space="preserve">{{voir|Manchot}}
+== {{=fr=}} ==
+{{-étym-}}
+: ''([[#fr-adj-1|Adjectif 1]]'', ''[[#fr-nom-1|Nom 1]])'' Dérivé de l’{{étyl|fro|fr|mot=manc|sens=[[estropié]]}}, avec le suffixe ''[[-ot]]'', lui-même du {{étyl|la|fr|mot=mancus}} de même sens.
+: ''([[#fr-nom-2|Nom 2]])'' Nom donné à ces [[oiseaux]] en 1760 par le [[zoologiste]] [[w:Mathurin Jacques Brisson|Mathurin Jacques Brisson]] « à [[cause]] de la [[brièveté]] de leurs [[ailes]] » (M. Brisson, ''Ornithologie'').
+: ''([[#fr-adj-2|Adjectif 2]])'' De ''[[Manche]]'', nom d’un des [[département]]s français.
+
+{{-adj-|fr|num=1}}
+{{fr-accord-ot|manch|mɑ̃.ʃ}}
+'''manchot''' {{m}}
+# Qui est [[estropier|estropié]] ou [[privé]] de la [[main]] ou du [[bras]].
+#* ''Il est '''manchot''' de la main droite.''
+#* ''Qu’on me rende impotent,&lt;br/&gt;Cul-de-jatte, goutteux, '''manchot''', pourvu qu’en somme&lt;br/&gt;Je vive, c’est assez, je suis plus que content.'' &lt;small&gt;([[w:Jean de La Fontaine|Jean de La Fontaine]], « La mort &amp; le Malheureux », ''Fables'', Livre I, 15)&lt;/small&gt;
+# {{figuré|fr}} {{familier|fr}} {{péjoratif|fr}} Se dit de quelqu’un de [[maladroit]].
+#* ''Il est un peu '''manchot'''.''
+#* ''Il n’est pas '''manchot''', se dit de quelqu’un d’habile, d’adroit.
+
+{{-drv-}}
+* [[bandit manchot]]
+* [[ne pas être manchot]]
+
+{{-syn-}}
+* [[unibrassiste]] {{rare|nocat=1}}
+
+{{-trad-}}
+{{(|privé d’un membre antérieur}}
+* {{T|de}} : {{trad+|de|einarmig}}
+* {{T|en}} : {{trad+|en|one-armed}}
+{{-}}
+* {{T|eo}} : {{trad-|eo|unubraka}}
+{{)}}
+
+{{(|maladroit}}
+* {{T|de}} : {{trad-|de|unbeholfen}}, {{trad+|de|tollpatschig}}, {{trad+|de|ungeschickt}}
+{{)}}
+
+{{(|à classer selon le sens}}
+* {{T|ca}} : {{trad-|ca|manc}} {{m}}
+* {{T|es}} : {{trad+|es|manco}} {{m}}
+{{-}}
+* {{T|io}} : {{trad+|io|brakio-kripla}}
+* {{T|ru}} : {{trad+|ru|неуклюжий|R=neouklioji}}, {{trad-|ru|кулёмистый|R=kouliomistyï}}
+{{)}}
+
+{{-adj-|fr|num=2}}
+{{fr-accord-ot|manch|mɑ̃.ʃ}}
+'''manchot''' {{m}}
+# Relatif au département de la [[Manche]] ou à ses habitants.
+
+{{-syn-}}
+* [[manchois]]
+
+{{-voc-}}
+* [[Manchois]]
+* [[Manchot]]
+
+{{-nom-|fr|num=1}}
+{{fr-accord-ot|manch|mɑ̃.ʃ}}
+'''manchot'''
+# [[personne|Personne]] à qui il manque un ou les [[deux]] [[bras]].
+#* ''Le '''manchot''', blessé de guerre, sortit sa carte de priorité de sa main valide pour s’asseoir dans le bus.''
+# {{sport|fr}} {{familier|fr}} Nom donné par les amateurs de rugby aux footballeurs et aux supporters de football.
+#*''J’ai beau avoir grandi dans la capitale de l’ovalie je suis un footeux pur et dur. Un '''manchot''' comme ils disent.'' {{source|Guernica, Guðmundur Daníelsson, Omar, Nabarro, 2004}}
+
+{{-syn-}}
+; personne à laquelle il manque un bras
+* [[unibrassiste]] {{rare|nocat=1}}
+
+{{-trad-}}
+{{(|personne à laquelle il manque un bras}}
+* {{T|de}} : {{trad-|de|Einarmiger}} {{m}} (adj. substantivé)
+* {{T|es}} : {{trad+|es|manco}} {{m}}
+{{-}}
+* {{T|eo}} : {{trad-|eo|unubrakulo}}
+* {{T|ru}} : {{trad+|ru|кулёма|R=koulioma}} {{m}}
+{{)}}
+
+{{-nom-|fr|num=2}}
+{{fr-rég|mɑ̃.ʃo}}
+[[Image:Emperor penguin.jpg|thumb|Des '''manchots''' empereurs de l’Antarctique.]]
+'''manchot''' {{pron|mɑ̃.ʃo|fr}} {{m}}
+# {{zoologie|nocat=1}} Oiseau [[palmipède]] [[marin]] de l’[[hémisphère]] [[sud]], notamment de l’[[Antarctique]], très bon [[nageur]], aux petites pattes et aux [[ailes]] très [[petites]] servant de [[nageoires]], ce qui le rend incapable de [[voler]].
+
+{{-note-}}
+: Le traduction anglaise ''[[penguin#en|penguin]]'' est un [[faux-ami]], car ce mot ne désigne pas un [[pingouin]]. Le mot anglais désignant un pingouin est ''[[auk#en|auk]]''.
+
+{{-drv-}}
+* [[manchotière]]
+
+{{-hypo-}}
+* [[gorfou]]
+* [[manchot à ailerons blancs]]
+* [[manchot à jugulaire]]
+* [[manchot Adélie]]
+* [[manchot antipode]]
+* [[manchot de Humboldt]]
+* [[manchot de Magellan]]
+* [[manchot des Galapagos]]
+* [[manchot du Cap]]
+* [[manchot empereur]]
+* [[manchot papou]]
+* [[manchot pygmée]]
+* [[manchot royal]]
+
+{{-trad-}}
+{{(}}
+* {{T|de}} : {{trad+|de|Pinguin}} {{m}}
+* {{T|en}} : {{trad+|en|penguin}}
+* {{T|zh}} : {{trad+|zh|企鹅|tradi=企鵝}}
+* {{T|ko}} : {{trad+|ko|펭귄|R=penggwin}}
+* {{T|es}} : {{trad+|es|pingüino}} {{m}}
+* {{T|eo}} : {{trad+|eo|pingveno}}
+* {{T|fi}} : {{trad-|fi|pingviinit}}
+{{-}}
+* {{T|el}} : {{trad+|el|πιγκουίνος|R=pinguínos}} {{m}}
+* {{T|is}} : {{trad-|is|mörgæsir}}
+* {{T|ja}} : {{trad+|ja|ペンギン|R=pengin}}
+* {{T|nl}} : {{trad+|nl|pinguïn}}
+* {{T|ru}} : {{trad+|ru|пингвин|R=pingvin}}
+* {{T|cs}} : {{trad+|cs|tučňák}}
+{{)}}
+
+{{-réf-}}
+* {{Import:DAF8}}
+
+{{-voir-}}
+* {{WP}}
+
+[[Catégorie:Oiseaux en français]]
+
+[[de:manchot]]
+[[el:manchot]]
+[[en:manchot]]
+[[fi:manchot]]
+[[gl:manchot]]
+[[hu:manchot]]
+[[id:manchot]]
+[[io:manchot]]
+[[ko:manchot]]
+[[lt:manchot]]
+[[nl:manchot]]
+[[ro:manchot]]
+[[ru:manchot]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>chinois</title>
+    <id>218</id>
+    <revision>
+      <id>9433775</id>
+      <timestamp>2011-09-15T22:12:10Z</timestamp>
+      <contributor>
+        <username>JackBot</username>
+        <id>12968</id>
+      </contributor>
+      <minor />
+      <comment>[[Wiktionnaire:Structure des articles|Autoformatage]]</comment>
+      <text xml:space="preserve">{{voir|Chinois}}
+== {{=fr=}} ==
+
+{{-étym-}}
+: Dérivé de ''[[Chine]]'' avec le suffixe ''[[-ois]]''.
+
+{{-adj-|fr}}
+{{fr-accord-s|ʃi.nwa}}
+'''chinois'''
+# Qui se rapporte aux [[Chinois]], à la [[Chine]] (et aussi à [[Taïwan]]).
+#* ''A l’égard de la population des autres parties de l’empire '''chinois''', nous croyons que l’on pourrait la porter tout au plus à 20 millions.'' {{source|Adrien Balbi, ''[[s:La population des deux mondes|La population des deux mondes]]'', Revue des Deux Mondes, 1829, tome 1}}
+#* ''Le Taipei '''chinois''' (Taïwan) est constitué des îles de Taïwan, Penghu, Kinmen, Matsu et de plusieurs îlots. En 2002, le Canada a exporté vers Taïwan des produits agricoles et agroalimentaires d’une valeur marchande supérieure à 206 millions de dollars.'' {{source|[http://www.agr.gc.ca/itpd-dpci/francais/info_pays/taiwan_f.htm]}}
+#Relatif à la langue parlée et écrite les [[sinophone]]s.
+#*''Un caractère [[chinois]].''
+#{{par ext}} [[compliqué|Compliqué]], très [[difficile]].
+#*''un casse-tête [[chinois]].''
+
+{{-drv-}}
+* [[chinoiser]]
+* [[chinoiserie]]
+* [[chinoisement]]
+
+{{-exp-}}
+* [[bille chinoise]]
+* [[casse-tête chinois]]
+* [[chapeau chinois]]
+* [[châtaigne d’eau chinoise]]
+* [[chou chinois]]
+* [[ombre chinoise]]
+* [[pâté chinois]]
+* [[portrait chinois]]
+
+{{-trad-}}
+{{(}}
+* {{T|de}} : {{trad+|de|chinesisch}}
+* {{T|en}} : {{trad+|en|Chinese}}
+* {{T|ar}} : {{trad-|ar|صيني}}
+* {{T|br}} : {{trad-|br|sinaat}}, {{trad-|br|sinaek}}
+* {{T|bg}} : {{trad-|bg|китайски}}
+* {{T|zh}} : {{trad+|zh|中国|R=Zhōngguó|tradi=中國}}, {{trad-|zh|中国的|R=zhōngguóde|tradi=中國的}}
+* {{T|ko}} : {{trad+|ko|중국}}, {{trad-|ko|중-}}
+* {{T|da}} : {{trad+|da|kinesisk}}
+* {{T|es}} : {{trad+|es|chino}}
+* {{T|fi}} : {{trad+|fi|kiinalainen}}
+* {{T|hu}} : {{trad+|hu|kínai}}
+{{-}}
+* {{T|it}} : {{trad+|it|cinese}}
+* {{T|la}} : {{trad-|la|Sinica}}
+* {{T|lt}} : {{trad-|lt|kiniškas}}
+* {{T|nl}} : {{trad+|nl|Chinees}}, {{trad+|nl|Chinese}}
+* {{T|pt}} : {{trad+|pt|chinês}}
+* {{T|ro}} : {{trad-|ro|chinez}}
+* {{T|sl}} : {{trad+|sl|kitajski}}
+* {{T|sv}} : {{trad+|sv|kinesisk}}
+* {{T|tl}} : {{trad-|tl|Tsina}}
+* {{T|cs}} : {{trad+|cs|čínský}}
+* {{T|bo}} : {{trad--|bo|rgya nag gi}}
+{{)}}
+
+{{-adv-|fr}}
+'''chinois''' {{pron|ʃi.nwa}}
+# À la façon des Chinois, à leur manière.
+#*''Parler [[chinois]].''
+
+{{-trad-}}
+* {{T|cs}} : {{trad+|cs|čínsky}}
+
+{{-nom-|fr}}
+{{fr-inv|ʃi.nwa}}
+[[Image:Chinois.jpg|thumb|Un chinois (3).]]
+'''chinois''' {{pron|ʃi.nwa}} {{m}} {{sp}}
+# {{linguistique|nocat=1}} [[langue|Langue]] [[sinitique]], parlée par un [[Han]]. En particulier :
+##Aussi appelée « [[mandarin]] », la [[langue officielle]] de la [[Chine]] (République populaire de Chine), de [[Taïwan]], et l’une des [[langue]]s officielles de [[Singapour]].
+##* ''…pour saisir quelque chose de tellement chinois, il faudrait se faire Chinois soi-même, penser et écrire en '''chinois'''.'' {{source|[[w:Jean-Jacques Ampère|Jean-Jacques Ampère]], ''[[s:La Chine et les travaux d'Abel Rémusat|La Chine et les travaux d'Abel Rémusat]]'', Revue des Deux Mondes, 1832, tome 8}}
+##Le [[cantonais]], parlé dans le sud de la Chine.
+##Le [[wu]], parlé à [[Shanghaï]].
+#{{linguistique|nocat=1}} [[système|Système]] d’[[écriture]] à base d’[[idéogramme]]s, aussi appelés [[sinogramme]]s pour écrire les langues parlées par les [[sinophone]]s, les minorités chinoises non sinophones et d'autres langues non chinoises comme une partie du japonais.
+#*''5 000 caractères sont couramment employés, représentant chacun un élément du [[chinois]].''
+#*''L’écriture [[chinois]]e est arrivée au Japon vers le quatrième siècle.''
+# {{figuré|fr}} [[quelque chose|Quelque chose]] de [[dur]] à [[comprendre]].
+#* ''C’est du '''chinois''', je n’y comprends rien.''
+# {{cuisine|nocat=1}} [[passoire|Passoire]] de forme [[conique]], utilisée en [[art]] [[culinaire]].
+#*''Où as-tu mis le [[chinois]] ?''
+# {{cuisine|nocat=1}} {{ellipse|fr}} Restaurant '''chinois'''. 
+#*''On se fait un [[chinois]] ce soir ?''
+# {{cuisine|nocat=1}} {{ellipse|fr}} Plat préparé dont la recette est d'origine '''chinoise'''
+#*''
+
+{{-syn-}}
+* [[hébreu]] (2)
+* [[noich]] (5) {{verlan|nocat=1}}
+
+{{-trad-}}
+{{(|Langue officielle de la Chine (1)}}
+* {{T|de}} : {{trad+|de|Chinesisch}} {{n}}
+* {{T|en}} : {{trad+|en|Chinese}}
+* {{T|ar}} : {{trad-|ar|طعام صيني}}
+* {{T|br}} : {{trad+|br|sinaeg}} {{m}}
+* {{T|ca}} : {{trad+|ca|xinès}} {{m}} {{trad-|ca|xinesa}} {{f}}
+* {{T|ceb}} : {{trad--|ceb|Wikang Tsino}}
+* {{T|zh}} : {{trad+|zh|中文|R=zhōngwén}}, {{trad+|zh|汉语|R=hànyǔ|tradi=漢語}},, {{trad+|zh|普通话|R=pǔtōnghuà|tradi=普通話}}, {{trad+|zh|国语|R=guóyǔ|tradi=國語}}
+* {{T|ko}} : {{trad+|ko|중국어}} {{trad+|ko|中國語}}
+* {{T|da}} : {{trad+|da|kinesisk}}
+* {{T|es}} : {{trad+|es|chino}}
+* {{T|eo}} : {{trad-|eo|Ĉinia}}
+* {{T|fi}} : {{trad+|fi|kiina}}
+* {{T|ga}} : {{trad-|ga|an-tSín}} {{f}}
+* {{T|gu}} : {{trad+|gu|ચીની}}
+* {{T|el}} : {{trad+|el|κινέζικα}}, {{trad+|el|κινέζικα}}
+* {{T|hak}} : {{trad--|hak|zhongven}}
+* {{T|he}} : {{trad+|he|סין}} (Sîn)
+{{-}}
+* {{T|hi}} : {{trad+|hi|चीनी}}
+* {{T|hu}} : {{trad+|hu|kínai}}
+* {{T|id}} : {{trad-|id|bahasa cina}}, {{trad-|id|bahasa mandarin}}
+* {{T|it}} : {{trad+|it|cinese}}
+* {{T|ja}} : {{trad+|ja|中国語}}
+* {{T|la}} : {{trad-|la|Sinesis}}
+* {{T|lt}} : {{trad+|lt|kinų kalba}} {{f}}
+* {{T|mnc}} : {{trad--|mnc|nikan i gisun}}
+* {{T|nl}} : {{trad+|nl|Chinees}} {{n}}
+* {{T|pt}} : {{trad+|pt|chinês}}
+* {{T|ro}} : {{trad+|ro|chineză}}
+* {{T|sl}} : {{trad+|sl|kitajščina}}
+* {{T|sv}} : {{trad+|sv|kinesiska}}
+* {{T|tl}} : {{trad-|tl|Wikang Insik}}
+* {{T|bo}} : {{trad--|bo|rgya skad}}
+* {{T|cs}} : {{trad+|cs|čínština}} ; {{trad-|cs|mandarínština}}
+* {{T|tr}} : {{trad+|tr|Çince}}
+{{)}}
+
+{{(|Difficile à comprendre (2)}}
+* {{T|en}} : {{trad+|en|greek}}
+{{)}}
+
+{{(|Passoire (3)}}
+* {{T|en}} : {{trad+|en|strainer}}
+{{)}}
+
+{{-pron-}}
+* {{pron-rég|France (Ouest)|ʃi.'nwa|audio=Fr-chinois-fr.ogg}}
+
+{{-anagr-}}
+* [[chiions]] {{cf|chier}}
+* [[chionis]]
+* [[ischion]]
+
+{{-voir-}}
+* {{Annexe|Radicaux en chinois}}
+{{interwiktionnaire|zh}}
+{{Autres projets
+|w=Chinois
+|b=Chinois
+|v=Chinois}}
+
+{{-réf-}}
+*{{R:TLFi}}
+
+[[Catégorie:Langues en français]]
+[[Catégorie:Ustensiles de cuisine en français]]
+
+[[de:chinois]]
+[[el:chinois]]
+[[en:chinois]]
+[[et:chinois]]
+[[fi:chinois]]
+[[gu:chinois]]
+[[hi:chinois]]
+[[hu:chinois]]
+[[hy:chinois]]
+[[id:chinois]]
+[[io:chinois]]
+[[li:chinois]]
+[[lt:chinois]]
+[[nl:chinois]]
+[[no:chinois]]
+[[oc:chinois]]
+[[pl:chinois]]
+[[ru:chinois]]
+[[vi:chinois]]
+[[zh:chinois]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>avant-midi</title>
+    <id>12748</id>
+    <revision>
+      <id>9352134</id>
+      <timestamp>2011-08-14T05:11:47Z</timestamp>
+      <contributor>
+        <ip>93.22.116.234</ip>
+      </contributor>
+      <comment>/* {{=fr=}} */</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+{{-étym-}}
+: [[composé|Composé]] d’''[[avant]]'' (« qui est [[antérieur]] dans le [[temps]] ») et de ''[[midi]]'' (« [[milieu]] de la [[journée]] »).
+
+{{-nom-|fr}}
+{{fr-rég|a.vɑ̃.mi.di|titre={{ortho1990}}}}
+'''avant-midi''' {{mf?}}{{réf|1}}
+# {{Canada|fr}} {{Belgique|fr}} {Liban} [[partie|Partie]] de la journée [[allant]] du [[matin]] à midi.
+#* ''Vendredi, je travaille tout l’'''avant-midi'''.''
+#* ''J’ai eu une terrible '''avant-midi'''.''
+#* ''Jeudi '''avant-midi''', je devrais recevoir ma lettre.''
+#* ''J’ai deux '''avant-midis''' de plaisir…''
+
+{{-syn-}}
+* [[matinée]]
+
+{{-trad-}}
+{{(}}
+*{{da}}: {{trad+|da|formiddag}}
+*{{en}}: {{trad+|en|forenoon}}
+*{{fi}}: {{trad+|fi|aamupäivä}}
+{{-}}
+*{{sv}}: {{trad+|sv|förmiddag}}
+*{{de}}: {{trad+|de|Vormittag}}
+{{)}}
+
+{{-réf-}}
+* {{RÉF|1}} : [http://66.46.185.79/bdl/gabarit_bdl.asp?t1=1&amp;id=3773 La grammaire : Noms que l'on emploie dans les deux genres] sur la [[:w:Banque de dépannage linguistique|Banque de dépannage linguistique]] de l’[[:w:Office québécois de la langue française|OQLF]].
+
+{{clé de tri|avant midi}}
+[[Catégorie:français du Canada]]
+[[Catégorie:français de Belgique]]
+
+
+[[ru:avant-midi]]
+[[vi:avant-midi]]
+[[zh:avant-midi]]</text>
+    </revision>
+  </page>
 </mediawiki>

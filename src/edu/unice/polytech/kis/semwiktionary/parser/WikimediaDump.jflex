@@ -85,6 +85,16 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 		System.err.println(text);
 	}
 	
+	private void logError(String text) {
+		System.err.println("**" + text + "**");
+		errorFlag = true;
+	}
+	
+	private void logSyntaxError(String text) {
+		System.err.println("!! " + text);
+		errorFlag = true;
+	}
+	
 	private void out(String text) {
 		System.out.print(text);
 	}
@@ -145,7 +155,7 @@ space = ({whitespace}|{newline})
 "</page>"
 {
 	// fallback for all cases
-	log("**Out of page, error on word '" + currentWord.getTitle() + "'**");
+	logSyntaxError("Out of page, error on word '" + currentWord.getTitle() + "'");
 	yybegin(XML);
 }
 
@@ -336,7 +346,7 @@ space = ({whitespace}|{newline})
 
 	[^|}]+|"|"
 	{
-		log("**unexpected pattern value!** [ " + yytext() + " ]");
+		log("Unexpected pattern value: '" + yytext() + "'");
 	}
 }
 
@@ -473,10 +483,8 @@ space = ({whitespace}|{newline})
 		try {
 			currentWord.set(currentRelation, MutableWord.from(yytext()));
 		} catch (Exception e) {
-			log("**Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( **");
+			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( ");
 			e.printStackTrace(System.err);
-			
-			errorFlag = true;
 		}
 	}
 }

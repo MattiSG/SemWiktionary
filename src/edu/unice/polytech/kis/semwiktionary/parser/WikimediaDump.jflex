@@ -118,7 +118,10 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 %init}
 
 %eof{
+	tick(currentWord.getTitle());
+	
 	PREV_ERR.println("Total time: " + ((System.nanoTime() - FIRST_TICK) / 10E9) + "s");
+	PREV_ERR.println("Parsed words: " + wordCount);
 
 	// restore outputs
 	System.setOut(PREV_OUT);

@@ -1,23 +1,22 @@
-#!/bin/sh
+#!/bin/bash
 
 # Shortcut to start up SemWiktionary
 # Author: Matti Schneider-Ghibaudo
 
-USE_GROWL=0 # [Growl](http://growl.info/) is a notification system for OS X
+loading=0
 
-if [[ $1 = "--growl" ]]
+if [[ $1 = "--load" ]]
 then
-	USE_GROWL=1
-	shift
+	loading=1
 fi
 
 if java -cp $(dirname $0)/bin:$(dirname $0)/lib/*:$(dirname $0)/lib/neo4j/* edu.unice.polytech.kis.semwiktionary.SemWiktionary "$@"
 then 
-	if [[ $USE_GROWL = 1 ]]
-	then growlnotify -t "Parsing succeeded" -m "SemWiktionary parsing succeeded!"
+	if [[ $loading = 1 ]]
+	then growlnotify -t "Parsing succeeded" -m "SemWiktionary parsing succeeded!" 2> /dev/null  # [Growl](http://growl.info/) is a notification system for OS X
 	fi
 else
-	if [[ $USE_GROWL = 1 ]]
-	then growlnotify -t "Parsing failed" -m "SemWiktionary parsing failed  :(" -p High
+	if [[ $loading = 1 ]]
+	then growlnotify -t "Parsing failed" -m "SemWiktionary parsing failed  :(" -p High 2> /dev/null
 	fi
 fi

@@ -167,8 +167,9 @@ space = ({whitespace}|{newline})
 		yybegin(PAGE);
 	}
 	
-	"<"|[^<]+
+	([^<]|"<"[^p]|"<p"[^a])+
 	{
+		// this longer regexp improves performance by getting as long matches as possible
 		// in initial state: suppress output
 	}
 }
@@ -190,8 +191,9 @@ space = ({whitespace}|{newline})
 		yybegin(XML);
 	}
 	
-	"<"|[^<]+
+	([^<]|"<"[^t/]|"<t"[^ei]|"<ti"[^t]|"</"[^p])+
 	{
+		// this longer regexp improves performance by getting as long matches as possible
 		// in Page: suppress output
 	}
 }

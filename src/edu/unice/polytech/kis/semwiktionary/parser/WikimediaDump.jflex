@@ -389,7 +389,7 @@ space = ({whitespace}|{newline})
 
 <DEFINITION>
 {
-	[^{]+
+	[^\r\n{]+
 	{
 		definitionsBuffer.add(yytext());
 		

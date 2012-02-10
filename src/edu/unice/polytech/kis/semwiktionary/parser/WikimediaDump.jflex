@@ -406,6 +406,13 @@ space = ({whitespace}|{newline})
 	{
 		yybegin(DEFINITION_DOMAIN);
 	}
+	
+	{newline}
+	{
+		// rare case in which the only content of a definition is a list of domains (see "neuf")
+		yypushback(1);
+		yybegin(SECTION);
+	}
 }
 
 <SIMPLENYM>

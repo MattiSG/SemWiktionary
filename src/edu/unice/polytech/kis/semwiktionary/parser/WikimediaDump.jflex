@@ -413,6 +413,7 @@ space = ({whitespace}|{newline})
 	{newline}
 	{
 		// rare case in which the only content of a definition is a list of domains (see "neuf")
+		definitionsBuffer.add(definitionDepth, ""); // otherwise we'll break the concatenation
 		yypushback(1);
 		yybegin(SECTION);
 	}

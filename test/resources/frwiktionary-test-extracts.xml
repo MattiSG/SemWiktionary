@@ -1600,6 +1600,60 @@ Quelques infos sur [[Discuter:accueil|cette page]] &lt;small&gt;Attention : les 
     </revision>
   </page>
   <page>
+    <title>moduler</title>
+    <id>11576</id>
+    <revision>
+      <id>9728849</id>
+      <timestamp>2011-12-05T03:08:56Z</timestamp>
+      <contributor>
+        <username>JackBot</username>
+        <id>12968</id>
+      </contributor>
+      <minor />
+      <comment>[[Wiktionnaire:Structure des articles|Autoformatage]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+
+{{-étym-}}
+: Du {{étyl|la|fr|mot=modulari|sens=mesurer, [[régulariser]]}}.
+
+{{-verb-|fr}}
+'''moduler''' {{pron|mɔ.dy.le}} {{1ergroupe|fr}}
+# {{t|fr}} 
+##[[émettre|Émettre]] un son ou une [[série]] de [[son]]s, [[varier|en variant]] de hauteur et d'intensité.
+##* ''— Bonjour! dit-il.&lt;br/&gt;Il avait une façon de '''moduler''' les deux syllabes de son salut si bien qu'on n'en remarquait pas d'abord la brièveté et qui lui permettait de ne nommer personne.'' {{source|{{w|Jean Rogissart}}, ''Hurtebise aux Griottes'', 1954}}
+## {{musique|fr}} [[articuler|Articuler]], [[émettre]] une [[mélodie]], un [[son]] [[varié]], par une [[suite]] de [[modulation]]s.
+##* ''Les flûtes, l'une après l'autre, inventent et '''modulent''' de gracieuses variations, comme pour célébrer joyeusement la virtuosité du vainqueur.'' {{source|{{w|Out-el-Kouloub}}, ''Zariffa'', dans &quot;Trois contes de l'Amour et de la Mort&quot;, 1940}}
+## {{par ext}} {{informatique|fr}} [[convertir|Convertir]] des [[donnée]]s [[numériques]] en [[signaux]] [[analogiques]].
+## {{physique|fr}} [[faire|Faire]] [[varier]] les [[caractéristique]]s d'un [[courant]] [[électrique]], d'une [[onde]].
+## [[adapter|Adapter]] [[quelque chose]] à [[différent]]s [[cas]] [[particulier]]s.
+# {{i|fr}}
+## {{musique|fr}} [[effectuer|Effectuer]] [[une]] ou [[plusieurs]] [[modulation]]s.
+##* ''Ce musicien '''module''' bien, d’une manière savante.''
+
+{{-apr-}}
+* [[modulateur]]
+* [[modulation]]
+* [[démodulation]]
+* [[démodulateur]]
+* [[démoduler]]
+
+{{-trad-}}
+{{(}}
+* {{T|en}} : {{trad+|en|modulate}}
+* {{T|es}} : {{trad+|es|modular}}
+* {{T|io}} : {{trad+|io|modulacar}}
+{{)}}
+
+{{-réf-}}
+* {{R:DAF8}}
+
+[[en:moduler]]
+[[io:moduler]]
+[[ru:moduler]]
+[[vi:moduler]]</text>
+    </revision>
+  </page>
+  <page>
     <title>chinois</title>
     <id>218</id>
     <revision>

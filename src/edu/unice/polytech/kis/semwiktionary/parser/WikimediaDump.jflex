@@ -404,14 +404,24 @@ space = ({whitespace}|{newline})
 {
 	([^\r\n{]|"{"[^{])+
 	{
-		definitionsBuffer.add(definitionDepth, yytext());
-		
-		String result = "";
-		for (int i = definitionDepth; i >= 0; i--)
-			result = definitionsBuffer.get(i) + (result.isEmpty() ? "" : (" " + result));
-		
-		currentDefinition.setContent(result);
-		
+		try {
+
+			definitionsBuffer.add(definitionDepth, yytext());
+			
+			String result = "";
+			for (int i = definitionDepth; i >= 0; i--)
+				result = definitionsBuffer.get(i) + (result.isEmpty() ? "" : (" " + result));
+
+			currentDefinition.setContent(result);
+
+		} catch (ArrayIndexOutOfBoundsException e) {
+			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
+			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + yytext() + "'. Skipping definition.");
+			e.printStackTrace();
+			
+			currentDefinition.setContent(yytext()); // best recovery we can do: forget about concatenation
+		}
+				
 		yybegin(SECTION);
 	}
 	

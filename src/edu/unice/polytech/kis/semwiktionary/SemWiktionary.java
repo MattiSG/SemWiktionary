@@ -23,8 +23,6 @@ import edu.unice.polytech.kis.semwiktionary.database.Database;
 
 
 public class SemWiktionary {
-    private static final int MAX_COUNT_TIME = 2 * 1000; // microseconds
-
 
 	public static void print(String message) {
 		System.out.print(message);
@@ -54,6 +52,9 @@ public class SemWiktionary {
 			if (args[0].equals("--load")) {
 				load(args[1]);
 				System.exit(0);
+			} else if (args[0].equals("--count")) {
+				println(count() + " words in database");
+				System.exit(0);
 			}
 			
 			for (String arg: args) {
@@ -68,8 +69,6 @@ public class SemWiktionary {
 				"===================================================");
 		println("Hit ctrl-C to exit.\n");
 		
-		println(count() + " words in database");
-		
 		while (true) {
 			println("\nEnter a word and press enter or ctrl-D to look it up: ");
 			
@@ -83,19 +82,16 @@ public class SemWiktionary {
 	public static long count() {
 		print( "Counting… " );
 		
-		long start = System.currentTimeMillis(),
-			 end,
+		long start = System.nanoTime(),
 			 count = 0;
 		
 		for (Node word : Database.getIndexForName(Word.INDEX_KEY).query(Word.INDEX_KEY, "*")) {
-			end = System.currentTimeMillis();
 			count++;
-			if ((end - start > MAX_COUNT_TIME)) {
-				print("(too long " + end + ", stopping now) ");
-				return count;
-			}
+			if ((count % 10000) == 0)
+				print(".");
 		}
 		
+		println(" (took " + ((System.nanoTime() - start) / 10E9) + "s)");
 		return count;
 	}
 	

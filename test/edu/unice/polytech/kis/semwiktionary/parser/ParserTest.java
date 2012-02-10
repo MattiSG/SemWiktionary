@@ -92,6 +92,8 @@ public class ParserTest {
 			Word currentWord = Word.from(currentEntry.getKey());
 			List<Definition> expectedDefinitions = currentEntry.getValue();
 			
+			fail("No MediaWiki content parser. Test deactivated to avoid too verbose details."); //TODO
+			
 			for (int i = 1; i <= expectedDefinitions.size(); i++) {
 				ReflectionAssert.assertReflectionEquals(
 														expectedDefinitions.get(i).getExamples(),
@@ -100,6 +102,7 @@ public class ParserTest {
 			}
 		}
 	}
+	
 	
 	@Test
 	public void pagesThatAreNotWordsAreNotStored() {

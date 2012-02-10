@@ -210,6 +210,7 @@ space = ({whitespace}|{newline})
 	
 	.
 	{
+		// if it is anything else than expected (i.e. it contains a colon), then it is not a page we're interested in, we can skip it immediately
 		yybegin(XML);
 	}
 }

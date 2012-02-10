@@ -1,8 +1,8 @@
 package edu.unice.polytech.kis.semwiktionary.parser;
 
 import java.io.*;
-import java.util.List;
-import java.util.LinkedList;
+import java.util.Vector;
+import java.util.Map;
 import java.util.HashMap;
 
 import edu.unice.polytech.kis.semwiktionary.model.*;
@@ -32,8 +32,8 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	
 	private String buffer = ""; // an all-purpose buffer, to be initialized by groups that need it
 	
-	private List<String> definitionsBuffer;
-	private HashMap<String, Relation> relationsMap;
+	private Vector<String> definitionsBuffer;
+	private Map<String, Relation> relationsMap;
 	
 	private long timer = System.nanoTime();
 	private static final long FIRST_TICK = System.nanoTime();
@@ -46,7 +46,7 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	}
 
 	private void initParser() {
-		definitionsBuffer = new LinkedList<String>();
+		definitionsBuffer = new Vector<String>(8); // maximum level of foreseeable nested definitions
 		relationsMap = new HashMap<String, Relation>(2);
 
 		relationsMap.put("syn", Relation.SYNONYM);

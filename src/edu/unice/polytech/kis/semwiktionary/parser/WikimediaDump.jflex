@@ -56,7 +56,7 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	private void initWord(String word) {
 		tick(currentWord.getTitle());
 		
-		currentWord = MutableWord.create(word);
+		currentWord = MutableWord.create(word);	//TODO: delay until language was accepted? We currently create the word immediately, even though we might not store anything from it if its language is not supported
 		errorFlag = false;
 		initSection();
 		
@@ -475,7 +475,7 @@ space = ({whitespace}|{newline})
 {
 	[^:]+
 	{
-		// Context is not handled yet
+		//TODO: context is not handled yet
 	}
 
 	":"

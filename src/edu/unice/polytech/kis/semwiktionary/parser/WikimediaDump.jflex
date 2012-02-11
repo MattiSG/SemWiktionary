@@ -328,7 +328,7 @@ space = ({whitespace}|{newline})
 		leaveSection();
 	}
 
-	.|{newline}
+	([^{<\r\n])+|"{"[^{]|.|{newline}
 	{
 		// in Section: suppress output
 	}

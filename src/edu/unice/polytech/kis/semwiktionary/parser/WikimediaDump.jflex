@@ -233,7 +233,7 @@ space = ({whitespace}|{newline})
 		yybegin(XML);
 	}
 
-	.|{newline}
+	([^={<]|"="[^=]|"=="[^ ]|"== "[^{]|"{"[^{]|"{{"[^-])+
 	{
 		// in MediaWiki: suppress output
 	}

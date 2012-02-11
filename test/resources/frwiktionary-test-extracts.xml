@@ -1604,6 +1604,198 @@ Quelques infos sur [[Discuter:accueil|cette page]] &lt;small&gt;Attention : les 
     </revision>
   </page>
   <page>
+    <title>火</title>
+    <id>215</id>
+    <revision>
+      <id>9711474</id>
+      <timestamp>2011-12-01T04:22:01Z</timestamp>
+      <contributor>
+        <username>WikitanvirBot</username>
+        <id>48028</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.1) (robot Ajoute : [[fj:火]], [[mg:火]]</comment>
+      <text xml:space="preserve">{{alphabet chinois}}
+[[image:火-order.gif|thumb|Tracé du caractère]]
+== {{-car-}} ==
+
+{{sinogram-noimg|火|
+clefhz1=火|clefhz2=0|
+nbthz1=1-5|nbthz2=4|
+m4chz1=9|m4chz2=9080&lt;sub&gt;0&lt;/sub&gt;|
+unihz=706B|
+gbhz1= |gbhz2=-|
+b5hz1=A1|b5hz2=A4F5|
+cjhz1=F|cjhz2=火|cjhz3=F}}
+* [[signification]] : [[feu]]
+* Rang de probabilité: #574
+&lt;!--* [[ordre]] des [[trait]]s : [Image:Stroke order of Japanese Kanji 火.png]]--&gt;
+{{car-tracé|Image:火-bw.png|Tracé du sinogramme (en chinois)}}
+
+{{-sino-dico-}}
+* KangXi: 0665.010
+* Morobashi: 18850
+* Dae Jaweon: 1073.190
+* Hanyu Da Zidian: 32187.010
+
+{{composition | 火 | 冖D = [[荧]], [[爂]], [[燢]], [[熒]],  | 叕G = [[燚]],  | 吅D = [[耿]], [[吙]], [[钬]], [[伙]], [[阦]], [[狄]], [[秋]], [[鈥]], [[炚]],  | 吅G = [[炞]], [[燷]], [[燣]], [[烗]], [[炫]], [[焙]], [[燱]], [[燧]], [[燑]], [[爙]], [[煷]], [[燺]], [[焞]], [[熇]], [[炶]], [[爐]], [[爈]], [[焲]], [[焠]], [[熥]], [[炆]], [[炓]], [[焴]], [[熾]], [[炕]], [[熢]], [[燵]], [[炷]], [[爘]], [[燦]], [[燉]], [[烄]], [[熵]], [[爖]], [[煺]], [[焯]], [[熚]], [[熼]], [[熅]], [[煨]], [[燡]], [[燭]], [[炠]], [[煾]], [[烟]], [[爅]], [[焑]], [[煟]], [[畑]], [[爉]], [[爍]], [[炪]], [[熣]], [[煓]], [[熴]], [[灿]], [[熑]], [[燶]], [[爡]], [[燇]], [[燤]], [[煹]], [[爟]], [[烊]], [[燪]], [[煫]], [[烵]], [[爑]], [[焫]], [[煁]], [[烂]], [[燁]], [[煤]], [[熯]], [[煐]], [[煂]], [[熿]], [[烪]], [[爔]], [[燨]], [[煪]], [[燍]], [[爜]], [[烘]], [[爤]], [[焟]], [[爦]], [[煀]], [[焗]], [[炬]], [[熰]], [[烬]], [[熤]], [[燖]], [[熮]], [[燿]], [[熠]], [[烥]], [[爁]], [[炤]], [[灱]], [[爥]], [[熞]], [[煆]], [[煰]], [[燀]], [[燥]], [[炾]], [[焒]], [[炽]], [[熉]], [[焆]], [[炜]], [[炐]], [[煼]], [[炖]], [[煠]], [[炮]], [[煯]], [[灼]], [[灺]], [[烸]], [[炝]], [[炸]], [[熻]], [[烨]], [[炧]], [[熂]], [[烚]], [[烩]], [[烇]], [[爚]], [[燴]], [[炌]], [[炇]], [[熗]], [[焓]], [[焾]], [[炩]], [[燋]], [[焳]], [[烌]], [[炀]], [[燈]], [[烃]], [[炊]], [[焔]], [[邩]], [[煡]], [[烻]], [[烶]], [[焰]], [[煣]], [[燏]], [[炄]], [[煥]], [[焕]], [[炡]], [[燂]], [[煙]], [[熛]], [[烴]], [[熸]], [[爄]], [[烼]], [[煏]], [[炻]], [[炳]], [[炣]], [[灯]], [[焐]], [[爏]], [[炋]], [[爧]], [[烦]], [[煗]], [[燯]], [[熕]], [[煩]], [[燸]], [[烜]], [[灴]], [[熽]], [[焖]], [[灲]], [[燼]], [[烑]], [[烛]], [[熡]], [[炥]], [[爞]], [[炴]], [[炼]], [[燲]], [[熁]], [[烯]], [[煃]], [[烣]], [[燎]], [[烠]], [[焼]], [[燌]], [[熍]], [[煳]], [[烧]], [[炨]], [[焥]], [[烷]], [[煊]], [[烤]], [[爎]], [[烢]], [[熔]], [[焪]], [[焢]], [[煵]], [[熝]], [[熫]], [[爌]], [[燫]], [[煽]], [[煸]], [[炉]], [[炲]], [[烒]], [[爊]], [[煻]], [[焿]], [[炦]], [[烳]], [[煘]], [[炢]], [[焌]], [[煿]], [[烺]], [[熜]], [[焷]], [[烁]], [[熄]], [[熩]], [[燩]], [[熓]], [[焝]], [[灹]], [[烆]], [[煈]], [[炈]], [[炘]], [[焮]], [[燆]], [[煄]], [[煅]], [[熘]], [[烍]], [[焅]], [[燻]], [[燬]], [[爋]], [[烀]], [[炵]], [[烙]], [[烽]], [[炍]], [[燔]], [[熪]], [[煍]], [[秌]], [[烐]], [[炿]], [[烅]], [[燠]], [[煌]], [[熺]], [[燽]], [[焃]], [[熆]], [[燒]], [[烓]], [[爀]], [[灶]], [[熦]], [[炒]], [[爃]], [[燐]], [[爣]], [[焇]], [[炏]], [[烞]], [[煉]], [[煒]], [[炔]], [[爩]], [[炑]], [[熷]], [[焀]], [[焍]], [[焧]], [[炂]], [[烿]], [[爝]], [[爠]], [[焹]], [[焵]], [[炯]], [[熎]], [[烰]], [[烔]], [[煖]], [[燃]], [[煇]], [[熖]], [[烱]], [[煱]], [[燰]], [[焩]], [[熐]], [[煜]], [[燝]], [[熳]], [[爗]], [[爆]], [[熶]], [[燳]], [[焜]], [[焬]], [[爓]], [[爛]], [[燜]], [[熌]], [[燘]], [[燗]], [[煶]], [[焊]], [[煬]], [[炟]], [[煝]], [[焺]], [[煋]], [[熀]], [[煴]], [[焨]], [[焻]],  | 吕D = [[齌]], [[災]], [[焋]], [[羙]], [[炗]], [[苂]], [[燛]], [[灵]], [[熨]], [[焁]], [[烲]], [[熭]], [[焂]], [[煲]], [[熃]], [[灸]], [[烉]], [[烮]], [[灭]], [[疢]], [[灰]], [[灾]], [[煑]], [[炱]], [[熋]], [[焤]], [[焈]], [[熧]], [[灻]], [[爕]], [[燙]], [[烫]], [[燓]], [[炃]], [[炙]], [[煚]], [[炅]], [[焽]],  | 吕G = [[烡]], [[灷]], [[炛]], [[灮]], [[炎]],  | 咒D = [[燹]], [[烎]], [[焚]], [[煛]], [[焸]],  | 咒G = [[鶑]],  | 品G = [[焱]],  | 回D = [[灳]], [[焛]],  | 回G = [[烖]],}}
+
+== {{=yue=}} ==
+{{-étym-}}
+{{ébauche-étym|yue}}
+
+{{-nom-|yue}}
+'''{{lang/span|yue|火}}''' {{pron||yue}} ''{{lang/span|yue-Latn|fuõ}}''
+# [[feu|Feu]].
+
+{{-drv-}}
+* {{lang/span|yue|[[火炉]]}}
+
+{{-pron-}}
+* {{Jyutping}} : fo2
+* {{Penkyamp}} : fõ
+* {{Yale-zh}} : fo2
+
+== {{=zh=}} ==
+{{-étym-}}
+{{ébauche-étym|zh}}
+
+{{-nom-|zh}}
+'''{{lang/span|zh|火}}''' ''{{lang/span|zh-Latn|huǒ}}'' {{zh-radical|86}}
+# [[feu|Feu]].
+#* '''火'''[[很]][[热]]。
+#* '''Huǒ''' hěn rè.
+#* Le '''feu''' est très chaud.
+
+{{-drv-}}
+* {{lang/span|zh|[[火柴#zh|火柴]]}} (huǒchái)
+* {{lang/span|zh|[[火炉#zh|火炉]]}} (huǒlú)
+* {{lang/span|zh|[[火山#zh|火山]]}} (huǒshān)
+
+
+{{-pron-}}
+* {{pron||zh}}
+** {{pinyin}} : huǒ (huo3)
+** {{Wade}} : huo{{e|3}}
+** {{Yale-zh}} :
+* [[chinois]] [[médiéval]] : {{lang/span|zh-Hant|晓果合一}} ''xwaX''
+
+== {{=ko-hanja=}} ==
+{{-étym-}}
+{{ébauche-étym|ko-hanja}}
+
+{{-nom-|ko-hanja}}
+'''{{lang/span|ko-Hani|火}}''' {{pron||ko-hanja}} ({{lang/span|ko|화}}, ''{{lang/span|ko-Latn|hwa}}'')
+# [[colère|Colère]].
+# [[mardi|Mardi]] (employé avant la transcription de ''semaine'').
+
+{{-syn-}}
+* {{lang/span|ko|[[불]]}}
+
+{{-pron-}}
+* {{Hangul}} : {{lang/span|ko|[[화]]}} {{pron||ko-hanja}}
+** {{roman-ko}} : {{lang/span|ko-Latn|hwa}}
+** {{McCune}} : {{lang/span|ko-Latn|hwa}}
+** {{Yale-ko}} : {{lang/span|ko-Latn|hwa}}
+* {{eumhun}} : {{lang/span|ko|불 화}}
+
+{{-réf-}}
+* {{R:libhangul}}
+
+== {{=ja=}} ==
+{{-étym-}}
+: {{ébauche-étym|ja}}
+
+{{-nom-|ja}}
+{{ja-ka|ひ|hi}}
+'''{{lang/span|ja|火}}''' {{pron|hi}} 
+# [[feu|Feu]].
+
+{{-drv-}}
+* [[火炎]] ([[かえん]], [[kaen]]) - [[flamme]]
+* [[火気]] ([[かき]], [[kaki]]) - [[feu]]
+* [[火器]] ([[かき]], [[kaki]]) - [[arme à feu]]
+* [[火急]] ([[かきゅう]], [[kakyū]]) - [[urgence]]
+* [[火花]] ([[ひばな]], [[hibana]]) - [[étincelle]]
+* [[火山]] ([[かざん]], [[kazan]]) - [[volcan]]
+* [[噴火]] ([[ふんか]], [[funka]]) - [[éruption]] [[volcanique]]
+* [[火山帯]] ([[かざんたい]], [[kazantai]]) - [[zone]] [[volcanique]]
+* [[火山灰]] ([[かざんばい]], [[kazanbai]]) - [[cendre]] [[volcanique]]
+* [[火事]] ([[かじ]], [[kaji]]) - [[feu]], [[incendie]]
+* [[火星]] ([[かせい]], [[kasei]]) - [[Mars]]
+* [[火星人]] ([[かせいじん]], [[kaseijin]]) - un [[martien]]
+* [[火勢]] ([[かせい]], [[kasei]]) - [[force]] des [[flammes]], [[feu]]
+* [[火葬]] ([[かそう]], [[kasō]]) - [[crémation]], [[incinération]]
+* [[火中の栗を拾う]] ([[かちゅうのくりをひろう]], [[kachū no kuri o hirō]]) - [[prendre]] un [[risque]]
+* [[火薬]] ([[かやく]], [[kayaku]]) - [[poudre à canon]]
+* [[火曜日]] ([[かようび]], [[kayōbi]]) - [[mardi]]
+* [[火力]] ([[かりょく]], [[karyoku]]) - à [[vapeur]]
+* [[火遊び]] ([[ひあそび]], [[hiasobi]]) - [[jouer avec le feu]]
+* [[火元]] ([[ひもと]], [[himoto]]) - l’[[origine]] du [[feu]]
+* [[花火]] ([[はなび]], [[hanabi]]) - [[feu d’artifice]]
+* [[防火]] ([[ぼうか]], [[bōka]]) - [[protection]] contre l'[[incendie]]
+* [[導火線]] ([[どうかさん]], [[dōkasen]]) - [[mèche]]
+* [[放火]] ([[ほうか]], [[hōka]]) - [[incendie]] [[volontaire]]
+* [[火炎瓶]] ([[かえんびん]], [[ kaenbin]]) - [[cocktail Molotov]]
+* [[火成岩]] ([[かせいがん]], [[ kaseigan]]) - [[roche]] [[volcanique]]
+* [[消火器]] ([[しょうかき]], [[ shōkaki]]) - [[extincteur]]
+* [[消火栓]] ([[しょうかせん]], [[ shōkasen]]) - [[bouche d'incendie]]
+* [[耐火]] ([[たいか]], [[ taika]]) - [[incombustible]]
+* [[飛び火]] ([[とびひ]], [[ tobihi]]) - [[étincelles]], [[petite]] [[flamme]]
+
+{{-pron-}}
+; Caractère
+* {{ja-on}} : {{lang/span|ja|か}} (''ka''), {{lang/span|ja|こ}} (''ko'')
+* {{ja-kun}} : {{lang/span|ja|ひ}} (''hi''), {{lang/span|ja|ほ}} (''ho'')
+; Nom
+* {{pron|çi}}
+
+{{-voir-}}
+* consulter ce mot sur [http://www.dictionnaire-japonais.com/vocabulaire_90.html www.dictionnaire-japonais.fr] (fiche [[Image:logo-diko.gif|fiche]])
+* Dictionnaire des kanji japonais [[http://kanji.free.fr/lexicon.php?page=1&amp;str=%E7%81%AB&amp;x=0&amp;y=0&amp;type=utf8&amp;whole_word=1]]
+
+
+{{clé de tri|火}}
+
+[[Catégorie:Lexique en japonais de la biologie]]
+[[Catégorie:Hanjas coréens]]
+
+[[bg:火]]
+[[cs:火]]
+[[de:火]]
+[[el:火]]
+[[en:火]]
+[[et:火]]
+[[fi:火]]
+[[fj:火]]
+[[hu:火]]
+[[io:火]]
+[[ja:火]]
+[[ko:火]]
+[[ku:火]]
+[[la:火]]
+[[li:火]]
+[[lo:火]]
+[[lt:火]]
+[[lv:火]]
+[[mg:火]]
+[[ms:火]]
+[[nl:火]]
+[[oc:火]]
+[[pl:火]]
+[[pt:火]]
+[[ru:火]]
+[[sv:火]]
+[[sw:火]]
+[[th:火]]
+[[tpi:火]]
+[[tr:火]]
+[[uk:火]]
+[[vi:火]]
+[[zh:火]]</text>
+    </revision>
+  </page>
+  <page>
     <title>moduler</title>
     <id>11576</id>
     <revision>

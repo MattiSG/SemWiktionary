@@ -465,9 +465,9 @@ space = ({whitespace}|{newline})
 		leaveSection();
 	}
 
-	.|{newline}
+	([^-:*\r\n]|"-"[^}])+|.|{newline}
 	{
-
+		// in SimpleNym: suppress output
 	}
 }
 

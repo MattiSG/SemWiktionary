@@ -129,6 +129,12 @@ public class Word extends NodeMappedObject {
 		return this.<Word>get(Relation.ANTONYM);
 	}
 	
+	/** Returns all troponyms of this Word.
+	 */
+	public Collection<Word> getTroponyms() {
+		return this.<Word>get(Relation.TROPONYM);
+	}
+	
 // DATABASE ACCESS
 	
 	/** Loads the definitions for this Word from the database.

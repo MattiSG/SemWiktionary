@@ -294,7 +294,7 @@ space = ({whitespace}|{newline})
 
 <SECTION>
 { // an entrance into that state with a non-consumed newline will switch to <MEDIAWIKI>
-	"{{"
+	^"{{"
 	{
 		yybegin(PATTERN);
 	}
@@ -450,7 +450,7 @@ space = ({whitespace}|{newline})
 		// end of pattern
 	}
 
-	":"{optionalSpaces}
+	(":"{optionalSpaces}|\'\'\')
 	{
 		yybegin(SPNM_CONTEXT);
 	}
@@ -474,7 +474,7 @@ space = ({whitespace}|{newline})
 
 <SPNM_CONTEXT>
 {
-	[^:]+
+	([^:]+)
 	{
 		// Context is not handled yet
 	}
@@ -482,6 +482,11 @@ space = ({whitespace}|{newline})
 	":"
 	{
 		yybegin(SIMPLENYM);
+	}
+
+	.
+	{
+
 	}
 }
 
@@ -494,6 +499,9 @@ space = ({whitespace}|{newline})
 
 	[^\]]+
 	{
+		if (currentRelation == Relation.TROPONYM) {
+			log("Tropo OK : " +yytext());
+		}
 		try {
 			currentWord.set(currentRelation, MutableWord.from(yytext()));
 		} catch (Exception e) {

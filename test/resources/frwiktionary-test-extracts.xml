@@ -2341,4 +2341,64 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
 [[zh-min-nan:Noël]]</text>
     </revision>
   </page>
+  <page>
+    <title>handshake</title>
+    <id>118840</id>
+    <revision>
+      <id>9155226</id>
+      <timestamp>2011-05-24T08:33:43Z</timestamp>
+      <contributor>
+        <username>WikitanvirBot</username>
+        <id>48028</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.1) (robot Ajoute: [[eo:handshake]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+{{-étym-}}
+: De l’{{étyl|en|fr|mot=handshake}}.
+
+{{-nom-|fr}}
+'''handshake''' {{m}
+# {{info|fr}} [[procédure|Procédure]] d’[[établissement]] d’une [[communication]] entre deux [[matériel]]s ou [[logiciel]]s.
+#* ''La gestion des échanges est faite à partir d'une procédure de '''Handshake''' à partir des lignes DAV, NFRD, NDAC.'' {{source|[http://www.stielec.ac-aix-marseille.fr/cours/abati/ieee.htm Bus d’instrumentation IEEE 488]}}
+
+== {{=en=}} ==
+{{-étym-}}
+: Mot {{compos|hand|shake|lang=en}}.
+
+{{-nom-|en}}
+{{en-nom-rég|ˈhændˌʃeɪk|s=s}}
+'''handshake'''
+# [[poignée de main|Poignée de main]].
+# {{info|en}} [[procédure|Procédure]] d’[[établissement]] d’une [[communication]] entre deux [[matériel]]s ou [[logiciel]]s.
+
+{{-apr-}}
+* [[shake hands#en|shake hands]]
+
+{{-pron-}}
+* {{pron|ˈhændˌʃeɪk|en}}
+* {{pron-rég|États-Unis &lt;!-- précisez svp la ville ou la région --&gt;||audio=En-us-handshake.ogg}}
+* {{pron-rég|Royaume Uni &lt;!-- précisez svp la ville ou la région --&gt;||audio=En-uk-handshake.ogg}}
+
+[[en:handshake]]
+[[eo:handshake]]
+[[et:handshake]]
+[[fa:handshake]]
+[[fi:handshake]]
+[[hu:handshake]]
+[[io:handshake]]
+[[it:handshake]]
+[[ja:handshake]]
+[[kn:handshake]]
+[[ko:handshake]]
+[[ml:handshake]]
+[[pl:handshake]]
+[[pt:handshake]]
+[[simple:handshake]]
+[[ta:handshake]]
+[[tr:handshake]]
+[[vi:handshake]]
+[[zh:handshake]]</text>
+    </revision>
+  </page>
 </mediawiki>

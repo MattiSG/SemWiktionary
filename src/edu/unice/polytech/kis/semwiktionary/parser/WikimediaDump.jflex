@@ -289,6 +289,12 @@ space = ({whitespace}|{newline})
 		// TODO: store type in word
 		yybegin(SECTION);
 	}
+	
+	.
+	{
+		logSyntaxError("Unparsable nature in '" + currentWord.getTitle());
+		yybegin(SECTION);
+	}
 }
 
 
@@ -351,6 +357,12 @@ space = ({whitespace}|{newline})
 	[^|}]+|"|"
 	{
 		log("Unexpected pattern value: '" + yytext() + "'");
+	}
+	
+	"}"
+	{
+		logSyntaxError("Unbalanced bracket in pattern in '" + currentWord.getTitle() + "'");
+		yybegin(SECTION);
 	}
 }
 

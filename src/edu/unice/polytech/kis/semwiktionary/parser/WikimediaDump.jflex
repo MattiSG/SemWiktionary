@@ -432,8 +432,7 @@ space = ({whitespace}|{newline})
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
-			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + yytext() + "'. Skipping definition.");
-			e.printStackTrace();
+			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + yytext() + "'. Only content at this nesting level will be stored.");
 			
 			currentDefinition.setContent(yytext()); // best recovery we can do: forget about concatenation
 		}

@@ -17,13 +17,20 @@ Offer a complete graph database and a Java API to access it that provides the fo
 How to use
 ----------
 
+### Prerequisites ###
+
 You will need:
 
+- Java 1.6;
 - [Ant](http://ant.apache.org) to build this project;
 - this project's source files;
 - a [Wiktionary dump file](http://dumps.wikimedia.org/frwiktionary/latest/) with all articles (direct link for French: [130MB archive](http://dumps.wikimedia.org/frwiktionary/latest/frwiktionary-latest-pages-articles.xml.bz2));
-- around 2 GB of free space;
-- around an hour to initialize the database.
+- around 2 GB of free space (most of it can be reclaimed by deleting the dump file once the database has been populated from it);
+- around 12 hours to initialize the database.
+
+### Database population ###
+
+**Remember that we are currently offering support only for the French wiktionary**. This software has not been tested with any other language. You are most welcome to try and give us feedback, though!
 
 You will first need to deflate the dump file you previously downloaded, then:
 
@@ -31,9 +38,17 @@ You will first need to deflate the dump file you previously downloaded, then:
     cd SemWiktionary
     ant compile
     ./wiktionary --load path/to/dump/file.xml # this will take some time (see performance note beneath)
-	./wiktionary [wordToLookUp [anotherWord [...]]]
 	
 If you really want to parse a full dumpfile, though, you should first remove the `%debug` line in `src/edu/unice/polytech/kis/semwiktionary/parser/WikimediaDump.jflex`. That will give quite a speedup.
+
+### Lookup ###
+
+For testing or a basic usage, you can simply use the lookup interface this way:
+
+	./wiktionary	# interactive, or:
+	./wiktionary [wordToLookUp [anotherWord [...]]]
+	
+To integrate with your own application, or export the data in any format you wish, use the provided API. To access it, run `ant doc` and read the documentation in the `doc` folder.
 
 Constraints
 -----------

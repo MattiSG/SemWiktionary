@@ -2452,4 +2452,154 @@ Quelques infos sur [[Discuter:accueil|cette page]] &lt;small&gt;Attention : les 
 [[zh:manger]]</text>
     </revision>
   </page>
+  <page>
+    <title>céréale</title>
+    <id>9858</id>
+    <revision>
+      <id>9434922</id>
+      <timestamp>2011-09-16T04:12:14Z</timestamp>
+      <contributor>
+        <username>JackBot</username>
+        <id>12968</id>
+      </contributor>
+      <minor />
+      <comment>[[Wiktionnaire:Structure des articles|Autoformatage]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+{{-étym-}}
+: Du [[latin]] ''[[cerealis]]'' (« [[relatif]] à [[Cérès]] », [[déesse]] des [[moissons]]).
+: Même racine indo-européenne que ''[[creare]]'' (« [[créer]] ») et ''[[crescere]]'' (« [[croître]] »).
+
+{{-nom-|fr}}
+{{fr-rég|se.ʁe.al}}
+[[Image:Getreide.jpg|thumbnail|250px|right|[[épis|Épis]] d’[[orge]], de [[blé]] et de [[seigle]]]]
+'''céréale''' {{pron|se.ʁe.al}} {{f}}
+# [[plante|Plante]] cultivée principalement pour ses [[grain]]s utilisés dans l’[[alimentation]] de l’[[homme]] et de [[certain]]s animaux [[domestique]]s. Toutefois elle est parfois cultivée pour utiliser toute la plante comme [[fourrage]].
+#* ''Cette phytohormone de synthèse présentée sous forme de sels de sodium et de potassium, est surtout utilisée en cultures de '''céréales''' pour détruire le gaillet-gratteron et le mouron.''  {{source|Index phytosanitaire de l'{{w|ACTA}} ; 1961, p.113}}
+#* '' Le [[papillon]] de nuit ([[hétérocère]]) suivant se nourrit de '''céréales''' : &lt;br /&gt;
+:::[[noctuelle gamma]], ''Autographa gamma'' (Noctuidae). ''
+# [[graine|Graine]] de ces plantes.
+#* ''Cette farine est composée de deux '''céréales''', [[blé]] et [[épeautre]]''.
+
+{{-apr-}}
+* [[Cérès]]
+
+{{-drv-}}
+* [[céréalier]], [[céréalière]]
+* [[céréaliculture]]
+
+{{-hypo-}}
+* [[avoine]]
+* [[blé]]
+* [[épeautre]]
+* [[escourgeon]]
+* [[froment]]
+* [[orge]]
+* [[maïs]]
+* [[seigle]]
+* [[sorgho]]
+* [[triticale]]
+
+{{-trad-}}
+{{(}}
+* {{T|de}} : {{trad+|de|Getreide}} {{n}}
+* {{T|en}} : {{trad+|en|cereal}}
+* {{T|es}} : {{trad+|es|cereal}} {{m}}
+* {{T|eo}} : {{trad-|eo|cerealo}}
+* {{T|io}} : {{trad+|io|cerealo}}
+* {{T|el}} : {{trad+|el|δημητριακό|R=dhimitriakó}} {{n}}
+{{-}}
+* {{T|hbo}} : {{trad--|hbo|דגן|dif=דָּגָן}} {{m}}
+* {{T|io}} : {{trad+|io|cerealo}}
+* {{T|id}} : {{trad-|id|serealia}}
+* {{T|it}} : {{trad-|it|cereale}} {{m}}
+* {{T|nl}} : {{trad+|nl|graan}}
+* {{T|oc}} : {{trad-|oc|cereala}} 
+{{)}}
+
+{{-hyper-}}
+* [[plante]]
+** [[culture]]
+*** [[féculent]]
+
+{{-hypo-}}
+{{(|Plante, graine''' (1, 2)}}
+* [[alpiste des canaries]] ([[Phalaris canariensis]])
+* [[avoine]] ([[Avena sativa]])
+* [[blé]] 
+** [[blé amidonnier]] ([[Triticum dicoccum]])
+** [[blé dur]] ([[Triticum durum]])
+** [[blé tendre]], [[froment]] ([[Triticum aestivum]])
+** [[blé poulard]] ([[Triticum turgidum]])
+** [[engrain]] ([[Triticum monoccocum]])
+** [[épeautre]] ([[Triticum spelta]])
+** [[pain]]
+** [[pâte]]
+** [[semoule]]
+* [[coix]] ([[Coix lachryma-jobi]])
+* [[éleusine cultivée]] ([[Eleusine coracana L.]])
+* [[fonio]] ([[Digitaria exilis]])
+* [[kamut]] ([[Triticum turgidum ssp. turanicum]])
+* [[maïs]] ([[Zea mays]])
+* [[mil]], [[millet]]
+** [[millet commun]] ([[panicum miliaceum]])
+** [[millet des oiseaux]] ([[Setaria italica]])
+** [[millet japonais]] ([[Echinochloa frumentacea]])
+** [[millet perle]] ([[Pennisetum glaucum]])
+* [[orge]] ([[Hordeum vulgare]])
+** [[orge perlée]]
+* [[quinoa]]
+* [[riz]] ([[Oryza sativa]])
+** [[riz sauvage]] ([[Zizania palustris]])
+* [[sarrasin]] ([[Fagopyrum esculentum]])
+* [[seigle]] ([[Secale cereale]])
+* [[sésame]]
+* [[sorgho]] ([[Sorghum bicolor]])
+* [[teff]] ([[Eragrostis tef]])
+* [[triticale]]
+{{)}}
+
+{{-méro-}}
+'''Plante''' (1) :
+* [[grain]]
+
+{{-holo-}}
+'''Graine''' (2) :
+* [[alimentation]]
+* [[diète]]
+
+{{-adj-|fr}}
+{{fr-rég|se.ʁe.al|mf=1}}
+'''céréale''' {{pron|se.ʁe.al|fr}} {{mf}}
+# Qui [[produit]] des [[graine]]s [[propre]]s à la [[nourriture]] de l’[[homme]] et de [[certain]]s animaux [[domestique]]s.
+#* ''Les plantes '''céréales'''.''
+
+{{-var-ortho-}}
+* [[céréal]]
+
+{{-pron-}}
+* {{pron-rég|France &lt;!--  précisez svp la ville ou la région --&gt;|se.ʁe.al|audio=Fr-céréale.ogg}}
+
+{{-homo-}}
+* [[céréales]]
+
+{{-voir-}}
+* [[w:céréale|céréale]] sur Wikipedia
+
+{{-réf-}}
+* {{R:DAF8}}
+{{clé de tri|cereale}}
+
+[[de:céréale]]
+[[en:céréale]]
+[[es:céréale]]
+[[et:céréale]]
+[[fi:céréale]]
+[[hu:céréale]]
+[[io:céréale]]
+[[pl:céréale]]
+[[pt:céréale]]
+[[vi:céréale]]
+[[zh:céréale]]</text>
+    </revision>
+  </page>
 </mediawiki>

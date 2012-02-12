@@ -3,20 +3,16 @@ SemWiktionary
 
 Java API to locally access data from [wiktionary](http://fr.wiktionary.org). Specific target is the French wiktionary.
 
-Objectifs
----------
+Goal
+----
 
-### Objectif primaire ###
+Offer a complete graph database and a Java API to access it that provides the following information about a word:
 
-Fournir une API Java permettant d'accéder aux informations suivantes sur un mot de la langue française :
+1. Definitions.
+2. Semantical relations with other words, such as synonymy, antonymy, parnoymy…
+3. _[Lexical class](http://en.wikipedia.org/wiki/Part_of_speech) (or “part of speech”)._ **— not available yet**
 
-1. [nature](http://fr.wikipedia.org/wiki/Classe_lexicale) (ou “classe lexicale”) ;
-2. relations avec d'autres mots de la base de données (liste non exhaustive : synonymie, homonymie…) ;
-3. définition.
 
-### Objectifs secondaires ###
-
-**Performance.** Durées maximales envisageables : 1 journée pour le chargement de la base de données ; 5 minutes pour l'exécution d'une requête.
 
 How to use
 ----------

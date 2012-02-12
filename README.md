@@ -12,7 +12,20 @@ Offer a complete graph database and a Java API to access it that provides the fo
 2. Semantical relations with other words, such as synonymy, antonymy, parnoymy…
 3. _[Lexical class](http://en.wikipedia.org/wiki/Part_of_speech) (or “part of speech”)._ **— not available yet**
 
+Example
+-------
 
+    import edu.unice.polytech.kis.semwiktionary.model.Word;
+	
+	
+	Word hello = Word.from("bonjour");
+	
+	for (Word salutation : hello.getSynonyms()) {
+		System.out.println(salutation + " word!";
+		
+		System.out.print("Most usually used in the context of: ");
+		System.out.println(hello.getDefinitions().get(0).getDomain());
+	}
 
 How to use
 ----------

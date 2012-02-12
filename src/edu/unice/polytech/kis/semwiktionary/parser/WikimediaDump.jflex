@@ -499,9 +499,6 @@ space = ({whitespace}|{newline})
 
 	[^\]]+
 	{
-		if (currentRelation == Relation.TROPONYM) {
-			log("Tropo OK : " +yytext());
-		}
 		try {
 			currentWord.set(currentRelation, MutableWord.from(yytext()));
 		} catch (Exception e) {

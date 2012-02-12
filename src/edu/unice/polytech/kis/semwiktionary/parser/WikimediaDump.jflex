@@ -449,7 +449,15 @@ space = ({whitespace}|{newline})
 	{newline}
 	{
 		// rare case in which the only content of a definition is a list of domains (see "neuf")
-		definitionsBuffer.add(definitionDepth, ""); // otherwise we'll break the concatenation
+		try {
+			definitionsBuffer.add(definitionDepth, ""); // otherwise we'll break the concatenation
+		} catch (ArrayIndexOutOfBoundsException e) {
+			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
+			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "', with a definition that has no content other than domains."); // damn, that's an edge case… (but an existing one)
+			
+			// no recovery to do here: more nested definitions will be caught in the usual definition handling case above this one
+		}
+		
 		yypushback(1);
 		yybegin(SECTION);
 	}

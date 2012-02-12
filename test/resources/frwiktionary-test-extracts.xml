@@ -2401,4 +2401,85 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
 [[zh:handshake]]</text>
     </revision>
   </page>
+  <page>
+    <title>expulser</title>
+    <id>160817</id>
+    <revision>
+      <id>9382550</id>
+      <timestamp>2011-08-25T11:48:09Z</timestamp>
+      <contributor>
+        <username>Luckas-bot</username>
+        <id>9945</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.1) (robot Ajoute: [[cs:expulser]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+
+{{-étym-}}
+: Du {{étyl|la|fr|mot=expulsare}}.
+
+{{-verb-|fr}}
+'''expulser''' {{t|fr}} {{1ergroupe}}
+## [[chasser|Chasser]] [[quelqu’un]] d’un [[lieu]], d’un [[pays]] où il [[établir|était établi]], d’un [[bien]] dont il [[être|était]] en [[possession]].
+##* ''Les juifs '''furent expulsés''' de Bretagne et ceux qui n'obtempérèrent pas assez vite furent massacrés.'' {{source|{{w|Léon Berman}}, ''Histoire des Juifs de France des origines à nos jours'', 1937}}
+## {{ébauche-déf|fr}}
+##:{{ébauche-exe|fr}}
+# [[exclure|Exclure]] d’une [[société]], d’une [[compagnie]], [[etc.]]
+#* ''Il fut honteusement '''expulsé''' de ce cercle.''
+# {{médecine|fr}} [[pousser|Pousser]] au [[dehors]], [[faire]] [[évacuer]].
+#* '''''Expulser''' des gaz.''
+#* ''Le calcul fut '''expulsé''' à la suite d’une crise hépatique.''
+
+{{-tropo-}}
+* [[faire faire la course à l’échalote]] (1)
+
+{{-drv-}}
+* [[expulsable]]
+* [[expulsion]]
+
+{{-syn-}}
+* [[bannir]] (1)
+* [[rejeter]] (1, 2)
+* [[éjecter]] (1)
+* [[exclure]] (2)
+
+{{-trad-}}
+{{(|Chasser quelqu’un d’un lieu où il était établi}}
+* {{T|en}} : {{trad+|en|expel}}
+{{-}}
+* {{T|id}} : {{trad-|id|menggusur}}
+{{)}}
+{{(|Chasser quelqu’un d’un lieu d’un pays}}
+* {{T|en}} : {{trad+|en|expel}}
+{{-}}
+* {{T|id}} : {{trad+|id|mengusir}}, {{trad-|id|mendeportasi}}
+{{)}}
+{{(|Pousser au dehors, faire évacuer}}
+* {{T|en}} : {{trad+|en|expel}}
+{{-}}
+{{)}}
+
+
+{{trad-trier}}
+{{(|Traductions à trier suivant le sens}}
+* {{T|es}} : {{trad+|io|expulsar}}
+{{-}}
+* {{T|io}} : {{trad+|io|ekpulsar}}
+{{)}}
+
+{{-pron-}}
+* {{pron|ɛk.spyl.se}}
+
+{{-réf-}}
+*{{Import:DAF8}}
+
+[[cs:expulser]]
+[[en:expulser]]
+[[et:expulser]]
+[[fi:expulser]]
+[[id:expulser]]
+[[io:expulser]]
+[[vi:expulser]]</text>
+    </revision>
+  </page>
 </mediawiki>

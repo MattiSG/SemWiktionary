@@ -374,8 +374,9 @@ space = ({whitespace}|{newline})
 		currentWord.set("pronunciation", yytext());
 	}
 	
-	"|"|"}}"
+	"|"|"}"
 	{
+		// not only "}}" in case of missing ending curly bracket
 		yybegin(PATTERN);
 	}
 }

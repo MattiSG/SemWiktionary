@@ -2482,4 +2482,50 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
 [[vi:expulser]]</text>
     </revision>
   </page>
+  <page>
+    <title>pratiquant</title>
+    <id>172328</id>
+    <revision>
+      <id>9397392</id>
+      <timestamp>2011-08-31T17:47:42Z</timestamp>
+      <contributor>
+        <username>François GOGLINS</username>
+        <id>2898</id>
+      </contributor>
+      <comment>ajout du nom &amp; exemple</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+
+{{-étym-}}
+: {{ébauche-étym|fr}}
+
+{{-adj-|fr}}
+{{fr-accord-cons|pʁa.ti.kɑ̃|t}}
+'''pratiquant''' {{pron|pʁa.ti.kɑ̃|fr}}
+# Qui [[observer|observe]] [[exactement]] les [[pratique]]s de sa [[religion]].
+#* ''Un catholique '''pratiquant'''''.
+
+{{-apr-}}
+* [[pratiquer]]
+* [[pratique]]
+
+{{-nom-|fr}}
+{{fr-accord-cons|pʁa.ti.kɑ̃|t}}
+'''pratiquant''' {{pron|pʁa.ti.kɑ̃}|fr}
+# [[personne|Personne]] qui [[pratiquer|pratique]] avec [[constance]] une [[activité]] particulière.
+#* ''On voit que la moralité des armateurs et des gros négociants n'était pas toujours irréprochable et que l'amour ancillaire avait, à Saint-Malo, de chauds '''pratiquants'''.'' {{source|{{w|Étienne Dupont}}, ''Le vieux Saint-Malo : Les Corsaires chez eux'', Édouard Champion, 1929, p.110}}
+
+{{-flex-verb-|fr}}
+{{fr-verbe-flexion|ppr=oui}}
+'''pratiquant''' {{pron|pʁa.ti.kɑ̃}}
+# ''Participe présent du verbe'' [[pratiquer]].
+
+{{-réf-}}
+{{Import:DAF8}}
+
+[[en:pratiquant]]
+[[fi:pratiquant]]
+[[io:pratiquant]]
+[[vi:pratiquant]]</text>
+    </revision>
+  </page>
 </mediawiki>

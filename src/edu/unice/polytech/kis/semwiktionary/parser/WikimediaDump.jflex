@@ -512,7 +512,7 @@ space = ({whitespace}|{newline})
 		yybegin(SIMPLENYM);
 	}
 
-	[^\]]+
+	([^\]]|"]"[^\]])+
 	{
 		try {
 			currentWord.set(currentRelation, MutableWord.from(yytext()));

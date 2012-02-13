@@ -393,6 +393,12 @@ space = ({whitespace}|{newline})
 	{
 		yybegin(DEFINITION);
 	}
+	
+	"}"
+	{
+		logSyntaxError("Single bracket in definition domain in '" + currentWord.getTitle() + "'");
+		yybegin(DEFINITION);
+	}
 }
 
 <DEFINITION_EXAMPLE>

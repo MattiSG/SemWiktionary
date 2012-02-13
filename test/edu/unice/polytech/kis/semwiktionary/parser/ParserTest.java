@@ -291,6 +291,16 @@ public class ParserTest {
 						
 						
 		result.put("vieux", definitions);
+		
+		
+		definitions = new ArrayList<Definition>(1);
+		
+		definitions.add(new Definition("Substance phytosanitaire, de formule chimique C6H12NO4PS2 , à usage d'insecticide endothérapique sur de nombreux insectes, particulièrement les pucerons, la mouche de l’olive, la mouche méditerranéenne des fruits, le carpocapse, la mouche de l’endive et la mouche de l’asperge, la mouche de la betterave, la cicadelle de la vigne, les psylles et les thrips ; et avec une bonne action acaricide sur les acariens de la vigne, des arbres fruitiers, des cultures légumières.", 1)
+						.addDomain("Agriculture")
+						.addDomain("Viticulture"));
+		
+		
+		result.put("formothion", definitions);
 
 		
 		return result;

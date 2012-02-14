@@ -184,21 +184,87 @@
 			</classpath>
 		</junit>
 	</target>
+	
+	<target name="package" depends="junit, package_source, package_build" description="Create both source and build packages if tests succeed">
+	</target>
+	
+	<target name="package_forced" depends="package_source, package_build" description="Create both source and build packages, ignoring tests results">
+	</target>
 
-	<target name="install" depends="clean, jar, jar_tests, junit, doc" description="Create dist directory, include jars and doc if everything works">
+	<target name="package_source" depends="doc" description="Create dist directory, include all source files, doc and lib, ignoring tests">
+		
 		<mkdir dir="${dist}"/>
 		<mkdir dir="${tmp}"/>
-		<mkdir dir="${tmp}/config"/>
-		<copy file="${build_file}" todir="${tmp}"/>
-<!--		<copy todir="${tmp}/config">
-				<fileset dir="${config}"/>  // TODO: do not fail if directory does not exist
+		
+		<copy file="${build_file}" todir="${tmp}" preservelastmodified="true"/>
+		
+		<copy file="README.md" todir="${tmp}" preservelastmodified="true"/>
+		
+		<copy file="wiktionary" todir="${tmp}" preservelastmodified="true"/>
+		<chmod file="${tmp}/wiktionary" perm="550"/>
+		
+		<copy todir="${tmp}/lib" preservelastmodified="true">
+			<fileset refid="lib.jars"/>
 		</copy>
--->
-		<zip destfile="${dist}/${ant.project.name}${project_suffix}.zip">
-			<fileset dir="${jars}"/>
-			<fileset dir="${doc}"/>
-			<fileset dir="${tmp}"/>
+		
+		<copy todir="${tmp}/doc" preservelastmodified="true">
+			<fileset dir="${doc}">
+				<exclude name="vendor/**"/>
+			</fileset>
+		</copy>
+		
+		<copy todir="${tmp}/src" preservelastmodified="true">
+			<fileset dir="${src}"/>
+		</copy>
+		
+		<copy todir="${tmp}/test" preservelastmodified="true">
+			<fileset dir="${test_dir}"/>
+		</copy>
+
+		<tstamp>
+			<format property="now" pattern="yyyy-MM-dd_HH-mm-ss" />
+		</tstamp>
+		
+		<zip destfile="${dist}/${now}/${ant.project.name}${project_suffix}_source.zip"
+			 basedir="${tmp}"
+			 level="9">
 		</zip>
+		
+		<delete dir="${tmp}"/>
+	</target>
+	
+	<target name="package_build" depends="clean, jar, doc" description="Create dist directory, include jars, doc and lib, ignoring tests">
+		
+		<mkdir dir="${dist}"/>
+		<mkdir dir="${tmp}"/>
+		
+		<copy file="README.md" todir="${tmp}" preservelastmodified="true"/>
+		
+		<copy file="wiktionary" todir="${tmp}" preservelastmodified="true"/>
+		<chmod file="${tmp}/wiktionary" perm="550"/>
+		
+		<copy todir="${tmp}/lib" preservelastmodified="true">
+			<fileset refid="lib.jars"/>
+		</copy>
+		
+		<copy todir="${tmp}/doc" preservelastmodified="true">
+			<fileset dir="${doc}">
+				<exclude name="vendor/**"/>
+				<exclude name="resources/**"/>
+			</fileset>
+		</copy>
+		
+		<copy file="${jar_destination}" todir="${tmp}" preservelastmodified="true" />
+		
+		<tstamp>
+			<format property="now" pattern="yyyy-MM-dd_HH-mm-ss" />
+		</tstamp>
+		
+		<zip destfile="${dist}/${now}/${ant.project.name}${project_suffix}_library.zip"
+			basedir="${tmp}"
+			level="9">
+		</zip>
+		
 		<delete dir="${tmp}"/>
 	</target>
 
@@ -233,7 +299,6 @@
 		<delete dir="${build}"/>
 		<delete dir="${bin}"/>
 		<delete dir="${jars}"/>
-		<delete dir="${dist}"/>
 		<delete dir="${tmp}"/>
 	</target>
 </project>

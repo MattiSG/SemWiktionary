@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="semwiktionary" default="junit" basedir=".">
+<project name="SemWiktionary" default="junit" basedir=".">
 	<!-- JAVA CLASSES -->	
 		<!-- package prefix -->
 		<property name="package" value="edu.unice.polytech.kis.semwiktionary"/>
 
 		<!-- main class to be executed -->
-		<property name="main_class" value="${package}.SemWiktionary"/>
+		<property name="main_class" value="${package}.${ant.project.name}"/>
 		
 		<!-- main test class to be run by Junit -->
 		<property name="test.class.name" value="${package}.test.RunAndPray" />
@@ -76,9 +76,12 @@
 	
 	<!-- TASKS -->
 	
+	<!-- For more information about this task, see http://jflex.de/jflex_anttask.html -->
 	<taskdef name="jflex" classname="JFlex.anttask.JFlexTask" classpath="${lib}/JFlex.jar"/>
 	
 	<!-- /TASKS -->
+	
+	<!-- SHORTCUTS -->
 	
 	<!-- lib directory should contain any pre-built jar files needed to build the project -->
 	<fileset id="lib.jars" dir="${lib}">
@@ -88,9 +91,10 @@
 	<path id="lib.path">
 		<fileset refid="lib.jars"/>
 	</path>
+	
+	<!-- /SHORTCUTS -->
 
-	<!-- Initialization target, for any prelimary setup needed to build -->
-	<target name="init" description="Preparation">
+	<target name="init" description="All prelimary setup (mainly directory creation)">
 		<mkdir dir="${src}"/>
 		<mkdir dir="${lib}"/>
 		<mkdir dir="${build}"/>
@@ -99,22 +103,21 @@
 		<mkdir dir="${doc}"/>
 	</target>
 	
-	<target name="doc">
+	<target name="doc" description="Generate documentation">
 		<javadoc linksource="true" docencoding="UTF-8"
 			destdir="${doc}/javadoc"
 			classpathref="lib.path"
 			stylesheetfile="${doc}/resources/javadoc-stylesheet.css"
 		>
+			<doclet name="com.visural.doclets.markdown.standard.Standard"
+				path="${lib}/MarkdownDoclet-3.0.jar">
+			</doclet>
 			<fileset dir="${src}">
 				<filename name="**/*.java"/>
 			</fileset>
-			<doclet name="com.visural.doclets.markdown.standard.Standard"
-					path="${lib}/MarkdownDoclet-3.0.jar">
-			</doclet>
 		</javadoc>	
 	</target>
 	
-	 <!-- For more information about this task, see http://jflex.de/jflex_anttask.html -->
 	<target name="jflex" depends="init" description="Generate parser">
 		<jflex
 			file="${src}/edu/unice/polytech/kis/semwiktionary/parser/WikimediaDump.jflex"
@@ -132,17 +135,18 @@
 			debug="${compile.debug}"
 			classpathref="lib.path"
 			>
-				<compilerarg value="-Xlint:unchecked"/>
+			<compilerarg value="-Xlint:unchecked"/>
 		</javac>
 	</target>
 
-	<target name="compile_tests" depends="compile" description="Compile tests code">
+	<target name="compile_tests" depends="compile" description="Compile test code">
 		<javac deprecation="on" srcdir="${test_dir}" destdir="${bin}"
 			source="${jdk.dev}" target="${jdk.target}"
 			includeAntRuntime="no"
 			debug="${compile.debug}"
 			classpathref="lib.path"
-			> <!-- TODO: use a reference to share compile and compile_tests javac node -->
+			>
+			<compilerarg value="-Xlint:unchecked"/>	
 		</javac>
 	</target>
 	
@@ -205,7 +209,7 @@
 		<delete dir="${tmp}"/>
 	</target>
 
-	<target name="parse" depends="compile,erase_db" description="Run the parser">
+	<target name="parse" depends="compile, erase_db" description="Run the parser">
 		<java classname="edu.unice.polytech.kis.semwiktionary.parser.WikimediaDump"
 			  fork="true"
 			  failonerror="true">

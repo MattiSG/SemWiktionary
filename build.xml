@@ -210,7 +210,7 @@
 				<pathelement location="${bin}" />
 				<fileset refid="lib.jars"/>
 			</classpath>
-			<arg value="test/resources/miniwiki.xml"/>
+			<arg value="${test_dir}/resources/frwiktionary-test-extracts.xml"/>
 		</java>
 	</target>
 

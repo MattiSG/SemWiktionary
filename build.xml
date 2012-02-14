@@ -100,10 +100,11 @@
 		<mkdir dir="${build}"/>
 		<mkdir dir="${data}"/>
 		<mkdir dir="${log}"/>
-		<mkdir dir="${doc}"/>
 	</target>
 	
 	<target name="doc" description="Generate documentation">
+		<mkdir dir="${doc}"/>
+		
 		<javadoc linksource="true" docencoding="UTF-8"
 			destdir="${doc}/javadoc"
 			classpathref="lib.path"

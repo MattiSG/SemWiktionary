@@ -394,7 +394,7 @@ space = ({whitespace}|{newline})
 		yybegin(DEFINITION);
 	}
 	
-	"}"
+	(\|[^}]*)?"}"{optionalSpaces}
 	{
 		logSyntaxError("Single bracket in definition domain in '" + currentWord.getTitle() + "'");
 		yybegin(DEFINITION);

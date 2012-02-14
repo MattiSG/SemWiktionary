@@ -77,7 +77,7 @@
 	<!-- TASKS -->
 	
 	<!-- For more information about this task, see http://jflex.de/jflex_anttask.html -->
-	<taskdef name="jflex" classname="JFlex.anttask.JFlexTask" classpath="${lib}/JFlex.jar"/>
+	<taskdef name="jflex" classname="JFlex.anttask.JFlexTask" classpath="${lib}/parser_build/JFlex.jar"/>
 	
 	<!-- /TASKS -->
 	
@@ -117,7 +117,7 @@
 			stylesheetfile="${doc}/resources/javadoc-stylesheet.css"
 		>
 			<doclet name="com.visural.doclets.markdown.standard.Standard"
-				path="${lib}/MarkdownDoclet-3.0.jar">
+				path="${lib}/doc/MarkdownDoclet-3.0.jar">
 			</doclet>
 			<fileset dir="${src}">
 				<filename name="**/*.java"/>
@@ -241,7 +241,12 @@
 		<chmod file="${tmp}/wiktionary" perm="550"/>
 		
 		<copy todir="${tmp}/lib" preservelastmodified="true">
-			<fileset refid="lib.jars"/>
+			<fileset dir="${lib}">
+				<include name="**/*.jar" />
+				<exclude name="test/**" />
+				<exclude name="doc/**" />
+				<exclude name="parser_build/**" />
+			</fileset>
 		</copy>
 		
 		<copy todir="${tmp}/doc" preservelastmodified="true">

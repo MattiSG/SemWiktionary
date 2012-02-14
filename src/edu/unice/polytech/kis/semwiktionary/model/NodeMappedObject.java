@@ -83,6 +83,7 @@ public abstract class NodeMappedObject {
 	*You'll need to specify the expected output type, so as to avoid casts.
 	*Example: Collection<Word> synonyms = myWord.<Word>get(Relation.SYNONYM);
 	*/
+	@SuppressWarnings("unchecked") // otherwise, getDestinationType will warn about <T extends NMO> being different from <? extends NMO>
 	public <T extends NodeMappedObject> Collection<T> get(Relation relType, Direction dir) {
 		Class<T> type = relType.getDestinationType();
 		List<T> result = new LinkedList<T>();

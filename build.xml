@@ -92,6 +92,8 @@
 		<fileset refid="lib.jars"/>
 	</path>
 	
+	<property name="jar_destination" value="${jars}/${ant.project.name}${project_suffix}.jar"/>
+	
 	<!-- /SHORTCUTS -->
 
 	<target name="init" description="All prelimary setup (mainly directory creation)">
@@ -152,9 +154,7 @@
 	</target>
 	
 	<target name="jar" depends="compile" description="Build jar">
-		<property name="jar_file" value="${jars}/${ant.project.name}${project_suffix}.jar"/>
-		<delete file="${jar_file}"/>
-		<buildnumber file="build.num"/>
+		<delete file="${jar_destination}"/>
 		
 		<tstamp>
 			<format property="now" pattern="yyyy-MM-dd HH:mm:ss" />
@@ -163,22 +163,14 @@
 		<manifest file="${bin}/Manifest">
 			<attribute name="Built-By" value="${user.name}"/>
 			<attribute name="Main-Class" value="${main_class}"/>
-			<attribute name="Built-Date" value="${TODAY}"/>                 
+			<attribute name="Built-Date" value="${now}"/>
 		</manifest>
 		
-		<jar destfile="${jar_file}"
-			basedir="."
+		<jar destfile="${jar_destination}"
+			basedir="${bin}"
 			manifest="${bin}/Manifest"
+			level="9"
 			>
-			<fileset dir="${bin}/"/>
-		</jar>
-		<!-- TODO: now, this is an executable JAR. Make another one for source. -->
-	</target>
-
-	<target name="jar_tests" depends="compile_tests" description="Build tests jar">
-		<mkdir dir="${jars}"/>
-		<jar jarfile="${jars}/${ant.project.name}${project_suffix}_tests.jar" basedir="${test_dir}">
-			<fileset dir="${test_dir}/" />
 		</jar>
 	</target>
 

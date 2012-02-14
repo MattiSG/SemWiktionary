@@ -56,9 +56,6 @@
 		 <!-- database storage folder -->
 		<property name="data" location="data"/>
 		
-		 <!-- intermediate folder for final zipping -->
-		<property name="tmp" location="tmp"/>
-		
 		 <!-- intermediate build products -->
 		<property name="build" location="build"/>
 		
@@ -194,77 +191,55 @@
 	<target name="package_source" depends="doc" description="Create dist directory, include all source files, doc and lib, ignoring tests">
 		
 		<mkdir dir="${dist}"/>
-		<mkdir dir="${tmp}"/>
-		
-		<copy file="${build_file}" todir="${tmp}" preservelastmodified="true"/>
-		
-		<copy file="README.md" todir="${tmp}" preservelastmodified="true"/>
-		
-		<copy file="wiktionary" todir="${tmp}" preservelastmodified="true"/>
-		<chmod file="${tmp}/wiktionary" perm="550"/>
-		
-		<copy todir="${tmp}/lib" preservelastmodified="true">
-			<fileset refid="lib.jars"/>
-		</copy>
-		
-		<copy todir="${tmp}/doc" preservelastmodified="true">
-			<fileset dir="${doc}">
-				<exclude name="vendor/**"/>
-			</fileset>
-		</copy>
-		
-		<copy todir="${tmp}/src" preservelastmodified="true">
-			<fileset dir="${src}"/>
-		</copy>
-		
-		<copy todir="${tmp}/test" preservelastmodified="true">
-			<fileset dir="${test_dir}"/>
-		</copy>
 		
 		<zip destfile="${dist}/${now}/${ant.project.name}${project_suffix}_source.zip"
-			 basedir="${tmp}"
 			 level="9">
-			 <zipfileset file="wiktionary" filemode="550" />
+			 
+			<zipfileset file="README.md" />
+			 
+			<zipfileset file="${build_file}" />
+			
+			<zipfileset file="wiktionary" filemode="550" />
+			
+			<zipfileset dir="${doc}" prefix="doc">
+				<exclude name="vendor/**"/>
+			</zipfileset>
+			
+			<zipfileset dir="${lib}" prefix="lib">
+				<include name="**/*.jar" />
+			</zipfileset>
+			
+			<zipfileset dir="${src}" prefix="src"/>
+			
+			<zipfileset dir="${test_dir}" prefix="test"/>
 		</zip>
-		
-		<delete dir="${tmp}"/>
 	</target>
 	
 	<target name="package_build" depends="clean, jar, doc" description="Create dist directory, include jars, doc and lib, ignoring tests">
 		
 		<mkdir dir="${dist}"/>
-		<mkdir dir="${tmp}"/>
-		
-		<copy file="README.md" todir="${tmp}" preservelastmodified="true"/>
-		
-		<copy file="wiktionary" todir="${tmp}" preservelastmodified="true"/>
-		<chmod file="${tmp}/wiktionary" perm="550"/>
-		
-		<copy todir="${tmp}/lib" preservelastmodified="true">
-			<fileset dir="${lib}">
+				
+		<zip destfile="${dist}/${now}/${ant.project.name}${project_suffix}_library.zip"
+			level="9">
+			
+			<zipfileset file="README.md" />
+			
+			<zipfileset file="wiktionary" filemode="550" />
+			
+			<zipfileset dir="${doc}" prefix="doc">
+				<exclude name="vendor/**"/>
+				<exclude name="resources/**"/>
+			</zipfileset>
+			
+			<zipfileset dir="${lib}" prefix="lib">
 				<include name="**/*.jar" />
 				<exclude name="test/**" />
 				<exclude name="doc/**" />
 				<exclude name="parser_build/**" />
-			</fileset>
-		</copy>
-		
-		<copy todir="${tmp}/doc" preservelastmodified="true">
-			<fileset dir="${doc}">
-				<exclude name="vendor/**"/>
-				<exclude name="resources/**"/>
-			</fileset>
-		</copy>
-		
-		<copy file="${jar_destination}" todir="${tmp}" preservelastmodified="true" />
-		
-		<zip destfile="${dist}/${now}/${ant.project.name}${project_suffix}_library.zip"
-			basedir="${tmp}"
-			level="9">
-			<zipfileset file="wiktionary" filemode="550" />
+			</zipfileset>
+			
+			<zipfileset file="${jar_destination}" />
 		</zip>
-		
-		<delete dir="${tmp}"/>
 	</target>
 
 	<target name="parse" depends="compile, erase_db" description="Run the parser">
@@ -298,6 +273,5 @@
 		<delete dir="${build}"/>
 		<delete dir="${bin}"/>
 		<delete dir="${jars}"/>
-		<delete dir="${tmp}"/>
 	</target>
 </project>

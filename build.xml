@@ -94,6 +94,10 @@
 	
 	<property name="jar_destination" value="${jars}/${ant.project.name}${project_suffix}.jar"/>
 	
+	<tstamp>
+		<format property="now" pattern="yyyy-MM-dd_HH-mm-ss" />
+	</tstamp>
+	
 	<!-- /SHORTCUTS -->
 
 	<target name="init" description="All prelimary setup (mainly directory creation)">
@@ -156,10 +160,6 @@
 	<target name="jar" depends="compile" description="Build jar">
 		<delete file="${jar_destination}"/>
 		
-		<tstamp>
-			<format property="now" pattern="yyyy-MM-dd HH:mm:ss" />
-		</tstamp>
-		
 		<manifest file="${bin}/Manifest">
 			<attribute name="Built-By" value="${user.name}"/>
 			<attribute name="Main-Class" value="${main_class}"/>
@@ -220,14 +220,11 @@
 		<copy todir="${tmp}/test" preservelastmodified="true">
 			<fileset dir="${test_dir}"/>
 		</copy>
-
-		<tstamp>
-			<format property="now" pattern="yyyy-MM-dd_HH-mm-ss" />
-		</tstamp>
 		
 		<zip destfile="${dist}/${now}/${ant.project.name}${project_suffix}_source.zip"
 			 basedir="${tmp}"
 			 level="9">
+			 <zipfileset file="wiktionary" filemode="550" />
 		</zip>
 		
 		<delete dir="${tmp}"/>
@@ -256,13 +253,10 @@
 		
 		<copy file="${jar_destination}" todir="${tmp}" preservelastmodified="true" />
 		
-		<tstamp>
-			<format property="now" pattern="yyyy-MM-dd_HH-mm-ss" />
-		</tstamp>
-		
 		<zip destfile="${dist}/${now}/${ant.project.name}${project_suffix}_library.zip"
 			basedir="${tmp}"
 			level="9">
+			<zipfileset file="wiktionary" filemode="550" />
 		</zip>
 		
 		<delete dir="${tmp}"/>

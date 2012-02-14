@@ -49,10 +49,7 @@ public class Definition extends NodeMappedObject {
 		this.listDomain = new LinkedList<String>();
 	}
 	
-	/** Models a definition of a word.
-	 * Default position value is 0.
-	 *
-	 * @param	definition	The actual definition content
+	/** Retrieves a stored definition's content from its node.
 	 */
 	public Definition(Node node) {
 		this.node = node;
@@ -102,7 +99,7 @@ public class Definition extends NodeMappedObject {
 	/** Adds the given example to this definition.
 	 *
 	 * @param	example	The example to add
-	 * @returns	this	for chainability
+	 * @return	this	for chainability
 	 */
 	public Definition addExample(String example) {
 		this.listExample.add(example);
@@ -114,7 +111,7 @@ public class Definition extends NodeMappedObject {
 	/** Adds the given domain to this defintion.
 	 *
 	 * @param	domain	The domain to add
-	 * @returns	this	for chainability
+	 * @return	this	for chainability
 	 */
 	public Definition addDomain(String domain) {
 		this.listDomain.add(domain);
@@ -124,7 +121,7 @@ public class Definition extends NodeMappedObject {
 	}
 
 	/**
-	* @returns	this	for chainability
+	* @return	this	for chainability
 	*/
 	public Definition setPosition(int position) {
 		this.position = position;
@@ -134,7 +131,7 @@ public class Definition extends NodeMappedObject {
 	}
 	
 	/**
-	* @returns	this	for chainability
+	* @return	this	for chainability
 	*/	
 	public Definition setContent(String content) {
 		this.content = content;

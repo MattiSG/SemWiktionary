@@ -21,7 +21,7 @@ Example
 	Word hello = Word.from("bonjour");
 	
 	for (Word salutation : hello.getSynonyms()) {
-		System.out.println(salutation + " word!";
+		System.out.println(salutation + " word!");
 		
 		System.out.print("Most usually used in the context of: ");
 		System.out.println(hello.getDefinitions().get(0).getDomain());
@@ -38,12 +38,18 @@ You will need:
 - [Ant](http://ant.apache.org) to build this project;
 - this project's source files;
 - a [Wiktionary dump file](http://dumps.wikimedia.org/frwiktionary/latest/) with all articles (direct link for French: [130MB archive](http://dumps.wikimedia.org/frwiktionary/latest/frwiktionary-latest-pages-articles.xml.bz2));
-- around 2 GB of free space (most of it can be reclaimed by deleting the dump file once the database has been populated from it);
-- around 12 hours to initialize the database.
+- around 2 GB of free space (three quarters of it can be reclaimed by deleting the dump file once the database has been populated from it);
+- around 20 hours to initialize the database (_unless you use an already parsed database, see below_).
 
 ### Database population ###
 
 **Remember that we are currently offering support only for the French wiktionary**. This software has not been tested with any other language. You are most welcome to try and give us feedback, though!
+
+#### Using an already parsed database (recommended) ####
+
+This is clearly the preferred method, as it will allow you to skip the long task of parsing the wiktionary yourself. As long as our servers can handle the load, you can download the [full French wiktionary database](http://dl.mattischneider.fr/semwiktionary/data-v0.1.2.zip) (80 MB ZIP).
+
+#### Parsing yourself ####
 
 You will first need to deflate the dump file you previously downloaded, then:
 
@@ -69,7 +75,7 @@ Constraints
 This project being academic, some technical constraints were applied to it.
 
 1. Data source: [French Wiktionary](http://fr.wiktionary.org). Internationalization could be thought about, but is not currently aimed at.
-2. Technologies: access API in Java. [Graph database](http://en.wikipedia.org/wiki/Graph_database), preferably Neo4j.
+2. Technologies: Java. [Graph database](http://en.wikipedia.org/wiki/Graph_database), preferably Neo4j.
 
 Equivalent projects and rationale
 ---------------------------------

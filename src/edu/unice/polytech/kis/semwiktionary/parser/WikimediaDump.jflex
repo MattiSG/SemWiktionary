@@ -56,7 +56,7 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	private void initWord(String word) {
 		tick(currentWord.getTitle());
 		
-		currentWord = MutableWord.create(word);
+		currentWord = MutableWord.create(word);	//TODO: delay until language was accepted? We currently create the word immediately, even though we might not store anything from it if its language is not supported
 		errorFlag = false;
 		initSection();
 		
@@ -233,8 +233,9 @@ space = ({whitespace}|{newline})
 		yybegin(XML);
 	}
 
-	.|{newline}
+	([^={<]|"="[^=]|"=="[^ ]|"== "[^{]|"== {{-"|"{"[^{]|"{{"[^-])+|.
 	{
+		// "== {{-" is for "== {{-car-}} =="
 		// in MediaWiki: suppress output
 	}
 }
@@ -288,6 +289,12 @@ space = ({whitespace}|{newline})
 		// TODO: store type in word
 		yybegin(SECTION);
 	}
+	
+	.
+	{
+		logSyntaxError("Unparsable nature in '" + currentWord.getTitle());
+		yybegin(SECTION);
+	}
 }
 
 
@@ -328,7 +335,7 @@ space = ({whitespace}|{newline})
 		leaveSection();
 	}
 
-	.|{newline}
+	([^{<\r\n])+|"{"[^{]|.|{newline}
 	{
 		// in Section: suppress output
 	}
@@ -351,6 +358,12 @@ space = ({whitespace}|{newline})
 	{
 		log("Unexpected pattern value: '" + yytext() + "'");
 	}
+	
+	"}"
+	{
+		logSyntaxError("Unbalanced bracket in pattern in '" + currentWord.getTitle() + "'");
+		yybegin(SECTION);
+	}
 }
 
 
@@ -361,8 +374,9 @@ space = ({whitespace}|{newline})
 		currentWord.set("pronunciation", yytext());
 	}
 	
-	"|"|"}}"
+	"|"|"}"
 	{
+		// not only "}}" in case of missing ending curly bracket
 		yybegin(PATTERN);
 	}
 }
@@ -377,6 +391,12 @@ space = ({whitespace}|{newline})
 	
 	(\|[^}]*)?"}}"{optionalSpaces}
 	{
+		yybegin(DEFINITION);
+	}
+	
+	(\|[^}]*)?"}"{optionalSpaces}
+	{
+		logSyntaxError("Single bracket in definition domain in '" + currentWord.getTitle() + "'");
 		yybegin(DEFINITION);
 	}
 }
@@ -419,8 +439,7 @@ space = ({whitespace}|{newline})
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
-			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + yytext() + "'. Skipping definition.");
-			e.printStackTrace();
+			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + yytext() + "'. Only content at this nesting level will be stored.");
 			
 			currentDefinition.setContent(yytext()); // best recovery we can do: forget about concatenation
 		}
@@ -436,7 +455,15 @@ space = ({whitespace}|{newline})
 	{newline}
 	{
 		// rare case in which the only content of a definition is a list of domains (see "neuf")
-		definitionsBuffer.add(definitionDepth, ""); // otherwise we'll break the concatenation
+		try {
+			definitionsBuffer.add(definitionDepth, ""); // otherwise we'll break the concatenation
+		} catch (ArrayIndexOutOfBoundsException e) {
+			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
+			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "', with a definition that has no content other than domains."); // damn, that's an edge case… (but an existing one)
+			
+			// no recovery to do here: more nested definitions will be caught in the usual definition handling case above this one
+		}
+		
 		yypushback(1);
 		yybegin(SECTION);
 	}
@@ -465,9 +492,9 @@ space = ({whitespace}|{newline})
 		leaveSection();
 	}
 
-	.|{newline}
+	([^-:*\r\n]|"-"[^}])+|.|{newline}
 	{
-
+		// in SimpleNym: suppress output
 	}
 }
 
@@ -475,7 +502,7 @@ space = ({whitespace}|{newline})
 {
 	[^:]+
 	{
-		// Context is not handled yet
+		//TODO: context is not handled yet
 	}
 
 	":"
@@ -491,7 +518,7 @@ space = ({whitespace}|{newline})
 		yybegin(SIMPLENYM);
 	}
 
-	[^\]]+
+	([^\]]|"]"[^\]])+
 	{
 		try {
 			currentWord.set(currentRelation, MutableWord.from(yytext()));

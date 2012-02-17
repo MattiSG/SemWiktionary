@@ -135,6 +135,12 @@ public class Word extends NodeMappedObject {
 		return this.<Word>get(Relation.TROPONYM);
 	}
 	
+	/** Returns all hyponyms of this Word.
+	 */
+	public Collection<Word> getHyponyms() {
+		return this.<Word>get(Relation.HYPONYM);
+	}
+	
 // DATABASE ACCESS
 	
 	/** Loads the definitions for this Word from the database.

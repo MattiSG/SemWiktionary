@@ -121,6 +121,12 @@ public class MutableWord extends Word {
 		return this;
 	}
 	
+	public MutableWord addHyponym(Word hyponym) {
+		Database.link(this.node, hyponym.node, Relation.HYPONYM);
+		
+		return this;
+	}
+	
 // DELETE FUNCTIONS
 	
 	/** Deletes this word and all of its properties from the database.
@@ -175,6 +181,12 @@ public class MutableWord extends Word {
 	
 	public MutableWord clearTroponyms() {
 		this.delete(Relation.TROPONYM);
+		
+		return this;
+	}
+	
+	public MutableWord clearHyponyms() {
+		this.delete(Relation.HYPONYM);
 		
 		return this;
 	}

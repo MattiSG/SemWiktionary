@@ -2,6 +2,7 @@ package edu.unice.polytech.kis.semwiktionary.parser;
 
 import java.io.*;
 import java.util.Vector;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -30,6 +31,9 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	private int definitionCount = 0;
 	private int definitionDepth = -1; // the depth is the number of sharps (#) in front of a definition, minus one (that's optimization to have only one substraction for the 0-based indexed list). So, to trigger comparisons, we need to be negative.
 	
+	private ArrayList<Word> complexNyms;
+	private int complexDepth = 0;
+	
 	private String buffer = ""; // an all-purpose buffer, to be initialized by groups that need it
 	
 	private Vector<String> definitionsBuffer;
@@ -52,6 +56,10 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 		relationsMap.put("syn", Relation.SYNONYM);
 		relationsMap.put("ant", Relation.ANTONYM);
 		relationsMap.put("tropo", Relation.TROPONYM);
+		//relationsMap.put("hyper", Relation.HYPERONYM);
+		relationsMap.put("hypo", Relation.HYPONYM);
+		
+		complexNyms = new ArrayList<Word>(3);
 	}
 
 	private void initWord(String word) {
@@ -146,7 +154,7 @@ newline = (\r|\n|\r\n)
 optionalSpaces = ({whitespace}*)
 space = ({whitespace}|{newline})
 
-%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD
+%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD, COMPLEXNYM, CPNM_CONTEXT, CPNM_WORD
 
 %xstate XML, PAGE
 
@@ -273,6 +281,12 @@ space = ({whitespace}|{newline})
 	{
 		currentRelation = relationsMap.get(yytext());
 		yybegin(SIMPLENYM);
+	}
+
+	"hypo"
+	{
+		currentRelation = relationsMap.get(yytext());
+		yybegin(COMPLEXNYM);
 	}
 
 	.
@@ -501,6 +515,88 @@ space = ({whitespace}|{newline})
 	{
 		try {
 			currentWord.set(currentRelation, MutableWord.from(yytext()));
+		} catch (Exception e) {
+			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( ");
+			e.printStackTrace(System.err);
+		}
+	}
+}
+
+<COMPLEXNYM>
+{
+	"-}}"
+	{
+		// end of pattern
+	}
+	
+	(":"{optionalSpaces}|\'\'\')
+	{
+		yybegin(CPNM_CONTEXT);
+	}
+
+	"*"+{optionalSpaces}"[["
+	{
+		while (yytext().charAt(complexDepth + 1) == '*') {
+			++complexDepth;
+		}
+			
+		yybegin(CPNM_WORD);
+	}
+
+	{newline}{newline}
+	{
+		leaveSection();
+	}
+
+	.|{newline}
+	{
+
+	}
+
+}
+
+<CPNM_CONTEXT>
+{
+	([^:]+)
+	{
+		// Context is not handled yet
+	}
+
+	":"
+	{
+		yybegin(COMPLEXNYM);
+	}
+
+	.
+	{
+
+	}
+}
+
+<CPNM_WORD>
+{
+	"]]"
+	{
+		complexDepth = 0;
+		complexNyms.clear();
+		
+		yybegin(COMPLEXNYM);
+	}
+
+	[^\]]+
+	{
+		while (complexNyms.size() > complexDepth)
+			complexNyms.remove(complexNyms.size() - 1);
+					
+		try {
+			MutableWord currentNym = MutableWord.from(yytext());
+			complexNyms.add(currentNym);
+			
+			if (complexDepth == 0)
+				currentWord.set(currentRelation, currentNym);
+			else
+				complexNyms.get(complexNyms.size()-2).set(currentRelation, currentNym);
+				
 		} catch (Exception e) {
 			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( ");
 			e.printStackTrace(System.err);

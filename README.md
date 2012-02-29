@@ -23,8 +23,8 @@ Example
 	for (Word salutation : hello.getSynonyms()) {
 		System.out.println(salutation + " world!");	// all variants of “hello world!”…
 		
-		System.out.print("Most usually used in the context of: ");
-		System.out.println(hello.getDefinitions().get(0).getDomain());	// …with the domain (usage context, e.g. “sociology”) of the most common meaning
+		System.out.print("Most usually used in the context of: "); // …with the domain (usage context, e.g. “sociology”)…
+		System.out.println(hello.getDefinitions().get(0).getDomain()); // …of their most common meaning
 	}
 
 How to use

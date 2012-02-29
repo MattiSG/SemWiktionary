@@ -18,13 +18,13 @@ Example
     import edu.unice.polytech.kis.semwiktionary.model.Word;
 	
 	
-	Word hello = Word.from("bonjour");
+	Word hello = Word.from("bonjour");	// database lookup
 	
 	for (Word salutation : hello.getSynonyms()) {
-		System.out.println(salutation + " word!");
+		System.out.println(salutation + " world!");	// all variants of “hello world!”…
 		
 		System.out.print("Most usually used in the context of: ");
-		System.out.println(hello.getDefinitions().get(0).getDomain());
+		System.out.println(hello.getDefinitions().get(0).getDomain());	// …with the domain (usage context, e.g. “sociology”) of the most common meaning
 	}
 
 How to use

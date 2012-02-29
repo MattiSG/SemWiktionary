@@ -13,6 +13,7 @@ import java.util.Collection;
 
 import edu.unice.polytech.kis.semwiktionary.model.Word;
 
+
 public class AntonymsTest {
 
 	private static final String[] EXPECTED_ANTONYMS = {
@@ -35,7 +36,7 @@ public class AntonymsTest {
 	}
 		
 	@Test
-	public void allSynonymsExist() {
+	public void allAntonymsExist() {
 		Collection<Word> actualSynonyms = subject.getAntonyms();
 		ReflectionAssert.assertReflectionEquals(expectedAntonyms, actualSynonyms, ReflectionComparatorMode.LENIENT_ORDER);
 	}

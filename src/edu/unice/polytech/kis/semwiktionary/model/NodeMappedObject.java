@@ -45,7 +45,7 @@ public abstract class NodeMappedObject {
 	/**Stores the given property on this node.
 	*There is a restriction as compared to Neo4j: only strings are accepted.
 	*
-	*@returns	this, for chainability
+	*@return	this, for chainability
 	*/
 	public NodeMappedObject set(String key, String value) {
 		Transaction tx = Database.getDbService().beginTx();
@@ -63,7 +63,7 @@ public abstract class NodeMappedObject {
 
 	/**Connects the given object to this one, with the given relation type.
 	 *
-	 *@returns	the created relationship, so you can annotate it if needs be
+	 *@return	the created relationship, so you can annotate it if needs be
 	 */
 	public Relationship set(Relation relType, NodeMappedObject target) {
 		return Database.link(this.node, target.node, relType);
@@ -83,6 +83,7 @@ public abstract class NodeMappedObject {
 	*You'll need to specify the expected output type, so as to avoid casts.
 	*Example: Collection<Word> synonyms = myWord.<Word>get(Relation.SYNONYM);
 	*/
+	@SuppressWarnings("unchecked") // otherwise, getDestinationType will warn about <T extends NMO> being different from <? extends NMO>
 	public <T extends NodeMappedObject> Collection<T> get(Relation relType, Direction dir) {
 		Class<T> type = relType.getDestinationType();
 		List<T> result = new LinkedList<T>();

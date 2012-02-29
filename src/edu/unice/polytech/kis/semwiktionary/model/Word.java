@@ -38,7 +38,7 @@ public class Word extends NodeMappedObject {
 	 *
 	 *@see	org.neo4j.graphdb.index.IndexManager#forNodes
 	 */
-	protected static Index index = Database.getIndexForName(INDEX_KEY);
+	protected static Index<Node> index = Database.getIndexForName(INDEX_KEY);
 	
 	/** The actual natural language word this instance represents.
 	 */

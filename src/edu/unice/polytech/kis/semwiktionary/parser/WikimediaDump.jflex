@@ -422,7 +422,8 @@ space = ({whitespace}|{newline})
 
 	{newline}
 	{
-		currentDefinition.addExample(buffer);
+		String plainStr = wikiModel.render(new PlainTextConverter(), buffer);
+		currentDefinition.addExample(plainStr);
 		yypushback(1);	// <SECTION> needs it to match
 		yybegin(SECTION);
 	}

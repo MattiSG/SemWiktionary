@@ -47,10 +47,11 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
 	private void initParser() {
 		definitionsBuffer = new Vector<String>(8); // maximum level of foreseeable nested definitions
-		relationsMap = new HashMap<String, Relation>(2);
+		relationsMap = new HashMap<String, Relation>(3);
 
 		relationsMap.put("syn", Relation.SYNONYM);
 		relationsMap.put("ant", Relation.ANTONYM);
+		relationsMap.put("tropo", Relation.TROPONYM);
 	}
 
 	private void initWord(String word) {
@@ -269,7 +270,7 @@ space = ({whitespace}|{newline})
 		yybegin(NATURE);
 	}
 	
-	"syn"|"ant"
+	"syn"|"ant"|"tropo"
 	{
 		currentRelation = relationsMap.get(yytext());
 		yybegin(SIMPLENYM);
@@ -300,7 +301,7 @@ space = ({whitespace}|{newline})
 
 <SECTION>
 { // an entrance into that state with a non-consumed newline will switch to <MEDIAWIKI>
-	"{{"
+	^"{{"
 	{
 		yybegin(PATTERN);
 	}
@@ -476,7 +477,7 @@ space = ({whitespace}|{newline})
 		// end of pattern
 	}
 
-	":"{optionalSpaces}
+	(":"{optionalSpaces}|\'\'\')
 	{
 		yybegin(SPNM_CONTEXT);
 	}
@@ -500,7 +501,7 @@ space = ({whitespace}|{newline})
 
 <SPNM_CONTEXT>
 {
-	[^:]+
+	([^:]+)
 	{
 		//TODO: context is not handled yet
 	}
@@ -508,6 +509,11 @@ space = ({whitespace}|{newline})
 	":"
 	{
 		yybegin(SIMPLENYM);
+	}
+
+	.
+	{
+
 	}
 }
 

@@ -1,7 +1,7 @@
 SemWiktionary history
 =====================
 
-SemWiktionary was started as an end-of-studies project in French engineering school [Polytech'Nice-Sophia](http://www.polytech.unice.fr), in the Knowledge and Information Systems major.
+SemWiktionary was started as an [end-of-studies project](http://pfe.polytech.unice.fr/index.php?option=com_content&view=article&id=30&Itemid=28) in French engineering school [Polytech'Nice-Sophia](http://www.polytech.unice.fr), in the Knowledge and Information Systems major.
 
 Constraints
 -----------

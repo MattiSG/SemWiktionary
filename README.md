@@ -63,7 +63,7 @@ To integrate SemWiktionary within your own application, or export the data in an
 
 ### Tweaking the parser ###
 
-If you are interested in modifying the parser, generate your own database and so on, download the source and read `doc/Parsing.md`.
+If you are interested in modifying the parser, generate your own database and so on, download the source and read `doc/Parser/How to parse a dump file.md`.
 
 Equivalent projects and rationale
 ---------------------------------

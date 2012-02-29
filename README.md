@@ -30,35 +30,27 @@ Example
 How to use
 ----------
 
-### Prerequisites ###
+**Remember that we are currently offering support only for the French Wiktionary**. This software has not been tested with any other language. You are most welcome to try and contribute support for other languages, though!
 
-You will need:
+### Acquiring the API ###
 
-- Java 1.6;
-- [Ant](http://ant.apache.org) to build this project;
-- this project's source files;
-- a [Wiktionary dump file](http://dumps.wikimedia.org/frwiktionary/latest/) with all articles (direct link for French: [130MB archive](http://dumps.wikimedia.org/frwiktionary/latest/frwiktionary-latest-pages-articles.xml.bz2));
-- around 2 GB of free space (three quarters of it can be reclaimed by deleting the dump file once the database has been populated from it);
-- around 20 hours to initialize the database (_unless you use an already parsed database, see below_).
+Download the latest build from the [downloads page](https://github.com/MattiSG/SemWiktionary/downloads).
 
-### Database population ###
+All necessary dependencies are in the `lib` folder, and the API itself is available as a JAR at the archive's root.
 
-**Remember that we are currently offering support only for the French wiktionary**. This software has not been tested with any other language. You are most welcome to try and give us feedback, though!
+### Acquiring an already parsed database ###
 
-#### Using an already parsed database (recommended) ####
+This is clearly the preferred method, as it will allow you to skip the long task of parsing the Wiktionary yourself. As long as our servers can handle the load, you can download the [full French Wiktionary database](http://dl.mattischneider.fr/semwiktionary/data-v0.1.2.zip) (80 MB ZIP).
 
-This is clearly the preferred method, as it will allow you to skip the long task of parsing the wiktionary yourself. As long as our servers can handle the load, you can download the [full French wiktionary database](http://dl.mattischneider.fr/semwiktionary/data-v0.1.2.zip) (80 MB ZIP).
+You will then have to move the contents of the archive in a `data` folder in the deflated API archive, in order to get the following file hierarchy:
 
-#### Parsing yourself ####
-
-You will first need to deflate the dump file you previously downloaded, then:
-
-    git clone git://github.com/MattiSG/SemWiktionary.git # or download the source files manually
-    cd SemWiktionary
-    ant compile
-    ./wiktionary --load path/to/dump/file.xml # this will take some time (see performance note beneath)
-	
-If you really want to parse a full dumpfile, though, you should first remove the `%debug` line in `src/edu/unice/polytech/kis/semwiktionary/parser/WikimediaDump.jflex`. That will give quite a speedup.
+    ┲SemWiktionary (deflated API archive)
+	├  SemWiktionary.jar
+	├  wiktionary
+	├┬ lib
+	 ┋ (…many jars…)
+	├┬ data (deflated database archive)
+	 ┋ (…many "neostore" files…)
 
 ### Lookup ###
 
@@ -67,15 +59,11 @@ For testing or a basic usage, you can simply use the lookup interface this way:
 	./wiktionary	# interactive, or:
 	./wiktionary [wordToLookUp [anotherWord [...]]]
 	
-To integrate with your own application, or export the data in any format you wish, use the provided API. To access it, run `ant doc` and read the documentation in the `doc` folder.
+To integrate SemWiktionary within your own application, or export the data in any format you wish, use the provided API. Its documentation is available in the `doc/javadoc` folder of the archive. You will need to include the SemWiktionary JAR and and all those in the `lib` folder, and provide a `data` folder containing the database at the root of your project folder.
 
-Constraints
------------
+### Tweaking the parser ###
 
-This project being academic, some technical constraints were applied to it.
-
-1. Data source: [French Wiktionary](http://fr.wiktionary.org). Internationalization could be thought about, but is not currently aimed at.
-2. Technologies: Java. [Graph database](http://en.wikipedia.org/wiki/Graph_database), preferably Neo4j.
+If you are interested in modifying the parser, generate your own database and so on, download the source and read `doc/Parsing.md`.
 
 Equivalent projects and rationale
 ---------------------------------

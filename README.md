@@ -9,7 +9,7 @@ Goal
 Offer a complete graph database and a Java API to access it that provides the following information about a word:
 
 1. Definitions.
-2. Semantical relations with other words, such as synonymy, antonymy, parnoymy…
+2. Semantical relations with other words, such as synonyms, antonyms, paronyms…
 3. _[Lexical class](http://en.wikipedia.org/wiki/Part_of_speech) (or “part of speech”)._ **— not available yet**
 
 Example
@@ -82,12 +82,14 @@ Equivalent projects and rationale
 
 - [JWKTL](http://www.ukp.tu-darmstadt.de/software/jwktl/). Not documented, source code access was not allowed by authors (yet?).
 
-[Several](http://rendering.xwiki.org/xwiki/bin/view/Main/Architecture) [tools](http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/extraction_framework/file/2c1eea7da303/wiktionary) parse MediaWiki markup and create an AST from it. However, most of them are overkill and not specific enough for the Wiktionary dialects (much more strongly structured than Wikipedia, for which most tools are tailored).
+[Several](http://rendering.xwiki.org/xwiki/bin/view/Main/Architecture) [tools](http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/extraction_framework/file/2c1eea7da303/wiktionary) parse MediaWiki markup and create an AST from it. However, most of them are both overkill and not specific enough for the Wiktionary dialects (much more structured than Wikipedia, for which most tools are tailored).
 
 License
 -------
 
 GNU [General Public License](http://www.gnu.org/licenses/gpl.html).
+
+Contact authors for a different licensing request.
 
 Credits
 -------
@@ -95,18 +97,18 @@ Credits
 ### Authors ###
 - [Matti Schneider-Ghibaudo](http://mattischneider.fr)
 - [Fabien Brossier](http://fabienbrossier.fr)
-- Ngoc Nguyen Thinh Dong
+- Dong Thinh
 
 ### Tutors ###
 - Michel Gautero
 - Carine Fédèle
 
 ### Used projects ###
-- [Neo4j](http://neo4j.org/)	(GPL)
-- [JFlex](http://jflex.de/) by Gerwin Klein	(GPL)
+- [Neo4j](http://neo4j.org/) graph database	(GPL)
+- [JFlex](http://jflex.de/) Java lexer by Gerwin Klein	(GPL)
 - [Markdown doclet](http://code.google.com/p/markdown-doclet/) documentation parser by Richard Nichols	(GPLv2)
-- [JUnit](http://www.junit.org/)	(CPL)
-- [Unitils](http://unitils.org/)	(Apache 2)
+- [JUnit](http://www.junit.org/) unit-testing framework	(CPL)
+- [Unitils](http://unitils.org/) extensions for JUnit	(Apache 2)
 
 ### Miscellaneous ###
-- Javadoc stylesheet by [Apache Software Foundation](http://click-project-template.googlecode.com/svn-history/r2/trunk/documentation/javadoc-stylesheet.css).
+- Javadoc stylesheet by the [Apache Software Foundation](http://click-project-template.googlecode.com/svn-history/r2/trunk/documentation/javadoc-stylesheet.css).

@@ -103,18 +103,30 @@ public class MutableWord extends Word {
 		return this;
 	}
 
+	/** Adds the word given in parameter to the current word object as a synonym.
+	 * @param synonym The synonym to add to this Word
+	 * @return This MultableWord, for chainability
+	 */
 	public MutableWord addSynonym(Word synonym) {
 		Database.link(this.node, synonym.node, Relation.SYNONYM);
 		
 		return this;
 	}
 	
+	/** Adds the word given in parameter to the current word object as an antonym.
+	 * @param antonym The antonym to add to this Word
+	 * @return This MultableWord, for chainability
+	 */
 	public MutableWord addAntonym(Word antonym) {
 		Database.link(this.node, antonym.node, Relation.ANTONYM);
 		
 		return this;
 	}
 	
+	/** Adds the word given in parameter to the current word object as a troponym.
+	 * @param troponym The troponym to add to this Word
+	 * @return This MultableWord, for chainability
+	 */
 	public MutableWord addTroponym(Word troponym) {
 		Database.link(this.node, troponym.node, Relation.TROPONYM);
 		
@@ -161,18 +173,27 @@ public class MutableWord extends Word {
 		return this;
 	}	
 	
+	/** Deletes all synonyms associated to this Word.
+	 * @return This MultableWord, for chainability
+	 */
 	public MutableWord clearSynonyms() {
 		this.delete(Relation.SYNONYM);
 		
 		return this;
 	}
 	
+	/** Deletes all antonyms associated to this Word.
+	 * @return This MultableWord, for chainability
+	 */
 	public MutableWord clearAntonyms() {
 		this.delete(Relation.ANTONYM);
 		
 		return this;
 	}
 	
+	/** Deletes all troponyms associated to this Word.
+	 * @return This MultableWord, for chainability
+	 */
 	public MutableWord clearTroponyms() {
 		this.delete(Relation.TROPONYM);
 		

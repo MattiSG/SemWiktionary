@@ -104,22 +104,34 @@ public class SemWiktionary {
 		}
 		
 		println('"' + word.getTitle() + '"');
-		println("--------------------");
+		println("------SYNONYMS------");
 		
 		for (Word syn : word.getSynonyms())
 			println("= " + syn.getTitle());
 		
-		println("--------------------");
+		println("------ANTONYMS------");
 		
 		for (Word ant : word.getAntonyms())
 			println("≠ " + ant.getTitle());
 		
-		println("--------------------");
+		println("------TROPONYMS-----");
 
 		for (Word tro : word.getTroponyms())
 			println("$ " + tro.getTitle());
 		
-		println("--------------------");
+		println("------HYPONYMS------");
+		
+		for (Word hyp1 : word.getHyponyms()) {
+			println("* " + hyp1.getTitle());
+			for (Word hyp2 : hyp1.getHyponyms()) {
+				println("** " + hyp2.getTitle());
+				for (Word hyp3 : hyp2.getHyponyms()) {
+					println("*** " + hyp3.getTitle());
+				}
+			}
+		}
+		
+		println("-----DEFINITIONS----");
 		
 		for (Definition def : word.getDefinitions()) {
 			println(def.getPosition() + ". \"" + def.getContent() + "\"");

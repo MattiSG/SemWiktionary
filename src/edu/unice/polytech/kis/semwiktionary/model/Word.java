@@ -138,7 +138,7 @@ public class Word extends NodeMappedObject {
 	/** Returns all hyponyms of this Word.
 	 */
 	public Collection<Word> getHyponyms() {
-		return this.<Word>get(Relation.HYPONYM);
+		return this.<Word>get(Relation.HYPONYM, Direction.OUTGOING);
 	}
 	
 // DATABASE ACCESS

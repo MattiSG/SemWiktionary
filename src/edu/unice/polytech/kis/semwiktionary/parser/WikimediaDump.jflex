@@ -59,7 +59,7 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 		//relationsMap.put("hyper", Relation.HYPERONYM);
 		relationsMap.put("hypo", Relation.HYPONYM);
 		
-		complexNyms = new ArrayList<Word>(3);
+		complexNyms = new ArrayList<Word>();
 	}
 
 	private void initWord(String word) {
@@ -529,6 +529,11 @@ space = ({whitespace}|{newline})
 		// end of pattern
 	}
 	
+	^"{{"([^}]+)"}}"
+	{
+		// Context or formatting : ignore
+	}
+	
 	(":"{optionalSpaces}|\'\'\')
 	{
 		yybegin(CPNM_CONTEXT);
@@ -539,12 +544,15 @@ space = ({whitespace}|{newline})
 		while (yytext().charAt(complexDepth + 1) == '*') {
 			++complexDepth;
 		}
-			
+		
 		yybegin(CPNM_WORD);
 	}
 
 	{newline}{newline}
 	{
+		complexDepth = 0;
+		complexNyms.clear();
+	
 		leaveSection();
 	}
 
@@ -575,11 +583,8 @@ space = ({whitespace}|{newline})
 
 <CPNM_WORD>
 {
-	"]]"
-	{
-		complexDepth = 0;
-		complexNyms.clear();
-		
+	"]]"{optionalSpaces}("("[^)]")")*
+	{	
 		yybegin(COMPLEXNYM);
 	}
 
@@ -592,10 +597,11 @@ space = ({whitespace}|{newline})
 			MutableWord currentNym = MutableWord.from(yytext());
 			complexNyms.add(currentNym);
 			
-			if (complexDepth == 0)
+			if (complexDepth == 0) {
 				currentWord.set(currentRelation, currentNym);
-			else
+			} else {
 				complexNyms.get(complexNyms.size()-2).set(currentRelation, currentNym);
+			}
 				
 		} catch (Exception e) {
 			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( ");

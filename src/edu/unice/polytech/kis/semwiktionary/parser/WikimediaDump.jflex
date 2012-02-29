@@ -8,6 +8,9 @@ import java.util.HashMap;
 import edu.unice.polytech.kis.semwiktionary.model.*;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
+import info.bliki.wiki.filter.PlainTextConverter;
+import info.bliki.wiki.model.WikiModel;
+
 
 %%
 
@@ -37,6 +40,8 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	
 	private long timer = System.nanoTime();
 	private static final long FIRST_TICK = System.nanoTime();
+
+	WikiModel wikiModel = new WikiModel("http://www.mywiki.com/wiki/${image}", "http://www.mywiki.com/wiki/${title}");
 	
 	
 	private void tick(String message) {
@@ -436,13 +441,16 @@ space = ({whitespace}|{newline})
 			for (int i = definitionDepth; i >= 0; i--)
 				result = definitionsBuffer.get(i) + (result.isEmpty() ? "" : (" " + result));
 
+			String plainStr = wikiModel.render(new PlainTextConverter(), result);
 			currentDefinition.setContent(result);
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
 			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + yytext() + "'. Only content at this nesting level will be stored.");
-			
-			currentDefinition.setContent(yytext()); // best recovery we can do: forget about concatenation
+
+			String result = yytext();			
+			String plainStr = wikiModel.render(new PlainTextConverter(), result);
+			currentDefinition.setContent(plainStr); // best recovery we can do: forget about concatenation
 		}
 				
 		yybegin(SECTION);

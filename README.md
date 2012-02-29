@@ -1,7 +1,7 @@
 SemWiktionary
 =============
 
-Java API to locally access data from [wiktionary](http://fr.wiktionary.org). Specific target is the French wiktionary.
+Java API to locally access data from [Wiktionary](http://fr.wiktionary.org), a collaboratively-edited, free dictionary. Specific target is the French Wiktionary.
 
 Goal
 ----

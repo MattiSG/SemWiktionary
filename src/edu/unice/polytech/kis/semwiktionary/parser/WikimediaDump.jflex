@@ -146,7 +146,7 @@ newline = (\r|\n|\r\n)
 optionalSpaces = ({whitespace}*)
 space = ({whitespace}|{newline})
 
-%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD
+%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD, TRASH_STATE
 
 %xstate XML, PAGE
 
@@ -279,7 +279,7 @@ space = ({whitespace}|{newline})
 
 	.
 	{
-		yybegin(MEDIAWIKI);	// this is not an accepted type
+		yybegin(TRASH_STATE);	// this is not an accepted type
 	}
 }
 
@@ -489,11 +489,6 @@ space = ({whitespace}|{newline})
 		yybegin(SPNM_WORD);
 	}
 
-	[^\n]|\\n[^\n]
-	{
-		// Trash state
-	}
-
 	{newline}{newline}
 	{
 		leaveSection();
@@ -538,5 +533,18 @@ space = ({whitespace}|{newline})
 			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( ");
 			e.printStackTrace(System.err);
 		}
+	}
+}
+
+<TRASH_STATE>
+{
+	([^\n]|{newline}[^\n])*
+	{
+		// Trash
+	}
+
+	{newline}{newline}
+	{
+		yybegin(MEDIAWIKI);
 	}
 }

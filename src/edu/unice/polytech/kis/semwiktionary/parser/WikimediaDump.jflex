@@ -269,7 +269,8 @@ space = ({whitespace}|{newline})
 		yybegin(NATURE);
 	}
 	
-	"syn"|"ant"|"tropo"
+	/*|"tropo"*/
+	"syn"|"ant"
 	{
 		currentRelation = relationsMap.get(yytext());
 		yybegin(SIMPLENYM);
@@ -450,22 +451,27 @@ space = ({whitespace}|{newline})
 		// end of pattern
 	}
 
-	(":"{optionalSpaces}|\'\'\')
+	(":"{optionalSpaces}|\'\'\'|";")
 	{
 		yybegin(SPNM_CONTEXT);
 	}
 
-	"*"{optionalSpaces}"[["
+	/*{optionalSpaces}*/
+	^"*"([^\[]|"["[^\[])*"[["
 	{
 		yybegin(SPNM_WORD);
 	}
 
+	[^\n]|\\n[^\n]
+	{
+		// Trash state
+	}
 
 	{newline}{newline}
 	{
 		leaveSection();
 	}
-
+	
 	.|{newline}
 	{
 

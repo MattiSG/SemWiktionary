@@ -297,9 +297,10 @@ space = ({whitespace}|{newline})
 		yybegin(NATURE);
 	}
 	
-	"syn"|"ant"|"tropo"
+	"syn-}}\n"|"ant-}}\n"|"tropo-}}\n"
 	{
-		currentRelation = relationsMap.get(yytext());
+		buffer = yytext();
+		currentRelation = relationsMap.get(buffer.substring(0, buffer.length() - 4));
 		yybegin(SIMPLENYM);
 	}
 
@@ -499,23 +500,17 @@ space = ({whitespace}|{newline})
 
 <SIMPLENYM>
 {
-	"-}}"
-	{
-		// end of pattern
-	}
-
-	^"{{(}}"|"{{(}}"|"{{-}}"$
+	"{{(}}"|"{{-}}"|"{{)}}"
 	{
 		// Wiki syntax for tables
 	}
 
-	^(":"{optionalSpaces}|\'\'\'|";")
+	(":"{optionalSpaces}|\'\'\'|";")
 	{
 		yybegin(SPNM_CONTEXT);
 	}
 
-	/*{optionalSpaces}*/
-	^"*"([^\[]|"["[^\[])*"[["
+	"*"([^\[]|"["[^\[])*"[["
 	{
 		yybegin(SPNM_WORD);
 	}

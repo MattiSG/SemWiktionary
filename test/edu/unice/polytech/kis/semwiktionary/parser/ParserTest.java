@@ -37,7 +37,11 @@ public class ParserTest {
 		FileInputStream fileInputStream = new FileInputStream(new File(TEST_FILE));
 
 		WikimediaDump lexer = new WikimediaDump(fileInputStream);
-		lexer.yylex(); // store in db
+		try {
+			lexer.yylex(); // store in db
+		} catch (Exception e) {
+			fail("Parser failed and threw an exception! (" + e + ")\nSee parser log for details.");
+		}
 	}
 	
 	

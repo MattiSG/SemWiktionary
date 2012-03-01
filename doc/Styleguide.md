@@ -15,13 +15,22 @@ Repo management
 File hierarchy
 --------------
 
+Versioned:
+
 - `src` contains all source files.
 - `test` contains all test source files.
 - `doc` contains all documentation, except this README. [Markdown](http://daringfireball.net/projects/markdown) is to be used for documentation formatting.
 - `lib` contains all third-party libraries.
+
+Ignored:
+
+- `build` contains intermediate build products.
 - `bin` contains `class` files.
-- `build` contains all build products packaged in JARs.
+- `jar` contains build products as executable libraries.
+- `data` contains program-generated data.
+- `log` contains program-generated log files.
 - `dist` contains deliverables.
+- `doc/vendor` contains included libraries documentation, and is not to be distributed nor versioned, it is just a convenient shortcut.
 
 Coding style
 ------------

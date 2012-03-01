@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="semwiktionary" default="junit" basedir=".">
+<project name="SemWiktionary" default="junit" basedir=".">
 	<!-- JAVA CLASSES -->	
 		<!-- package prefix -->
 		<property name="package" value="edu.unice.polytech.kis.semwiktionary"/>
 
 		<!-- main class to be executed -->
-		<property name="main_class" value="${package}.SemWiktionary"/>
+		<property name="main_class" value="${package}.${ant.project.name}"/>
 		
 		<!-- main test class to be run by Junit -->
 		<property name="test.class.name" value="${package}.test.RunAndPray" />
@@ -56,9 +56,6 @@
 		 <!-- database storage folder -->
 		<property name="data" location="data"/>
 		
-		 <!-- intermediate folder for final zipping -->
-		<property name="tmp" location="tmp"/>
-		
 		 <!-- intermediate build products -->
 		<property name="build" location="build"/>
 		
@@ -76,9 +73,12 @@
 	
 	<!-- TASKS -->
 	
-	<taskdef name="jflex" classname="JFlex.anttask.JFlexTask" classpath="${lib}/JFlex.jar"/>
+	<!-- For more information about this task, see http://jflex.de/jflex_anttask.html -->
+	<taskdef name="jflex" classname="JFlex.anttask.JFlexTask" classpath="${lib}/parser_build/JFlex.jar"/>
 	
 	<!-- /TASKS -->
+	
+	<!-- SHORTCUTS -->
 	
 	<!-- lib directory should contain any pre-built jar files needed to build the project -->
 	<fileset id="lib.jars" dir="${lib}">
@@ -88,33 +88,40 @@
 	<path id="lib.path">
 		<fileset refid="lib.jars"/>
 	</path>
+	
+	<property name="jar_destination" value="${jars}/${ant.project.name}${project_suffix}.jar"/>
+	
+	<tstamp>
+		<format property="now" pattern="yyyy-MM-dd_HH-mm-ss" />
+	</tstamp>
+	
+	<!-- /SHORTCUTS -->
 
-	<!-- Initialization target, for any prelimary setup needed to build -->
-	<target name="init" description="Preparation">
+	<target name="init" description="All prelimary setup (mainly directory creation)">
 		<mkdir dir="${src}"/>
 		<mkdir dir="${lib}"/>
 		<mkdir dir="${build}"/>
 		<mkdir dir="${data}"/>
 		<mkdir dir="${log}"/>
-		<mkdir dir="${doc}"/>
 	</target>
 	
-	<target name="doc">
+	<target name="doc" description="Generate documentation">
+		<mkdir dir="${doc}"/>
+		
 		<javadoc linksource="true" docencoding="UTF-8"
 			destdir="${doc}/javadoc"
 			classpathref="lib.path"
 			stylesheetfile="${doc}/resources/javadoc-stylesheet.css"
 		>
+			<doclet name="com.visural.doclets.markdown.standard.Standard"
+				path="${lib}/doc/MarkdownDoclet-3.0.jar">
+			</doclet>
 			<fileset dir="${src}">
 				<filename name="**/*.java"/>
 			</fileset>
-			<doclet name="com.visural.doclets.markdown.standard.Standard"
-					path="${lib}/MarkdownDoclet-3.0.jar">
-			</doclet>
 		</javadoc>	
 	</target>
 	
-	 <!-- For more information about this task, see http://jflex.de/jflex_anttask.html -->
 	<target name="jflex" depends="init" description="Generate parser">
 		<jflex
 			file="${src}/edu/unice/polytech/kis/semwiktionary/parser/WikimediaDump.jflex"
@@ -132,48 +139,35 @@
 			debug="${compile.debug}"
 			classpathref="lib.path"
 			>
-				<compilerarg value="-Xlint:unchecked"/>
+			<compilerarg value="-Xlint:unchecked"/>
 		</javac>
 	</target>
 
-	<target name="compile_tests" depends="compile" description="Compile tests code">
+	<target name="compile_tests" depends="compile" description="Compile test code">
 		<javac deprecation="on" srcdir="${test_dir}" destdir="${bin}"
 			source="${jdk.dev}" target="${jdk.target}"
 			includeAntRuntime="no"
 			debug="${compile.debug}"
 			classpathref="lib.path"
-			> <!-- TODO: use a reference to share compile and compile_tests javac node -->
+			>
+			<compilerarg value="-Xlint:unchecked"/>	
 		</javac>
 	</target>
 	
 	<target name="jar" depends="compile" description="Build jar">
-		<property name="jar_file" value="${jars}/${ant.project.name}${project_suffix}.jar"/>
-		<delete file="${jar_file}"/>
-		<buildnumber file="build.num"/>
-		
-		<tstamp>
-			<format property="now" pattern="yyyy-MM-dd HH:mm:ss" />
-		</tstamp>
+		<delete file="${jar_destination}"/>
 		
 		<manifest file="${bin}/Manifest">
 			<attribute name="Built-By" value="${user.name}"/>
 			<attribute name="Main-Class" value="${main_class}"/>
-			<attribute name="Built-Date" value="${TODAY}"/>                 
+			<attribute name="Built-Date" value="${now}"/>
 		</manifest>
 		
-		<jar destfile="${jar_file}"
-			basedir="."
+		<jar destfile="${jar_destination}"
+			basedir="${bin}"
 			manifest="${bin}/Manifest"
+			level="9"
 			>
-			<fileset dir="${bin}/"/>
-		</jar>
-		<!-- TODO: now, this is an executable JAR. Make another one for source. -->
-	</target>
-
-	<target name="jar_tests" depends="compile_tests" description="Build tests jar">
-		<mkdir dir="${jars}"/>
-		<jar jarfile="${jars}/${ant.project.name}${project_suffix}_tests.jar" basedir="${test_dir}">
-			<fileset dir="${test_dir}/" />
 		</jar>
 	</target>
 
@@ -187,25 +181,68 @@
 			</classpath>
 		</junit>
 	</target>
-
-	<target name="install" depends="clean, jar, jar_tests, junit, doc" description="Create dist directory, include jars and doc if everything works">
-		<mkdir dir="${dist}"/>
-		<mkdir dir="${tmp}"/>
-		<mkdir dir="${tmp}/config"/>
-		<copy file="${build_file}" todir="${tmp}"/>
-<!--		<copy todir="${tmp}/config">
-				<fileset dir="${config}"/>  // TODO: do not fail if directory does not exist
-		</copy>
--->
-		<zip destfile="${dist}/${ant.project.name}${project_suffix}.zip">
-			<fileset dir="${jars}"/>
-			<fileset dir="${doc}"/>
-			<fileset dir="${tmp}"/>
-		</zip>
-		<delete dir="${tmp}"/>
+	
+	<target name="package" depends="junit, package_source, package_build" description="Create both source and build packages if tests succeed">
+	</target>
+	
+	<target name="package_forced" depends="package_source, package_build" description="Create both source and build packages, ignoring tests results">
 	</target>
 
-	<target name="parse" depends="compile,erase_db" description="Run the parser">
+	<target name="package_source" depends="doc" description="Create dist directory, include all source files, doc and lib, ignoring tests">
+		
+		<mkdir dir="${dist}"/>
+		
+		<zip destfile="${dist}/${now}/${ant.project.name}${project_suffix}_source.zip"
+			 level="9">
+			 
+			<zipfileset file="README.md" />
+			 
+			<zipfileset file="${build_file}" />
+			
+			<zipfileset file="wiktionary" filemode="550" />
+			
+			<zipfileset dir="${doc}" prefix="doc">
+				<exclude name="vendor/**"/>
+			</zipfileset>
+			
+			<zipfileset dir="${lib}" prefix="lib">
+				<include name="**/*.jar" />
+			</zipfileset>
+			
+			<zipfileset dir="${src}" prefix="src"/>
+			
+			<zipfileset dir="${test_dir}" prefix="test"/>
+		</zip>
+	</target>
+	
+	<target name="package_build" depends="clean, jar, doc" description="Create dist directory, include jars, doc and lib, ignoring tests">
+		
+		<mkdir dir="${dist}"/>
+				
+		<zip destfile="${dist}/${now}/${ant.project.name}${project_suffix}_library.zip"
+			level="9">
+			
+			<zipfileset file="README.md" />
+			
+			<zipfileset file="wiktionary" filemode="550" />
+			
+			<zipfileset dir="${doc}" prefix="doc">
+				<exclude name="vendor/**"/>
+				<exclude name="resources/**"/>
+			</zipfileset>
+			
+			<zipfileset dir="${lib}" prefix="lib">
+				<include name="**/*.jar" />
+				<exclude name="test/**" />
+				<exclude name="doc/**" />
+				<exclude name="parser_build/**" />
+			</zipfileset>
+			
+			<zipfileset file="${jar_destination}" />
+		</zip>
+	</target>
+
+	<target name="parse" depends="compile, erase_db" description="Run the parser">
 		<java classname="edu.unice.polytech.kis.semwiktionary.parser.WikimediaDump"
 			  fork="true"
 			  failonerror="true">
@@ -213,7 +250,7 @@
 				<pathelement location="${bin}" />
 				<fileset refid="lib.jars"/>
 			</classpath>
-			<arg value="test/resources/miniwiki.xml"/>
+			<arg value="${test_dir}/resources/frwiktionary-test-extracts.xml"/>
 		</java>
 	</target>
 
@@ -236,7 +273,5 @@
 		<delete dir="${build}"/>
 		<delete dir="${bin}"/>
 		<delete dir="${jars}"/>
-		<delete dir="${dist}"/>
-		<delete dir="${tmp}"/>
 	</target>
 </project>

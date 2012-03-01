@@ -21,11 +21,19 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
 	private final PrintStream PREV_OUT = System.out,
 							  PREV_ERR = System.err;
+							  
+	private final static int LOG_FREQUENCY = 100; // a count message will be output to the console on every multiple of this frequency
 
-	private MutableWord currentWord = new MutableWord(new Word("Init & prolog")); // init for logging purposes
+	private MutableWord currentWord;
 	private Relation currentRelation;
 	
-	private boolean errorFlag; // used to warn user about errors for a word without interrupting the process; reset between each word
+	/**@name	Flags
+	*These flags are used to give parsing information for a word to the user. They are reset between each word
+	*/
+	//@{
+	private boolean errorFlag, // a parsing error happened
+					syntaxErrorFlag; // the MediaWiki text was malformed
+	//@}
 
 	private Definition currentDefinition;
 	private int definitionCount = 0;
@@ -43,13 +51,20 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	private static final long FIRST_TICK = System.nanoTime();
 	
 	
-	private void tick(String message) {
-		PREV_OUT.println(message + "\t\t" + ((System.nanoTime() - timer) / 10E9) + "s"
-						 + (errorFlag ? "\t\t\t /!\\" : ""));
+	/** Returns nanoseconds since the last `tick()` call.
+	*/
+	private long tick() {
+		long result = System.nanoTime() - timer;
+		
 		timer = System.nanoTime();
+		
+		return result;
 	}
 
 	private void initParser() {
+		PREV_OUT.println("Word,Parsing time (ns),Syntax errors,Parser errors");
+		PREV_OUT.print("**Init**"); // for logging purposes
+	
 		definitionsBuffer = new Vector<String>(8); // maximum level of foreseeable nested definitions
 		relationsMap = new HashMap<String, Relation>(3);
 
@@ -61,18 +76,38 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 		
 		complexNyms = new ArrayList<Word>();
 	}
+	
+	/** Logs a CSV entry to provide info about how the last word's parsing went.
+	* Does not include the actual word title output, in case a crash happened on the given word.
+	*/
+	private void logWord() {
+		PREV_OUT.println(","
+						 + tick() + ","
+						 + (syntaxErrorFlag ? "y" : "n") + ","
+						 + (errorFlag ? "y" : "n")
+						);
+	}
 
 	private void initWord(String word) {
-		tick(currentWord.getTitle());
+		logWord();
 		
-		currentWord = MutableWord.create(word);
-		errorFlag = false;
+		PREV_OUT.print(word); // output before the parsing starts, to have the culprit in case of a crash
+		
+		currentWord = MutableWord.create(word);	//TODO: delay until language was accepted? We currently create the word immediately, even though we might not store anything from it if its language is not supported
+		resetFlags();
+		
 		initSection();
 		
 		wordCount++;
 		
-		if ((wordCount % 100) == 0)
-			PREV_OUT.println("\n\n=============================\n\t" + wordCount + " WORDS PARSED!\n=============================\n\n");
+		if ((wordCount % LOG_FREQUENCY) == 0)
+			PREV_ERR.println("\t\t\t\t\t\t\t" + wordCount + " WORDS PARSED!");
+	}
+	
+	
+	private void resetFlags() {
+		errorFlag = false;
+		syntaxErrorFlag = false;
 	}
 	
 	private void initSection() {
@@ -90,10 +125,6 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 		yybegin(MEDIAWIKI);
 	}
 	
-	private void log(String text) {
-		System.err.println(text);
-	}
-	
 	private void logError(String text) {
 		System.err.println("**" + text + "**");
 		errorFlag = true;
@@ -101,11 +132,7 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	
 	private void logSyntaxError(String text) {
 		System.err.println("!! " + text);
-		errorFlag = true;
-	}
-	
-	private void out(String text) {
-		System.out.print(text);
+		syntaxErrorFlag = true;
 	}
 	
 	private void saveCurrentDefinition() {
@@ -137,7 +164,7 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 %init}
 
 %eof{
-	tick(currentWord.getTitle());
+	logWord();
 	
 	PREV_ERR.println("Total time: " + ((System.nanoTime() - FIRST_TICK) / 10E9) + "s");
 	PREV_ERR.println("Parsed words: " + wordCount);
@@ -242,8 +269,9 @@ space = ({whitespace}|{newline})
 		yybegin(XML);
 	}
 
-	.|{newline}
+	([^={<]|"="[^=]|"=="[^ ]|"== "[^{]|"== {{-"|"{"[^{]|"{{"[^-])+|.
 	{
+		// "== {{-" is for "== {{-car-}} =="
 		// in MediaWiki: suppress output
 	}
 }
@@ -303,6 +331,12 @@ space = ({whitespace}|{newline})
 		// TODO: store type in word
 		yybegin(SECTION);
 	}
+	
+	.
+	{
+		logSyntaxError("Unparsable nature in '" + currentWord.getTitle());
+		yybegin(SECTION);
+	}
 }
 
 
@@ -343,7 +377,7 @@ space = ({whitespace}|{newline})
 		leaveSection();
 	}
 
-	.|{newline}
+	([^{<\r\n])+|"{"[^{]|.|{newline}
 	{
 		// in Section: suppress output
 	}
@@ -364,7 +398,13 @@ space = ({whitespace}|{newline})
 
 	[^|}]+|"|"
 	{
-		log("Unexpected pattern value: '" + yytext() + "'");
+		logError("Unexpected pattern value: '" + yytext() + "'");
+	}
+	
+	"}"
+	{
+		logSyntaxError("Unbalanced bracket in pattern in '" + currentWord.getTitle() + "'");
+		yybegin(SECTION);
 	}
 }
 
@@ -376,8 +416,9 @@ space = ({whitespace}|{newline})
 		currentWord.set("pronunciation", yytext());
 	}
 	
-	"|"|"}}"
+	"|"|"}"
 	{
+		// not only "}}" in case of missing ending curly bracket
 		yybegin(PATTERN);
 	}
 }
@@ -392,6 +433,12 @@ space = ({whitespace}|{newline})
 	
 	(\|[^}]*)?"}}"{optionalSpaces}
 	{
+		yybegin(DEFINITION);
+	}
+	
+	(\|[^}]*)?"}"{optionalSpaces}
+	{
+		logSyntaxError("Single bracket in definition domain in '" + currentWord.getTitle() + "'");
 		yybegin(DEFINITION);
 	}
 }
@@ -434,8 +481,7 @@ space = ({whitespace}|{newline})
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
-			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + yytext() + "'. Skipping definition.");
-			e.printStackTrace();
+			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + yytext() + "'. Only content at this nesting level will be stored.");
 			
 			currentDefinition.setContent(yytext()); // best recovery we can do: forget about concatenation
 		}
@@ -451,7 +497,15 @@ space = ({whitespace}|{newline})
 	{newline}
 	{
 		// rare case in which the only content of a definition is a list of domains (see "neuf")
-		definitionsBuffer.add(definitionDepth, ""); // otherwise we'll break the concatenation
+		try {
+			definitionsBuffer.add(definitionDepth, ""); // otherwise we'll break the concatenation
+		} catch (ArrayIndexOutOfBoundsException e) {
+			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
+			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "', with a definition that has no content other than domains."); // damn, that's an edge case… (but an existing one)
+			
+			// no recovery to do here: more nested definitions will be caught in the usual definition handling case above this one
+		}
+		
 		yypushback(1);
 		yybegin(SECTION);
 	}
@@ -480,9 +534,9 @@ space = ({whitespace}|{newline})
 		leaveSection();
 	}
 
-	.|{newline}
+	([^-:*\r\n]|"-"[^}])+|.|{newline}
 	{
-
+		// in SimpleNym: suppress output
 	}
 }
 
@@ -490,7 +544,7 @@ space = ({whitespace}|{newline})
 {
 	([^:]+)
 	{
-		// Context is not handled yet
+		//TODO: context is not handled yet
 	}
 
 	":"
@@ -511,7 +565,7 @@ space = ({whitespace}|{newline})
 		yybegin(SIMPLENYM);
 	}
 
-	[^\]]+
+	([^\]]|"]"[^\]])+
 	{
 		try {
 			currentWord.set(currentRelation, MutableWord.from(yytext()));

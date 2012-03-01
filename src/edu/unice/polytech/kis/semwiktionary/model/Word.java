@@ -71,10 +71,15 @@ public class Word extends NodeMappedObject {
 	/** Tests if the given Word exists in the database.
 	 *
 	 * @param	word	The word to search for in the database
-	 * @return	`true` if the word exists in the database, `false` otherwise
+	 * @return	`true` if the word exists in the database, `false` otherwise or if an exception was thrown while trying to access it.
 	 */
 	public static boolean exists(String word) {
-		return from(word) != null;
+		try {
+			return find(word) != null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 // CONSTRUCTORS

@@ -146,7 +146,7 @@ newline = (\r|\n|\r\n)
 optionalSpaces = ({whitespace}*)
 space = ({whitespace}|{newline})
 
-%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD, TRASH_STATE
+%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD, TRASH
 
 %xstate XML, PAGE
 
@@ -270,8 +270,7 @@ space = ({whitespace}|{newline})
 		yybegin(NATURE);
 	}
 	
-	/*|"tropo"*/
-	"syn"|"ant"
+	"syn"|"ant"|"tropo"
 	{
 		currentRelation = relationsMap.get(yytext());
 		yybegin(SIMPLENYM);
@@ -279,7 +278,7 @@ space = ({whitespace}|{newline})
 
 	.
 	{
-		yybegin(TRASH_STATE);	// this is not an accepted type
+		yybegin(TRASH);	// this is not an accepted type
 	}
 }
 
@@ -478,7 +477,12 @@ space = ({whitespace}|{newline})
 		// end of pattern
 	}
 
-	(":"{optionalSpaces}|\'\'\'|";")
+	^"{{(}}"|"{{(}}"|"{{-}}"$
+	{
+		// Wiki syntax for tables
+	}
+
+	^(":"{optionalSpaces}|\'\'\'|";")
 	{
 		yybegin(SPNM_CONTEXT);
 	}
@@ -494,7 +498,7 @@ space = ({whitespace}|{newline})
 		leaveSection();
 	}
 
-	([^-:*\r\n]|"-"[^}])+|.|{newline}
+	([^-:;'*\r\n]|"-"[^}])+|.|{newline}
 	{
 		// in SimpleNym: suppress output
 	}
@@ -502,12 +506,13 @@ space = ({whitespace}|{newline})
 
 <SPNM_CONTEXT>
 {
-	([^:]+)
+	([^:\n\r]+)
 	{
 		//TODO: context is not handled yet
+		System.out.println("Boudibou : " + yytext());
 	}
 
-	":"
+	":"|{newline}
 	{
 		yybegin(SIMPLENYM);
 	}
@@ -536,7 +541,7 @@ space = ({whitespace}|{newline})
 	}
 }
 
-<TRASH_STATE>
+<TRASH>
 {
 	([^\n]|{newline}[^\n])*
 	{

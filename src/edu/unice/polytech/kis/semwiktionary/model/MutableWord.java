@@ -64,6 +64,7 @@ public class MutableWord extends Word {
 	 */
 	public MutableWord(Word model) {
 		super(model.getTitle());
+		this.node = model.node;
 	}
 	
 	/** Models an editable natural-language word.

@@ -8,6 +8,9 @@ import java.util.HashMap;
 import edu.unice.polytech.kis.semwiktionary.model.*;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
+import info.bliki.wiki.filter.PlainTextConverter;
+import info.bliki.wiki.model.WikiModel;
+
 
 %%
 
@@ -20,85 +23,55 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
 	private final PrintStream PREV_OUT = System.out,
 							  PREV_ERR = System.err;
-							  
-	private final static int LOG_FREQUENCY = 100; // a count message will be output to the console on every multiple of this frequency
 
-	private MutableWord currentWord;
+	private MutableWord currentWord = new MutableWord(new Word("Init & prolog")); // init for logging purposes
 	private Relation currentRelation;
 	
-	/**@name	Flags
-	*These flags are used to give parsing information for a word to the user. They are reset between each word
-	*/
-	//@{
-	private boolean errorFlag, // a parsing error happened
-					syntaxErrorFlag; // the MediaWiki text was malformed
-	//@}
+	private boolean errorFlag; // used to warn user about errors for a word without interrupting the process; reset between each word
 
 	private Definition currentDefinition;
 	private int definitionCount = 0;
 	private int definitionDepth = -1; // the depth is the number of sharps (#) in front of a definition, minus one (that's optimization to have only one substraction for the 0-based indexed list). So, to trigger comparisons, we need to be negative.
 	
 	private String buffer = ""; // an all-purpose buffer, to be initialized by groups that need it
-	
+	private String source = "";
+
 	private Vector<String> definitionsBuffer;
 	private Map<String, Relation> relationsMap;
+
+	private WikiModel wikiModel = new WikiModel("http://www.mywiki.com/wiki/${image}", "http://www.mywiki.com/wiki/${title}");
+	private PlainTextConverter converter = new PlainTextConverter();
 	
 	private long timer = System.nanoTime();
 	private static final long FIRST_TICK = System.nanoTime();
 	
 	
-	/** Returns nanoseconds since the last `tick()` call.
-	*/
-	private long tick() {
-		long result = System.nanoTime() - timer;
-		
+	private void tick(String message) {
+		PREV_OUT.println(message + "\t\t" + ((System.nanoTime() - timer) / 10E9) + "s"
+						 + (errorFlag ? "\t\t\t /!\\" : ""));
 		timer = System.nanoTime();
-		
-		return result;
 	}
 
 	private void initParser() {
-		PREV_OUT.println("Word,Parsing time (ns),Syntax errors,Parser errors");
-		PREV_OUT.print("**Init**"); // for logging purposes
-	
 		definitionsBuffer = new Vector<String>(8); // maximum level of foreseeable nested definitions
-		relationsMap = new HashMap<String, Relation>(2);
+		relationsMap = new HashMap<String, Relation>(3);
 
 		relationsMap.put("syn", Relation.SYNONYM);
 		relationsMap.put("ant", Relation.ANTONYM);
-	}
-	
-	/** Logs a CSV entry to provide info about how the last word's parsing went.
-	* Does not include the actual word title output, in case a crash happened on the given word.
-	*/
-	private void logWord() {
-		PREV_OUT.println(","
-						 + tick() + ","
-						 + (syntaxErrorFlag ? "y" : "n") + ","
-						 + (errorFlag ? "y" : "n")
-						);
+		relationsMap.put("tropo", Relation.TROPONYM);
 	}
 
 	private void initWord(String word) {
-		logWord();
-		
-		PREV_OUT.print(word); // output before the parsing starts, to have the culprit in case of a crash
+		tick(currentWord.getTitle());
 		
 		currentWord = MutableWord.create(word);	//TODO: delay until language was accepted? We currently create the word immediately, even though we might not store anything from it if its language is not supported
-		resetFlags();
-		
+		errorFlag = false;
 		initSection();
 		
 		wordCount++;
 		
-		if ((wordCount % LOG_FREQUENCY) == 0)
-			PREV_ERR.println("\t\t\t\t\t\t\t" + wordCount + " WORDS PARSED!");
-	}
-	
-	
-	private void resetFlags() {
-		errorFlag = false;
-		syntaxErrorFlag = false;
+		if ((wordCount % 100) == 0)
+			PREV_OUT.println("\n\n=============================\n\t" + wordCount + " WORDS PARSED!\n=============================\n\n");
 	}
 	
 	private void initSection() {
@@ -115,6 +88,15 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 		
 		yybegin(MEDIAWIKI);
 	}
+
+	private String plainTextConverter(String wikiMedia) {
+		String plainStr = wikiModel.render(converter, wikiMedia);
+		return plainStr;
+	}
+	
+	private void log(String text) {
+		System.err.println(text);
+	}
 	
 	private void logError(String text) {
 		System.err.println("**" + text + "**");
@@ -123,7 +105,11 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	
 	private void logSyntaxError(String text) {
 		System.err.println("!! " + text);
-		syntaxErrorFlag = true;
+		errorFlag = true;
+	}
+	
+	private void out(String text) {
+		System.out.print(text);
 	}
 	
 	private void saveCurrentDefinition() {
@@ -155,7 +141,7 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 %init}
 
 %eof{
-	logWord();
+	tick(currentWord.getTitle());
 	
 	PREV_ERR.println("Total time: " + ((System.nanoTime() - FIRST_TICK) / 10E9) + "s");
 	PREV_ERR.println("Parsed words: " + wordCount);
@@ -172,7 +158,7 @@ newline = (\r|\n|\r\n)
 optionalSpaces = ({whitespace}*)
 space = ({whitespace}|{newline})
 
-%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD
+%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SOURCE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD
 
 %xstate XML, PAGE
 
@@ -296,7 +282,7 @@ space = ({whitespace}|{newline})
 		yybegin(NATURE);
 	}
 	
-	"syn"|"ant"
+	"syn"|"ant"|"tropo"
 	{
 		currentRelation = relationsMap.get(yytext());
 		yybegin(SIMPLENYM);
@@ -327,7 +313,7 @@ space = ({whitespace}|{newline})
 
 <SECTION>
 { // an entrance into that state with a non-consumed newline will switch to <MEDIAWIKI>
-	"{{"
+	^"{{"
 	{
 		yybegin(PATTERN);
 	}
@@ -349,6 +335,7 @@ space = ({whitespace}|{newline})
 	{newline}#+("*"|":"){optionalSpaces}
 	{
 		// the colon is not standard, but is used in some words ("siège")
+		buffer = "";
 		yybegin(DEFINITION_EXAMPLE);
 	}
 	
@@ -383,7 +370,7 @@ space = ({whitespace}|{newline})
 
 	[^|}]+|"|"
 	{
-		logError("Unexpected pattern value: '" + yytext() + "'");
+		log("Unexpected pattern value: '" + yytext() + "'");
 	}
 	
 	"}"
@@ -430,22 +417,53 @@ space = ({whitespace}|{newline})
 
 <DEFINITION_EXAMPLE>
 {
-	.+
+	"{{source|"
 	{
-		buffer = yytext();
+		source = "";
+		yybegin(SOURCE);
 	}
 
 	{newline}#+\*:
 	{
 		// the colon means we're in the same example, but on another line
 		buffer += "\n" + yytext();
+	}
+
+	.
+	{
+		buffer += yytext();
 	}	
 
 	{newline}
 	{
-		currentDefinition.addExample(buffer);
+		if(source != "")
+		{
+			buffer = buffer + "— (" + source + ")";
+			source = "";
+		}
+		String plainStr = plainTextConverter(buffer);
+		currentDefinition.addExample(plainStr);
 		yypushback(1);	// <SECTION> needs it to match
 		yybegin(SECTION);
+	}
+}
+
+<SOURCE>
+{
+	"{{w|"|"}}"
+	{
+	
+	}
+
+	.
+	{
+		source += yytext();
+	}
+
+	{newline}
+	{
+		yypushback(1);	// <DEFINITION_EXAMPLE> needs it to match
+		yybegin(DEFINITION_EXAMPLE);
 	}
 }
 
@@ -462,13 +480,15 @@ space = ({whitespace}|{newline})
 			for (int i = definitionDepth; i >= 0; i--)
 				result = definitionsBuffer.get(i) + (result.isEmpty() ? "" : (" " + result));
 
-			currentDefinition.setContent(result);
+			String plainStr = plainTextConverter(result);
+			currentDefinition.setContent(plainStr);
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
 			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + yytext() + "'. Only content at this nesting level will be stored.");
 			
-			currentDefinition.setContent(yytext()); // best recovery we can do: forget about concatenation
+			String plainStr = plainTextConverter(yytext());
+			currentDefinition.setContent(plainStr); // best recovery we can do: forget about concatenation
 		}
 				
 		yybegin(SECTION);
@@ -503,7 +523,7 @@ space = ({whitespace}|{newline})
 		// end of pattern
 	}
 
-	":"{optionalSpaces}
+	(":"{optionalSpaces}|\'\'\')
 	{
 		yybegin(SPNM_CONTEXT);
 	}
@@ -527,7 +547,7 @@ space = ({whitespace}|{newline})
 
 <SPNM_CONTEXT>
 {
-	[^:]+
+	([^:]+)
 	{
 		//TODO: context is not handled yet
 	}
@@ -535,6 +555,11 @@ space = ({whitespace}|{newline})
 	":"
 	{
 		yybegin(SIMPLENYM);
+	}
+
+	.
+	{
+
 	}
 }
 

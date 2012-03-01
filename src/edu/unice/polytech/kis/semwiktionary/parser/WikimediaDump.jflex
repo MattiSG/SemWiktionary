@@ -58,7 +58,6 @@ import info.bliki.wiki.model.WikiModel;
 
 		relationsMap.put("syn", Relation.SYNONYM);
 		relationsMap.put("ant", Relation.ANTONYM);
-		relationsMap.put("tropo", Relation.TROPONYM);
 	}
 
 	private void initWord(String word) {

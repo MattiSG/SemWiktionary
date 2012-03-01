@@ -443,7 +443,7 @@ space = ({whitespace}|{newline})
 				result = definitionsBuffer.get(i) + (result.isEmpty() ? "" : (" " + result));
 
 			String plainStr = wikiModel.render(new PlainTextConverter(), result);
-			currentDefinition.setContent(result);
+			currentDefinition.setContent(plainStr);
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)

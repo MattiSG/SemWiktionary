@@ -531,17 +531,11 @@ space = ({whitespace}|{newline})
 	([^:\n\r]+)
 	{
 		//TODO: context is not handled yet
-		System.out.println("Boudibou : " + yytext());
 	}
 
 	":"|{newline}
 	{
 		yybegin(SIMPLENYM);
-	}
-
-	.
-	{
-
 	}
 }
 

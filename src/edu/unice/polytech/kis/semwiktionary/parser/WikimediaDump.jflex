@@ -8,6 +8,9 @@ import java.util.HashMap;
 import edu.unice.polytech.kis.semwiktionary.model.*;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
+import info.bliki.wiki.filter.PlainTextConverter;
+import info.bliki.wiki.model.WikiModel;
+
 
 %%
 
@@ -34,6 +37,9 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	
 	private Vector<String> definitionsBuffer;
 	private Map<String, Relation> relationsMap;
+
+	private WikiModel wikiModel = new WikiModel("http://www.mywiki.com/wiki/${image}", "http://www.mywiki.com/wiki/${title}");
+	private PlainTextConverter converter = new PlainTextConverter();
 	
 	private long timer = System.nanoTime();
 	private static final long FIRST_TICK = System.nanoTime();
@@ -80,6 +86,11 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 		initSection();
 		
 		yybegin(MEDIAWIKI);
+	}
+
+	private String plainTextConverter(String wikiMedia) {
+		String plainStr = wikiModel.render(converter, wikiMedia);
+		return plainStr;
 	}
 	
 	private void log(String text) {
@@ -417,7 +428,8 @@ space = ({whitespace}|{newline})
 
 	{newline}
 	{
-		currentDefinition.addExample(buffer);
+		String plainStr = plainTextConverter(buffer);
+		currentDefinition.addExample(plainStr);
 		yypushback(1);	// <SECTION> needs it to match
 		yybegin(SECTION);
 	}
@@ -436,13 +448,15 @@ space = ({whitespace}|{newline})
 			for (int i = definitionDepth; i >= 0; i--)
 				result = definitionsBuffer.get(i) + (result.isEmpty() ? "" : (" " + result));
 
-			currentDefinition.setContent(result);
+			String plainStr = plainTextConverter(result);
+			currentDefinition.setContent(plainStr);
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
 			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + yytext() + "'. Only content at this nesting level will be stored.");
 			
-			currentDefinition.setContent(yytext()); // best recovery we can do: forget about concatenation
+			String plainStr = plainTextConverter(yytext());
+			currentDefinition.setContent(plainStr); // best recovery we can do: forget about concatenation
 		}
 				
 		yybegin(SECTION);

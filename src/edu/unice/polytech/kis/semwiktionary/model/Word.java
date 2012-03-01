@@ -46,7 +46,7 @@ public class Word extends NodeMappedObject {
 	
 	/** Definitions of this Word, in parsing order.
 	 */
-	protected List<Definition> definitions;
+	protected List<Definition> definitions = new LinkedList<Definition>();
 	
 	
 // STATIC METHODS
@@ -114,7 +114,7 @@ public class Word extends NodeMappedObject {
 	/** Returns all available definitions for this Word.
 	 */
 	public List<Definition> getDefinitions() {
-		if (definitions == null || definitions.isEmpty())
+		if (definitions.isEmpty())
 			this.fetchDefinitions();
 		
 		return this.definitions;
@@ -137,7 +137,7 @@ public class Word extends NodeMappedObject {
 	/** Loads the definitions for this Word from the database.
 	 */
 	protected void fetchDefinitions() {
-		this.definitions = new LinkedList<Definition>(this.<Definition>get(Relation.DEFINITION));
+		this.definitions.addAll(this.<Definition>get(Relation.DEFINITION));
 	}
 	
 	

@@ -115,6 +115,12 @@ public class MutableWord extends Word {
 		return this;
 	}
 	
+	public MutableWord addTroponym(Word troponym) {
+		Database.link(this.node, troponym.node, Relation.TROPONYM);
+		
+		return this;
+	}
+	
 // DELETE FUNCTIONS
 	
 	/** Deletes this word and all of its properties from the database.
@@ -163,6 +169,12 @@ public class MutableWord extends Word {
 	
 	public MutableWord clearAntonyms() {
 		this.delete(Relation.ANTONYM);
+		
+		return this;
+	}
+	
+	public MutableWord clearTroponyms() {
+		this.delete(Relation.TROPONYM);
 		
 		return this;
 	}

@@ -94,11 +94,11 @@ public class Word extends NodeMappedObject {
 
 	/** Constructs a Word object from a Node in the database.
 	 * Useful in propagation cases.
+	 * _Note_: This method is used by the generic `NodeMappedObject.get` method, you should not have to use manually it.
 	 *
-	 * @param node The node object of the database
+	 * @param node The Node object storing information about the to-be word in the database.
 	 */
-	// Modified public to be accessible in the generic method get.
-	public Word(Node node) {
+	protected Word(Node node) {
 		this.node = node;
 		this.title = this.get("title");
 	}

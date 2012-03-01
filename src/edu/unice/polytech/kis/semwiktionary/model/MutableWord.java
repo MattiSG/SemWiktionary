@@ -4,6 +4,7 @@ package edu.unice.polytech.kis.semwiktionary.model;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.Node;
 
 import edu.unice.polytech.kis.semwiktionary.database.Database;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
@@ -77,6 +78,16 @@ public class MutableWord extends Word {
 		super();
 		this.title = model.title;
 		this.node = model.node;
+	}
+	
+	/** Constructs a MutableWord object from a Node in the database.
+	 * Useful in propagation cases.
+	 * _Note_: This method is used by the generic `NodeMappedObject.get` method, you should not have to use manually it.
+	 *
+	 * @param node The Node object storing information about the to-be word in the database.
+	 */
+	protected MutableWord(Node node) {
+		super(node);
 	}
 	
 // UPDATE FUNCTIONS

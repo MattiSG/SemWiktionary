@@ -90,7 +90,7 @@ public abstract class NodeMappedObject {
 		Constructor<T> constructor = null;
 		try {
 			// constructor = T.class.getConstructor(Node.class); // unfortunately, Java can't handle getting a Class from a Type
-			constructor = type.getConstructor(Node.class);
+			constructor = type.getDeclaredConstructor(Node.class); // get*Declared*Constructor allows bypassing public-only access
 		} catch (NoSuchMethodException e) {
 			throw new RuntimeException("The specified generic type does not offer a Node constructor.", e);
 		}

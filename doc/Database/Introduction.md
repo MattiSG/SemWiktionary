@@ -1,3 +1,8 @@
+SemWiktionary database introduction
+===================================
+
+Our database engine is a NoSQL, graph-oriented database: Neo4j.
+
 Basic introduction
 ------------------
 http://docs.neo4j.org/chunked/1.5/what-is-a-graphdb.html

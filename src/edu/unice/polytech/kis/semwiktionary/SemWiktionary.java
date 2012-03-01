@@ -34,7 +34,7 @@ public class SemWiktionary {
 	
 	private static void load(String path) {
 		try {
-			System.out.println("Loading file '" + path + "'…");
+			System.err.println("Loading file '" + path + "'…");
 			new WikimediaDump(new FileInputStream(new File(path))).yylex();
 		} catch (java.io.FileNotFoundException e) {
 			System.err.println("File '" + path + "' was not found!");
@@ -44,7 +44,7 @@ public class SemWiktionary {
 			throw new RuntimeException(e);
 		}
 		
-		System.out.println("…done!");
+		System.err.println("…done!");
 	}
 	
 	public static void main(String[] args) {

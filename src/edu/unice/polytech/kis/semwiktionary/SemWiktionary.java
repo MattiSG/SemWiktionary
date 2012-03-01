@@ -117,7 +117,7 @@ public class SemWiktionary {
 		println("--------------------");
 
 		for (Word tro : word.getTroponyms())
-			println("$ " + tro.getTitle());
+			println("∋ " + tro.getTitle());
 		
 		println("--------------------");
 		

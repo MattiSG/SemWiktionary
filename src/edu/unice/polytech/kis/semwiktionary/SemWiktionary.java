@@ -115,6 +115,11 @@ public class SemWiktionary {
 			println("≠ " + ant.getTitle());
 		
 		println("--------------------");
+
+		for (Word tro : word.getTroponyms())
+			println("$ " + tro.getTitle());
+		
+		println("--------------------");
 		
 		for (Definition def : word.getDefinitions()) {
 			println(def.getPosition() + ". \"" + def.getContent() + "\"");

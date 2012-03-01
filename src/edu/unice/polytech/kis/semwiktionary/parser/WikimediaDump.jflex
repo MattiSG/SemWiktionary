@@ -8,6 +8,9 @@ import java.util.HashMap;
 import edu.unice.polytech.kis.semwiktionary.model.*;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
+import info.bliki.wiki.filter.PlainTextConverter;
+import info.bliki.wiki.model.WikiModel;
+
 
 %%
 
@@ -45,6 +48,8 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	
 	private long timer = System.nanoTime();
 	private static final long FIRST_TICK = System.nanoTime();
+
+	WikiModel wikiModel = new WikiModel("http://www.mywiki.com/wiki/${image}", "http://www.mywiki.com/wiki/${title}");
 	
 	
 	/** Returns nanoseconds since the last `tick()` call.
@@ -62,10 +67,11 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 		PREV_OUT.print("**Init**"); // for logging purposes
 	
 		definitionsBuffer = new Vector<String>(8); // maximum level of foreseeable nested definitions
-		relationsMap = new HashMap<String, Relation>(2);
+		relationsMap = new HashMap<String, Relation>(3);
 
 		relationsMap.put("syn", Relation.SYNONYM);
 		relationsMap.put("ant", Relation.ANTONYM);
+		relationsMap.put("tropo", Relation.TROPONYM);
 	}
 	
 	/** Logs a CSV entry to provide info about how the last word's parsing went.
@@ -296,7 +302,7 @@ space = ({whitespace}|{newline})
 		yybegin(NATURE);
 	}
 	
-	"syn"|"ant"
+	"syn"|"ant"|"tropo"
 	{
 		currentRelation = relationsMap.get(yytext());
 		yybegin(SIMPLENYM);
@@ -327,7 +333,7 @@ space = ({whitespace}|{newline})
 
 <SECTION>
 { // an entrance into that state with a non-consumed newline will switch to <MEDIAWIKI>
-	"{{"
+	^"{{"
 	{
 		yybegin(PATTERN);
 	}
@@ -443,7 +449,8 @@ space = ({whitespace}|{newline})
 
 	{newline}
 	{
-		currentDefinition.addExample(buffer);
+		String plainStr = wikiModel.render(new PlainTextConverter(), buffer);
+		currentDefinition.addExample(plainStr);
 		yypushback(1);	// <SECTION> needs it to match
 		yybegin(SECTION);
 	}
@@ -462,13 +469,16 @@ space = ({whitespace}|{newline})
 			for (int i = definitionDepth; i >= 0; i--)
 				result = definitionsBuffer.get(i) + (result.isEmpty() ? "" : (" " + result));
 
-			currentDefinition.setContent(result);
+			String plainStr = wikiModel.render(new PlainTextConverter(), result);
+			currentDefinition.setContent(plainStr);
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
 			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + yytext() + "'. Only content at this nesting level will be stored.");
-			
-			currentDefinition.setContent(yytext()); // best recovery we can do: forget about concatenation
+
+			String result = yytext();			
+			String plainStr = wikiModel.render(new PlainTextConverter(), result);
+			currentDefinition.setContent(plainStr); // best recovery we can do: forget about concatenation
 		}
 				
 		yybegin(SECTION);
@@ -503,7 +513,7 @@ space = ({whitespace}|{newline})
 		// end of pattern
 	}
 
-	":"{optionalSpaces}
+	(":"{optionalSpaces}|\'\'\')
 	{
 		yybegin(SPNM_CONTEXT);
 	}
@@ -527,7 +537,7 @@ space = ({whitespace}|{newline})
 
 <SPNM_CONTEXT>
 {
-	[^:]+
+	([^:]+)
 	{
 		//TODO: context is not handled yet
 	}
@@ -535,6 +545,11 @@ space = ({whitespace}|{newline})
 	":"
 	{
 		yybegin(SIMPLENYM);
+	}
+
+	.
+	{
+
 	}
 }
 

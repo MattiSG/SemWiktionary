@@ -329,7 +329,7 @@ space = ({whitespace}|{newline})
 
 <SECTION>
 { // an entrance into that state with a non-consumed newline will switch to <MEDIAWIKI>
-	^"{{"
+	"{{"
 	{
 		yybegin(PATTERN);
 	}

@@ -297,7 +297,7 @@ space = ({whitespace}|{newline})
 		yybegin(NATURE);
 	}
 	
-	"syn-}}\n"|"ant-}}\n"|"tropo-}}\n"
+	("syn"|"ant"|"tropo")"-}}"{newline}
 	{
 		buffer = yytext();
 		currentRelation = relationsMap.get(buffer.substring(0, buffer.length() - 4));
@@ -500,12 +500,12 @@ space = ({whitespace}|{newline})
 
 <SIMPLENYM>
 {
-	"{{(}}"|"{{-}}"|"{{)}}"
+	"{{"[()|]"}}"
 	{
 		// Wiki syntax for tables
 	}
 
-	(":"{optionalSpaces}|\'\'\'|";")
+	":"{optionalSpaces}|"'''"|";"
 	{
 		yybegin(SPNM_CONTEXT);
 	}
@@ -565,7 +565,7 @@ space = ({whitespace}|{newline})
 
 <TRASH>
 {
-	([^\n]|{newline}[^\n])*
+	([^\r\n]|{newline}[^\r\n])*
 	{
 		// Trash
 	}

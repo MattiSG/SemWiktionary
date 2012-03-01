@@ -46,7 +46,7 @@ public class Word extends NodeMappedObject {
 	
 	/** Definitions of this Word, in parsing order.
 	 */
-	protected List<Definition> definitions;
+	protected List<Definition> definitions = new LinkedList<Definition>();
 	
 	
 // STATIC METHODS
@@ -54,10 +54,10 @@ public class Word extends NodeMappedObject {
 	/** Finds a word in the database from its title.
 	 * Constructs a Word object with all its properties (definition, synonyms).
 	 *
-	 * @param	word	The word to model
-	 * @return	The complete Word object created or null if the word is not in the database
+	 * @param	word	The word to model.
+	 * @return	The complete Word object created or null if the word is not in the database.
 	 */
-	public static Word from(String word) {
+	public static Word find(String word) {
 		Node result;
 		try {
 			 result = (Node) index.get(INDEX_KEY, word).getSingle();
@@ -71,31 +71,34 @@ public class Word extends NodeMappedObject {
 	/** Tests if the given Word exists in the database.
 	 *
 	 * @param	word	The word to search for in the database
-	 * @return	`true` if the word exists in the database, `false` otherwise
+	 * @return	`true` if the word exists in the database, `false` otherwise or if an exception was thrown while trying to access it.
 	 */
 	public static boolean exists(String word) {
-		return from(word) != null;
+		try {
+			return find(word) != null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 // CONSTRUCTORS
-	
-	/** Models a natural-language word.
-	 * Does not store it in the database. See `MutableWord.create` to create a word in the database.
+
+	/** Initializes all fields when `create()`ing a new word.
 	 *
-	 * @param	word	The natural language word to model
+	 *@return	An empty shell to be filled.
 	 */
-	public Word(String word) {
-		this.title = word;
-		this.definitions = new LinkedList<Definition>();
+	protected Word() {
+		// nothing to do
 	}
 
 	/** Constructs a Word object from a Node in the database.
 	 * Useful in propagation cases.
+	 * _Note_: This method is used by the generic `NodeMappedObject.get` method, you should not have to use manually it.
 	 *
-	 * @param node The node object of the database
+	 * @param node The Node object storing information about the to-be word in the database.
 	 */
-	// Modified public to be accessible in the generic method get.
-	public Word(Node node) {
+	protected Word(Node node) {
 		this.node = node;
 		this.title = this.get("title");
 	}
@@ -111,7 +114,7 @@ public class Word extends NodeMappedObject {
 	/** Returns all available definitions for this Word.
 	 */
 	public List<Definition> getDefinitions() {
-		if (definitions == null || definitions.isEmpty())
+		if (definitions.isEmpty())
 			this.fetchDefinitions();
 		
 		return this.definitions;
@@ -134,7 +137,7 @@ public class Word extends NodeMappedObject {
 	/** Loads the definitions for this Word from the database.
 	 */
 	protected void fetchDefinitions() {
-		this.definitions = new LinkedList<Definition>(this.<Definition>get(Relation.DEFINITION));
+		this.definitions.addAll(this.<Definition>get(Relation.DEFINITION));
 	}
 	
 	

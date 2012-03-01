@@ -31,24 +31,24 @@ public class MutableWordTest {
 	@Before
 	public void setUp() {
 		currentTitle = MUTABLEWORD_WORD + "_" + count;
-		subject = MutableWord.create(currentTitle);
+		subject = MutableWord.obtain(currentTitle);
 		count++;
 	}
 	
 	@Test
-	public void createTest() {
-		assertEquals("'" + subject + "' pretends not to exist in the database!",
+	public void obtainTest() {
+		assertEquals("'" + subject + "' could not be obtained from the database!",
 					 subject.getTitle(),
-					 MutableWord.from(currentTitle).getTitle()
+					 MutableWord.obtain(currentTitle).getTitle()
 		);
 	}
 	
 	@Test
-	public void constructorTest() {
-		MutableWord word = new MutableWord(new Word(currentTitle));
+	public void mutatorTest() {
+		MutableWord word = new MutableWord(Word.find(currentTitle));
 		assertNotNull("The created Mutableword is null !", word);
 		
-		assertEquals("Title of word '" + word + "' was not properly fetched from database!",
+		assertEquals("Title of mutated word '" + word + "' was not properly fetched from database!",
 					 currentTitle,
 					 word.getTitle()
 		);
@@ -81,8 +81,13 @@ public class MutableWordTest {
 		definitions.add(new Definition(MUTABLEWORD_DEFINITION_2, 2));
 		subject.addDefinitions(definitions);
 		
-		assertEquals("The first definition was not registered correctly.", MUTABLEWORD_DEFINITION_1, subject.getDefinitions().get(0).getContent());
-		assertEquals("The second definition was not registered correctly.", MUTABLEWORD_DEFINITION_2, subject.getDefinitions().get(1).getContent());
+		assertEquals("The first definition was not registered correctly.",
+					 MUTABLEWORD_DEFINITION_1,
+					 subject.getDefinitions().get(0).getContent());
+					
+		assertEquals("The second definition was not registered correctly.",
+					 MUTABLEWORD_DEFINITION_2,
+					 subject.getDefinitions().get(1).getContent());
 	}
 	
 	@Test
@@ -90,7 +95,7 @@ public class MutableWordTest {
 		subject.delete();
 		
 		assertNull("The deleted word '" + MUTABLEWORD_WORD + "' still exists in the database!",
-				   Word.from(MUTABLEWORD_WORD));
+				   Word.find(MUTABLEWORD_WORD));
 	}
 	
 	@Test

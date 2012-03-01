@@ -84,7 +84,7 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 		
 		PREV_OUT.print(word); // output before the parsing starts, to have the culprit in case of a crash
 		
-		currentWord = MutableWord.create(word);	//TODO: delay until language was accepted? We currently create the word immediately, even though we might not store anything from it if its language is not supported
+		currentWord = MutableWord.obtain(word);	//TODO: delay until language was accepted? We currently create the word immediately, even though we might not store anything from it if its language is not supported
 		resetFlags();
 		
 		initSection();
@@ -548,7 +548,7 @@ space = ({whitespace}|{newline})
 	([^\]]|"]"[^\]])+
 	{
 		try {
-			currentWord.set(currentRelation, MutableWord.from(yytext()));
+			currentWord.set(currentRelation, MutableWord.obtain(yytext()));
 		} catch (Exception e) {
 			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( ");
 			e.printStackTrace(System.err);

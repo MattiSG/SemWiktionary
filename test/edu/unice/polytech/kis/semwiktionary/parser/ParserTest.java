@@ -50,7 +50,7 @@ public class ParserTest {
 	@Test
 	public void properNumberOfDefinitionsWereParsed() {
 		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
-			Word currentWord = Word.from(currentEntry.getKey());
+			Word currentWord = Word.find(currentEntry.getKey());
 
 			assertEquals("Bad number of definitions for word " + currentWord, currentEntry.getValue().size(), currentWord.getDefinitions().size());
 		}
@@ -59,7 +59,7 @@ public class ParserTest {
 	@Test
 	public void definitionsWereParsedInCorrectOrder() {
 		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
-			Word currentWord = Word.from(currentEntry.getKey());
+			Word currentWord = Word.find(currentEntry.getKey());
 			List<Definition> expectedDefinitions = currentEntry.getValue();
 			
 			for (int i = 0; i < expectedDefinitions.size(); i++) {
@@ -74,7 +74,7 @@ public class ParserTest {
 	@Test
 	public void definitionsContentIsCorrect() {
 		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
-			Word currentWord = Word.from(currentEntry.getKey());
+			Word currentWord = Word.find(currentEntry.getKey());
 			List<Definition> expectedDefinitions = currentEntry.getValue();
 			
 			for (int i = 1; i <= expectedDefinitions.size(); i++) {
@@ -89,7 +89,7 @@ public class ParserTest {
 	@Test
 	public void examplesWereProperlyParsed() {
 		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
-			Word currentWord = Word.from(currentEntry.getKey());
+			Word currentWord = Word.find(currentEntry.getKey());
 			List<Definition> expectedDefinitions = currentEntry.getValue();
 			
 			fail("No MediaWiki content parser. Test deactivated to avoid too verbose details."); //TODO

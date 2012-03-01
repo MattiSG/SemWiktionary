@@ -54,10 +54,10 @@ public class Word extends NodeMappedObject {
 	/** Finds a word in the database from its title.
 	 * Constructs a Word object with all its properties (definition, synonyms).
 	 *
-	 * @param	word	The word to model
-	 * @return	The complete Word object created or null if the word is not in the database
+	 * @param	word	The word to model.
+	 * @return	The complete Word object created or null if the word is not in the database.
 	 */
-	public static Word from(String word) {
+	public static Word find(String word) {
 		Node result;
 		try {
 			 result = (Node) index.get(INDEX_KEY, word).getSingle();
@@ -78,15 +78,13 @@ public class Word extends NodeMappedObject {
 	}
 	
 // CONSTRUCTORS
-	
-	/** Models a natural-language word.
-	 * Does not store it in the database. See `MutableWord.create` to create a word in the database.
+
+	/** Initializes all fields when `create()`ing a new word.
 	 *
-	 * @param	word	The natural language word to model
+	 *@return	An empty shell to be filled.
 	 */
-	public Word(String word) {
-		this.title = word;
-		this.definitions = new LinkedList<Definition>();
+	protected Word() {
+		// nothing to do
 	}
 
 	/** Constructs a Word object from a Node in the database.

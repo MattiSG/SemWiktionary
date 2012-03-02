@@ -8,6 +8,8 @@ import java.util.HashMap;
 import edu.unice.polytech.kis.semwiktionary.model.*;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
+import info.bliki.wiki.filter.PlainTextConverter;
+import info.bliki.wiki.model.WikiModel;
 
 %%
 
@@ -31,7 +33,8 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	*/
 	//@{
 	private boolean errorFlag, // a parsing error happened
-					syntaxErrorFlag; // the MediaWiki text was malformed
+					syntaxErrorFlag, // the MediaWiki text was malformed
+			funcChimEx; // a function chimie in example
 	//@}
 
 	private Definition currentDefinition;
@@ -39,9 +42,13 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	private int definitionDepth = -1; // the depth is the number of sharps (#) in front of a definition, minus one (that's optimization to have only one substraction for the 0-based indexed list). So, to trigger comparisons, we need to be negative.
 	
 	private String buffer = ""; // an all-purpose buffer, to be initialized by groups that need it
+	private String source = "";
 	
 	private Vector<String> definitionsBuffer;
 	private Map<String, Relation> relationsMap;
+
+	private WikiModel wikiModel = new WikiModel("http://www.mywiki.com/wiki/${image}", "http://www.mywiki.com/wiki/${title}");
+	private PlainTextConverter converter = new PlainTextConverter();
 	
 	private long timer = System.nanoTime();
 	private static final long FIRST_TICK = System.nanoTime();
@@ -131,6 +138,11 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 		currentDefinition.setPosition(definitionCount);
 		currentWord.addDefinition(currentDefinition);
 	}
+
+	private String convertToPlainText(String wikiMedia) {
+		String plainStr = wikiModel.render(converter, wikiMedia);
+		return plainStr;
+	}
 %}
 
 
@@ -172,7 +184,7 @@ newline = (\r|\n|\r\n)
 optionalSpaces = ({whitespace}*)
 space = ({whitespace}|{newline})
 
-%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD
+%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SOURCE, FCHIMIE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD
 
 %xstate XML, PAGE
 
@@ -349,6 +361,7 @@ space = ({whitespace}|{newline})
 	{newline}#+("*"|":"){optionalSpaces}
 	{
 		// the colon is not standard, but is used in some words ("siège")
+		buffer = "";
 		yybegin(DEFINITION_EXAMPLE);
 	}
 	
@@ -374,6 +387,13 @@ space = ({whitespace}|{newline})
 	"pron|"
 	{
 		yybegin(PRONUNCIATION);
+	}
+
+	"fchim"
+	{
+		if(!funcChimEx)
+			buffer = "";
+		yybegin(FCHIMIE);
 	}
 	
 	"}}"
@@ -428,11 +448,51 @@ space = ({whitespace}|{newline})
 	}
 }
 
+<FCHIMIE>
+{
+	"|"
+	{
+
+	}
+
+	"}}"
+	{
+		if(funcChimEx){
+			funcChimEx = false;
+			yybegin(DEFINITION_EXAMPLE);		
+		}
+		else {
+			definitionDepth++;
+			definitionsBuffer.add(definitionDepth, buffer);
+			definitionDepth++;
+			yybegin(DEFINITION);
+		}			
+	}
+
+	[^\|}]+
+	{
+		buffer += yytext();
+	}
+}
+
 <DEFINITION_EXAMPLE>
 {
-	.+
+	"{{source|"
 	{
-		buffer = yytext();
+		source = "";
+		yybegin(SOURCE);
+	}
+
+	"{{fchim"
+	{
+		funcChimEx = true;
+		yypushback(7);
+		yybegin(SECTION);
+	}
+
+	([^\r\n{]|"{"[^{])+|"{{"
+	{
+		buffer += yytext();
 	}
 
 	{newline}#+\*:
@@ -443,9 +503,34 @@ space = ({whitespace}|{newline})
 
 	{newline}
 	{
-		currentDefinition.addExample(buffer);
+		if(!source.isEmpty())
+		{
+			buffer +=  "— (" + source + ")";
+			source = "";
+		}
+		String plainStr = convertToPlainText(buffer);
+		currentDefinition.addExample(plainStr);
 		yypushback(1);	// <SECTION> needs it to match
 		yybegin(SECTION);
+	}
+}
+
+<SOURCE>
+{
+	"{{"|"w|"|"}}"
+	{
+	
+	}
+
+	([^\r\n}{w]|"}"[^}]|"{"[^{]|"w"[^\|])+
+	{
+		source += yytext();
+	}
+
+	{newline}
+	{
+		yypushback(1);	// <DEFINITION_EXAMPLE> needs it to match
+		yybegin(DEFINITION_EXAMPLE);
 	}
 }
 
@@ -460,15 +545,17 @@ space = ({whitespace}|{newline})
 			
 			String result = "";
 			for (int i = definitionDepth; i >= 0; i--)
-				result = definitionsBuffer.get(i) + (result.isEmpty() ? "" : (" " + result));
+				result = definitionsBuffer.get(i).trim() + (result.isEmpty() ? "" : (" " + result));
 
-			currentDefinition.setContent(result);
+			String plainStr = convertToPlainText(result);
+			currentDefinition.setContent(plainStr);
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
 			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + yytext() + "'. Only content at this nesting level will be stored.");
 			
-			currentDefinition.setContent(yytext()); // best recovery we can do: forget about concatenation
+			String plainStr = convertToPlainText(yytext());
+			currentDefinition.setContent(plainStr); // best recovery we can do: forget about concatenation
 		}
 				
 		yybegin(SECTION);

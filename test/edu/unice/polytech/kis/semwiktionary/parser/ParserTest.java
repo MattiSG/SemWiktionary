@@ -77,7 +77,7 @@ public class ParserTest {
 			Word currentWord = Word.from(currentEntry.getKey());
 			List<Definition> expectedDefinitions = currentEntry.getValue();
 			
-			for (int i = 1; i <= expectedDefinitions.size(); i++) {
+			for (int i = 0; i < expectedDefinitions.size(); i++) {
 				assertEquals("Bad definition for word " + currentWord,
 							 expectedDefinitions.get(i),
 							 currentWord.getDefinitions().get(i)
@@ -276,14 +276,14 @@ public class ParserTest {
 						   .addExample("Coudre du vieux avec du neuf.")
 						   .addExample("C’est du vieux qui vaut du neuf."));
 			
-		definitions.add(new Definition(" ou Père ou mère", 4)
+		definitions.add(new Definition("ou Père ou mère.", 4)
 						.addDomain("Argot")
 						.addDomain("Populaire")
 						.addDomain("Au singulier")
 						.addExample("Mon vieux a regardé la télé hier.")
 						.addExample("Ma vieille me prend la tête en ce moment..."));
 		
-		definitions.add(new Definition(" ou Parents.", 5)
+		definitions.add(new Definition("ou Parents.", 5)
 						.addDomain("Argot")
 						.addDomain("Populaire")
 						.addDomain("Au pluriel")

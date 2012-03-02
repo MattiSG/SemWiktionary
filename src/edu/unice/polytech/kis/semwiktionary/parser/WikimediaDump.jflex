@@ -42,7 +42,6 @@ import info.bliki.wiki.model.WikiModel;
 	private int definitionDepth = -1; // the depth is the number of sharps (#) in front of a definition, minus one (that's optimization to have only one substraction for the 0-based indexed list). So, to trigger comparisons, we need to be negative.
 	
 	private String buffer = ""; // an all-purpose buffer, to be initialized by groups that need it
-	private String source = "";
 	
 	private Vector<String> definitionsBuffer;
 	private Map<String, Relation> relationsMap;
@@ -480,7 +479,7 @@ space = ({whitespace}|{newline})
 {
 	"{{source|"
 	{
-		source = "";
+		buffer += "— (";
 		yybegin(SOURCE);
 	}
 
@@ -504,11 +503,6 @@ space = ({whitespace}|{newline})
 
 	{newline}
 	{
-		if(!source.isEmpty())
-		{
-			buffer +=  "— (" + source + ")";
-			source = "";
-		}
 		String plainStr = convertToPlainText(buffer);
 		currentDefinition.addExample(plainStr);
 		yypushback(1);	// <SECTION> needs it to match
@@ -525,11 +519,12 @@ space = ({whitespace}|{newline})
 
 	([^\r\n}{w]|"}"[^}]|"{"[^{]|"w"[^\|])+
 	{
-		source += yytext();
+		buffer += yytext();
 	}
 
 	{newline}
 	{
+		buffer += ")";
 		yypushback(1);	// <DEFINITION_EXAMPLE> needs it to match
 		yybegin(DEFINITION_EXAMPLE);
 	}

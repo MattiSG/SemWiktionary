@@ -34,7 +34,7 @@ import info.bliki.wiki.model.WikiModel;
 	//@{
 	private boolean errorFlag, // a parsing error happened
 					syntaxErrorFlag, // the MediaWiki text was malformed
-			funcChimEx; // a function chimie in example
+					funcChimEx;	// a chemical formula
 	//@}
 
 	private Definition currentDefinition;
@@ -141,8 +141,7 @@ import info.bliki.wiki.model.WikiModel;
 	}
 
 	private String convertToPlainText(String wikiMedia) {
-		String plainStr = wikiModel.render(converter, wikiMedia);
-		return plainStr;
+		return wikiModel.render(converter, wikiMedia);
 	}
 %}
 
@@ -393,7 +392,7 @@ space = ({whitespace}|{newline})
 
 	"fchim"
 	{
-		if(!funcChimEx)
+		if (! funcChimEx)
 			buffer = "";
 		yybegin(FCHIMIE);
 	}

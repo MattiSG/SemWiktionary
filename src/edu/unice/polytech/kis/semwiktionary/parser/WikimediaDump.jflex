@@ -71,7 +71,7 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 		relationsMap.put("syn", Relation.SYNONYM);
 		relationsMap.put("ant", Relation.ANTONYM);
 		relationsMap.put("tropo", Relation.TROPONYM);
-		relationsMap.put("mero", Relation.MERONYM);
+		relationsMap.put("méro", Relation.MERONYM);
 		relationsMap.put("hypo", Relation.HYPONYM);
 		
 		complexNyms = new ArrayList<Word>();
@@ -328,7 +328,7 @@ space = ({whitespace}|{newline})
 		yybegin(SIMPLENYM);
 	}
 
-	"hypo"
+	"hypo"|"méro"
 	{
 		currentRelation = relationsMap.get(yytext());
 		yybegin(COMPLEXNYM);

@@ -197,6 +197,9 @@ space = ({whitespace}|{newline})
 // a third-level header
 %state H3
 
+// a {{-pron-}} block, that is, a list of pronunciations
+%state PRONUNCIATION_BLOCK
+
 %state NATURE
 %state SECTION
 %state PATTERN
@@ -334,10 +337,15 @@ space = ({whitespace}|{newline})
 		currentRelation = relationsMap.get(yytext());
 		yybegin(SIMPLENYM);
 	}
+	
+	"pron"
+	{
+		yybegin(PRONUNCIATION_BLOCK);
+	}
 
 	.
 	{
-		yybegin(MEDIAWIKI);	// this is not an accepted type
+		yybegin(MEDIAWIKI);	// no specific treatment for this state
 	}
 }
 
@@ -403,12 +411,7 @@ space = ({whitespace}|{newline})
 
 
 <PATTERN>
-{
-	"pron|"
-	{
-		yybegin(PRONUNCIATION);
-	}
-	
+{	
 	"}}"
 	{
 		yybegin(SECTION);
@@ -426,6 +429,24 @@ space = ({whitespace}|{newline})
 	}
 }
 
+<PRONUNCIATION_BLOCK>
+{
+	"{{pron|"
+	{
+		yybegin(PRONUNCIATION); // yes, it could be that there are multiple pronunciations, but this is very rare. For the moment at least, we'll store only the last one.
+	}
+	
+	(({newline}|"{")?[^{\r\n])+
+	{
+		// in PRONUNCIATION_BLOCK: suppress output
+	}
+	
+	{newline}{newline}
+	{
+		yybegin(MEDIAWIKI);
+	}
+}
+
 
 <PRONUNCIATION>
 {
@@ -437,7 +458,7 @@ space = ({whitespace}|{newline})
 	"|"|"}"
 	{
 		// not only "}}" in case of missing ending curly bracket
-		yybegin(PATTERN);
+		yybegin(PRONUNCIATION_BLOCK);
 	}
 }
 

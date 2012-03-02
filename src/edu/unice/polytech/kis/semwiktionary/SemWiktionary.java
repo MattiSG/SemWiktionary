@@ -103,7 +103,7 @@ public class SemWiktionary {
 			return;
 		}
 		
-		println('"' + word.getTitle() + '"');
+		println("\"" + word.getTitle() + "\" /" + word.getPronunciation() + "/");
 		println("--------------------");
 		
 		for (Word syn : word.getSynonyms())

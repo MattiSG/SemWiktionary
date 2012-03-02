@@ -107,6 +107,13 @@ public class Word extends NodeMappedObject {
 	public String getTitle() {
 		return title;
 	}
+	
+	/** Returns the pronunciation for this word.
+	 * If no pronunciation was found in the Wiktionary, returns an empty `String`.
+	 */
+	public String getPronunciation() {
+		return this.get("pronunciation");
+	}
 
 	/** Returns all available definitions for this Word.
 	 */

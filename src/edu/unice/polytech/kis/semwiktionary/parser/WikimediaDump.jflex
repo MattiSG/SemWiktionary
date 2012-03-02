@@ -83,6 +83,15 @@ import info.bliki.wiki.model.WikiModel;
 	private void log(String text) {
 		System.err.println(text);
 	}
+
+	private String convertToPlainText(String wikiMedia) {
+		String plainStr = wikiModel.render(converter, wikiMedia);
+		return plainStr;
+	}
+	
+	private void log(String text) {
+		System.err.println(text);
+	}
 	
 	/** Logs a CSV entry to provide info about how the last word's parsing went.
 	* Does not include the actual word title output, in case a crash happened on the given word.
@@ -490,7 +499,7 @@ space = ({whitespace}|{newline})
 			buffer = buffer + "— (" + source + ")";
 			source = "";
 		}
-		String plainStr = plainTextConverter(buffer);
+		String plainStr = convertToPlainText(buffer);
 		currentDefinition.addExample(plainStr);
 		yypushback(1);	// <SECTION> needs it to match
 		yybegin(SECTION);
@@ -510,14 +519,14 @@ space = ({whitespace}|{newline})
 			for (int i = definitionDepth; i >= 0; i--)
 				result = definitionsBuffer.get(i) + (result.isEmpty() ? "" : (" " + result));
 
-			String plainStr = plainTextConverter(result);
+			String plainStr = convertToPlainText(result);
 			currentDefinition.setContent(plainStr);
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
 			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + yytext() + "'. Only content at this nesting level will be stored.");
 			
-			String plainStr = plainTextConverter(yytext());
+			String plainStr = convertToPlainText(yytext());
 			currentDefinition.setContent(plainStr); // best recovery we can do: forget about concatenation
 		}
 				

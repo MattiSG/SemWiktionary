@@ -121,12 +121,20 @@ public class MutableWord extends Word {
 		return this;
 	}
 	
+	/** Adds the word given in parameter to the current word object as an hyponym.
+	 * @param hyponym The hyponym to add to this Word
+	 * @return This MutableWord, for chainability
+	 */
 	public MutableWord addHyponym(Word hyponym) {
 		Database.link(this.node, hyponym.node, Relation.HYPONYM);
 		
 		return this;
 	}
-	
+
+	/** Adds the word given in parameter to the current word object as a meronym.
+	 * @param meronym The meronym to add to this Word
+	 * @return This MutableWord, for chainability
+	 */
 	public MutableWord addMeronym(Word meronym) {
 		Database.link(this.node, meronym.node, Relation.MERONYM);
 		
@@ -191,12 +199,18 @@ public class MutableWord extends Word {
 		return this;
 	}
 	
+	/** Deletes all hyponyms associated to this Word.
+	 * @return This MutableWord, for chainability
+	 */
 	public MutableWord clearHyponyms() {
 		this.delete(Relation.HYPONYM);
 		
 		return this;
 	}
 	
+	/** Deletes all meronyms associated to this Word.
+	 * @return This MutableWord, for chainability
+	 */
 	public MutableWord clearMeronyms() {
 		this.delete(Relation.MERONYM);
 		

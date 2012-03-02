@@ -172,12 +172,31 @@ newline = (\r|\n|\r\n)
 optionalSpaces = ({whitespace}*)
 space = ({whitespace}|{newline})
 
-// all states declarations are on their own line to minimize conflicts
-// these states are inclusive, i.e. they may match with non-state-specific patterns
+
+// All states declarations are on their own line to minimize conflicts.
+
+// These states are exclusive, i.e. they may match only with patterns namespaced by them.
+//@{
+// outermost state
+%xstate XML
+
+// in a <page> element of the XML, i.e. an entry in the dictionary
+%xstate PAGE
+//@}
+
+// These states are inclusive, i.e. they may match with non-state-specific patterns.
+//@{
+// <title> of a <page>
 %state TITLE
+
+// <content> node of a <page>
 %state MEDIAWIKI
+
 %state LANG
-%state H2
+
+// a third-level header
+%state H3
+
 %state NATURE
 %state SECTION
 %state PATTERN
@@ -188,9 +207,7 @@ space = ({whitespace}|{newline})
 %state SIMPLENYM
 %state SPNM_CONTEXT
 %state SPNM_WORD
-// these states are exclusive, i.e. they may match only with patterns namespaced by them
-%xstate XML
-%xstate PAGE
+//@}
 
 %%
 
@@ -268,7 +285,7 @@ space = ({whitespace}|{newline})
 	
 	"{{-"
 	{
-		yybegin(H2);
+		yybegin(H3);
 	}
 	
 	"</text>"
@@ -304,7 +321,7 @@ space = ({whitespace}|{newline})
 }
 
 
-<H2>
+<H3>
 {
 	"verb"|"nom"|"adj"|"noms-vern"
 	{

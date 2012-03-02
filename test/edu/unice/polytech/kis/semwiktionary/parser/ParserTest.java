@@ -94,7 +94,7 @@ public class ParserTest {
 			
 			fail("No MediaWiki content parser. Test deactivated to avoid too verbose details."); //TODO
 			
-			for (int i = 1; i <= expectedDefinitions.size(); i++) {
+			for (int i = 0; i < expectedDefinitions.size(); i++) {
 				ReflectionAssert.assertReflectionEquals(
 														expectedDefinitions.get(i).getExamples(),
 														currentWord.getDefinitions().get(i).getExamples()

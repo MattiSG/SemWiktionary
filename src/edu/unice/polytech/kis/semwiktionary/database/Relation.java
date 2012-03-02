@@ -11,7 +11,8 @@ public enum Relation implements RelationshipType {
 	SYNONYM(Word.class),
 	ANTONYM(Word.class),
 	TROPONYM(Word.class),
-	HYPONYM(Word.class);
+	HYPONYM(Word.class),
+	MERONYM(Word.class);
 	
 	public Class getDestinationType() {
 		return this.maps;

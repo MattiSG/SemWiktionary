@@ -62,10 +62,11 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 		PREV_OUT.print("**Init**"); // for logging purposes
 	
 		definitionsBuffer = new Vector<String>(8); // maximum level of foreseeable nested definitions
-		relationsMap = new HashMap<String, Relation>(2);
+		relationsMap = new HashMap<String, Relation>(3);
 
 		relationsMap.put("syn", Relation.SYNONYM);
 		relationsMap.put("ant", Relation.ANTONYM);
+		relationsMap.put("tropo", Relation.TROPONYM);
 	}
 	
 	/** Logs a CSV entry to provide info about how the last word's parsing went.
@@ -172,7 +173,7 @@ newline = (\r|\n|\r\n)
 optionalSpaces = ({whitespace}*)
 space = ({whitespace}|{newline})
 
-%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD
+%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD, TRASH
 
 %xstate XML, PAGE
 
@@ -296,15 +297,16 @@ space = ({whitespace}|{newline})
 		yybegin(NATURE);
 	}
 	
-	"syn"|"ant"
+	("syn"|"ant"|"tropo")"-}}"{newline}
 	{
-		currentRelation = relationsMap.get(yytext());
+		buffer = yytext();
+		currentRelation = relationsMap.get(buffer.substring(0, buffer.length() - 4));
 		yybegin(SIMPLENYM);
 	}
 
 	.
 	{
-		yybegin(MEDIAWIKI);	// this is not an accepted type
+		yybegin(TRASH);	// this is not an accepted type
 	}
 }
 
@@ -498,28 +500,27 @@ space = ({whitespace}|{newline})
 
 <SIMPLENYM>
 {
-	"-}}"
+	"{{"[()|]"}}"
 	{
-		// end of pattern
+		// Wiki syntax for tables
 	}
 
-	":"{optionalSpaces}
+	":"{optionalSpaces}|"'''"|";"
 	{
 		yybegin(SPNM_CONTEXT);
 	}
 
-	"*"{optionalSpaces}"[["
+	"*"([^\[]|"["[^\[])*"[["
 	{
 		yybegin(SPNM_WORD);
 	}
-
 
 	{newline}{newline}
 	{
 		leaveSection();
 	}
 
-	([^-:*\r\n]|"-"[^}])+|.|{newline}
+	([^-:;'*\r\n]|"-"[^}])+|.|{newline}
 	{
 		// in SimpleNym: suppress output
 	}
@@ -527,12 +528,12 @@ space = ({whitespace}|{newline})
 
 <SPNM_CONTEXT>
 {
-	[^:]+
+	([^:\n\r]+)
 	{
 		//TODO: context is not handled yet
 	}
 
-	":"
+	":"|{newline}
 	{
 		yybegin(SIMPLENYM);
 	}
@@ -553,5 +554,18 @@ space = ({whitespace}|{newline})
 			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( ");
 			e.printStackTrace(System.err);
 		}
+	}
+}
+
+<TRASH>
+{
+	([^\r\n]|{newline}[^\r\n])*
+	{
+		// Trash
+	}
+
+	{newline}{newline}
+	{
+		yybegin(MEDIAWIKI);
 	}
 }

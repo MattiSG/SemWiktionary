@@ -172,9 +172,25 @@ newline = (\r|\n|\r\n)
 optionalSpaces = ({whitespace}*)
 space = ({whitespace}|{newline})
 
-%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD
-
-%xstate XML, PAGE
+// all states declarations are on their own line to minimize conflicts
+// these states are inclusive, i.e. they may match with non-state-specific patterns
+%state TITLE
+%state MEDIAWIKI
+%state LANG
+%state H2
+%state NATURE
+%state SECTION
+%state PATTERN
+%state PRONUNCIATION
+%state DEFINITION
+%state DEFINITION_DOMAIN
+%state DEFINITION_EXAMPLE
+%state SIMPLENYM
+%state SPNM_CONTEXT
+%state SPNM_WORD
+// these states are exclusive, i.e. they may match only with patterns namespaced by them
+%xstate XML
+%xstate PAGE
 
 %%
 

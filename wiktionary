@@ -14,7 +14,7 @@ then
 	loading=1
 fi
 
-if java -cp $(dirname $0)/bin:$(dirname $0)/lib/*:$(dirname $0)/lib/neo4j_database/*:SemWiktionary_MattiSG.jar edu.unice.polytech.kis.semwiktionary.SemWiktionary "$@" # the jar is here for the built package, and bin for the actual project
+if java -cp $(dirname $0)/bin:$(dirname $0)/lib/*:$(dirname $0)/lib/neo4j_database/*:$(dirname $0)/lib/parser_build/*:SemWiktionary_MattiSG.jar edu.unice.polytech.kis.semwiktionary.SemWiktionary "$@" # the jar is here for the built package, and bin for the actual project
 then 
 	if [[ $loading = 1 ]]
 	then

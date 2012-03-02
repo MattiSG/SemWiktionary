@@ -426,12 +426,12 @@ space = ({whitespace}|{newline})
 
 <SOURCE>
 {
-	"{{w|"|"}}"
+	"{{"|"w|"|"}}"
 	{
 	
 	}
 
-	.
+	([^\r\n}{w]|"}"[^}]|"{"[^{]|"w"[^\|])+
 	{
 		source += yytext();
 	}
@@ -465,6 +465,7 @@ space = ({whitespace}|{newline})
 
 <DEFINITION_EXAMPLE>
 {
+	
 	"{{source|"
 	{
 		source = "";
@@ -477,14 +478,14 @@ space = ({whitespace}|{newline})
 		buffer += "\n" + yytext();
 	}
 
-	.
+	([^\r\n{]|"{"[^{])+|"{{"
 	{
 		buffer += yytext();
 	}	
 
 	{newline}
 	{
-		if(source != "")
+		if(!source.isEmpty())
 		{
 			buffer = buffer + "— (" + source + ")";
 			source = "";

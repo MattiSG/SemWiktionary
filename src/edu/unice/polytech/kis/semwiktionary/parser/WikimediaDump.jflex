@@ -183,7 +183,7 @@ newline = (\r|\n|\r\n)
 optionalSpaces = ({whitespace}*)
 space = ({whitespace}|{newline})
 
-%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SOURCE, FCHIMIE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD, TRASH
+%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SOURCE, FCHIM_PATTERN, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD, TRASH
 
 %xstate XML, PAGE
 
@@ -393,7 +393,7 @@ space = ({whitespace}|{newline})
 	{
 		if (! funcChimEx)
 			buffer = "";
-		yybegin(FCHIMIE);
+		yybegin(FCHIM_PATTERN);
 	}
 	
 	"}}"
@@ -448,18 +448,13 @@ space = ({whitespace}|{newline})
 	}
 }
 
-<FCHIMIE>
-{
-	"|"
-	{
-
-	}
-
+<FCHIM_PATTERN>
+{ // chemical formulas. See http://fr.wiktionary.org/wiki/Modèle:fchim
 	"}}"
 	{
 		if(funcChimEx){
 			funcChimEx = false;
-			yybegin(DEFINITION_EXAMPLE);		
+			yybegin(DEFINITION_EXAMPLE);
 		}
 		else {
 			definitionDepth++;
@@ -472,6 +467,14 @@ space = ({whitespace}|{newline})
 	[^\|}]+
 	{
 		buffer += yytext();
+	}
+	
+	"|"("lien="[|}]+)?
+	{
+		// pipes are used as separators for element symbols and their indices, which are all rendered the same in a text-only representation. Therefore, we simply ignore pipes.
+		// example: H|2|O => H2O
+
+		// chemical formulas may also specify a link to a complete page with "lien=<link>". We also want to remove this information.
 	}
 }
 

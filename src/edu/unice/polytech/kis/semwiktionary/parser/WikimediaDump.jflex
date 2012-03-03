@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Vector;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Stack;
 
 import edu.unice.polytech.kis.semwiktionary.model.*;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
@@ -24,7 +25,8 @@ import info.bliki.wiki.model.WikiModel;
 							  PREV_ERR = System.err;
 							  
 	private final static int LOG_FREQUENCY = 100; // a count message will be output to the console on every multiple of this frequency
-
+	
+	private Stack<Integer> statesStack = new Stack<Integer>();
 	private MutableWord currentWord;
 	private Relation currentRelation;
 	
@@ -33,8 +35,7 @@ import info.bliki.wiki.model.WikiModel;
 	*/
 	//@{
 	private boolean errorFlag, // a parsing error happened
-					syntaxErrorFlag, // the MediaWiki text was malformed
-					funcChimEx;	// a chemical formula
+					syntaxErrorFlag; // the MediaWiki text was malformed
 	//@}
 
 	private Definition currentDefinition;
@@ -73,6 +74,26 @@ import info.bliki.wiki.model.WikiModel;
 		relationsMap.put("syn", Relation.SYNONYM);
 		relationsMap.put("ant", Relation.ANTONYM);
 		relationsMap.put("tropo", Relation.TROPONYM);
+	}
+	
+	private void yypushstate() {
+		statesStack.push(yystate());
+	}
+	
+	/** Shortcut convenience method: pushes state and switches to the passed one.
+	*/
+	private void yypushstate(int newState) {
+		yypushstate();
+		yybegin(newState);
+	}
+	
+	private void yypopstate() {
+		try {
+			yybegin(statesStack.pop());
+		} catch (java.util.EmptyStackException e) {
+			logError("Unbalanced states! Popping state threw an EmptyStackException. Skipping rest of the word.");
+			yybegin(XML);
+		}
 	}
 	
 	/** Logs a CSV entry to provide info about how the last word's parsing went.
@@ -341,6 +362,7 @@ space = ({whitespace}|{newline})
 { // an entrance into that state with a non-consumed newline will switch to <MEDIAWIKI>
 	"{{"
 	{
+		yypushstate();
 		yybegin(PATTERN);
 	}
 
@@ -355,6 +377,7 @@ space = ({whitespace}|{newline})
 		
 		currentDefinition = new Definition();
 		
+		buffer = "";
 		yybegin(DEFINITION);
 	}
 	
@@ -388,17 +411,16 @@ space = ({whitespace}|{newline})
 	{
 		yybegin(PRONUNCIATION);
 	}
+	
+	"source|"
+	{
+		buffer += "— (";
+		yybegin(SOURCE);
+	}
 
 	"fchim"
 	{
-		if (! funcChimEx)
-			buffer = "";
 		yybegin(FCHIM_PATTERN);
-	}
-	
-	"}}"
-	{
-		yybegin(SECTION);
 	}
 
 	[^|}]+|"|"
@@ -406,10 +428,15 @@ space = ({whitespace}|{newline})
 		logError("Unexpected pattern value: '" + yytext() + "'");
 	}
 	
+	"}}"
+	{
+		yypopstate();
+	}
+	
 	"}"
 	{
 		logSyntaxError("Unbalanced bracket in pattern in '" + currentWord.getTitle() + "'");
-		yybegin(SECTION);
+		yypopstate();
 	}
 }
 
@@ -452,16 +479,7 @@ space = ({whitespace}|{newline})
 { // chemical formulas. See http://fr.wiktionary.org/wiki/Modèle:fchim
 	"}}"
 	{
-		if(funcChimEx){
-			funcChimEx = false;
-			yybegin(DEFINITION_EXAMPLE);
-		}
-		else {
-			definitionDepth++;
-			definitionsBuffer.add(definitionDepth, buffer);
-			definitionDepth++;
-			yybegin(DEFINITION);
-		}			
+		yypopstate();
 	}
 
 	[^\|}]+
@@ -480,17 +498,10 @@ space = ({whitespace}|{newline})
 
 <DEFINITION_EXAMPLE>
 {
-	"{{source|"
+	"{{"
 	{
-		buffer += "— (";
-		yybegin(SOURCE);
-	}
-
-	"{{fchim"
-	{
-		funcChimEx = true;
-		yypushback(7);
-		yybegin(SECTION);
+		yypushstate();
+		yybegin(PATTERN);
 	}
 
 	([^\r\n{]|"{"[^{])+|"{{"
@@ -506,18 +517,20 @@ space = ({whitespace}|{newline})
 
 	{newline}
 	{
-		String plainStr = convertToPlainText(buffer);
-		currentDefinition.addExample(plainStr);
+		buffer = convertToPlainText(buffer).trim();	// convert before testing for emptiness: `''` is not empty, but the plaintext equivalent is ""
+		if (! buffer.isEmpty())
+			currentDefinition.addExample(buffer);
+		
 		yypushback(1);	// <SECTION> needs it to match
 		yybegin(SECTION);
 	}
 }
 
 <SOURCE>
-{
+{ // source of a quote. May only be at the end of a line.
 	"{{"|"w|"|"}}"
 	{
-	
+		// in SOURCE: suppress output
 	}
 
 	([^\r\n}{w]|"}"[^}]|"{"[^{]|"w"[^\|])+
@@ -538,24 +551,7 @@ space = ({whitespace}|{newline})
 {
 	([^\r\n{]|"{"[^{])+
 	{
-		try {
-			definitionsBuffer.add(definitionDepth, convertToPlainText(yytext()));
-			
-			String result = "";
-			for (int i = definitionDepth; i >= 0; i--)
-				result = definitionsBuffer.get(i).trim() + (result.isEmpty() ? "" : (" " + result));
-
-			currentDefinition.setContent(result);
-
-		} catch (ArrayIndexOutOfBoundsException e) {
-			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
-			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + yytext() + "'. Only content at this nesting level will be stored.");
-			
-			String plainStr = convertToPlainText(yytext());
-			currentDefinition.setContent(plainStr); // best recovery we can do: forget about concatenation
-		}
-				
-		yybegin(SECTION);
+		buffer += yytext();
 	}
 	
 	"{{"
@@ -563,19 +559,32 @@ space = ({whitespace}|{newline})
 		yybegin(DEFINITION_DOMAIN);
 	}
 	
+	"{{fchim"
+	{ //TODO: this should be generalized to "{{" -> PATTERN, and PATTERN contain all DEFINITION_DOMAIN triggers
+		yypushstate();
+		yybegin(FCHIM_PATTERN);
+	}
+	
 	{newline}
 	{
-		// rare case in which the only content of a definition is a list of domains (see "neuf")
 		try {
-			definitionsBuffer.add(definitionDepth, ""); // otherwise we'll break the concatenation
+			definitionsBuffer.add(definitionDepth, convertToPlainText(buffer).trim());
+
+			String result = "";
+			for (int i = definitionDepth; i >= 0; i--)
+				result = definitionsBuffer.get(i) + (result.isEmpty() ? "" : (" " + result));
+
+			currentDefinition.setContent(result);
+
 		} catch (ArrayIndexOutOfBoundsException e) {
-			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
-			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "', with a definition that has no content other than domains."); // damn, that's an edge case… (but an existing one)
-			
-			// no recovery to do here: more nested definitions will be caught in the usual definition handling case above this one
+			// this can happen in cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
+			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + yytext() + "'. Only content at this nesting level will be stored.");
+
+			String plainStr = convertToPlainText(yytext());
+			currentDefinition.setContent(plainStr); // best recovery we can do: forget about concatenation
 		}
 		
-		yypushback(1);
+		yypushback(1);	// SECTION needs it to match
 		yybegin(SECTION);
 	}
 }

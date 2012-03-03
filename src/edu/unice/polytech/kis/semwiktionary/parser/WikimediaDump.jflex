@@ -416,7 +416,12 @@ space = ({whitespace}|{newline})
 
 
 <PATTERN>
-{	
+{
+	"pron|"
+	{
+		yybegin(PRONUNCIATION);
+	}
+
 	"}}"
 	{
 		yybegin(SECTION);
@@ -460,10 +465,10 @@ space = ({whitespace}|{newline})
 		currentWord.set("pronunciation", yytext());
 	}
 	
-	[^}\r\n]+"}""}"?
+	("|"[^|}\r\n]+)*"}""}"?
 	{
 		// not only "}}" in case of missing ending curly bracket
-		yybegin(PRONUNCIATION_BLOCK);
+		yybegin(SECTION); //TODO: use yypopstate() once merged
 	}
 }
 

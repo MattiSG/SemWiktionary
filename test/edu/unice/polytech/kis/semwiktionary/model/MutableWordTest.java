@@ -114,7 +114,7 @@ public class MutableWordTest {
 	@Test
 	public void pronuciationSetGet() {
 		try {
-			subject.set("pronunciation", MUTABLEWORD_DEFINITION_1);
+			subject.setPronunciation(MUTABLEWORD_DEFINITION_1);
 		} catch (Exception e) {
 			fail("Exception while trying to set the pronunciation of a MutableWord! ("
 				 + e.toString() + ")");

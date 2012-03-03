@@ -134,6 +134,16 @@ public class MutableWord extends Word {
 		return this;
 	}
 	
+	/** Sets the string given in parameter as the pronunciation of the current word.
+	 * @param	pron	The pronunciation to set to this Word.
+	 * @return	This `MutableWord`, for chainability
+	 */
+	public MutableWord setPronunciation(String pron) {
+		this.set("pronunciation", pron);
+		
+		return this;
+	}
+	
 // DELETE FUNCTIONS
 	
 	/** Deletes this word and all of its properties from the database.

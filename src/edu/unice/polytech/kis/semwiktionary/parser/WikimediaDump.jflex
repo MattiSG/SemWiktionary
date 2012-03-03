@@ -462,7 +462,7 @@ space = ({whitespace}|{newline})
 {
 	[^}|]+
 	{
-		currentWord.set("pronunciation", yytext());
+		currentWord.setPronunciation(yytext());
 	}
 	
 	("|"[^|}\r\n]+)*"}""}"?

@@ -539,15 +539,13 @@ space = ({whitespace}|{newline})
 	([^\r\n{]|"{"[^{])+
 	{
 		try {
-
-			definitionsBuffer.add(definitionDepth, yytext());
+			definitionsBuffer.add(definitionDepth, convertToPlainText(yytext()));
 			
 			String result = "";
 			for (int i = definitionDepth; i >= 0; i--)
 				result = definitionsBuffer.get(i).trim() + (result.isEmpty() ? "" : (" " + result));
 
-			String plainStr = convertToPlainText(result);
-			currentDefinition.setContent(plainStr);
+			currentDefinition.setContent(result);
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)

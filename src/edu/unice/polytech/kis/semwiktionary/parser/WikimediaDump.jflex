@@ -47,7 +47,10 @@ import info.bliki.wiki.model.WikiModel;
 	private Vector<String> definitionsBuffer;
 	private Map<String, Relation> relationsMap;
 
-	private WikiModel wikiModel = new WikiModel("http://www.mywiki.com/wiki/${image}", "http://www.mywiki.com/wiki/${title}");
+	// the params are URLs patterns to be used by WikiModel to generate hyperlinks when converting to HTML
+	// they are completely useless here, since we only use WikiModel to convert to plaintext, removing links altogether. WikiModel does not offer a default constructor though, so we'll put a meaningful URL.
+	private WikiModel wikiModel = new WikiModel("http://fr.wiktionary.org/${image}",
+												"http://fr.wiktionary.org/wiki/${title}");
 	private PlainTextConverter converter = new PlainTextConverter();
 	
 	private long timer = System.nanoTime();

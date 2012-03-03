@@ -19,7 +19,7 @@ import info.bliki.wiki.model.WikiModel;
 	public static final String  OUTPUT_FILE = "log/parser-output.txt",
 								ERROR_FILE = "log/parser-error.txt";
 								
-	public long wordCount = 0;
+	public long wordCount = 0, exampleCount = 0;
 
 	private final PrintStream PREV_OUT = System.out,
 							  PREV_ERR = System.err;
@@ -159,8 +159,11 @@ import info.bliki.wiki.model.WikiModel;
 	
 	private void saveCurrentDefinition() {
 		definitionCount++;
+		if (exampleCount > 0)
+			currentDefinition.set("exampleNb", Long.toString(exampleCount));
 		currentDefinition.setPosition(definitionCount);
 		currentWord.addDefinition(currentDefinition);
+		exampleCount = 0;
 	}
 
 	private String convertToPlainText(String wikiMedia) {
@@ -522,7 +525,7 @@ space = ({whitespace}|{newline})
 	{
 		buffer = convertToPlainText(buffer).trim();	// convert before testing for emptiness: `''` is not empty, but the plaintext equivalent is ""
 		if (! buffer.isEmpty())
-			currentDefinition.addExample(buffer);
+			currentDefinition.addExample(buffer, ++exampleCount);
 		
 		yypushback(1);	// <SECTION> needs it to match
 		yybegin(SECTION);
@@ -536,6 +539,18 @@ space = ({whitespace}|{newline})
 		// in SOURCE: suppress output
 	}
 
+	"}}"{newline}
+	{
+		buffer += ")";
+		yypushback(1);
+	}
+
+	"}}."{newline}
+	{
+		buffer += ")";
+		yypushback(2);
+	}
+
 	([^\r\n}{w]|"}"[^}]|"{"[^{]|"w"[^\|])+
 	{
 		buffer += yytext();
@@ -543,7 +558,6 @@ space = ({whitespace}|{newline})
 
 	{newline}
 	{
-		buffer += ")";
 		yypushback(1);	// <DEFINITION_EXAMPLE> needs it to match
 		yybegin(DEFINITION_EXAMPLE);
 	}

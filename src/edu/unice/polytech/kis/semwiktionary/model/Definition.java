@@ -69,9 +69,13 @@ public class Definition extends NodeMappedObject {
 	/** Returns all examples of this definition.
 	 */
 	public List<String> getExamples() {
+		long count = 0;
+		if (! this.get("exampleNb").isEmpty())
+			count = Long.valueOf(this.get("exampleNb"));
 		if (listExample == null) {
-			listExample = new ArrayList<String>(1);
-			listExample.add(this.get("example"));
+			listExample = new ArrayList<String>((int)count);
+			for (int i = 1; i <= count; i++)
+				listExample.add(this.get("example " + i));
 		}
 		
 		return this.listExample;
@@ -101,9 +105,9 @@ public class Definition extends NodeMappedObject {
 	 * @param	example	The example to add
 	 * @return	this	for chainability
 	 */
-	public Definition addExample(String example) {
+	public Definition addExample(String example, long exampleCount) {
 		this.listExample.add(example);
-		this.set("example", example); // TODO: this stores only the last one
+		this.set("example " + exampleCount, example); // TODO: this stores only the last one
 		
 		return this;
 	}

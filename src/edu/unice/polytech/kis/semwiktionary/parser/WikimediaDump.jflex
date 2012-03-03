@@ -62,10 +62,11 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 		PREV_OUT.print("**Init**"); // for logging purposes
 	
 		definitionsBuffer = new Vector<String>(8); // maximum level of foreseeable nested definitions
-		relationsMap = new HashMap<String, Relation>(2);
+		relationsMap = new HashMap<String, Relation>(3);
 
 		relationsMap.put("syn", Relation.SYNONYM);
 		relationsMap.put("ant", Relation.ANTONYM);
+		relationsMap.put("tropo", Relation.TROPONYM);
 	}
 	
 	/** Logs a CSV entry to provide info about how the last word's parsing went.
@@ -182,6 +183,9 @@ space = ({whitespace}|{newline})
 
 // in a <page> element of the XML, i.e. an entry in the dictionary
 %xstate PAGE
+
+// if a section block is considered useless, we'll switch to this trash state to safely ignore everything
+%xstate TRASH
 //@}
 
 // These states are inclusive, i.e. they may match with non-state-specific patterns.
@@ -332,20 +336,21 @@ space = ({whitespace}|{newline})
 		yybegin(NATURE);
 	}
 	
-	"syn"|"ant"
+	("syn"|"ant"|"tropo")"-}}"{newline}
 	{
-		currentRelation = relationsMap.get(yytext());
+		buffer = yytext();
+		currentRelation = relationsMap.get(buffer.substring(0, buffer.length() - 4));
 		yybegin(SIMPLENYM);
 	}
 	
 	"pron"
 	{
-		yybegin(PRONUNCIATION_BLOCK);
+		yybegin(TRASH); // pronunciation blocks are not supported yet
 	}
 
 	.
 	{
-		yybegin(MEDIAWIKI);	// no specific treatment for this state
+		yybegin(TRASH);	// this is not an accepted type
 	}
 }
 
@@ -455,7 +460,7 @@ space = ({whitespace}|{newline})
 		currentWord.set("pronunciation", yytext());
 	}
 	
-	"|"|"}"
+	[^}\r\n]+"}""}"?
 	{
 		// not only "}}" in case of missing ending curly bracket
 		yybegin(PRONUNCIATION_BLOCK);
@@ -552,28 +557,27 @@ space = ({whitespace}|{newline})
 
 <SIMPLENYM>
 {
-	"-}}"
+	"{{"[()|]"}}"
 	{
-		// end of pattern
+		// Wiki syntax for tables
 	}
 
-	":"{optionalSpaces}
+	":"{optionalSpaces}|"'''"|";"
 	{
 		yybegin(SPNM_CONTEXT);
 	}
 
-	"*"{optionalSpaces}"[["
+	"*"([^\[]|"["[^\[])*"[["
 	{
 		yybegin(SPNM_WORD);
 	}
-
 
 	{newline}{newline}
 	{
 		leaveSection();
 	}
 
-	([^-:*\r\n]|"-"[^}])+|.|{newline}
+	([^-:;'*\r\n]|"-"[^}])+|.|{newline}
 	{
 		// in SimpleNym: suppress output
 	}
@@ -581,12 +585,12 @@ space = ({whitespace}|{newline})
 
 <SPNM_CONTEXT>
 {
-	[^:]+
+	([^:\n\r]+)
 	{
 		//TODO: context is not handled yet
 	}
 
-	":"
+	":"|{newline}
 	{
 		yybegin(SIMPLENYM);
 	}
@@ -607,5 +611,18 @@ space = ({whitespace}|{newline})
 			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( ");
 			e.printStackTrace(System.err);
 		}
+	}
+}
+
+<TRASH>
+{
+	([^\r\n]|{newline}[^\r\n])*
+	{
+		// Trash
+	}
+
+	{newline}{newline}
+	{
+		yybegin(MEDIAWIKI);
 	}
 }

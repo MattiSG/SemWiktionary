@@ -207,9 +207,54 @@ newline = (\r|\n|\r\n)
 optionalSpaces = ({whitespace}*)
 space = ({whitespace}|{newline})
 
-%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SOURCE, FCHIM_PATTERN, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD, TRASH
 
-%xstate XML, PAGE
+// All states declarations are on their own line to minimize conflicts.
+
+// These states are exclusive, i.e. they may match only with patterns namespaced by them.
+//@{
+// outermost state
+%xstate XML
+
+// in a <page> element of the XML, i.e. an entry in the dictionary
+%xstate PAGE
+
+// if a section block is considered useless, we'll switch to this trash state to safely ignore everything
+%xstate TRASH
+//@}
+
+// These states are inclusive, i.e. they may match with non-state-specific patterns.
+//@{
+// <title> of a <page>
+%state TITLE
+
+// <content> node of a <page>
+%state MEDIAWIKI
+
+%state LANG
+
+// a third-level header
+%state H3
+
+%state NATURE
+%state SECTION
+
+// any "{{" pattern (template opening)
+%state PATTERN
+
+// an {{fchim}} pattern
+%state FCHIM_PATTERN
+
+%state PRONUNCIATION
+%state DEFINITION
+%state DEFINITION_DOMAIN
+%state DEFINITION_EXAMPLE
+%state SIMPLENYM
+%state SPNM_CONTEXT
+%state SPNM_WORD
+
+// inside a {{source}} pattern (origin of a quotation)
+%state SOURCE
+//@}
 
 %%
 
@@ -287,7 +332,7 @@ space = ({whitespace}|{newline})
 	
 	"{{-"
 	{
-		yybegin(H2);
+		yybegin(H3);
 	}
 	
 	"</text>"
@@ -323,7 +368,7 @@ space = ({whitespace}|{newline})
 }
 
 
-<H2>
+<H3>
 {
 	"verb"|"nom"|"adj"|"noms-vern"
 	{

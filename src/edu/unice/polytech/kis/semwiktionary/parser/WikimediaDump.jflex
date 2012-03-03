@@ -567,8 +567,9 @@ space = ({whitespace}|{newline})
 	
 	{newline}
 	{
+		String localDefinitionContent = convertToPlainText(buffer).trim();
 		try {
-			definitionsBuffer.add(definitionDepth, convertToPlainText(buffer).trim());
+			definitionsBuffer.add(definitionDepth, localDefinitionContent);
 
 			String result = "";
 			for (int i = definitionDepth; i >= 0; i--)
@@ -578,10 +579,9 @@ space = ({whitespace}|{newline})
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 			// this can happen in cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
-			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + yytext() + "'. Only content at this nesting level will be stored.");
+			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + localDefinitionContent + "'. Only content at this nesting level will be stored.");
 
-			String plainStr = convertToPlainText(yytext());
-			currentDefinition.setContent(plainStr); // best recovery we can do: forget about concatenation
+			currentDefinition.setContent(localDefinitionContent); // best recovery we can do: forget about concatenation
 		}
 		
 		yypushback(1);	// SECTION needs it to match

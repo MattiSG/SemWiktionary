@@ -39,11 +39,11 @@ public class TroponymsTest {
 
 	@Before
 	public void setUp() throws Exception {
-		subject = Word.from("manger");
+		subject = Word.find("manger");
 		expectedTroponyms = new ArrayList<Word>(EXPECTED_TROPONYMS.length);
 		
 		for (String trop : EXPECTED_TROPONYMS)
-			expectedTroponyms.add(Word.from(trop));
+			expectedTroponyms.add(Word.find(trop));
 	}
 		
 	@Test

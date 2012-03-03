@@ -28,27 +28,27 @@ public class WordTest {
 	}
 		
 	@Test
-	public void fromTest() {
+	public void findTest() {
 		for (String someWord : expected.keySet())
-			assertNotNull("'" + someWord + "' was not found in the database!", Word.from(someWord));
+			assertNotNull("'" + someWord + "' was not found in the database!", Word.find(someWord));
 	}
 	
 	@Test
 	public void existsTest() {
 		for (String someWord : expected.keySet())
-			assertTrue("'" + someWord + "' pretends not to exist in the database (compare with allWordsExistWithFrom())!", Word.exists(someWord));
+			assertTrue("'" + someWord + "' pretends not to exist in the database (compare with allWordsExistWithFind())!", Word.exists(someWord));
 	}
 	
 	@Test
 	public void constructorTest() {
 		for (String someWord : expected.keySet())
-			assertEquals("Title of word '" + someWord + "' was not properly fetched from database!", someWord, Word.from(someWord).getTitle());
+			assertEquals("Title of word '" + someWord + "' was not properly fetched from database!", someWord, Word.find(someWord).getTitle());
 	}
 	
 	@Test
 	public void definitionsMatch() {
 		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
-			Word currentWord = Word.from(currentEntry.getKey());
+			Word currentWord = Word.find(currentEntry.getKey());
 			List<Definition> expectedDefinitions = currentEntry.getValue();
 			
 			fail("No support for multiple examples yet. Test deactivated to avoid too verbose details."); //TODO

@@ -18,7 +18,7 @@ Example
     import edu.unice.polytech.kis.semwiktionary.model.Word;
 	
 	
-	Word hello = Word.from("bonjour");	// database lookup
+	Word hello = Word.find("bonjour");	// database lookup
 	
 	for (Word salutation : hello.getSynonyms()) {
 		System.out.println(salutation + " world!");	// all variants of “hello world!”…

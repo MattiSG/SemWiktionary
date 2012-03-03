@@ -30,11 +30,11 @@ public class SynonymsTest {
 
 	@Before
 	public void setUp() throws Exception {
-		subject = Word.from("vieux");
+		subject = Word.find("vieux");
 		expectedSynonyms = new ArrayList<Word>(EXPECTED_SYNONYMS.length);
 		
 		for (String syn : EXPECTED_SYNONYMS)
-			expectedSynonyms.add(Word.from(syn));
+			expectedSynonyms.add(Word.find(syn));
 	}
 		
 	@Test

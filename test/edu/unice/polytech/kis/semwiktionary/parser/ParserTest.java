@@ -37,7 +37,11 @@ public class ParserTest {
 		FileInputStream fileInputStream = new FileInputStream(new File(TEST_FILE));
 
 		WikimediaDump lexer = new WikimediaDump(fileInputStream);
-		lexer.yylex(); // store in db
+		try {
+			lexer.yylex(); // store in db
+		} catch (Exception e) {
+			fail("Parser failed and threw an exception! (" + e + ")\nSee parser log for details.");
+		}
 	}
 	
 	
@@ -50,7 +54,7 @@ public class ParserTest {
 	@Test
 	public void properNumberOfDefinitionsWereParsed() {
 		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
-			Word currentWord = Word.from(currentEntry.getKey());
+			Word currentWord = Word.find(currentEntry.getKey());
 
 			assertEquals("Bad number of definitions for word " + currentWord, currentEntry.getValue().size(), currentWord.getDefinitions().size());
 		}
@@ -59,7 +63,7 @@ public class ParserTest {
 	@Test
 	public void definitionsWereParsedInCorrectOrder() {
 		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
-			Word currentWord = Word.from(currentEntry.getKey());
+			Word currentWord = Word.find(currentEntry.getKey());
 			List<Definition> expectedDefinitions = currentEntry.getValue();
 			
 			for (int i = 0; i < expectedDefinitions.size(); i++) {
@@ -74,10 +78,10 @@ public class ParserTest {
 	@Test
 	public void definitionsContentIsCorrect() {
 		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
-			Word currentWord = Word.from(currentEntry.getKey());
+			Word currentWord = Word.find(currentEntry.getKey());
 			List<Definition> expectedDefinitions = currentEntry.getValue();
 			
-			for (int i = 1; i <= expectedDefinitions.size(); i++) {
+			for (int i = 0; i < expectedDefinitions.size(); i++) {
 				assertEquals("Bad definition for word " + currentWord,
 							 expectedDefinitions.get(i),
 							 currentWord.getDefinitions().get(i)
@@ -89,12 +93,12 @@ public class ParserTest {
 	@Test
 	public void examplesWereProperlyParsed() {
 		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
-			Word currentWord = Word.from(currentEntry.getKey());
+			Word currentWord = Word.find(currentEntry.getKey());
 			List<Definition> expectedDefinitions = currentEntry.getValue();
 			
-			fail("No MediaWiki content parser. Test deactivated to avoid too verbose details."); //TODO
+			fail("No support for multiple examples yet. Test deactivated to avoid too verbose details."); //TODO
 			
-			for (int i = 1; i <= expectedDefinitions.size(); i++) {
+			for (int i = 0; i < expectedDefinitions.size(); i++) {
 				ReflectionAssert.assertReflectionEquals(
 														expectedDefinitions.get(i).getExamples(),
 														currentWord.getDefinitions().get(i).getExamples()
@@ -276,14 +280,14 @@ public class ParserTest {
 						   .addExample("Coudre du vieux avec du neuf.")
 						   .addExample("C’est du vieux qui vaut du neuf."));
 			
-		definitions.add(new Definition(" ou Père ou mère", 4)
+		definitions.add(new Definition("ou Père ou mère.", 4)
 						.addDomain("Argot")
 						.addDomain("Populaire")
 						.addDomain("Au singulier")
 						.addExample("Mon vieux a regardé la télé hier.")
 						.addExample("Ma vieille me prend la tête en ce moment..."));
 		
-		definitions.add(new Definition(" ou Parents.", 5)
+		definitions.add(new Definition("ou Parents.", 5)
 						.addDomain("Argot")
 						.addDomain("Populaire")
 						.addDomain("Au pluriel")

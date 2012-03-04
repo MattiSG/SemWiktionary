@@ -96,7 +96,7 @@ public class SemWiktionary {
 	}
 	
 	public static void lookup(String input) {
-		Word word = Word.from(input);
+		Word word = Word.find(input);
 		
 		if (word == null) {
 			println("*The word '" + input + "' was not found in the database!*");
@@ -117,7 +117,7 @@ public class SemWiktionary {
 		println("------TROPONYMS-----");
 
 		for (Word tro : word.getTroponyms())
-			println("$ " + tro.getTitle());
+			println("∋ " + tro.getTitle());
 		
 		println("------HYPONYMS------");
 		

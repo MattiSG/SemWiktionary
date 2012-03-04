@@ -4,19 +4,27 @@
 # Author: Matti Schneider-Ghibaudo
 
 loading=0
+PARSING_SUCCESS_TITLE="Parsing succeeded"
+PARSING_SUCCESS_MESSAGE="SemWiktionary parsing succeeded!"
+PARSING_FAIL_TITLE="Parsing failed"
+PARSING_FAIL_MESSAGE="SemWiktionary parsing failed  :("
 
 if [[ $1 = "--load" ]]
 then
 	loading=1
 fi
 
-if java -cp $(dirname $0)/bin:$(dirname $0)/lib/*:$(dirname $0)/lib/neo4j_database/*:SemWiktionary_MattiSG.jar edu.unice.polytech.kis.semwiktionary.SemWiktionary "$@" # the jar is here for the built package, and bin for the actual project
+if java -cp $(dirname $0)/bin:$(dirname $0)/lib/*:$(dirname $0)/lib/neo4j_database/*:$(dirname $0)/lib/parser_build/*:SemWiktionary_MattiSG.jar edu.unice.polytech.kis.semwiktionary.SemWiktionary "$@" # the jar is here for the built package, and bin for the actual project
 then 
 	if [[ $loading = 1 ]]
-	then growlnotify -t "Parsing succeeded" -m "SemWiktionary parsing succeeded!" 2> /dev/null  # [Growl](http://growl.info/) is a notification system for OS X
+	then
+		notify-send -u critical "$PARSING_SUCCESS_TITLE" "$PARSING_SUCCESS_MESSAGE"  2> /dev/null || # notification system for Linux
+			growlnotify -t "$PARSING_SUCCESS_TITLE" -m "$PARSING_SUCCESS_MESSAGE"  2> /dev/null  # [Growl](http://growl.info/) is a notification system for OS X
 	fi
 else
 	if [[ $loading = 1 ]]
-	then growlnotify -t "Parsing failed" -m "SemWiktionary parsing failed  :(" -p High 2> /dev/null
+	then
+		notify-send -u critical "$PARSING_FAIL_TITLE" "$PARSING_FAIL_MESSAGE" 2> /dev/null ||
+			growlnotify -t "$PARSING_FAIL_TITLE" -m "$PARSING_FAIL_MESSAGE" -p High 2> /dev/null
 	fi
 fi

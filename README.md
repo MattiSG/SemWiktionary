@@ -18,7 +18,7 @@ Example
     import edu.unice.polytech.kis.semwiktionary.model.Word;
 	
 	
-	Word hello = Word.from("bonjour");	// database lookup
+	Word hello = Word.find("bonjour");	// database lookup
 	
 	for (Word salutation : hello.getSynonyms()) {
 		System.out.println(salutation + " world!");	// all variants of “hello world!”…
@@ -97,6 +97,7 @@ Credits
 - [Markdown doclet](http://code.google.com/p/markdown-doclet/) documentation parser by Richard Nichols	(GPLv2)
 - [JUnit](http://www.junit.org/) unit-testing framework	(CPL)
 - [Unitils](http://unitils.org/) extensions for JUnit	(Apache 2)
+- [Gwtwiki](http://code.google.com/p/gwtwiki/) converter wiki text to plain text	(EPLv1)
 
 ### Miscellaneous ###
 - Javadoc stylesheet by the [Apache Software Foundation](http://click-project-template.googlecode.com/svn-history/r2/trunk/documentation/javadoc-stylesheet.css).

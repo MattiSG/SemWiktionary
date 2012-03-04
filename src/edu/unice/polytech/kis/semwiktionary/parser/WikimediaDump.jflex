@@ -5,10 +5,13 @@ import java.util.Vector;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Stack;
 
 import edu.unice.polytech.kis.semwiktionary.model.*;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
 
+import info.bliki.wiki.filter.PlainTextConverter;
+import info.bliki.wiki.model.WikiModel;
 
 %%
 
@@ -23,7 +26,8 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 							  PREV_ERR = System.err;
 							  
 	private final static int LOG_FREQUENCY = 100; // a count message will be output to the console on every multiple of this frequency
-
+	
+	private Stack<Integer> statesStack = new Stack<Integer>();
 	private MutableWord currentWord;
 	private Relation currentRelation;
 	
@@ -46,6 +50,12 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	
 	private Vector<String> definitionsBuffer;
 	private Map<String, Relation> relationsMap;
+
+	// the params are URLs patterns to be used by WikiModel to generate hyperlinks when converting to HTML
+	// they are completely useless here, since we only use WikiModel to convert to plaintext, removing links altogether. WikiModel does not offer a default constructor though, so we'll put a meaningful URL.
+	private WikiModel wikiModel = new WikiModel("http://fr.wiktionary.org/${image}",
+												"http://fr.wiktionary.org/wiki/${title}");
+	private PlainTextConverter converter = new PlainTextConverter();
 	
 	private long timer = System.nanoTime();
 	private static final long FIRST_TICK = System.nanoTime();
@@ -77,6 +87,26 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 		complexNyms = new ArrayList<Word>();
 	}
 	
+	private void yypushstate() {
+		statesStack.push(yystate());
+	}
+	
+	/** Shortcut convenience method: pushes state and switches to the passed one.
+	*/
+	private void yypushstate(int newState) {
+		yypushstate();
+		yybegin(newState);
+	}
+	
+	private void yypopstate() {
+		try {
+			yybegin(statesStack.pop());
+		} catch (java.util.EmptyStackException e) {
+			logError("Unbalanced states! Popping state threw an EmptyStackException. Skipping rest of the word.");
+			yybegin(XML);
+		}
+	}
+	
 	/** Logs a CSV entry to provide info about how the last word's parsing went.
 	* Does not include the actual word title output, in case a crash happened on the given word.
 	*/
@@ -93,7 +123,7 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 		
 		PREV_OUT.print(word); // output before the parsing starts, to have the culprit in case of a crash
 		
-		currentWord = MutableWord.create(word);	//TODO: delay until language was accepted? We currently create the word immediately, even though we might not store anything from it if its language is not supported
+		currentWord = MutableWord.obtain(word);	//TODO: delay until language was accepted? We currently create the word immediately, even though we might not store anything from it if its language is not supported
 		resetFlags();
 		
 		initSection();
@@ -157,6 +187,10 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 	private void storeTree(LinkedTree tree) {
 		storeNode(tree.getHead());
 	}*/
+
+	private String convertToPlainText(String wikiMedia) {
+		return wikiModel.render(converter, wikiMedia);
+	}
 %}
 
 
@@ -198,9 +232,60 @@ newline = (\r|\n|\r\n)
 optionalSpaces = ({whitespace}*)
 space = ({whitespace}|{newline})
 
-%state TITLE, MEDIAWIKI, LANG, H2, NATURE, SECTION, PATTERN, PRONUNCIATION, DEFINITION, DEFINITION_DOMAIN, DEFINITION_EXAMPLE, SIMPLENYM, SPNM_CONTEXT, SPNM_WORD, COMPLEXNYM, CPNM_CONTEXT, CPNM_WORD
+// All states declarations are on their own line to minimize conflicts.
 
-%xstate XML, PAGE
+// These states are exclusive, i.e. they may match only with patterns namespaced by them.
+//@{
+// outermost state
+%xstate XML
+
+// in a <page> element of the XML, i.e. an entry in the dictionary
+%xstate PAGE
+
+// if a section block is considered useless, we'll switch to this trash state to safely ignore everything
+%xstate TRASH
+//@}
+
+// These states are inclusive, i.e. they may match with non-state-specific patterns.
+//@{
+// <title> of a <page>
+%state TITLE
+
+// <content> node of a <page>
+%state MEDIAWIKI
+
+%state LANG
+
+// a third-level header
+%state H3
+
+%state NATURE
+%state SECTION
+
+// any "{{" pattern (template opening)
+%state PATTERN
+
+// an {{fchim}} pattern
+%state FCHIM_PATTERN
+
+%state PRONUNCIATION
+%state DEFINITION
+%state DEFINITION_DOMAIN
+%state DEFINITION_EXAMPLE
+
+// simple relations such as synonyms, antonyms and troponyms
+%state SIMPLENYM
+%state SPNM_CONTEXT
+%state SPNM_WORD
+
+// complex relations such as hyponyms, hyperonyms, holonyms and meronyms
+%state COMPLEXNYM
+%state CPNM_CONTEXT
+%state CPNM_WORD
+
+// inside a {{source}} pattern (origin of a quotation)
+%state SOURCE
+//@}
 
 %%
 
@@ -278,7 +363,7 @@ space = ({whitespace}|{newline})
 	
 	"{{-"
 	{
-		yybegin(H2);
+		yybegin(H3);
 	}
 	
 	"</text>"
@@ -314,7 +399,7 @@ space = ({whitespace}|{newline})
 }
 
 
-<H2>
+<H3>
 {
 	"verb"|"nom"|"adj"|"noms-vern"
 	{
@@ -322,9 +407,10 @@ space = ({whitespace}|{newline})
 		yybegin(NATURE);
 	}
 	
-	"syn"|"ant"|"tropo"
+	("syn"|"ant"|"tropo")"-}}"{newline}
 	{
-		currentRelation = relationsMap.get(yytext());
+		buffer = yytext();
+		currentRelation = relationsMap.get(buffer.substring(0, buffer.length() - 4));
 		yybegin(SIMPLENYM);
 	}
 
@@ -336,7 +422,7 @@ space = ({whitespace}|{newline})
 
 	.
 	{
-		yybegin(MEDIAWIKI);	// this is not an accepted type
+		yybegin(TRASH);	// this is not an accepted type
 	}
 }
 
@@ -359,8 +445,9 @@ space = ({whitespace}|{newline})
 
 <SECTION>
 { // an entrance into that state with a non-consumed newline will switch to <MEDIAWIKI>
-	^"{{"
+	"{{"
 	{
+		yypushstate();
 		yybegin(PATTERN);
 	}
 
@@ -375,12 +462,14 @@ space = ({whitespace}|{newline})
 		
 		currentDefinition = new Definition();
 		
+		buffer = "";
 		yybegin(DEFINITION);
 	}
 	
 	{newline}#+("*"|":"){optionalSpaces}
 	{
 		// the colon is not standard, but is used in some words ("siège")
+		buffer = "";
 		yybegin(DEFINITION_EXAMPLE);
 	}
 	
@@ -408,9 +497,15 @@ space = ({whitespace}|{newline})
 		yybegin(PRONUNCIATION);
 	}
 	
-	"}}"
+	"source|"
 	{
-		yybegin(SECTION);
+		buffer += "— (";
+		yybegin(SOURCE);
+	}
+
+	"fchim"
+	{
+		yybegin(FCHIM_PATTERN);
 	}
 
 	[^|}]+|"|"
@@ -418,10 +513,15 @@ space = ({whitespace}|{newline})
 		logError("Unexpected pattern value: '" + yytext() + "'");
 	}
 	
+	"}}"
+	{
+		yypopstate();
+	}
+	
 	"}"
 	{
 		logSyntaxError("Unbalanced bracket in pattern in '" + currentWord.getTitle() + "'");
-		yybegin(SECTION);
+		yypopstate();
 	}
 }
 
@@ -460,11 +560,38 @@ space = ({whitespace}|{newline})
 	}
 }
 
+<FCHIM_PATTERN>
+{ // chemical formulas. See http://fr.wiktionary.org/wiki/Modèle:fchim
+	"}}"
+	{
+		yypopstate();
+	}
+
+	[^\|}]+
+	{
+		buffer += yytext();
+	}
+	
+	"|"("lien="[|}]+)?
+	{
+		// pipes are used as separators for element symbols and their indices, which are all rendered the same in a text-only representation. Therefore, we simply ignore pipes.
+		// example: H|2|O => H2O
+
+		// chemical formulas may also specify a link to a complete page with "lien=<link>". We also want to remove this information.
+	}
+}
+
 <DEFINITION_EXAMPLE>
 {
-	.+
+	"{{"
 	{
-		buffer = yytext();
+		yypushstate();
+		yybegin(PATTERN);
+	}
+
+	([^\r\n{]|"{"[^{])+|"{{"
+	{
+		buffer += yytext();
 	}
 
 	{newline}#+\*:
@@ -475,9 +602,32 @@ space = ({whitespace}|{newline})
 
 	{newline}
 	{
-		currentDefinition.addExample(buffer);
+		buffer = convertToPlainText(buffer).trim();	// convert before testing for emptiness: `''` is not empty, but the plaintext equivalent is ""
+		if (! buffer.isEmpty())
+			currentDefinition.addExample(buffer);
+		
 		yypushback(1);	// <SECTION> needs it to match
 		yybegin(SECTION);
+	}
+}
+
+<SOURCE>
+{ // source of a quote. May only be at the end of a line.
+	"{{"|"w|"|"}}"
+	{
+		// in SOURCE: suppress output
+	}
+
+	([^\r\n}{w]|"}"[^}]|"{"[^{]|"w"[^\|])+
+	{
+		buffer += yytext();
+	}
+
+	{newline}
+	{
+		buffer += ")";
+		yypushback(1);	// <DEFINITION_EXAMPLE> needs it to match
+		yybegin(DEFINITION_EXAMPLE);
 	}
 }
 
@@ -486,24 +636,7 @@ space = ({whitespace}|{newline})
 {
 	([^\r\n{]|"{"[^{])+
 	{
-		try {
-
-			definitionsBuffer.add(definitionDepth, yytext());
-			
-			String result = "";
-			for (int i = definitionDepth; i >= 0; i--)
-				result = definitionsBuffer.get(i) + (result.isEmpty() ? "" : (" " + result));
-
-			currentDefinition.setContent(result);
-
-		} catch (ArrayIndexOutOfBoundsException e) {
-			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
-			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + yytext() + "'. Only content at this nesting level will be stored.");
-			
-			currentDefinition.setContent(yytext()); // best recovery we can do: forget about concatenation
-		}
-				
-		yybegin(SECTION);
+		buffer += yytext();
 	}
 	
 	"{{"
@@ -511,47 +644,59 @@ space = ({whitespace}|{newline})
 		yybegin(DEFINITION_DOMAIN);
 	}
 	
+	"{{fchim"
+	{ //TODO: this should be generalized to "{{" -> PATTERN, and PATTERN contain all DEFINITION_DOMAIN triggers
+		yypushstate();
+		yybegin(FCHIM_PATTERN);
+	}
+	
 	{newline}
 	{
-		// rare case in which the only content of a definition is a list of domains (see "neuf")
+		String localDefinitionContent = convertToPlainText(buffer).trim();
 		try {
-			definitionsBuffer.add(definitionDepth, ""); // otherwise we'll break the concatenation
+			definitionsBuffer.add(definitionDepth, localDefinitionContent);
+
+			String result = "";
+			for (int i = definitionDepth; i >= 0; i--)
+				result = definitionsBuffer.get(i) + (result.isEmpty() ? "" : (" " + result));
+
+			currentDefinition.setContent(result);
+
 		} catch (ArrayIndexOutOfBoundsException e) {
-			// this can happen in very rare cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
-			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "', with a definition that has no content other than domains."); // damn, that's an edge case… (but an existing one)
-			
-			// no recovery to do here: more nested definitions will be caught in the usual definition handling case above this one
+			// this can happen in cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
+			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + localDefinitionContent + "'. Only content at this nesting level will be stored.");
+
+			currentDefinition.setContent(localDefinitionContent); // best recovery we can do: forget about concatenation
 		}
 		
-		yypushback(1);
+		yypushback(1);	// SECTION needs it to match
 		yybegin(SECTION);
 	}
 }
 
 <SIMPLENYM>
 {
-	"-}}"
+	"{{"[()|]"}}"
 	{
-		// end of pattern
+		// Wiki syntax for tables
 	}
 
-	(":"{optionalSpaces}|\'\'\')
+	":"{optionalSpaces}|"'''"|";"
 	{
 		yybegin(SPNM_CONTEXT);
 	}
 
-	"*"{optionalSpaces}"[["
+	"*"([^\[]|"["[^\[])*"[["
 	{
 		yybegin(SPNM_WORD);
 	}
-
 
 	{newline}{newline}
 	{
 		leaveSection();
 	}
 
-	([^-:*\r\n]|"-"[^}])+|.|{newline}
+	([^-:;'*\r\n]|"-"[^}])+|.|{newline}
 	{
 		// in SimpleNym: suppress output
 	}
@@ -559,19 +704,14 @@ space = ({whitespace}|{newline})
 
 <SPNM_CONTEXT>
 {
-	([^:]+)
+	([^:\n\r]+)
 	{
 		//TODO: context is not handled yet
 	}
 
-	":"
+	":"|{newline}
 	{
 		yybegin(SIMPLENYM);
-	}
-
-	.
-	{
-
 	}
 }
 
@@ -585,7 +725,7 @@ space = ({whitespace}|{newline})
 	([^\]]|"]"[^\]])+
 	{
 		try {
-			currentWord.set(currentRelation, MutableWord.from(yytext()));
+			currentWord.set(currentRelation, MutableWord.obtain(yytext()));
 		} catch (Exception e) {
 			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( ");
 			e.printStackTrace(System.err);
@@ -667,7 +807,7 @@ space = ({whitespace}|{newline})
 		System.err.println("Après : " + complexNyms);
 
 		try {
-			MutableWord currentNym = MutableWord.from(yytext());
+			MutableWord currentNym = MutableWord.obtain(yytext());
 			complexNyms.add(currentNym);
 			
 			// The list contains at least 2 elements : the current word and the parsed complexNym
@@ -676,5 +816,18 @@ space = ({whitespace}|{newline})
 			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( ");
 			e.printStackTrace(System.err);
 		}
+	}
+}
+
+<TRASH>
+{
+	([^\r\n]|{newline}[^\r\n])*
+	{
+		// Trash
+	}
+
+	{newline}{newline}
+	{
+		yybegin(MEDIAWIKI);
 	}
 }

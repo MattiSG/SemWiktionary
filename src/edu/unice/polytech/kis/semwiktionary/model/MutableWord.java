@@ -4,6 +4,7 @@ package edu.unice.polytech.kis.semwiktionary.model;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.Node;
 
 import edu.unice.polytech.kis.semwiktionary.database.Database;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
@@ -20,25 +21,27 @@ public class MutableWord extends Word {
 // STATIC METHODS
 	
 	/** Finds a word in the database from its title, or creates it if it does not exist yet.
-	 * Constructs a MutableWord object with all its properties (definition, synonyms).
-	 * Such an object _may_ modify the database. See `Word` for a safer use.
+	 * Constructs a MutableWord object and links all of its attached properties (definitions, synonyms…) from the database.
+	 * Such an object _may_ modify the database. See `Word` for a safer, immutable use.
 	 *
 	 * @param	word	The word to model
 	 * @return	A MutableWord object, either referencing the current word in database or creating a new one
 	 */
-	public static MutableWord from(String word) {
-		Word immutableWord = Word.from(word);
+	public static MutableWord obtain(String word) {
+		Word immutableWord = Word.find(word);
 		return (immutableWord == null ? MutableWord.create(word) : new MutableWord(immutableWord));
 	}
 	
 	/** Creates a new word in the database.
-	 * The word is created even if the same word already exists in the database, possibly leading to duplicates. You should use the `Word.exists` method to check for existence before creating a new word.
+	 * The word is created even if the same word already exists in the database, **possibly leading to duplicates**. Such a case would be a violation of the constraints, and render the word unusable.
+	 * You should always use the `Word.exists` method to check for existence before creating a new word.
 	 *
 	 * @param	word	The natural language word to add to the database
 	 * @return	The MutableWord model for the word added to the database
 	 */
-	public static MutableWord create(String word) {
-		MutableWord result = new MutableWord(word);
+	private static MutableWord create(String word) {
+		MutableWord result = new MutableWord();
+		result.title = word;
 		
 		Transaction tx = Database.getDbService().beginTx();
 		
@@ -57,22 +60,34 @@ public class MutableWord extends Word {
 	}
 	
 // CONSTRUCTORS
-
-	/** Models an editable natural-language word.
+	
+	/** Initializes all fields when `create()`ing a new word.
+	*
+	*@return	An empty shell to be filled by `create()`.
+	*/
+	private MutableWord() {
+		super();
+		// nothing else to do
+	}
+	
+	/** Makes an existing natural-language word mutable, that is, able to modify the database.
 	 *
 	 * @param	model	An immutable version of a word you want to modify.
 	 */
 	public MutableWord(Word model) {
-		super(model.getTitle());
+		super();
+		this.title = model.title;
 		this.node = model.node;
 	}
 	
-	/** Models an editable natural-language word.
+	/** Constructs a MutableWord object from a Node in the database.
+	 * Useful in propagation cases.
+	 * _Note_: This method is used by the generic `NodeMappedObject.get` method, you should not have to use manually it.
 	 *
-	 * @param	word	The natural language word to model
+	 * @param node The Node object storing information about the to-be word in the database.
 	 */
-	private MutableWord(String word) {
-		super(word);
+	protected MutableWord(Node node) {
+		super(node);
 	}
 	
 // UPDATE FUNCTIONS

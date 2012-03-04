@@ -28,11 +28,11 @@ public class AntonymsTest {
 
 	@Before
 	public void setUp() throws Exception {
-		subject = Word.from("vieux");
+		subject = Word.find("vieux");
 		expectedAntonyms = new ArrayList<Word>(EXPECTED_ANTONYMS.length);
 		
 		for (String ant : EXPECTED_ANTONYMS)
-			expectedAntonyms.add(Word.from(ant));
+			expectedAntonyms.add(Word.find(ant));
 	}
 		
 	@Test

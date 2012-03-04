@@ -757,7 +757,8 @@ space = ({whitespace}|{newline})
 
 	"*"+{optionalSpaces}"[["
 	{
-		while (yytext().charAt(complexDepth + 1) == '*') {
+		complexDepth = 1;
+		while (yytext().charAt(complexDepth) == '*') {
 			++complexDepth;
 		}
 		

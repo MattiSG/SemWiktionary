@@ -661,8 +661,10 @@ space = ({whitespace}|{newline})
 
 	[^\]]+
 	{
+		System.err.println("Avant : " + complexNyms);
 		while (complexNyms.size() > complexDepth)
 			complexNyms.remove(complexNyms.size() - 1);
+		System.err.println("Après : " + complexNyms);
 
 		try {
 			MutableWord currentNym = MutableWord.from(yytext());

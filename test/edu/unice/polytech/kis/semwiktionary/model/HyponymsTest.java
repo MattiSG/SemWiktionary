@@ -96,23 +96,17 @@ public class HyponymsTest {
 		EXPECTED_HYPONYMS.put("serbo-croate", hyponymsForSerboCroate);
 	}
 	
-	private static List<Word> expectedHyponyms;
 	private static Word subject;
 	
 	@Test
 	public void allHyponymsExist() {
 		for (String subjectStr : EXPECTED_HYPONYMS.keySet()) {
 			subject = Word.find(subjectStr);
-			expectedHyponyms = new ArrayList<Word>(EXPECTED_HYPONYMS.get(subjectStr).size());
 			
-			for (String hyp : EXPECTED_HYPONYMS.get(subjectStr)) {
-				expectedHyponyms.add(Word.find(hyp));
-			}
-			
-			for (Word expHyp : expectedHyponyms) {
+			for (String expHyp : EXPECTED_HYPONYMS.get(subjectStr)) {
 				boolean exists = false;
 				for (Word actHyp : subject.getHyponyms()) {
-					if (expHyp.equals(actHyp)) {
+					if (actHyp.equals(Word.find(expHyp))) {
 						exists = true;
 					}
 				}

@@ -47,23 +47,17 @@ public class MeronymsTest {
 		EXPECTED_MERONYMS.put("gros intestin", meronymsForGrosIntestin);
 	}
 	
-	private static List<Word> expectedMeronyms;
 	private static Word subject;
 	
 	@Test
 	public void allMeronymsExist() {
 		for (String subjectStr : EXPECTED_MERONYMS.keySet()) {
 			subject = Word.find(subjectStr);
-			expectedMeronyms = new ArrayList<Word>(EXPECTED_MERONYMS.get(subjectStr).size());
 			
-			for (String mer : EXPECTED_MERONYMS.get(subjectStr)) {
-				expectedMeronyms.add(Word.find(mer));
-			}
-			
-			for (Word expMer : expectedMeronyms) {
+			for (String expMer : EXPECTED_MERONYMS.get(subjectStr)) {
 				boolean exists = false;
 				for (Word actMer : subject.getMeronyms()) {
-					if (expMer.equals(actMer)) {
+					if (actMer.equals(Word.find(expMer))) {
 						exists = true;
 					}
 				}
@@ -72,4 +66,3 @@ public class MeronymsTest {
 		}
 	}
 }
-

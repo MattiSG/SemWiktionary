@@ -2,7 +2,6 @@ package edu.unice.polytech.kis.semwiktionary.parser;
 
 import java.io.*;
 import java.util.Vector;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Stack;
@@ -43,7 +42,7 @@ import info.bliki.wiki.model.WikiModel;
 	private int definitionCount = 0;
 	private int definitionDepth = -1; // the depth is the number of sharps (#) in front of a definition, minus one (that's optimization to have only one substraction for the 0-based indexed list). So, to trigger comparisons, we need to be negative.
 	
-	private ArrayList<Word> complexNyms;
+	private Vector<Word> complexNyms;
 	private int complexDepth = 1;
 	
 	private String buffer = ""; // an all-purpose buffer, to be initialized by groups that need it
@@ -84,7 +83,8 @@ import info.bliki.wiki.model.WikiModel;
 		relationsMap.put("méro", Relation.MERONYM);
 		relationsMap.put("hypo", Relation.HYPONYM);
 		
-		complexNyms = new ArrayList<Word>();
+		complexNyms = new Vector<Word>(8);
+		complexNyms.setSize(8);
 	}
 	
 	private void yypushstate() {
@@ -170,23 +170,6 @@ import info.bliki.wiki.model.WikiModel;
 		currentDefinition.setPosition(definitionCount);
 		currentWord.addDefinition(currentDefinition);
 	}
-
-	/*private void storeNode(Node parentNode) {
-		for (Node childNode : parentNode.getChildren())
-			try {
-				parentNode.getValue().set(currentRelation, currentNode.getValue());
-			} catch (Exception e) {
-				logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( ");
-				e.printStackTrace(System.err);
-			}
-
-			storeNode(childNode);
-		}
-	}
-
-	private void storeTree(LinkedTree tree) {
-		storeNode(tree.getHead());
-	}*/
 
 	private String convertToPlainText(String wikiMedia) {
 		return wikiModel.render(converter, wikiMedia);
@@ -737,7 +720,7 @@ space = ({whitespace}|{newline})
 {
 	"-}}"
 	{
-		complexNyms.add(currentWord);
+		complexNyms.set(0, currentWord);
 	}
 	
 	"{{"[()|]"}}"
@@ -755,7 +738,7 @@ space = ({whitespace}|{newline})
 		yybegin(CPNM_CONTEXT);
 	}
 
-	"*"+{optionalSpaces}"[["
+	"*"([^\[]|"["[^\[])*"[["
 	{
 		complexDepth = 1;
 		while (yytext().charAt(complexDepth) == '*') {
@@ -769,15 +752,15 @@ space = ({whitespace}|{newline})
 	{
 		complexDepth = 1;
 		complexNyms.clear();
-	
+		complexNyms.setSize(8);
+
 		leaveSection();
 	}
 
-	.|{newline}
+	([^-:;'*\r\n]|"-"[^}])+|.|{newline}
 	{
-
+		// in ComplexNym: suppress output
 	}
-
 }
 
 <CPNM_CONTEXT>
@@ -800,19 +783,17 @@ space = ({whitespace}|{newline})
 		yybegin(COMPLEXNYM);
 	}
 
-	[^\]]+
+	([^\]]|"]"[^\]])+
 	{
-		System.err.println("Avant : " + complexNyms);
-		while (complexNyms.size() > complexDepth)
-			complexNyms.remove(complexNyms.size() - 1);
-		System.err.println("Après : " + complexNyms);
-
 		try {
 			MutableWord currentNym = MutableWord.obtain(yytext());
-			complexNyms.add(currentNym);
+			complexNyms.set(complexDepth, currentNym);
 			
-			// The list contains at least 2 elements : the current word and the parsed complexNym
-			complexNyms.get(complexNyms.size()-2).set(currentRelation, currentNym);			
+			int emptyDepth = 1;
+			while (complexNyms.get(complexDepth-emptyDepth) == null)
+				++emptyDepth;
+
+			complexNyms.get(complexDepth-emptyDepth).set(currentRelation, currentNym);			
 		} catch (Exception e) {
 			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( ");
 			e.printStackTrace(System.err);

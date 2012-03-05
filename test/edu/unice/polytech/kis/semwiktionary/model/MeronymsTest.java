@@ -34,11 +34,11 @@ public class MeronymsTest {
 		meronymsForIntestin.add("gros intestin");
 		EXPECTED_MERONYMS.put("intestin", meronymsForIntestin);
 		
-		List<String> meronymsForIntestinGrêle = new ArrayList<String>();
-		meronymsForIntestinGrêle.add("duodénum");
-		meronymsForIntestinGrêle.add("jéjunum");
-		meronymsForIntestinGrêle.add("iléon");
-		EXPECTED_MERONYMS.put("intestin grêle", meronymsForIntestinGrêle);
+		List<String> meronymsForIntestinGrele = new ArrayList<String>();
+		meronymsForIntestinGrele.add("duodénum");
+		meronymsForIntestinGrele.add("jéjunum");
+		meronymsForIntestinGrele.add("iléon");
+		EXPECTED_MERONYMS.put("intestin grêle", meronymsForIntestinGrele);
 		
 		List<String> meronymsForGrosIntestin = new ArrayList<String>();
 		meronymsForGrosIntestin.add("cæcum");

@@ -39,6 +39,7 @@ import info.bliki.wiki.model.WikiModel;
 	//@}
 
 	private Definition currentDefinition;
+	private Example currentExample;
 	private int definitionCount = 0;
 	private int definitionDepth = -1; // the depth is the number of sharps (#) in front of a definition, minus one (that's optimization to have only one substraction for the 0-based indexed list). So, to trigger comparisons, we need to be negative.
 	
@@ -432,6 +433,7 @@ space = ({whitespace}|{newline})
 	{newline}#+("*"|":"){optionalSpaces}
 	{
 		// the colon is not standard, but is used in some words ("siège")
+		currentExample = new Example();
 		buffer = "";
 		yybegin(DEFINITION_EXAMPLE);
 	}
@@ -566,8 +568,10 @@ space = ({whitespace}|{newline})
 	{newline}
 	{
 		buffer = convertToPlainText(buffer).trim();	// convert before testing for emptiness: `''` is not empty, but the plaintext equivalent is ""
-		if (! buffer.isEmpty())
-			currentDefinition.addExample(buffer);
+		if (! buffer.isEmpty()) {
+			currentExample.setContent(buffer);	
+			currentDefinition.addExample(currentExample);
+		}
 		
 		yypushback(1);	// <SECTION> needs it to match
 		yybegin(SECTION);
@@ -581,6 +585,18 @@ space = ({whitespace}|{newline})
 		// in SOURCE: suppress output
 	}
 
+	"}}"{newline}
+	{
+		buffer += ")";
+		yypushback(1);
+	}
+
+	"}}."{newline}
+	{
+		buffer += ")";
+		yypushback(2);
+	}
+
 	([^\r\n}{w]|"}"[^}]|"{"[^{]|"w"[^\|])+
 	{
 		buffer += yytext();
@@ -588,7 +604,6 @@ space = ({whitespace}|{newline})
 
 	{newline}
 	{
-		buffer += ")";
 		yypushback(1);	// <DEFINITION_EXAMPLE> needs it to match
 		yybegin(DEFINITION_EXAMPLE);
 	}

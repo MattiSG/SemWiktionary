@@ -160,7 +160,7 @@ public class MutableWord extends Word {
 	*
 	*@see	clearDefinitions
 	*/
-	public void onDelete() {
+	protected void onDelete() {
 		this.clearDefinitions();
 	}
 	

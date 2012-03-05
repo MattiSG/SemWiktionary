@@ -238,7 +238,7 @@ public abstract class NodeMappedObject {
 	* Use it as a hook to propagate all necessary deletions.
 	* **WARNING**: even if you're not interested in propagating deletion, you _need_ to implement this method to allow for deletion. Otherwise, it will be assumed that the class does not allow deletion, and an exception will be thrown.
 	*/
-	public void onDelete() {
+	protected void onDelete() {
 		throw new RuntimeException(new IllegalAccessException("Deletion is not allowed on this class (implement `onDelete()` to allow it)."));
 	}
 	

@@ -3257,4 +3257,71 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
 [[zh:slave]]</text>
     </revision>
   </page>
+  <page>
+    <title>tube digestif</title>
+    <id>269129</id>
+    <revision>
+      <id>8408030</id>
+      <timestamp>2011-01-14T14:36:21Z</timestamp>
+      <contributor>
+        <username>Luckas-bot</username>
+        <id>9945</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.1) (robot Ajoute: [[es:tube digestif]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+{{-étym-}}
+: {{cf|tube|digestif}}
+
+{{-loc-nom-|fr}}
+{{fr-accord-mf|
+|p=tubes digestifs
+|pron=tyb di.ʒɛs.tif
+}}
+'''tube digestif''' {{m}}
+# [[système|Système]] d'[[organe]]s des animaux pluricellulaires qui prend la [[nourriture]], la [[digérer|digère]] pour en extraire de l'[[énergie]] et des [[nutriment]]s, et évacue le [[surplus]].
+#* ''Le rôle essentiel du '''tube digestif''' est d'assimiler, d'absorber les nutriments dans la circulation sanguine et lymphatique.''
+
+{{-syn-}}
+* [[système gastro-intestinal]]
+* [[appareil digestif]]
+* [[boyau]]x
+
+{{-trad-}}
+{{(}}
+* {{T|en}} : {{trad+|en|digestive tract}}
+{{)}}
+{{-hyper-}}
+* [[anatomie]]
+
+{{-méro-}}
+&lt;small&gt;De l'entrée vers la sortie du tube digestif.&lt;/small&gt;
+* [[bouche]] ou [[cavité orale]]
+* [[œsophage]]
+* [[estomac]]
+* [[foie]]
+* [[intestin]]s :
+** [[intestin grêle]], qui a trois parties :
+*** [[duodénum]]
+*** [[jéjunum]]
+*** [[iléon]]
+** [[gros intestin]], qui a trois parties :
+*** [[cæcum]]
+*** [[côlon]]
+*** [[rectum]]
+* [[anus]]
+
+{{-holo-}}
+* [[corps]]
+* [[corps humain]]
+* [[animal]]
+
+{{-voir-}}
+* {{WP}}
+
+[[Catégorie:Lexique en français de la zoologie]]
+
+[[es:tube digestif]]</text>
+    </revision>
+  </page>
 </mediawiki>

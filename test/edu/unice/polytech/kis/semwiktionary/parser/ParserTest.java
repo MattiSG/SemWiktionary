@@ -16,6 +16,7 @@ import java.util.HashMap;
 
 import edu.unice.polytech.kis.semwiktionary.model.Word;
 import edu.unice.polytech.kis.semwiktionary.model.Definition;
+import edu.unice.polytech.kis.semwiktionary.model.LexicalCategory;
 
 
 public class ParserTest {
@@ -23,6 +24,7 @@ public class ParserTest {
 	public static final String TEST_FILE = "test/resources/frwiktionary-test-extracts.xml"; // relative to ant build file
 	
 	private static List<String> unexpectedTitles;
+	private static Map<String, String> expectedModels;
 	private static Map<String, List<Definition>> expected;
 	
 	
@@ -30,9 +32,16 @@ public class ParserTest {
 	public static void classSetUp() throws Exception {
 		expected = generateExpectedContent();
 		
-		unexpectedTitles = new ArrayList<String>(2);
+		expectedModels = new HashMap<String, String>(2);
+		expectedModels.put("-verb-", "Verbe");
+		expectedModels.put("-conj-coord-", "Conjonction de coordination");
+		
+		
+		unexpectedTitles = new ArrayList<String>(4);
 		unexpectedTitles.add("MediaWiki:Disclaimers");
 		unexpectedTitles.add("Discussion utilisateur:Hippietrail");
+		for (String modelName : expectedModels.keySet())
+			unexpectedTitles.add("Modèle:" + modelName);
 		
 		FileInputStream fileInputStream = new FileInputStream(new File(TEST_FILE));
 
@@ -107,11 +116,22 @@ public class ParserTest {
 		}
 	}
 	
+
+	@Test
+	public void pagesThatAreNotWordsAreNotIndexedAsWords() {
+		for (String someWord : unexpectedTitles)
+			assertFalse(someWord + " should not exist as a word!", Word.exists(someWord));
+	}
+	
 	
 	@Test
-	public void pagesThatAreNotWordsAreNotStored() {
-		for (String someWord : unexpectedTitles)
-			assertFalse(someWord + " should exist in the database!", Word.exists(someWord));
+	public void modelsAreStoredAsModels() {
+		for (Map.Entry currentModel : expectedModels.entrySet()) {
+			LexicalCategory cat = LexicalCategory.find((String) (currentModel.getKey()));
+			
+			assertNotNull("No lexical category found for '" + cat + "'", cat);
+			assertEquals(currentModel.getValue(), cat.getDescription());
+		}
 	}
 	
 	

@@ -738,7 +738,7 @@ space = ({whitespace}|{newline})
 		yybegin(CPNM_CONTEXT);
 	}
 
-	"*"([^\[]|"["[^\[])*"[["
+	"*"+{optionalSpaces}"[["
 	{
 		complexDepth = 1;
 		while (yytext().charAt(complexDepth) == '*') {

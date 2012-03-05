@@ -58,7 +58,7 @@ public class SemWiktionary {
 			}
 			
 			for (String arg: args) {
-				lookup(arg);
+				lookup(arg.replace('_', ' '));
 				println("\n");
 			}
 			return;

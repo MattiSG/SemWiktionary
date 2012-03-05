@@ -127,6 +127,7 @@ public class Word extends NodeMappedObject {
 	
 // STANDARD METHODS
 	
+	@Override
 	public String toString() {
 		return this.getTitle();
 	}

@@ -257,6 +257,8 @@ public abstract class NodeMappedObject {
 		}
 	}
 	
+// OVERRIDES	
+	@Override
 	public boolean equals(Object o) {
 		if (! this.getClass().isInstance(o))
 			return false;
@@ -264,5 +266,10 @@ public abstract class NodeMappedObject {
 		NodeMappedObject comparedTo = (NodeMappedObject) o;
 		
 		return comparedTo.node == this.node;
+	}
+	
+	@Override
+	public String toString() {
+		return "Raw object mapped on node <" + this.node + ">";
 	}
 }

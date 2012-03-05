@@ -215,9 +215,4 @@ public class MutableWord extends Word {
 		
 		return this;
 	}
-	
-// STANDARD METHODS
-	public String toString() {
-		return super.toString() + "*";
-	}
 }

@@ -11,6 +11,7 @@ import edu.unice.polytech.kis.semwiktionary.database.DatabaseTest;
 @RunWith(Suite.class)
 @SuiteClasses({
 	edu.unice.polytech.kis.semwiktionary.database.DatabaseTest.class,
+	edu.unice.polytech.kis.semwiktionary.model.NodeMappedObjectTest.class,
 	edu.unice.polytech.kis.semwiktionary.model.MutableWordTest.class,
 	edu.unice.polytech.kis.semwiktionary.model.DefinitionTest.class,
 	

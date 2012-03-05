@@ -8,6 +8,7 @@ import java.lang.reflect.Constructor;
 
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.index.Index;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Transaction;
 
@@ -92,7 +93,7 @@ public abstract class NodeMappedObject {
 			// constructor = T.class.getConstructor(Node.class); // unfortunately, Java can't handle getting a Class from a Type
 			constructor = type.getDeclaredConstructor(Node.class); // get*Declared*Constructor allows bypassing public-only access
 		} catch (NoSuchMethodException e) {
-			throw new RuntimeException("The specified generic type does not offer a Node constructor.", e);
+			throw new RuntimeException("The specified generic type (" + type.getName() + ") does not offer a Node constructor.", e);
 		}
 		
 		try {
@@ -110,6 +111,103 @@ public abstract class NodeMappedObject {
 	   return result;
 	}
 	
+	/**
+	*@return	this	for chainability
+	*/
+	protected NodeMappedObject indexAs(String id) {
+		getIndex().add(this.node, getIndexKey(), id);
+		
+		return this;
+	}
+	
+	/** Gets the key of the database index for this inheriting type of `NodeMappedObject`.
+	*
+	*@return either the value of the `static String INDEX_KEY` field or, if not specified, the type's name (ex: `"Word"` for `Word`).
+	*@throw	RuntimeException	if the `INDEX_KEY` field is specified, but is not `static` and `public`
+	*/
+	protected String getIndexKey() {
+		return getIndexKey(this.getClass());
+	}
+	
+	
+	/** Gets the key of the database index for this inheriting type of `NodeMappedObject`.
+	 *
+	 *@return either the value of the `static String INDEX_KEY` field or, if not specified, the type's name (ex: `"Word"` for `Word`).
+	 *@throw	RuntimeException	if the `INDEX_KEY` field is specified, but is not `static` and `public`
+	 */
+	private static String getIndexKey(Class type) {
+		String indexKey;
+		
+		// TODO: cache a class=>key map to avoid costly exception-based lookup
+		
+		try {
+			indexKey = (String) (type
+								 .getDeclaredField("INDEX_KEY")    // any indexable class should declare a static INDEX_KEY field
+								 .get(null)); // since the field is static, we get it for the `null` instance
+		} catch (java.lang.NoSuchFieldException e) {
+			indexKey = type.getSimpleName(); // unfortunately, there is no way to test for a field presence other than throw a costly exception…
+		} catch (java.lang.IllegalAccessException e) {
+			throw new RuntimeException("Class '" + type + "' does not specify a public 'INDEX_KEY' static field, and wants to use automatic lookup.", e);
+		}
+		
+		return indexKey;	
+	}
+	
+	/** Gets the index of nodes for the type of this NodeMappedObject-refining.
+	 * Uses the default `getIndexKey()` key for the index.
+	 *
+	 *@see	getIndexKey
+	 */
+    private Index<Node> getIndex() {
+		return getIndex(getIndexKey());
+	}
+	
+	/** Gets the index of nodes for the NodeMappedObject-refining type passed in parameter.
+	 * The key used for the index is the one passed in parameter.
+	 */
+	private static Index<Node> getIndex(String indexKey) {
+		return Database.getIndexForName(indexKey); // more info on [Neo4j Index doc](http://api.neo4j.org/current/org/neo4j/graphdb/index/Index.html)
+	}
+	
+	/** Handles index lookup and instanciation if a matching object is found.
+	* The index used is the name of the `resultClass` parameter.
+	*
+	*@param	resultClass	the destination type of the found object
+	*@param	query	the index lookup query
+	*@return	an instance of `resultClass` properly initialized from all data in the database, or `null` if no matching result is found
+	*@throw	RuntimeException	if the `resultClass` does not have a `Node` constructor
+	*@throw	RuntimeException	if several matching nodes were found, as this is a violation of the database structure
+	*/
+	public static <T extends NodeMappedObject> T findAndInstanciateSingleOf(Class<T> resultClass, String query) {
+		Node result;
+		String indexKey = getIndexKey(resultClass);
+		Constructor<T> constructor = null;
+		try {
+		
+			constructor = resultClass.getDeclaredConstructor(Node.class); // get*Declared*Constructor allows bypassing public-only access
+			result = (Node) (getIndex(indexKey)
+							 .get(indexKey, query)
+							 .getSingle());
+							 
+		} catch (NoSuchMethodException e) {
+			throw new RuntimeException("The specified generic type (" + resultClass + ") does not offer a Node constructor.", e);
+		} catch (java.util.NoSuchElementException e) { // there were multiple results for this query
+			throw new RuntimeException("Inconsistent database: multiple nodes found for id '" + query + "' with type '" + resultClass + "'!", e);
+		}
+
+		try {
+		
+			return (result == null ? null : constructor.newInstance(result));
+			
+		} catch (java.lang.reflect.InvocationTargetException e) {
+			throw new RuntimeException(e);		
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		} catch (InstantiationException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	/**Fetches the property for that key, always as a String.
 	* If the property is missing, will return an empty string.
 	*/
@@ -117,6 +215,35 @@ public abstract class NodeMappedObject {
 		return (node.hasProperty(key) ? (String) node.getProperty(key) : "");
 	}
 	
+	/** Calls deletion propagation method, un-indexes the current node, and deletes it.
+	* Transactions are handled within this method.
+	*/
+	public void delete() {
+		Transaction tx = Database.getDbService().beginTx();
+		
+		try {
+			this.onDelete(); // hook for inheriting classes
+			
+			String indexKey = getIndexKey();
+			if (Database.getDbService().index().existsForNodes(indexKey))
+				this.getIndex(indexKey).remove(this.node);
+			
+			this.node.delete();
+		} finally {
+			tx.finish();
+		}
+	}
+	
+	/** This method will be called when `delete`ing a `NodeMappedObject`.
+	* Use it as a hook to propagate all necessary deletions.
+	* **WARNING**: even if you're not interested in propagating deletion, you _need_ to implement this method to allow for deletion. Otherwise, it will be assumed that the class does not allow deletion, and an exception will be thrown.
+	*/
+	public void onDelete() {
+		throw new RuntimeException(new IllegalAccessException("Deletion is not allowed on this class (implement `onDelete()` to allow it)."));
+	}
+	
+	/** Deletes all relations of the given type linked to this `NodeMappedObject`.
+	*/
 	public void delete(Relation relType) {
 		Transaction tx = Database.getDbService().beginTx();
 		
@@ -129,7 +256,6 @@ public abstract class NodeMappedObject {
 			tx.finish();
 		}
 	}
-	
 	
 	public boolean equals(Object o) {
 		if (! this.getClass().isInstance(o))

@@ -17,6 +17,12 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
  * @author	[Matti Schneider-Ghibaudo](http://mattischneider.fr)
  */
 public class MutableWord extends Word {
+
+	/**
+	* We'll share the same index as `Word` but, since the classname is different, we need to override the default "classname" heuristic for finding the index
+	*@see	NodeMappedObject.getIndexKey
+	*/
+	public static String INDEX_KEY = "Word";
 	
 // STATIC METHODS
 	
@@ -47,9 +53,8 @@ public class MutableWord extends Word {
 		
 		try {
 			result.initNode()
-				  .set("title", word);
-			
-			Word.index.add(result.node, Word.INDEX_KEY, word);
+				  .set("title", word)
+				  .indexAs(word);
 			
 			tx.success();
 		} finally {
@@ -151,17 +156,12 @@ public class MutableWord extends Word {
 	
 // DELETE FUNCTIONS
 	
-	/** Deletes this word and all of its properties from the database.
-	 */
-	public void delete() {
-		Transaction tx = Database.getDbService().beginTx();
-		try {
-			this.clearDefinitions();
-			Word.index.remove(this.node);
-			this.node.delete();
-		} finally {
-			tx.finish();
-		}
+	/** Propagates deletion to definition nodes.
+	*
+	*@see	clearDefinitions
+	*/
+	public void onDelete() {
+		this.clearDefinitions();
 	}
 	
 	/** Deletes all definitions for the current Word.

@@ -85,7 +85,7 @@ public class SemWiktionary {
 		long start = System.nanoTime(),
 			 count = 0;
 		
-		for (Node word : Database.getIndexForName(Word.INDEX_KEY).query(Word.INDEX_KEY, "*")) {
+		for (Node word : Database.getIndexForName("Word").query("Word", "*")) {
 			count++;
 			if ((count % 10000) == 0)
 				print(".");

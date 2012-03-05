@@ -16,6 +16,7 @@ import java.util.HashMap;
 
 import edu.unice.polytech.kis.semwiktionary.model.Word;
 import edu.unice.polytech.kis.semwiktionary.model.Definition;
+import edu.unice.polytech.kis.semwiktionary.model.Example;
 
 
 public class ParserTest {
@@ -96,13 +97,15 @@ public class ParserTest {
 			Word currentWord = Word.find(currentEntry.getKey());
 			List<Definition> expectedDefinitions = currentEntry.getValue();
 			
-			fail("No support for multiple examples yet. Test deactivated to avoid too verbose details."); //TODO
+			//fail("No support for multiple examples yet. Test deactivated to avoid too verbose details."); //TODO
 			
 			for (int i = 0; i < expectedDefinitions.size(); i++) {
-				ReflectionAssert.assertReflectionEquals(
-														expectedDefinitions.get(i).getExamples(),
-														currentWord.getDefinitions().get(i).getExamples()
-														);
+				for (int j = 0; j < expectedDefinitions.get(i).getExamples().size(); j++) {
+					assertEquals("Bad example for word " + currentWord + " at example ",
+								 expectedDefinitions.get(i).getExamples().get(j),
+								 currentWord.getDefinitions().get(i).getExamples().get(j)
+					);
+				}
 			}
 		}
 	}
@@ -118,52 +121,52 @@ public class ParserTest {
 	public static Map<String, List<Definition>> generateExpectedContent() {
 		Map<String, List<Definition>> result = new HashMap<String, List<Definition>>();
 		List<Definition> definitions;
-		
+				
 		int count = 0;
 		
 		definitions = new ArrayList<Definition>(9);
 		
 		definitions.add(new Definition("Ouvrage de référence qui répertorie des mots dans un ordre convenu (alphabétique en général) pour leur associer par exemple : une définition, un sens", 1)
 						.addDomain("Linguistique")
-						.addExample("Le dictionnaire de l’Académie française.")
-						.addExample("Les articles d’un dictionnaire.")
-						.addExample("Les dictionnaires sont irremplaçables parce qu’ils sont l’expression des connaissances et de l’idéologie dominante à un moment donné de l’histoire. — (Elisabeth Badinter, préface de : Samuel Souffi et Jean Pruvost, La mère, Honoré Champion)."));
+						.addExample(new Example("Le dictionnaire de l’Académie française."))
+						.addExample(new Example("Les articles d’un dictionnaire."))
+						.addExample(new Example("Les dictionnaires sont irremplaçables parce qu’ils sont l’expression des connaissances et de l’idéologie dominante à un moment donné de l’histoire. — (Elisabeth Badinter, préface de : Samuel Souffi et Jean Pruvost, La mère, Honoré Champion).")));
 		
 		definitions.add(new Definition("Ouvrage de référence qui répertorie des mots dans un ordre convenu (alphabétique en général) pour leur associer par exemple : un ou plusieurs synonymes, antonymes, etc.", 2)
 						.addDomain("Linguistique")
-						.addExample("Je te recommande ce dictionnaire des synonymes.")
-						.addExample("Dictionnaire des homonymes."));
+						.addExample(new Example("Je te recommande ce dictionnaire des synonymes."))
+						.addExample(new Example("Dictionnaire des homonymes.")));
 		
 		definitions.add(new Definition("Ouvrage de référence qui répertorie des mots dans un ordre convenu (alphabétique en général) pour leur associer par exemple : une étymologie", 3)
 						.addDomain("Linguistique")
-						.addExample("Un dictionnaire étymologique."));
+						.addExample(new Example("Un dictionnaire étymologique.")));
 		
 		definitions.add(new Definition("Ouvrage de référence qui répertorie des mots dans un ordre convenu (alphabétique en général) pour leur associer par exemple : et/ou une traduction.", 4)
 						.addDomain("Linguistique")
-						.addExample("Le dictionnaire latin-français, français-latin."));
+						.addExample(new Example("Le dictionnaire latin-français, français-latin.")));
 		
 		definitions.add(new Definition("Ouvrage de référence qui répertorie des mots dans un ordre convenu (alphabétique en général) pour leur associer par exemple : Il peut se contenter d’attester la simple existence d’un mot de façon normative, sans donner aucune autre information.", 5)
 						.addDomain("Linguistique")
-						.addExample("Le dictionnaire du Scrabble."));
+						.addExample(new Example("Le dictionnaire du Scrabble.")));
 		
 		definitions.add(new Definition("Recueil fait par ordre alphabétique sur des matières de littérature, de sciences ou d’arts.", 6)
 						.addDomain("Par extension")
-						.addExample("Dictionnaire de la Fable, de médecine, de chimie, de chirurgie.")
-						.addExample("Dictionnaire raisonné des arts et des sciences."));
+						.addExample(new Example("Dictionnaire de la Fable, de médecine, de chimie, de chirurgie."))
+						.addExample(new Example("Dictionnaire raisonné des arts et des sciences.")));
 		
 		definitions.add(new Definition("Livre, recueil de pensées, d’opinions, d’un auteur, publié dans un ordre alphabétique.", 7)
 						.addDomain("Littérature")
-						.addExample("Le dictionnaire des idées reçues.")
-						.addExample("Le dictionnaire philosophique de Voltaire."));
+						.addExample(new Example("Le dictionnaire des idées reçues."))
+						.addExample(new Example("Le dictionnaire philosophique de Voltaire.")));
 		
 		definitions.add(new Definition("Personne de grande érudition, qui a des connaissances étendues et qui les communique aisément.", 8)
 						.addDomain("Figuré")
 						.addDomain("Familier")
-						.addExample("C’est un dictionnaire vivant !"));
+						.addExample(new Example("C’est un dictionnaire vivant !")));
 		
 		definitions.add(new Definition("Vocabulaire, ensemble des mots dont se sert un écrivain.", 9)
 						.addDomain("Désuet")
-						.addExample("Le dictionnaire de Bossuet est très étendu."));
+						.addExample(new Example("Le dictionnaire de Bossuet est très étendu.")));
 						
 						
 		result.put("dictionnaire", definitions);
@@ -175,123 +178,123 @@ public class ParserTest {
 		
 		
 		definitions.add(new Definition("D’un certain âge (relatif à un autre).", 1)
-						.addExample("Dernièrement, j'avais eu la maladresse de m’enrhumer en pleine chaleur. Voilà pourtant ce que c'est que de devenir vieux : on ne peut résister à rien. — (Émile Thirion, La Politique au village, p. 125, Fischbacher, 1896)")
-						.addExample("Il ne rendait visite qu'à sa mère et encore, cette dernière, entourée de vieilles personnes ridicules et sujette elle-même à des radotages, lui agaçait les nerfs […]. — (Francis Carco, L'Homme de Minuit, 1938)")
-						.addExample("Je suis le plus vieux de ma classe.")
-						.addExample("Un vieil homme, une vieille femme.")
-						.addExample("De vieilles gens.")
-						.addExample("Se faire vieux : Vieillir, prendre de l’âge : Cet acteur se fait vieux."));
+						.addExample(new Example("Dernièrement, j'avais eu la maladresse de m’enrhumer en pleine chaleur. Voilà pourtant ce que c'est que de devenir vieux : on ne peut résister à rien. — (Émile Thirion, La Politique au village, p. 125, Fischbacher, 1896)"))
+						.addExample(new Example("Il ne rendait visite qu'à sa mère et encore, cette dernière, entourée de vieilles personnes ridicules et sujette elle-même à des radotages, lui agaçait les nerfs […]. — (Francis Carco, L'Homme de Minuit, 1938)"))
+						.addExample(new Example("Je suis le plus vieux de ma classe."))
+						.addExample(new Example("Un vieil homme, une vieille femme."))
+						.addExample(new Example("De vieilles gens."))
+						.addExample(new Example("Se faire vieux : Vieillir, prendre de l’âge : Cet acteur se fait vieux.")));
 		
 		definitions.add(new Definition("Ancien, qui existe depuis longtemps.", 2)
-						.addExample("Un vieux manoir.")
-						.addExample("Le monde est bien vieux.")
-						.addExample("Le bon vieux temps.")
-						.addExample("De vieilles rapsodies.")
-						.addExample("Les vieilles coutumes.")
-						.addExample("Un vieux proverbe.")
-						.addExample("De vieux papiers, de vieux parchemins.")
-						.addExample("Ce mot, ce terme est vieux : Il a cessé d’être en usage.")
-						.addExample("On dit dans le même sens :")
-						.addExample("Une vieille locution, le vieux langage."));
+						.addExample(new Example("Un vieux manoir."))
+						.addExample(new Example("Le monde est bien vieux."))
+						.addExample(new Example("Le bon vieux temps."))
+						.addExample(new Example("De vieilles rapsodies."))
+						.addExample(new Example("Les vieilles coutumes."))
+						.addExample(new Example("Un vieux proverbe."))
+						.addExample(new Example("De vieux papiers, de vieux parchemins."))
+						.addExample(new Example("Ce mot, ce terme est vieux : Il a cessé d’être en usage."))
+						.addExample(new Example("On dit dans le même sens :"))
+						.addExample(new Example("Une vieille locution, le vieux langage.")));
 		
 		definitions.add(new Definition("…", 3)
 						.addDomain("Familier")
-						.addExample("Vieux comme Hérode, comme Mathusalem : Très vieux."));
+						.addExample(new Example("Vieux comme Hérode, comme Mathusalem : Très vieux.")));
 		
 		definitions.add(new Definition("…", 4)
 						.addDomain("Figuré")
 						.addDomain("Familier")
-						.addExample("Vieux comme les rues. → voir rue"));
+						.addExample(new Example("Vieux comme les rues.")));
 		
 		definitions.add(new Definition("…", 5)
 						.addDomain("Familier")
-						.addExample("Cet homme ne fera pas de vieux os. → voir os"));
+						.addExample(new Example("Cet homme ne fera pas de vieux os.")));
 		
 		definitions.add(new Definition("…", 6)
 						.addDomain("Dévotion")
-						.addExample("Dépouiller le vieil homme. → voir dépouiller"));
+						.addExample(new Example("Dépouiller le vieil homme.")));
 		
 		definitions.add(new Definition("Apparence de la vétusté, les dehors de la vieillesse.", 7)
-						.addExample("Il a un air vieux.")
-						.addExample("Être vieux avant l’âge : Présenter prématurément des symptômes de vieillesse."));
+						.addExample(new Example("Il a un air vieux."))
+						.addExample(new Example("Être vieux avant l’âge : Présenter prématurément des symptômes de vieillesse.")));
 		
 		definitions.add(new Definition("S’emploie avec les adverbes plus et moins, et autres semblables, pour marquer la différence d’âge entre deux personnes ou choses.", 8)
-						.addExample("Il n’a que vingt ans, et vous en avez vingt-cinq, vous êtes plus vieux que lui.")
-						.addExample("Il n’est pas si vieux que vous.")
-						.addExample("Il est plus vieux que lui de six ans."));
+						.addExample(new Example("Il n’a que vingt ans, et vous en avez vingt-cinq, vous êtes plus vieux que lui."))
+						.addExample(new Example("Il n’est pas si vieux que vous."))
+						.addExample(new Example("Il est plus vieux que lui de six ans.")));
 		
 		definitions.add(new Definition("Personne qui exerce une profession, un métier, qui mène un certain genre de vie depuis longtemps.", 9)
-						.addExample("Vieux magistrat.")
-						.addExample("Vieux capitaine.")
-						.addExample("Vieux soldat.")
-						.addExample("La vieille garde.")
-						.addExample("Un vieux garçon, une vieille fille : Un garçon, une fille qui a passé la jeunesse et qui est encore célibataire.")
-						.addExample("Un vieil ami : Un ami de longue date.")
-						.addExample("Nous sommes de vieux amis.")
-						.addExample("De vieux époux : Des époux qui sont mariés depuis longtemps."));
+						.addExample(new Example("Vieux magistrat."))
+						.addExample(new Example("Vieux capitaine."))
+						.addExample(new Example("Vieux soldat."))
+						.addExample(new Example("La vieille garde."))
+						.addExample(new Example("Un vieux garçon, une vieille fille : Un garçon, une fille qui a passé la jeunesse et qui est encore célibataire."))
+						.addExample(new Example("Un vieil ami : Un ami de longue date."))
+						.addExample(new Example("Nous sommes de vieux amis."))
+						.addExample(new Example("De vieux époux : Des époux qui sont mariés depuis longtemps.")));
 		
 		definitions.add(new Definition("Sert aussi à marquer les anciennes habitudes, et surtout les habitudes vicieuses.", 10)
-						.addExample("Vieil ivrogne.")
-						.addExample("Vieux débauché."));
+						.addExample(new Example("Vieil ivrogne."))
+						.addExample(new Example("Vieux débauché.")));
 		
 		definitions.add(new Definition("Il s’emploie familièrement dans des phrases de dénigrement.", 11)
-						.addExample("Vieux coquin.")
-						.addExample("Vieux sorcier, vieille sorcière.")
-						.addExample("Vieux fou, Vieille folle.")
-						.addExample("Vieux radoteur.")
-						.addExample("Vieil avare."));
+						.addExample(new Example("Vieux coquin."))
+						.addExample(new Example("Vieux sorcier, vieille sorcière."))
+						.addExample(new Example("Vieux fou, Vieille folle."))
+						.addExample(new Example("Vieux radoteur."))
+						.addExample(new Example("Vieil avare.")));
 		
 		definitions.add(new Definition("S’emploie pour exprimer la vénération qu’inspire le nom d’un homme célèbre mort depuis longtemps, en laissant une grande renommée.", 12)
-						.addExample("Le vieux Corneille.")
-						.addExample("Le vieil Homère."));
+						.addExample(new Example("Le vieux Corneille."))
+						.addExample(new Example("Le vieil Homère.")));
 		
 		definitions.add(new Definition("…", 13)
 						.addDomain("Figuré")
-						.addExample("Un homme de la vieille roche, noblesse de vieille roche. → voir roche"));
+						.addExample(new Example("Un homme de la vieille roche, noblesse de vieille roche.")));
 		
 		definitions.add(new Definition("Par comparaison et opposition à nouveau.", 14)
-						.addExample("La vieille ville.")
-						.addExample("La vieille cour.")
-						.addExample("Du vin vieux.")
-						.addExample("La vieille mode.")
-						.addExample("Vieux style. → voir style"));
+						.addExample(new Example("La vieille ville."))
+						.addExample(new Example("La vieille cour."))
+						.addExample(new Example("Du vin vieux."))
+						.addExample(new Example("La vieille mode."))
+						.addExample(new Example("Vieux style.")));
 		
 		definitions.add(new Definition("Choses qui sont usées, principalement des habits, des meubles, par opposition à neuf.", 15)
-						.addExample("Vieil habit.")
-						.addExample("Vieux chapeau.")
-						.addExample("Vieux linge.")
-						.addExample("Vieux coffre.")
-						.addExample("Vieille tapisserie."));
+						.addExample(new Example("Vieil habit."))
+						.addExample(new Example("Vieux chapeau."))
+						.addExample(new Example("Vieux linge."))
+						.addExample(new Example("Vieux coffre."))
+						.addExample(new Example("Vieille tapisserie.")));
 						
 		definitions.add(new Definition("Personne âgée.", 1)
 						.addDomain("Péjoratif")
-						.addExample("Car enfin il ne m'emballe pas, moi, ce raplati de Karfeck et il est un peu dégoûtant, ce vieux qui guigne tout le temps les mollets de Clotte. — (Paul Margueritte, Jouir, 1918, T.2, p.78)")
-						.addExample("Le petit vieux s’est encore perdu.")
-						.addExample("Les jeunes et les vieux.")
-						.addExample("Faire le vieux : Prendre le ton, les habitudes de la vieillesse.")
-						.addExample("Mon vieux : Terme d’affection qui se dit familièrement à un vieil ami, à un ami intime. : J’irai bientôt te voir, mon vieux."));
+						.addExample(new Example("Car enfin il ne m'emballe pas, moi, ce raplati de Karfeck et il est un peu dégoûtant, ce vieux qui guigne tout le temps les mollets de Clotte. — (Paul Margueritte, Jouir, 1918, T.2, p.78)"))
+						.addExample(new Example("Le petit vieux s’est encore perdu."))
+						.addExample(new Example("Les jeunes et les vieux."))
+						.addExample(new Example("Faire le vieux : Prendre le ton, les habitudes de la vieillesse."))
+						.addExample(new Example("Mon vieux : Terme d’affection qui se dit familièrement à un vieil ami, à un ami intime. : J’irai bientôt te voir, mon vieux.")));
 		
 		
 		definitions.add(new Definition("Et elliptiquement,", 2)
 						   .addDomain("Familier")
-						   .addExample("Un vieux de la vieille : Un soldat de la vieille garde et, par extension, un bon vieux compagnon."));
+						   .addExample(new Example("Un vieux de la vieille : Un soldat de la vieille garde et, par extension, un bon vieux compagnon.")));
 						   
 		definitions.add(new Definition("Ce qui est vieux, usé.", 3)
-						   .addExample("Coudre du vieux avec du neuf.")
-						   .addExample("C’est du vieux qui vaut du neuf."));
+						   .addExample(new Example("Coudre du vieux avec du neuf."))
+						   .addExample(new Example("C’est du vieux qui vaut du neuf.")));
 			
 		definitions.add(new Definition("ou Père ou mère.", 4)
 						.addDomain("Argot")
 						.addDomain("Populaire")
 						.addDomain("Au singulier")
-						.addExample("Mon vieux a regardé la télé hier.")
-						.addExample("Ma vieille me prend la tête en ce moment..."));
+						.addExample(new Example("Mon vieux a regardé la télé hier."))
+						.addExample(new Example("Ma vieille me prend la tête en ce moment...")));
 		
 		definitions.add(new Definition("ou Parents.", 5)
 						.addDomain("Argot")
 						.addDomain("Populaire")
 						.addDomain("Au pluriel")
-						.addExample("Mes vieux partent en vacances demain."));
+						.addExample(new Example("Mes vieux partent en vacances demain.")));
 						
 						
 		result.put("vieux", definitions);

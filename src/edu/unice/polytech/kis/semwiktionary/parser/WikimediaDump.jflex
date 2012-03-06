@@ -8,6 +8,7 @@ import java.util.Stack;
 
 import edu.unice.polytech.kis.semwiktionary.model.*;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
+import edu.unice.polytech.kis.semwiktionary.database.LazyPatternsManager;
 
 import info.bliki.wiki.filter.PlainTextConverter;
 import info.bliki.wiki.model.WikiModel;
@@ -19,7 +20,8 @@ import info.bliki.wiki.model.WikiModel;
 	public static final String  OUTPUT_FILE = "log/parser-output.txt",
 								ERROR_FILE = "log/parser-error.txt";
 								
-	public long wordCount = 0;
+	public long wordCount = 0,
+				modelCount = 0;
 
 	private final PrintStream PREV_OUT = System.out,
 							  PREV_ERR = System.err;
@@ -136,6 +138,8 @@ import info.bliki.wiki.model.WikiModel;
 		PREV_OUT.print("Modèle:" + pattern);
 		
 		currentNMO = MutableLexicalCategory.obtain(pattern);
+		
+		modelCount++;
 	}
 	
 	private void resetFlags() {
@@ -204,7 +208,8 @@ import info.bliki.wiki.model.WikiModel;
 	logWord();
 	
 	PREV_ERR.println("Total time: " + ((System.nanoTime() - FIRST_TICK) / 10E9) + "s");
-	PREV_ERR.println("Parsed words: " + wordCount);
+	PREV_ERR.println("Parsed words:  " + wordCount);
+	PREV_ERR.println("Parsed models: " + modelCount);
 
 	// restore outputs
 	System.setOut(PREV_OUT);
@@ -249,7 +254,9 @@ space = ({whitespace}|{newline})
 // a third-level header
 %state H3
 
-%state NATURE
+// a third-level header with no "well-known" pattern
+%state H3_UNKNOWN
+
 %state SECTION
 
 // any "{{" pattern (template opening)
@@ -385,6 +392,9 @@ space = ({whitespace}|{newline})
 	[^|]+
 	{
 		((MutableLexicalCategory) currentNMO).setDescription(yytext());
+		
+		LexicalCategory newCategory = (LexicalCategory) currentNMO;
+		LazyPatternsManager.transferAll(newCategory.getPattern(), newCategory, Relation.LEXICAL_CATEGORY);
 	}
 	
 	.
@@ -440,13 +450,7 @@ space = ({whitespace}|{newline})
 
 
 <H3>
-{
-	"verb"|"nom"|"adj"|"noms-vern"
-	{
-		// TODO: add all types
-		yybegin(NATURE);
-	}
-	
+{	
 	("syn"|"ant"|"tropo")"-}}"{newline}
 	{
 		buffer = yytext();
@@ -456,26 +460,27 @@ space = ({whitespace}|{newline})
 
 	.
 	{
-		yybegin(TRASH);	// this is not an accepted type
+		yypushback(1);
+		yybegin(H3_UNKNOWN);	// this is not a "well-known" value
 	}
 }
 
-
-<NATURE>
-{
-	-[^}]*"}}"
+<H3_UNKNOWN>
+{ // we can't put this directly into <H3> because of the "longest match" rule
+	[^}]+
 	{
-		// TODO: store type in word
+		//TODO: add UNKNOWN link
+		
+		logError("Unknown H3 in '" + currentNMO + "': '" + yytext() + "'");
+		
 		yybegin(SECTION);
 	}
 	
-	.
+	"}"
 	{
-		logSyntaxError("Unparsable nature in '" + currentNMO);
 		yybegin(SECTION);
 	}
 }
-
 
 <SECTION>
 { // an entrance into that state with a non-consumed newline will switch to <CONTENT_WORD>

@@ -174,13 +174,24 @@ public class MutableWord extends Word {
 	/** Adds the word given in parameter to the current word object as a meronym.
 	 * @param meronym The meronym to add to this Word
 	 * @return This MutableWord, for chainability
+	 * @see addHolonym(Word holonym) (opposite method)
 	 */
 	public MutableWord addMeronym(Word meronym) {
 		Database.link(this.node, meronym.node, Relation.MERONYM);
 		
 		return this;
 	}
-	
+
+	/** Adds the word given in parameter to the current word object as an holonym.
+	 * @param holonym The holonym to add to this Word
+	 * @return This MutableWord, for chainability
+	 * @see addMeronym(Word meronym) (opposite method)
+	 */
+	public MutableWord addHolonym(Word holonym) {
+		Database.link(holonym.node, this.node, Relation.MERONYM);
+		
+		return this;
+	}
 // DELETE FUNCTIONS
 	
 	/** Deletes this word and all of its properties from the database.

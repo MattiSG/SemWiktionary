@@ -42,8 +42,11 @@ import info.bliki.wiki.model.WikiModel;
 	private int definitionCount = 0;
 	private int definitionDepth = -1; // the depth is the number of sharps (#) in front of a definition, minus one (that's optimization to have only one substraction for the 0-based indexed list). So, to trigger comparisons, we need to be negative.
 	
-	private Vector<Word> complexNyms;
-	private int complexDepth = 1;
+	private Vector<Word> complexNyms;	// Used for hyponyms, hyperonyms, holonyms, and meronyms
+	private int complexDepth = 1;		// Used to calculate the depth of the list (number of '*')
+	private boolean complexAlgoDirection;	// Used for complexNym algorithm :
+							// true = more and more precise (ex: hyponyms)
+							// false = less and less precise (ex: hyperonyms)
 	
 	private String buffer = ""; // an all-purpose buffer, to be initialized by groups that need it
 	
@@ -82,6 +85,7 @@ import info.bliki.wiki.model.WikiModel;
 		relationsMap.put("tropo", Relation.TROPONYM);
 		relationsMap.put("méro", Relation.MERONYM);
 		relationsMap.put("hypo", Relation.HYPONYM);
+		relationsMap.put("hyper", Relation.HYPONYM);
 		
 		complexNyms = new Vector<Word>(8);
 		complexNyms.setSize(8); // The size is force : if a user has made an error, the case is put at null and the algorithm ignores it
@@ -400,6 +404,14 @@ space = ({whitespace}|{newline})
 
 	"hypo"|"méro"
 	{
+		complexAlgoDirection = true;
+		currentRelation = relationsMap.get(yytext());
+		yybegin(COMPLEXNYM);
+	}
+	
+	"hyper"
+	{
+		complexAlgoDirection = false;
 		currentRelation = relationsMap.get(yytext());
 		yybegin(COMPLEXNYM);
 	}
@@ -795,8 +807,12 @@ space = ({whitespace}|{newline})
 			int emptyDepth = 1;
 			while (complexNyms.get(complexDepth-emptyDepth) == null)
 				++emptyDepth;
-
-			complexNyms.get(complexDepth-emptyDepth).set(currentRelation, currentNym);			
+			
+			// We create the relation between the two words
+			if (complexAlgoDirection)
+				complexNyms.get(complexDepth-emptyDepth).set(currentRelation, currentNym);
+			else
+				currentNym.set(currentRelation, complexNyms.get(complexDepth-emptyDepth));
 		} catch (Exception e) {
 			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( ");
 			e.printStackTrace(System.err);

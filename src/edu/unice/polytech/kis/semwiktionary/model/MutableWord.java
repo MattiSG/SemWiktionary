@@ -208,7 +208,8 @@ public class MutableWord extends Word {
 		return this;
 	}
 	
-	/** Deletes all antonyms associated to this Word.
+	/** Unlinks all antonyms associated to this Word.
+	 *
 	 * @return This MutableWord, for chainability
 	 */
 	public MutableWord clearAntonyms() {
@@ -217,7 +218,8 @@ public class MutableWord extends Word {
 		return this;
 	}
 	
-	/** Deletes all troponyms associated to this Word.
+	/** Unlinks all troponyms associated to this Word.
+	 *
 	 * @return This MutableWord, for chainability
 	 */
 	public MutableWord clearTroponyms() {

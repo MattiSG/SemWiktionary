@@ -96,9 +96,7 @@ public class ParserTest {
 		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
 			Word currentWord = Word.find(currentEntry.getKey());
 			List<Definition> expectedDefinitions = currentEntry.getValue();
-			
-			//fail("No support for multiple examples yet. Test deactivated to avoid too verbose details."); //TODO
-			
+						
 			for (int i = 0; i < expectedDefinitions.size(); i++) {
 				for (int j = 0; j < expectedDefinitions.get(i).getExamples().size(); j++) {
 					assertEquals("Bad example for word " + currentWord + " at example ",

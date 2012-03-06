@@ -84,7 +84,8 @@ import info.bliki.wiki.model.WikiModel;
 		relationsMap.put("hypo", Relation.HYPONYM);
 		
 		complexNyms = new Vector<Word>(8);
-		complexNyms.setSize(8);
+		complexNyms.setSize(8); // The size is force : if a user has made an error, the case is put at null and the algorithm ignores it
+					// (ex: * to *** (the second depth list is missing)
 	}
 	
 	private void yypushstate() {
@@ -786,9 +787,11 @@ space = ({whitespace}|{newline})
 	([^\]]|"]"[^\]])+
 	{
 		try {
+			// We get the word object associated to the parsed text and set it in the vector
 			MutableWord currentNym = MutableWord.obtain(yytext());
 			complexNyms.set(complexDepth, currentNym);
 			
+			// We find the last word of the list to link it with
 			int emptyDepth = 1;
 			while (complexNyms.get(complexDepth-emptyDepth) == null)
 				++emptyDepth;
@@ -810,16 +813,13 @@ space = ({whitespace}|{newline})
 
 	{newline}{newline}
 	{
+		// We leave the section : return in MEDIAWIKI state.
 		yybegin(MEDIAWIKI);
 	}
 
 	"<"
 	{
+		// That was the last section, the word is over because the </page> tag : return in XML state.
 		yybegin(XML);
-	}
-
-	.
-	{
-
 	}
 }

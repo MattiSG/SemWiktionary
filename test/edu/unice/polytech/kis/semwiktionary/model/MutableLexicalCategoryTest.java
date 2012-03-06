@@ -12,7 +12,7 @@ import edu.unice.polytech.kis.semwiktionary.model.Word;
 import edu.unice.polytech.kis.semwiktionary.model.LexicalCategory;
 
 
-public class MutableLexicalCategoryTest extends LexicalCategoryTest {
+public class MutableLexicalCategoryTest {
 	
 	private static MutableLexicalCategory subject;
 	
@@ -20,7 +20,7 @@ public class MutableLexicalCategoryTest extends LexicalCategoryTest {
 	
 	@Before
 	public void setUp() {
-		subject = MutableLexicalCategory.obtain(PATTERN);
+		subject = MutableLexicalCategory.obtain(LexicalCategoryTest.PATTERN);
 	}
 	
 	@Test
@@ -44,8 +44,8 @@ public class MutableLexicalCategoryTest extends LexicalCategoryTest {
 	
 	@Test
 	public void getSetLexicalCategoryDescription() {
-		subject.setDescription(DESCRIPTION);
+		subject.setDescription(LexicalCategoryTest.DESCRIPTION);
 		
-		assertEquals(DESCRIPTION, subject.getDescription());
+		assertEquals(LexicalCategoryTest.DESCRIPTION, subject.getDescription());
 	}
 }

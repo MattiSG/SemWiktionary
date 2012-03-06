@@ -31,7 +31,8 @@ public class DefinitionTest {
 		try {
 			subject.delete();
 		} catch (Exception e) {
-			fail("Exception raised on deletion!");
+			e.printStackTrace();
+			fail("Exception raised on deletion! (" + e + ")");
 		}
 	}
 }

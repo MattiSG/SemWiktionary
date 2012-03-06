@@ -29,7 +29,7 @@ public class MutableLexicalCategoryTest extends LexicalCategoryTest {
 	}
 		
 	@Test
-	public void deleteTest() {
+	public void deleteMutableLexicalCategory() {
 		subject = MutableLexicalCategory.obtain(DELETION_TEST_PATTERN);
 		try {
 			subject.delete();

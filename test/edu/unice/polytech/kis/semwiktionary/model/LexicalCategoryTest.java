@@ -14,10 +14,11 @@ import edu.unice.polytech.kis.semwiktionary.model.LexicalCategory;
 
 public class LexicalCategoryTest {
 	
-	private static LexicalCategory subject;
-	
 	protected final static String DESCRIPTION = "Lexical category test content.";
 	protected final static String PATTERN = "-test-pattern-";
+	
+	private static LexicalCategory subject;
+	
 	
 	@Before
 	public void setUp() {
@@ -30,7 +31,7 @@ public class LexicalCategoryTest {
 	}
 		
 	@Test
-	public void deleteTest() {
+	public void deleteLexicalCategoryIsForbidden() {
 		boolean exceptionWasRaised = false;
 		try {
 			subject.delete();

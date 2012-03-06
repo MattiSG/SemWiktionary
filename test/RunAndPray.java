@@ -14,7 +14,7 @@ import edu.unice.polytech.kis.semwiktionary.database.DatabaseTest;
 	edu.unice.polytech.kis.semwiktionary.model.NodeMappedObjectTest.class,
 	edu.unice.polytech.kis.semwiktionary.model.MutableWordTest.class,
 	edu.unice.polytech.kis.semwiktionary.model.DefinitionTest.class,
-	edu.unice.polytech.kis.semwiktionary.model.MutableLexicalCategoryTest.class,
+	edu.unice.polytech.kis.semwiktionary.model.MutableLexicalCategoryTest.class, // Mutable must be **before** immutable in order to create the LexicalCategory in database
 	edu.unice.polytech.kis.semwiktionary.model.LexicalCategoryTest.class,
 	
 	// test suites above this line don't need the database to be filled

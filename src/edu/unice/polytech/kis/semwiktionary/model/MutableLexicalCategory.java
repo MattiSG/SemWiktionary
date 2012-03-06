@@ -19,14 +19,14 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 public class MutableLexicalCategory extends LexicalCategory {
 
 	/**
-	 * We'll share the same index as `LexicalCategory` but, since the classname is different, we need to override the default "classname" heuristic for finding the index
+	 * We'll share the same index as `LexicalCategory` but, since the classname is different, we need to override the default "classname" heuristic for finding the index.
 	 *@see	NodeMappedObject.getIndexKey
 	 */
 	public static String INDEX_KEY = "LexicalCategory";
 	
 // LOOKUP
 
-	/** Finds a lexical category in the database from its pattern, or creates a new one if none is found
+	/** Finds a lexical category in the database from its pattern, or creates a new one if none is found.
 	 *
 	 * @param	pattern	The pattern to look for.
 	 * @return	A matching LexicalCategory object.

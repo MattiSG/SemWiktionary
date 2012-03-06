@@ -233,7 +233,7 @@ public abstract class NodeMappedObject {
 			this.onDelete(); // hook for inheriting classes
 			
 			String indexKey = getIndexKey();
-			if (Database.getDbService().index().existsForNodes(indexKey))
+			if (Database.getDbService().index().existsForNodes(indexKey)) // we might delete a non-indexed node
 				this.getIndex(indexKey).remove(this.node);
 			
 			this.node.delete();

@@ -132,7 +132,6 @@ public class Word extends NodeMappedObject {
 		this.definitions.addAll(this.<Definition>get(Relation.DEFINITION));
 	}
 	
-	
 // STANDARD METHODS
 	
 	@Override

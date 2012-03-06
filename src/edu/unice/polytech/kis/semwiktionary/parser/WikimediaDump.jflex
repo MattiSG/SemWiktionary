@@ -588,13 +588,15 @@ space = ({whitespace}|{newline})
 	"}}"{newline}
 	{
 		buffer += ")";
-		yypushback(1);
+		yypushback(1);	// <DEFINITION_EXAMPLE> needs it to match
+		yybegin(DEFINITION_EXAMPLE);
 	}
 
 	"}}."{newline}
 	{
-		buffer += ")";
-		yypushback(2);
+		buffer += ").";
+		yypushback(1);	// <DEFINITION_EXAMPLE> needs it to match
+		yybegin(DEFINITION_EXAMPLE);
 	}
 
 	([^\r\n}{w]|"}"[^}]|"{"[^{]|"w"[^\|])+

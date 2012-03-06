@@ -97,7 +97,17 @@ public class Definition extends NodeMappedObject {
 	}
 
 // MODIFIERS
-	
+
+	/** Adds the given example to this definition.
+	 * The passed in `String` will be automatically wrapped in an `Example`.
+	 *
+	 * @param	exampleContent	The content of the example to add.
+	 * @return	this	for chainability
+	 */
+	public Definition addExample(String exampleContent) {
+		return this.addExample(new Example(exampleContent));
+	}
+		
 	/** Adds the given example to this definition.
 	 *
 	 * @param	example	The example to add

@@ -152,9 +152,21 @@ public class MutableWord extends Word {
 	/** Adds the word given in parameter to the current word object as an hyponym.
 	 * @param hyponym The hyponym to add to this Word
 	 * @return This MutableWord, for chainability
+	 * @see addHyperonym(Word hyperonym) (opposite method)
 	 */
 	public MutableWord addHyponym(Word hyponym) {
 		Database.link(this.node, hyponym.node, Relation.HYPONYM);
+		
+		return this;
+	}
+	
+	/** Adds the word given in parameter to the current word object as an hyperonym.
+	 * @param hyponym The hyperonym to add to this Word
+	 * @return This MutableWord, for chainability
+	 * @see addHyponym(Word hyponym) (opposite method)
+	 */
+	public MutableWord addHyperonym(Word hyperonym) {
+		Database.link(hyperonym.node, this.node, Relation.HYPONYM);
 		
 		return this;
 	}

@@ -131,6 +131,18 @@ public class SemWiktionary {
 			}
 		}
 		
+		println("-----HYPERONYMS-----");
+		
+		for (Word hyp1 : word.getHyperonyms()) {
+			println("* " + hyp1.getTitle());
+			for (Word hyp2 : hyp1.getHyperonyms()) {
+				println("** " + hyp2.getTitle());
+				for (Word hyp3 : hyp2.getHyperonyms()) {
+					println("*** " + hyp3.getTitle());
+				}
+			}
+		}
+		
 		println("------MERONYMS------");
 		
 		for (Word mer1 : word.getMeronyms()) {

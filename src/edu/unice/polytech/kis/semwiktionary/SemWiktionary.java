@@ -18,6 +18,7 @@ import org.neo4j.graphdb.Node;
 import edu.unice.polytech.kis.semwiktionary.parser.WikimediaDump;
 import edu.unice.polytech.kis.semwiktionary.model.Word;
 import edu.unice.polytech.kis.semwiktionary.model.Definition;
+import edu.unice.polytech.kis.semwiktionary.model.LexicalCategory;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
 import edu.unice.polytech.kis.semwiktionary.database.Database;
 
@@ -106,18 +107,27 @@ public class SemWiktionary {
 		println('"' + word.getTitle() + '"');
 		println("--------------------");
 		
-		for (Word syn : word.getSynonyms())
-			println("= " + syn.getTitle());
+		print("(");
+		for (LexicalCategory category : word.getLexicalCategories())
+			print(category + ", ");
 		
-		println("--------------------");
-		
-		for (Word ant : word.getAntonyms())
-			println("≠ " + ant.getTitle());
+		println(")");
 		
 		println("--------------------");
 
-		for (Word tro : word.getTroponyms())
-			println("∋ " + tro.getTitle());
+		
+		for (Word synonym : word.getSynonyms())
+			println("= " + synonym);
+		
+		println("--------------------");
+		
+		for (Word antonym : word.getAntonyms())
+			println("≠ " + antonym);
+		
+		println("--------------------");
+
+		for (Word troponym : word.getTroponyms())
+			println("∋ " + troponym);
 		
 		println("--------------------");
 		

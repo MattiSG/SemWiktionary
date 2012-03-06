@@ -5,48 +5,47 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.LinkedList;
 import java.util.List;
+import java.util.LinkedList;
 
 import edu.unice.polytech.kis.semwiktionary.model.Word;
 import edu.unice.polytech.kis.semwiktionary.model.LexicalCategory;
-import edu.unice.polytech.kis.semwiktionary.database.DatabaseTest;
 
 
 public class LexicalCategoryTest {
 	
 	private static LexicalCategory subject;
 	
-	private final static String DESCRIPTION = "Lexical category test content.";
-	private final static String PATTERN = "-test-pattern-";
+	protected final static String DESCRIPTION = "Lexical category test content.";
+	protected final static String PATTERN = "-test-pattern-";
 	
 	@Before
 	public void setUp() {
-		subject = new LexicalCategory(PATTERN);
+		subject = LexicalCategory.find(PATTERN);
 	}
 	
 	@Test
-	public void lexicalCategoryConstructor() {
-		assertNotNull("Lexical Category constructor created a null!", subject);
+	public void lexicalCategoryFind() {
+		assertNotNull("Lexical Category `find()` did not find an existing element!", subject);
 	}
 		
 	@Test
 	public void deleteTest() {
+		boolean exceptionWasRaised = false;
 		try {
 			subject.delete();
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Exception raised on deletion! (" + e + ")");
+		} catch (RuntimeException e) {
+			assertEquals("An exception was thrown on LexicalCategory deletion, but not an IllegalAccessException",
+						 java.lang.IllegalAccessException.class,
+						 e.getCause().getClass());
+			
+			exceptionWasRaised = true;
 		}
 		
-		assertNull("Lexical category '" + PATTERN + "' was found after deletion!",
-				   LexicalCategory.find(PATTERN));
-	}
-	
-	@Test
-	public void getSetLexicalCategoryDescription() {
-		subject.setDescription(DESCRIPTION);
+		assertTrue("Exception was not raised on LexicalCategory '" + subject + "' deletion! (should be forbidden and allowed only on MutableWord)", exceptionWasRaised);
 		
-		assertEquals(DESCRIPTION, subject.getDescription());
+		assertEquals("Deletion was forbidden, but the LexicalCategory '" + subject + "' was still deleted :-|",
+					 subject.getPattern(),
+					 LexicalCategory.find(PATTERN).getPattern());
 	}
 }

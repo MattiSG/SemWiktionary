@@ -89,6 +89,13 @@ public class MutableWord extends Word {
 	
 // UPDATE FUNCTIONS
 	
+	public MutableWord addLexicalCategory(LexicalCategory cat) {
+		Database.link(this.node, cat.node, Relation.LEXICALCATEGORY);
+		this.lexicalCategories.add(cat);
+		
+		return this;
+	}
+	
 	/** Adds the given Definition to this Word.
 	 * The definition is immediately and transparently stored in the database. No need to `commit` modifications.
 	 * 
@@ -179,9 +186,20 @@ public class MutableWord extends Word {
 		this.definitions.clear();
 		
 		return this;
-	}	
+	}
 	
-	/** Deletes all synonyms associated to this Word.
+	/** Unlinks all parts of speech associated to this Word.
+	 *
+	 * @return This MutableWord, for chainability
+	 */
+	public MutableWord clearLexicalCategories() {
+		this.delete(Relation.LEXICALCATEGORY);
+		
+		return this;
+	}
+	
+	/** Unlinks all synonyms associated to this Word.
+	 *
 	 * @return This MutableWord, for chainability
 	 */
 	public MutableWord clearSynonyms() {

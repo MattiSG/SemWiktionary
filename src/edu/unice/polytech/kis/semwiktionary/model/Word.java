@@ -33,6 +33,10 @@ public class Word extends NodeMappedObject {
 	 */
 	protected List<Definition> definitions = new LinkedList<Definition>();
 	
+	/** Parts of speech, or “Lexical categories”, for this word.
+	*/
+	protected List<LexicalCategory> lexicalCategories = new LinkedList<LexicalCategory>();
+	
 	
 // STATIC METHODS
 	
@@ -96,6 +100,10 @@ public class Word extends NodeMappedObject {
 			this.fetchDefinitions();
 		
 		return this.definitions;
+	}
+	
+	public Collection<LexicalCategory> getLexicalCategories() {
+		return this.<LexicalCategory>get(Relation.LEXICALCATEGORY);
 	}
 	
 	/** Returns all synonyms of this Word.

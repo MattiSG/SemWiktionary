@@ -10,7 +10,8 @@ public enum Relation implements RelationshipType {
 	DEFINITION(Definition.class),
 	SYNONYM(Word.class),
 	ANTONYM(Word.class),
-	TROPONYM(Word.class);
+	TROPONYM(Word.class),
+	LEXICALCATEGORY(LexicalCategory.class);
 	
 	public Class getDestinationType() {
 		return this.maps;

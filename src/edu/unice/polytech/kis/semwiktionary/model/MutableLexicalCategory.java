@@ -64,12 +64,4 @@ public class MutableLexicalCategory extends LexicalCategory {
 		
 		this.description = description;
 	}
-	
-// DESTRUCTORS
-	
-	/** Propagates deletion.
-	*/
-	public void onDelete() {
-		// allow deletion
-	}
 }

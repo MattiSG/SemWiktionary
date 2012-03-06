@@ -16,7 +16,6 @@ public class MutableLexicalCategoryTest {
 	
 	private static MutableLexicalCategory subject;
 	
-	private static final String DELETION_TEST_PATTERN = "-to-be-deleted-";
 	
 	@Before
 	public void setUp() {
@@ -26,20 +25,6 @@ public class MutableLexicalCategoryTest {
 	@Test
 	public void lexicalCategoryObtain() {
 		assertNotNull("Lexical Category `obtain()` created a null!", subject);
-	}
-		
-	@Test
-	public void deleteMutableLexicalCategory() {
-		subject = MutableLexicalCategory.obtain(DELETION_TEST_PATTERN);
-		try {
-			subject.delete();
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Exception raised on deletion! (" + e + ")");
-		}
-		
-		assertNull("Lexical category '" + DELETION_TEST_PATTERN + "' was found after deletion!",
-				   LexicalCategory.find(DELETION_TEST_PATTERN));
 	}
 	
 	@Test

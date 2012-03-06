@@ -66,7 +66,7 @@ public class Word extends NodeMappedObject {
 	
 // CONSTRUCTORS
 
-	/** Initializes all fields when `create()`ing a new word.
+	/** Initializes all fields when creating a new word.
 	 *
 	 *@return	An empty shell to be filled.
 	 */

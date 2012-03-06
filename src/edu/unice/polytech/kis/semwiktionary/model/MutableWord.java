@@ -35,26 +35,9 @@ public class MutableWord extends Word {
 	 */
 	public static MutableWord obtain(String word) {
 		Word immutableWord = Word.find(word);
-		return (immutableWord == null ? MutableWord.create(word) : new MutableWord(immutableWord));
+		return (immutableWord == null ? new MutableWord(word) : new MutableWord(immutableWord));
 	}
 	
-	/** Creates a new word in the database.
-	 * The word is created even if the same word already exists in the database, **possibly leading to duplicates**. Such a case would be a violation of the constraints, and render the word unusable.
-	 * You should always use the `Word.exists` method to check for existence before creating a new word.
-	 *
-	 * @param	word	The natural language word to add to the database
-	 * @return	The MutableWord model for the word added to the database
-	 */
-	private static MutableWord create(String word) {
-		MutableWord result = new MutableWord();
-		result.title = word;
-		
-		result.initNode()
-			  .set("title", word)
-			  .indexAs(word);
-			  
-		return result;
-	}
 	
 // CONSTRUCTORS
 	
@@ -65,6 +48,21 @@ public class MutableWord extends Word {
 	private MutableWord() {
 		super();
 		// nothing else to do
+	}
+	
+	/** Creates a new word in the database.
+	 * The word is created even if the same word already exists in the database, **possibly leading to duplicates**. Such a case would be a violation of the constraints, and render the word unusable.
+	 * You should always use the `Word.exists` method to check for existence before creating a new word.
+	 *
+	 * @param	word	The natural language word to add to the database
+	 * @return	The MutableWord model for the word added to the database
+	 */
+	private MutableWord(String word) {
+		this.initNode()
+			.set("title", word)
+			.indexAs(word);
+			
+		this.title = word;
 	}
 	
 	/** Makes an existing natural-language word mutable, that is, able to modify the database.

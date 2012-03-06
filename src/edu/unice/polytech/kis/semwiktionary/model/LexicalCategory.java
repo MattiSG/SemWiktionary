@@ -42,22 +42,16 @@ public class LexicalCategory extends NodeMappedObject {
 // CONSTRUCTORS
 
 	public LexicalCategory(String pattern) {
-		this.pattern = pattern;
-		Transaction tx = Database.getDbService().beginTx();
-		
-		try {
-			this.initNode()
-				.set("pattern", pattern)
-				.indexAs(pattern);
+		this.initNode()
+			.set("pattern", pattern)
+			.indexAs(pattern);
 			
-			tx.success();
-		} finally {
-		    tx.finish();
-		}
+		this.pattern = pattern;
 	}
 	
 	public LexicalCategory(Node node) {
 		this.node = node;
+		
 		this.pattern = this.get("pattern");
 		this.description = this.get("description");
 	}
@@ -72,6 +66,7 @@ public class LexicalCategory extends NodeMappedObject {
 	
 	public void setDescription(String description) {
 		this.set("description", description);
+		
 		this.description = description;
 	}
 	

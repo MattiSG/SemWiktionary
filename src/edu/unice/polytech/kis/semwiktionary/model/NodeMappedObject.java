@@ -115,7 +115,15 @@ public abstract class NodeMappedObject {
 	*@return	this	for chainability
 	*/
 	protected NodeMappedObject indexAs(String id) {
-		getIndex().add(this.node, getIndexKey(), id);
+		Transaction tx = Database.getDbService().beginTx();
+		
+		try {
+			getIndex().add(this.node, getIndexKey(), id);
+		
+			tx.success();
+		} finally {
+		    tx.finish();
+		}
 		
 		return this;
 	}

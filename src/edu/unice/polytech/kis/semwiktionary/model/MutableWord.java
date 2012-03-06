@@ -49,18 +49,10 @@ public class MutableWord extends Word {
 		MutableWord result = new MutableWord();
 		result.title = word;
 		
-		Transaction tx = Database.getDbService().beginTx();
-		
-		try {
-			result.initNode()
-				  .set("title", word)
-				  .indexAs(word);
-			
-			tx.success();
-		} finally {
-		    tx.finish();
-		}
-
+		result.initNode()
+			  .set("title", word)
+			  .indexAs(word);
+			  
 		return result;
 	}
 	

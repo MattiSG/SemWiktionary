@@ -24,7 +24,7 @@ public class Example extends NodeMappedObject {
 		this("");
 	}
 	
-	/** Models a example of the current definition.
+	/** Models an example of a definition.
 	 *
 	 * @param	example		The actual example content
 	 */
@@ -36,7 +36,7 @@ public class Example extends NodeMappedObject {
 	
 	/** Retrieves a stored example's content from its node.
 	 */
-	public Example(Node node) {
+	protected Example(Node node) {
 		this.node = node;
 		
 		this.content = this.get("content");

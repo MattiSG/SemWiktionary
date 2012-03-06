@@ -488,10 +488,6 @@ space = ({whitespace}|{newline})
 		yypopstate();
 	}
 	
-	"&lt;"
-	{
-		yybegin(CHARS_HTML);
-	}
 }
 
 
@@ -558,7 +554,7 @@ space = ({whitespace}|{newline})
 		yybegin(PATTERN);
 	}
 
-	([^\r\n{&]|"{"[^{])+|"{{"
+	([^\r\n{&<]|"{"[^{])+|"{{"
 	{
 		buffer += yytext();
 	}
@@ -571,9 +567,8 @@ space = ({whitespace}|{newline})
 
 	"&lt;"
 	{
-		yypushback(4);
 		yypushstate();
-		yybegin(PATTERN);
+		yybegin(CHARS_HTML);
 	}
 
 	"&amp;"
@@ -594,9 +589,9 @@ space = ({whitespace}|{newline})
 
 <CHARS_HTML>
 {
-	"br/"
+	"br"{newline}*"/"
 	{
-		buffer += "\r\n";
+		buffer += "\n";
 		yybegin(PATTERN);
 	}
 
@@ -610,6 +605,11 @@ space = ({whitespace}|{newline})
 	{
 		buffer += yytext();
 		yypushback(1);
+		yybegin(PATTERN);
+	}
+
+	.
+	{
 		yybegin(PATTERN);
 	}
 }
@@ -655,9 +655,8 @@ space = ({whitespace}|{newline})
 
 	"&lt;"
 	{
-		yypushback(4);
 		yypushstate();
-		yybegin(PATTERN);
+		yybegin(CHARS_HTML);
 	}
 
 	"&amp;"

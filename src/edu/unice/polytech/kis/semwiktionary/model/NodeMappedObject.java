@@ -118,7 +118,7 @@ public abstract class NodeMappedObject {
 		Transaction tx = Database.getDbService().beginTx();
 		
 		try {
-			getIndex().add(this.node, getIndexKey(), id);
+			getIndex().add(this.node, id, true); // we can't index on a key only, so the value we associate to the key is always "true"
 		
 			tx.success();
 		} finally {
@@ -194,7 +194,7 @@ public abstract class NodeMappedObject {
 		
 			constructor = resultClass.getDeclaredConstructor(Node.class); // get*Declared*Constructor allows bypassing public-only access
 			result = (Node) (getIndex(indexKey)
-							 .get(indexKey, query)
+							 .get(query, true) // we can't index on a key only, so the value we associate to the key is always "true"
 							 .getSingle());
 							 
 		} catch (NoSuchMethodException e) {

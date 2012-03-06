@@ -251,6 +251,7 @@ space = ({whitespace}|{newline})
 %state SIMPLENYM
 %state SPNM_CONTEXT
 %state SPNM_WORD
+%state CHARS_HTML
 
 // inside a {{source}} pattern (origin of a quotation)
 %state SOURCE
@@ -471,12 +472,12 @@ space = ({whitespace}|{newline})
 		yybegin(FCHIM_PATTERN);
 	}
 
-	[^|}]+|"|"
+	[^|}&]+|"|"
 	{
 		logError("Unexpected pattern value: '" + yytext() + "'");
 	}
 	
-	"}}"
+	"}}"|"&gt;"|" "
 	{
 		yypopstate();
 	}
@@ -485,6 +486,11 @@ space = ({whitespace}|{newline})
 	{
 		logSyntaxError("Unbalanced bracket in pattern in '" + currentWord.getTitle() + "'");
 		yypopstate();
+	}
+	
+	"&lt;"
+	{
+		yybegin(CHARS_HTML);
 	}
 }
 
@@ -552,7 +558,7 @@ space = ({whitespace}|{newline})
 		yybegin(PATTERN);
 	}
 
-	([^\r\n{]|"{"[^{])+|"{{"
+	([^\r\n{&]|"{"[^{])+|"{{"
 	{
 		buffer += yytext();
 	}
@@ -561,7 +567,19 @@ space = ({whitespace}|{newline})
 	{
 		// the colon means we're in the same example, but on another line
 		buffer += "\n" + yytext();
-	}	
+	}
+
+	"&lt;"
+	{
+		yypushback(4);
+		yypushstate();
+		yybegin(PATTERN);
+	}
+
+	"&amp;"
+	{
+		buffer += "&";
+	}
 
 	{newline}
 	{
@@ -571,6 +589,28 @@ space = ({whitespace}|{newline})
 		
 		yypushback(1);	// <SECTION> needs it to match
 		yybegin(SECTION);
+	}
+}
+
+<CHARS_HTML>
+{
+	"br/"
+	{
+		buffer += "\r\n";
+		yybegin(PATTERN);
+	}
+
+	"small"|"/small"
+	{
+		// ignore le treatment of small characters
+		yybegin(PATTERN);
+	}
+
+	" "
+	{
+		buffer += yytext();
+		yypushback(1);
+		yybegin(PATTERN);
 	}
 }
 
@@ -611,6 +651,18 @@ space = ({whitespace}|{newline})
 	{ //TODO: this should be generalized to "{{" -> PATTERN, and PATTERN contain all DEFINITION_DOMAIN triggers
 		yypushstate();
 		yybegin(FCHIM_PATTERN);
+	}
+
+	"&lt;"
+	{
+		yypushback(4);
+		yypushstate();
+		yybegin(PATTERN);
+	}
+
+	"&amp;"
+	{
+		buffer += "&";
 	}
 	
 	{newline}

@@ -469,7 +469,14 @@ space = ({whitespace}|{newline})
 { // we can't put this directly into <H3> because of the "longest match" rule
 	[^|}]+
 	{
-		LazyPatternsManager.register("-" + yytext(), currentNMO);
+		String pattern = "-" + yytext();
+
+		LexicalCategory category = LexicalCategory.find(pattern);
+		
+		if (category == null)
+			LazyPatternsManager.register(pattern, currentNMO);
+		else
+			((MutableWord) currentNMO).addLexicalCategory(category);
 		
 		yybegin(SECTION);
 	}

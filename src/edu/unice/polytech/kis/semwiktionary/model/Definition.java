@@ -163,5 +163,4 @@ public class Definition extends NodeMappedObject {
 		
 		return false;
 	}
-	
 }

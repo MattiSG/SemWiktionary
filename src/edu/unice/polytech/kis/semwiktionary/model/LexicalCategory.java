@@ -68,7 +68,19 @@ public class LexicalCategory extends NodeMappedObject {
 	
 // STANDARD METHODS
 
+	@Override
 	public String toString() {
 		return this.description;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this.getClass().isInstance(o))
+			return this.pattern.equals(((LexicalCategory) o).getPattern());
+		
+		if (String.class.isInstance(o))
+			return this.pattern.equals(o);
+		
+		return false;
 	}
 }

@@ -2945,24 +2945,25 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
     </revision>
   </page>
   <page>
-    <title>Modèle:-verb-</title>
-    <id>4279</id>
-    <restrictions>edit=sysop:move=sysop</restrictions>
+    <title>Modèle:-nom-</title>
+    <id>4283</id>
+    <restrictions>sysop</restrictions>
     <revision>
-      <id>9552725</id>
-      <timestamp>2011-10-16T21:44:28Z</timestamp>
+      <id>8316060</id>
+      <timestamp>2010-12-21T09:44:19Z</timestamp>
       <contributor>
-        <username>JackPotte</username>
-        <id>6137</id>
+        <username>Darkdadaah</username>
+        <id>532</id>
       </contributor>
-      <text xml:space="preserve">&lt;includeonly&gt;{{-déf-|Verbe|
-|type=Verbes
-|code=verb
+      <comment>inclusion de la documentation</comment>
+      <text xml:space="preserve">{{-déf-|Nom commun|
+|type=Noms communs
+|code=nom
 |num={{{num|}}}
 |langue={{{1|}}}
-}}&lt;/includeonly&gt;&lt;noinclude&gt;
+}}&lt;noinclude&gt;
 {{Documentation}}
-[[Catégorie:Modèles de type de mot du Wiktionnaire|Verbe]]
+[[Catégorie:Modèles de type de mot du Wiktionnaire|Nom commun]]
 &lt;/noinclude&gt;</text>
     </revision>
   </page>

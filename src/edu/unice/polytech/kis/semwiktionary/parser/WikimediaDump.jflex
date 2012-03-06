@@ -25,6 +25,11 @@ import info.bliki.wiki.model.WikiModel;
 							  PREV_ERR = System.err;
 							  
 	private final static int LOG_FREQUENCY = 100; // a count message will be output to the console on every multiple of this frequency
+	/** Some nested elements (definitions and hierarchical relations) need to be stored in list-type structures. This variable defines their size.
+	* The size needs to be set in advance to allow for badly-nested elements.
+	* Most common seen maximal value is 3. As a security, we set it to a much higher value.
+	*/
+	private final static int BUFFER_SIZE = 8;
 	
 	private Stack<Integer> statesStack = new Stack<Integer>();
 	private MutableWord currentWord;
@@ -44,9 +49,13 @@ import info.bliki.wiki.model.WikiModel;
 	
 	private Vector<Word> complexNyms;	// Used for hyponyms, hyperonyms, holonyms, and meronyms
 	private int complexDepth = 1;		// Used to calculate the depth of the list (number of '*')
-	private boolean complexAlgoDirection;	// Used for complexNym algorithm :
-							// true = more and more precise (ex: hyponyms)
-							// false = less and less precise (ex: hyperonyms)
+	
+	/**Used for complexNym algorithm :
+	 *
+	 * - `true` = more and more precise (ex: hyponyms)
+	 * - `false` = less and less precise (ex: hyperonyms)
+	 */
+	private boolean currentComplexNymIsNarrower;
 	
 	private String buffer = ""; // an all-purpose buffer, to be initialized by groups that need it
 	
@@ -77,7 +86,7 @@ import info.bliki.wiki.model.WikiModel;
 		PREV_OUT.println("Word,Parsing time (ns),Syntax errors,Parser errors");
 		PREV_OUT.print("**Init**"); // for logging purposes
 	
-		definitionsBuffer = new Vector<String>(8); // maximum level of foreseeable nested definitions
+		definitionsBuffer = new Vector<String>(BUFFER_SIZE, 2); // second param is increment size.
 		relationsMap = new HashMap<String, Relation>(3);
 
 		relationsMap.put("syn", Relation.SYNONYM);
@@ -88,8 +97,8 @@ import info.bliki.wiki.model.WikiModel;
 		relationsMap.put("méro", Relation.MERONYM);
 		relationsMap.put("holo", Relation.MERONYM);
 		
-		complexNyms = new Vector<Word>(8);
-		complexNyms.setSize(8); // The size is force : if a user has made an error, the case is put at null and the algorithm ignores it
+		complexNyms = new Vector<Word>(BUFFER_SIZE, 2); // second param is increment size.
+		complexNyms.setSize(BUFFER_SIZE); // The size is force : if a user has made an error, the case is put at null and the algorithm ignores it
 					// (ex: * to *** (the second depth list is missing)
 	}
 	
@@ -405,14 +414,14 @@ space = ({whitespace}|{newline})
 
 	"hypo"|"méro"
 	{
-		complexAlgoDirection = true;
+		currentComplexNymIsNarrower = true;
 		currentRelation = relationsMap.get(yytext());
 		yybegin(COMPLEXNYM);
 	}
 	
 	"hyper"|"holo"
 	{
-		complexAlgoDirection = false;
+		currentComplexNymIsNarrower = false;
 		currentRelation = relationsMap.get(yytext());
 		yybegin(COMPLEXNYM);
 	}
@@ -766,7 +775,7 @@ space = ({whitespace}|{newline})
 	{
 		complexDepth = 1;
 		complexNyms.clear();
-		complexNyms.setSize(8);
+		complexNyms.setSize(BUFFER_SIZE);
 
 		leaveSection();
 	}
@@ -806,14 +815,15 @@ space = ({whitespace}|{newline})
 			
 			// We find the last word of the list to link it with
 			int emptyDepth = 1;
-			while (complexNyms.get(complexDepth-emptyDepth) == null)
+			while (complexNyms.get(complexDepth - emptyDepth) == null)
 				++emptyDepth;
 			
 			// We create the relation between the two words
-			if (complexAlgoDirection)
-				complexNyms.get(complexDepth-emptyDepth).set(currentRelation, currentNym);
+			if (currentComplexNymIsNarrower)
+				complexNyms.get(complexDepth - emptyDepth).set(currentRelation, currentNym);
 			else
-				currentNym.set(currentRelation, complexNyms.get(complexDepth-emptyDepth));
+				currentNym.set(currentRelation, complexNyms.get(complexDepth - emptyDepth));
+				
 		} catch (Exception e) {
 			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( ");
 			e.printStackTrace(System.err);
@@ -836,7 +846,7 @@ space = ({whitespace}|{newline})
 
 	"<"
 	{
-		// That was the last section, the word is over because the </page> tag : return in XML state.
+		// That was the last section, the word is over because of the </page> tag : return in XML state.
 		yybegin(XML);
 	}
 }

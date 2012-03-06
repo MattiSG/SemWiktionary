@@ -467,16 +467,14 @@ space = ({whitespace}|{newline})
 
 <H3_UNKNOWN>
 { // we can't put this directly into <H3> because of the "longest match" rule
-	[^}]+
+	[^|}]+
 	{
-		//TODO: add UNKNOWN link
-		
-		logError("Unknown H3 in '" + currentNMO + "': '" + yytext() + "'");
+		LazyPatternsManager.register("-" + yytext(), currentNMO);
 		
 		yybegin(SECTION);
 	}
 	
-	"}"
+	.
 	{
 		yybegin(SECTION);
 	}

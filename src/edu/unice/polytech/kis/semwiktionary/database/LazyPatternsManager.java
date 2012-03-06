@@ -27,8 +27,9 @@ public class LazyPatternsManager {
 	
 	/** Registers the given NodeMappedObject as having the given pattern, without knowing which it is.
 	*/
-	public static void register(NodeMappedObject element, String pattern) {
-		index.add(element.getNode(), pattern, true); // we can't index on a key only, so the value we associate to the key is always "true"
+	public static void register(String pattern, NodeMappedObject element) {
+		
+		element.indexAsOn(pattern, INDEX_KEY); // we can't index on a key only, so the value we associate to the key is always "true"
 	}
 
 	/** Adds a relation from all nodes previously registered with the given pattern to the given destination, with the given relation type.
@@ -40,12 +41,17 @@ public class LazyPatternsManager {
 	public static void transferAll(String pattern, NodeMappedObject destination, Relation relType) {
 		IndexHits<Node> hits = index.get(pattern, true);
 		Node destinationNode = destination.getNode();
+		
+		Transaction tx = Database.getDbService().beginTx();
+
 		try {
 			for (Node currentNode : hits) {
 				Database.link(currentNode, destinationNode, relType);
 				index.remove(currentNode);
 			}
 		} finally {
+		    tx.finish();
+
 			hits.close();
 		}
 	}

@@ -118,12 +118,22 @@ public abstract class NodeMappedObject {
 	/**
 	*@return	this	for chainability
 	*/
-	protected NodeMappedObject indexAs(String id) {
+	protected NodeMappedObject indexAs(String key) {
+		return indexAsOn(key, getIndexKey());
+	}
+	
+	/** Indexes the current `NodeMappedObject` on the passed key, in the specified index.
+	 *
+	 *@param	key	the key on which to index the current element
+	 *@param	indexKey	the index on which to index the current element
+	 *@return	this	for chainability
+	 */
+	public NodeMappedObject indexAsOn(String key, String indexKey) {
 		Transaction tx = Database.getDbService().beginTx();
 		
 		try {
-			getIndex().add(this.node, id, true); // we can't index on a key only, so the value we associate to the key is always "true"
-		
+			getIndex(indexKey).add(this.node, key, true); // we can't index on a key only, so the value we associate to the key is always "true"
+			
 			tx.success();
 		} finally {
 		    tx.finish();

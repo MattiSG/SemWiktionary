@@ -155,6 +155,18 @@ public class SemWiktionary {
 			}
 		}
 		
+		println("------HOLONYMS------");
+		
+		for (Word hol1 : word.getHolonyms()) {
+			println("* " + hol1.getTitle());
+			for (Word hol2 : hol1.getHolonyms()) {
+				println("** " + hol2.getTitle());
+				for (Word hol3 : hol2.getHolonyms()) {
+					println("*** " + hol3.getTitle());
+				}
+			}
+		}
+		
 		println("-----DEFINITIONS----");
 		
 		for (Definition def : word.getDefinitions()) {

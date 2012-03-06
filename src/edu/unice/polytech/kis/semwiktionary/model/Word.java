@@ -159,7 +159,7 @@ public class Word extends NodeMappedObject {
 	/** Returns all holonyms of this Word.
 	 */
 	public Collection<Word> getHolonyms() {
-		return this.<Word>get(Relation.HYPONYM, Direction.INCOMING);
+		return this.<Word>get(Relation.MERONYM, Direction.INCOMING);
 	}
 	
 // DATABASE ACCESS

@@ -49,6 +49,7 @@ public class ParserTest {
 		try {
 			lexer.yylex(); // store in db
 		} catch (Exception e) {
+			e.printStackTrace();
 			fail("Parser failed and threw an exception! (" + e + ")\nSee parser log for details.");
 		}
 	}

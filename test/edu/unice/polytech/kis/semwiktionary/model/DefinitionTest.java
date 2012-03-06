@@ -5,12 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.LinkedList;
 import java.util.List;
+import java.util.LinkedList;
 
 import edu.unice.polytech.kis.semwiktionary.model.Word;
 import edu.unice.polytech.kis.semwiktionary.model.Definition;
-import edu.unice.polytech.kis.semwiktionary.database.DatabaseTest;
 
 
 public class DefinitionTest {

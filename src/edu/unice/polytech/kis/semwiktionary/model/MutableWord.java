@@ -88,7 +88,7 @@ public class MutableWord extends Word {
 // UPDATE FUNCTIONS
 	
 	public MutableWord addLexicalCategory(LexicalCategory cat) {
-		Database.link(this.node, cat.node, Relation.LEXICALCATEGORY);
+		Database.link(this.node, cat.node, Relation.LEXICAL_CATEGORY);
 		this.lexicalCategories.add(cat);
 		
 		return this;
@@ -191,7 +191,7 @@ public class MutableWord extends Word {
 	 * @return This MutableWord, for chainability
 	 */
 	public MutableWord clearLexicalCategories() {
-		this.delete(Relation.LEXICALCATEGORY);
+		this.delete(Relation.LEXICAL_CATEGORY);
 		
 		return this;
 	}

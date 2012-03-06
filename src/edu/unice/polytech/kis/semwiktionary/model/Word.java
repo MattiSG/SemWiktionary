@@ -103,7 +103,7 @@ public class Word extends NodeMappedObject {
 	}
 	
 	public Collection<LexicalCategory> getLexicalCategories() {
-		return this.<LexicalCategory>get(Relation.LEXICALCATEGORY);
+		return this.<LexicalCategory>get(Relation.LEXICAL_CATEGORY);
 	}
 	
 	/** Returns all synonyms of this Word.

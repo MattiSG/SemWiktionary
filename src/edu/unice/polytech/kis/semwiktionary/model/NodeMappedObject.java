@@ -43,6 +43,10 @@ public abstract class NodeMappedObject {
 		return this;
 	}
 	
+	public Node getNode() {
+		return this.node;
+	}
+	
 	/**Stores the given property on this node.
 	*There is a restriction as compared to Neo4j: only strings are accepted.
 	*

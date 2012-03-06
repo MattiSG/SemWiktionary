@@ -33,3 +33,21 @@ Before starting parsing the full database, **remove the `%debug` line** in the p
     ./wiktionary --load path/to/dump/file.xml	# this will take some time (see performance note beneath)
 	
 If the process ends without error, publish your changes and, if they could be of interest to most other users, send us a pull request!  :)
+
+Error during the parsing process
+--------------------------------
+
+Errors might occur while parsing the Wiktionary dump file.
+Indeed, we created our parser considering the data that exist in the file and that were the most important to collect.
+But these informations may change over time, and the parser will crash if the file contains a string that is not handle by the parser.
+In that case, you can correct the parsing rules following these steps :
+- The standard output prints the title of a word when it starts to parse it, so the last word displayed is the word that produced the crash.
+- Now make a grep to obtain this whole word between the _<page>_ tags and add it to a test file which contains a subset of words.
+	**Exemple :** `grep -A 500 -B 1 "<title>fleur</title>" Wiktionary.xml`
+- Replace the `%debug` line in the parser file.
+- Try to parse again on this test file.
+- Open the `log/parser-output.txt` and `log/parser-error.txt`. Here you can have explainations on the crash.
+- Correct the parser.
+- Create JUnit tests if necessary to avoid future regressions.
+- Remove the `%debug` in the parser file again.
+- Restart the parsing on the whole file.

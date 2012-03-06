@@ -3324,4 +3324,346 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
 [[es:tube digestif]]</text>
     </revision>
   </page>
+  <page>
+    <title>carré</title>
+    <id>5091</id>
+    <revision>
+      <id>9700653</id>
+      <timestamp>2011-11-28T02:28:53Z</timestamp>
+      <contributor>
+        <username>JackBot</username>
+        <id>12968</id>
+      </contributor>
+      <minor />
+      <comment>[[Wiktionnaire:Structure des articles|Autoformatage]]</comment>
+      <text xml:space="preserve">{{voir|carre}}
+== {{=fr=}} ==
+
+{{-étym-}}
+: Du {{étyl|la|fr|mot=quadratus}}, devenu ''[[quarré]]'' ou ''[[carrez]]'' en moyen français, et enfin ''[[carré]]'' depuis l’époque moderne.
+
+{{-adj-|fr}}
+{{fr-accord-rég|ka.ʁe}}
+'''carré'''
+# {{mathématiques|fr}} [[dont|Dont]] les [[quatre]] [[côté]]s sont [[égal|égaux]], et [[former|forment]] un [[angle]] [[droit]] entre [[chacun]] d’[[eux]].
+#*''Une place '''carrée'''.''
+#*''La Maison '''Carrée''' de Nîmes, la Place '''Carrée''' à Paris''.
+# {{marine|fr}} [[quadrangulaire|Quadrangulaire]].
+#* ''Voiles carrées'' ou ''Voiles à trait '''carré''''' : [[voile|Voiles]] dont les [[vergue]]s sont [[hisser|hissées]] par le [[milieu]] et [[croiser|croisent]] le [[mât]] à angle droit.
+# {{arithmétique|fr}} Qui a [[rapport]] avec le carré (nombre résultant de la multiplication d’un nombre par lui-même).
+#* ''Trois est la racine '''carrée''' de neuf.''
+#* ''Quatre est la racine '''carrée''' de seize.''
+# {{familier|fr}} [[large|Large]] des [[épaule]]s, [[athlétiquement]] [[bâtir|bâti]], [[parler|en parlant]] d’un [[homme]], de sa [[carrure]], de sa [[physionomie]].
+#* ''C’était un homme de quarante-huit à cinquante ans, de moyenne taille, mais aux formes athlétiques et '''carrées''', et qui semblait, tant ses mouvements étaient en harmonie avec ceux de son cheval, avoir été taillé dans le même bloc de rocher.'' {{source|[[w:Alexandre Dumas|Alexandre Dumas]], ''[[s:Othon l’archer|Othon l’archer]]'', 1839}}
+# {{figuré|fr}} {{familier|fr}} Se dit d’une [[personne]] [[juste]] et [[droit]]e dans ses [[conviction]]s, et qui ne s’en [[détourne]] pas.
+#* ''Victor Hugo a toujours été très '''carré''' concernant les droits de l’homme.''
+
+{{-drv-}}
+{{(}}
+* [[bataillon carré]]
+* [[bonnet carré]]
+* [[dernier carré]]
+{{-}}
+*[[khi-carré]]
+* [[partie carrée]]
+* [[racine carrée]]
+{{)}}
+{{(|Unités de surface}}
+* [[centimètre carré]]
+* [[décimètre carré]]
+* [[kilomètre carré]]
+{{-}}
+* [[mètre carré]]
+* [[mile carré]]
+* [[mille carré]]
+{{-}}
+*[[millimètre carré]]
+* [[pied carré]]
+* [[pouce carré]]
+{{)}}
+
+{{-trad-}}
+{{(|Mathématique : Dont les quatre côtés sont parallèles et égaux entre eux|1}}
+* {{T|de}} : {{trad+|de|quadratisch}}
+* {{T|en}} : {{trad+|en|square}}
+* {{T|eo}} : {{trad-|eo|kvadrata}}
+{{-}}
+* {{T|pt}} : {{trad+|pt|quadrado}}
+* {{T|vo}} : {{trad+|vo|kvadik}}
+{{)}}
+{{(|Marine : voile carrée|2}}
+* {{T|en}} : {{trad+|en|square}}
+* {{T|es}} : {{trad-|es|cuadrada}}
+{{)}}
+{{(|Arithmétique : qui a un rapport avec le carré|3}}
+* {{T|en}} : {{trad+|en|square}}
+* {{T|eo}} : {{trad-|eo|kvadrata}}
+{{)}}
+{{(|Large d’épaule|4}}
+* {{T|en}} : {{trad-|en|square-shouldered}}
+{{)}}
+{{(|Juste et droit dans ses convictions|5}}
+* {{T|en}} : {{trad+|en|straightforward}}
+{{)}}
+
+{{-nom-|fr}}
+{{fr-rég|ka.ʁe}}
+[[Image:Square - black simple.svg|thumb|Un '''carré simple'''. (1)]]
+[[Image:Rack Carré d'agneau.JPG|thumb|Un '''carré''' d’agneau. (8)]]
+'''carré''' {{m}}
+# {{géom|fr}} Figure géométrique plane ayant [[quatre]] [[côté]]s égaux et quatre [[angle droit|angles droits]].
+#* ''L’aire d’un '''carré''' se calcule en multipliant la longueur d’un côté par lui-même.''
+# {{mathématiques|fr}} Nombre résultant de la multiplication d’un nombre par lui-même.
+#* ''Seize est le '''carré''' de quatre''.
+#* ''Zéro, un, quatre, neuf et seize sont les cinq premiers '''carrés''' parfaits''.
+# {{mathématiques|fr}} {{par extension|fr}} Objet mathématique résultant de la multiplication d’un objet mathématique par lui-même.
+#* ''Le '''carré''' d'une matrice se calcule en la multipliant par elle-même.''
+# {{militaire|fr}} [[bataillon|Bataillon]] qui a autant de [[file]]s que de [[rang]]s, autant de [[profondeur]] que de [[front]], [[troupe]], [[régiment]] d’[[infanterie]] disposé de [[manière]] à [[faire face]] de quatre côtés, soit [[intérieurement]], soit [[extérieurement]].
+#* ''[…] le commandant donne l’ordre à sa troupe de se former en '''carré''' […] La foule regarde étonnée, cette manœuvre […]'' {{source|Alfred Barbou, ''Les Trois Républiques françaises'', 1879}}  
+#* ''Le '''carré''' de Waterloo''.''
+# {{marine|fr}} [[pièce|Pièce]] [[commun]]e autour de [[laquelle]] [[ranger|sont rangées]] les [[cabine]]s des [[officier]]s.
+#* ''Au '''carré''', dans les cabines et les laboratoires, le désordre est inexprimable […]'' {{source|{{w|Jean-Baptiste Charcot}}, ''Dans la mer du Groenland'', 1928}}
+# {{term|jeu}} Association de quatre cartes de même hauteur.
+#* ''Il a abattu un '''carré''' de dames.''
+# ''(Norme [[AFNOR]])'' Format de papier de 45×65 cm.
+# {{term|coiffure}} ''Coupe au '''carré''''' : Se dit d’une coupe dans laquelle tous les [[cheveu]]x ont même longueur et tombent au niveau des [[épaule]]s.
+# {{figuré|fr}} '''''Carré''' d’amis'' (par analogie avec l’expression ''[[cercle]] d’amis'') : Ensemble des personnes que l’on considère comme des [[ami]]s proches.
+# {{boucherie|fr}} [[morceau|Morceau]] de [[viande]] d’[[agneau]] ou de [[porc]] rassemblant l’ensemble des [[côte]]s découvertes, secondes et premières.
+# {{urbanisme|fr}} Petit [[jardin public]], souvent établi au milieu d’une [[place]].
+#* ''La commune compte déjà 113 rues, places, '''carrés''', etc.'' {{source|Alphonse Guillaume G. Wauters, ''Histoire des environs de Bruxelles'', 1855}}
+# {{métal|fr}} {{mécanique|fr}} [[barre|Barre]] [[laminer|laminée]] de [[section]] carrée.
+# {{ferro|fr}} [[clé|Clé]] à [[tige]] carrée, servant à [[actionner]] les [[accessoire]]s des [[voiture]]s à [[voyageur]]s.
+# {{archéo|fr}} [[unité|Unité]] d’un [[quadrillage]] de [[fouille]] d’un [[site]] [[archéologique]].
+#* ''Généralement, l’inventaire est alors conçu d’une façon continue, par '''carré''' de fouille et quelles que soient les couches.'' {{source|Marcel Otte, ''Lire le passé : Méthodes de fouilles archéologiques'', Éditions de l’Université de Liège, 2003}}
+
+{{-syn-}}
+{{urbanisme|nocat=1}} :
+* [[square]] ''(considéré un anglicisme au Canada)''
+
+{{-drv-}}
+{{(}}
+* [[carré d’agneau]]
+* [[carré de chocolat]]
+* [[carré latin]]
+{{-}}
+* [[carré magique]]
+* [[carré parfait]]
+*[[faux-carré]]
+{{)}}
+
+{{-trad-}}
+{{(|Géométrie : figure géométrique plane|1}}
+* {{T|als}} : {{trad--|als|Quadrat}} 
+* {{T|de}} : {{trad+|de|Quadrat}}
+* {{T|en}} : {{trad+|en|square}}
+* {{T|ar}} : {{trad-|ar|مربع|R=}}
+* {{T|an}} : {{trad-|an|quadrato}}
+* {{T|ast}} : {{trad-|ast|cuadráu}}
+* {{T|ay}} : {{trad-|ay|pusi k'uchuni}}
+* {{T|eu}} : {{trad-|eu|lauki}}
+* {{T|be}} : {{trad-|be|квадрат|R=kvadrat}}
+* {{T|be-x-old}} : {{trad--|be-x-old|квадрат|R=kvadrat}}
+* {{T|bs}} : {{trad-|bs|kvadrat}}
+* {{T|bg}} : {{trad-|bg|квадра|R=kvadra}}
+* {{T|ca}} : {{trad+|ca|quadrat}}
+* {{T|zh}} : {{trad+|zh|正方形|R=}}
+* {{T|hr}} : {{trad-|hr|kvadrat}}, {{trad+|hr|četvorina}}
+* {{T|ko}} : {{trad-|ko|정사각형|R=jeongsaganhyeong}}
+* {{T|da}} : {{trad-|da|kvadrat}}
+* {{T|es}} : {{trad+|es|cuadrado}}
+* {{T|eo}} : {{trad-|eo|kvadrato}}
+* {{T|fi}} : {{trad+|fi|neliö}}
+{{-}}
+* {{T|ga}} : {{trad+|ga|cearnóg}}
+* {{T|gl}} : {{trad+|gl|cadrado}}
+* {{T|gan}} : {{trad--|gan|方形|R=}}
+* {{T|ka}} : {{trad-|ka|კვადრატი|R=}}
+* {{T|he}} : {{trad+|he|ריבוע|R=}}
+* {{T|ht}} : {{trad--|ht|kare}}
+* {{T|hsb}} : {{trad-|hsb|kwadrat}}
+* {{T|hu}} : {{trad+|hu|négyzet}}
+* {{T|hi}} : {{trad-|hi|वर्गाकार|R=vargākār}}
+* {{T|id}} : {{trad-|id|persegi}}
+* {{T|it}} : {{trad+|it|quadrato}}
+* {{T|ja}} : {{trad+|ja|正方形|R=seihōkei}}
+* {{T|cy}} : {{trad+|cy|sgwâr}}
+* {{T|ku}} : {{trad-|ku|çarçik}}
+* {{T|el}} : {{trad+|el|τετράγωνο|R=tetrágono}}
+* {{T|li}} : {{trad-|li|veerkant}}
+* {{T|lt}} : {{trad-|lt|kvadratas}}
+* {{T|lv}} : {{trad-|lv|kvadrāts}}
+* {{T|mk}} : {{trad-|mk|квадрат|R=kvadrat}}
+* {{T|ml}} : {{trad+|ml|സമചതുരം|R=}}
+{{-}}
+* {{T|nl}} : {{trad+|nl|vierkant}}
+* {{T|no}} : {{trad+|no|kvadrat}}
+* {{T|pms}} : {{trad--|pms|quadrà}}
+* {{T|fa}} : {{trad+|fa|مربع|R=}}
+* {{T|pl}} : {{trad+|pl|kwadrat}}
+* {{T|pl}} : {{trad+|pl|quadrado}}
+* {{T|qu}} : {{trad-|qu|t’asra}}
+* {{T|ro}} : {{trad-|ro|pătrat}}
+* {{T|ru}} : {{trad+|ru|квадрат|R=kvadrat}}
+* {{T|sr}} : {{trad+|sr|квадрат|R=kvadrat}}
+* {{T|sh}} : {{trad-|sh|kvadrat}}
+* {{T|scn}} : {{trad+|scn|quatratu}}
+* {{T|sk}} : {{trad-|sk|štvorec}}
+* {{T|sl}} : {{trad+|sl|kvadrat}}
+* {{T|sv}} : {{trad+|sv|kvadrat}}
+* {{T|sw}} : {{trad+|sw|mraba}}
+* {{T|tl}} : {{trad+|tl|parisukat}}
+* {{T|cs}} : {{trad+|cs|čtverec}}
+* {{T|tr}} : {{trad+|tr|kare}}
+* {{T|vo}} : {{trad+|vo|kvad}}
+{{-}}
+{{)}}
+{{(|Mathématiques : nombre résultant de la multiplication d’un nombre par lui-même|2}}
+* {{T|en}} : {{trad+|en|square}}
+* {{T|eo}} : {{trad-|eo|kvadrato}}
+* {{T|ja}} : {{trad+|ja|平方|R=heihō}}, {{trad-|ja|自乗|R=jijō}}
+{{)}}
+{{(|Militaire : organisation défensive d’un bataillon|3}}
+{{ébauche-trad|fr}}
+* &lt;!--{{T|en}} : {{trad|en|}}--&gt;
+{{-}}
+{{)}}
+{{(|Marine : carré des officiers|4}}
+{{ébauche-trad|fr}}
+* &lt;!--{{T|en}} : {{trad|en|}}--&gt;
+{{-}}
+{{)}}
+{{(|Jeu : Association de quatre cartes de même hauteur|5}}
+* {{T|en}} : {{trad+|en|quads}}, {{trad+|en|four of a kind}}
+* {{T|es}} : {{trad-|es|póquer}}
+{{-}}
+* {{T|eo}} : {{trad-|eo|kvaropo}}
+* {{T|it}} : {{trad+|it|poker}}
+{{-}}
+{{)}}
+{{(|Norme AFNOR: Format de papier de 45×65 cm|6}}
+{{ébauche-trad|fr}}
+* &lt;!--{{T|en}} : {{trad|en|}}--&gt;
+{{-}}
+{{)}}
+{{(|Coiffure: Coupe au carré|7}}
+{{ébauche-trad|fr}}
+* &lt;!--{{T|en}} : {{trad|en|}}--&gt;
+{{-}}
+{{)}}
+{{(|Ensemble des personnes que l’on considère comme des amis proches.|8}}
+{{ébauche-trad|fr}}
+* &lt;!--{{T|en}} : {{trad|en|}}--&gt;
+{{-}}
+{{)}}
+{{(|Boucherie: Morceau de viande d’agneau ou de porc|9}}
+* {{T|en}} : {{trad+|en|rack}}, {{trad-|en|lean eye}}
+* {{T|cs}} : {{trad+|cs|karé}}
+{{-}}
+{{)}}
+{{(|Urbanisme : Petit jardin public, souvent établi au milieu d’une place|10}}
+{{ébauche-trad|fr}}
+* &lt;!--{{T|en}} : {{trad|en|}}--&gt;
+{{-}}
+{{)}}
+{{(|Barre laminée de section carrée|11}}
+* {{T|en}} : {{trad-|en|square bar}}
+{{-}}
+{{)}}
+{{(|Chemin de fer: Clé à tige carrée|12}}
+* {{T|en}} : {{trad-|en|carriage key}}
+{{-}}
+{{)}}
+{{(|Archéologie : Unité d’un quadrillage de fouille|13}}
+* {{T|en}} : {{trad-|en|excavation plot}}
+{{-}}
+{{)}}
+{{(|Traduction à trier}}
+* {{T|de|trier}} : {{trad-|de|Karree}}, {{trad+|de|Viereck}}
+* {{T|da|trier}} : {{trad+|da|firkant}}
+* {{T|fy|trier}} : {{trad-|fy|fjouwerkant}}
+* {{T|nl|trier}} : {{trad-|nl|carré}}, {{trad+|nl|ruitje}}, {{trad+|nl|kwadraat}}, {{trad+|nl|vak}}
+* {{T|pap|trier}} : {{trad--|pap|firkant}}, {{trad--|pap|kuadrá}}, {{trad--|pap|kuadrat}}
+{{-}}
+* {{T|fa|trier}} : {{trad+|fa|مربع}}
+* {{T|pt|trier}} : {{trad+|pt|quadro}}
+* {{T|srn|trier}} : {{trad--|srn|fokanti}}
+* {{T|sv|trier}} : {{trad+|sv|fyrkant}}
+{{)}}
+
+{{-hyper-}}
+: {{géom|nocat=1}} :
+* [[polygone]]
+** [[quadrilatère]]
+*** [[trapèze]]
+**** [[parallélogramme]]
+***** [[losange]]
+***** [[rectangle]]
+: {{mathématiques|nocat=1}} :
+* [[puissance]]
+
+{{-flex-verb-|fr}}
+{{fr-verbe-flexion|pp=oui}}
+'''carré''' {{pron|ka.ʁe|fr}}
+# ''Participe passé masculin singulier du verbe'' [[carrer]].
+
+{{-pron-}}
+* {{pron|ka.ʁe|fr}}
+* {{pron|kɑ.ʁe|fr}} {{CA|nocat=1}} {{popu|nocat=1}}
+* {{pron-rég|France &lt;!--  précisez svp la ville ou la région --&gt;|ka.ʁe|audio=Fr-carré.ogg}}
+
+{{-homo-}}
+* [[carai]], [[caré]], [[carée]], [[carées]], [[carer]], [[carés]], [[carez]] {{cf|carer}}
+* [[carrai]], [[carrée]], [[carrées]], [[carrer]], [[carrés]], [[carrez]] {{cf|carrer}}
+* [[quarrai]], [[quarré]], [[quarrée]], [[quarrées]], [[quarrés]], [[quarrez]] {{cf|quarrer}}
+
+{{-anagr-}}
+* [[carer]]
+* [[racer]]
+
+{{-voir-}}
+* {{WP}}
+
+{{-réf-}}
+* {{Import:DAF8}}
+
+[[Catégorie:Lexique en français du poker]]
+
+== {{=nl=}} ==
+
+{{-étym-}}
+:{{ébauche-étym|nl}}
+
+{{-nom-|nl}}
+'''carré''' {{pron||nl}}
+# [[carré#fr|Carré]].
+
+{{-syn-}}
+* [[kwadraat]]
+* [[ruitje]]
+* [[vak]]
+* [[vierkant]]
+
+{{clé de tri|carre}}
+
+[[ar:carré]]
+[[cs:carré]]
+[[cy:carré]]
+[[de:carré]]
+[[el:carré]]
+[[en:carré]]
+[[et:carré]]
+[[fi:carré]]
+[[gl:carré]]
+[[hu:carré]]
+[[id:carré]]
+[[io:carré]]
+[[ko:carré]]
+[[lv:carré]]
+[[pl:carré]]
+[[pt:carré]]
+[[sv:carré]]
+[[vi:carré]]
+[[zh:carré]]</text>
+    </revision>
+  </page>
 </mediawiki>

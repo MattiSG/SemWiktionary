@@ -83,9 +83,10 @@ import info.bliki.wiki.model.WikiModel;
 		relationsMap.put("syn", Relation.SYNONYM);
 		relationsMap.put("ant", Relation.ANTONYM);
 		relationsMap.put("tropo", Relation.TROPONYM);
-		relationsMap.put("méro", Relation.MERONYM);
 		relationsMap.put("hypo", Relation.HYPONYM);
 		relationsMap.put("hyper", Relation.HYPONYM);
+		relationsMap.put("méro", Relation.MERONYM);
+		relationsMap.put("holo", Relation.MERONYM);
 		
 		complexNyms = new Vector<Word>(8);
 		complexNyms.setSize(8); // The size is force : if a user has made an error, the case is put at null and the algorithm ignores it
@@ -409,7 +410,7 @@ space = ({whitespace}|{newline})
 		yybegin(COMPLEXNYM);
 	}
 	
-	"hyper"
+	"hyper"|"holo"
 	{
 		complexAlgoDirection = false;
 		currentRelation = relationsMap.get(yytext());

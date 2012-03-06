@@ -22,6 +22,7 @@ import edu.unice.polytech.kis.semwiktionary.database.DatabaseTest;
 	edu.unice.polytech.kis.semwiktionary.model.AntonymsTest.class,
 	edu.unice.polytech.kis.semwiktionary.model.TroponymsTest.class,
 	edu.unice.polytech.kis.semwiktionary.model.HyponymsTest.class,
+	edu.unice.polytech.kis.semwiktionary.model.HyperonymsTest.class,
 	edu.unice.polytech.kis.semwiktionary.model.MeronymsTest.class
 
 	//database cleanup is done in the @AfterClass below

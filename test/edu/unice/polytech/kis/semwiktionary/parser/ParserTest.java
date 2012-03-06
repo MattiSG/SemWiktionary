@@ -129,7 +129,16 @@ public class ParserTest {
 		for (Map.Entry currentModel : expectedModels.entrySet()) {
 			LexicalCategory cat = LexicalCategory.find((String) (currentModel.getKey()));
 			
-			assertNotNull("No lexical category found for '" + cat + "'", cat);
+			assertNotNull("Missing lexical category for '" + cat + "'", cat);
+			assertEquals(currentModel.getValue(), cat.getDescription());
+		}
+	}
+	
+	@Test
+	public void modelsDescriptionIsProperlyStored() {
+		for (Map.Entry currentModel : expectedModels.entrySet()) {
+			LexicalCategory cat = LexicalCategory.find((String) (currentModel.getKey()));
+			
 			assertEquals(currentModel.getValue(), cat.getDescription());
 		}
 	}

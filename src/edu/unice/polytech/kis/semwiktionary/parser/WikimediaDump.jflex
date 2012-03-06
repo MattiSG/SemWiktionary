@@ -728,10 +728,10 @@ space = ({whitespace}|{newline})
 		// Wiki syntax for tables
 	}
 	
-	/*"{{"([^}]+)"}}"
+	"{{"[^}\n\r]*"}}"
 	{
 		// Context or formatting : ignore
-	}*/
+	}
 	
 	":"{optionalSpaces}|"'''"|";"
 	{
@@ -803,7 +803,7 @@ space = ({whitespace}|{newline})
 
 <TRASH>
 {
-	([^\r\n]|{newline}[^\r\n])*
+	([^\r\n<]|{newline}[^\r\n])*
 	{
 		// Trash
 	}
@@ -811,5 +811,15 @@ space = ({whitespace}|{newline})
 	{newline}{newline}
 	{
 		yybegin(MEDIAWIKI);
+	}
+
+	"<"
+	{
+		yybegin(XML);
+	}
+
+	.
+	{
+
 	}
 }

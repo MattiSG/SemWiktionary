@@ -41,15 +41,15 @@ public class LexicalCategory extends NodeMappedObject {
 	
 // CONSTRUCTORS
 
-	public LexicalCategory(String pattern) {
-		this.initNode()
-			.set("pattern", pattern)
-			.indexAs(pattern);
-			
-		this.pattern = pattern;
+	/** Initializes all fields when creating a new lexical category.
+	 *
+	 *@return	An empty shell to be filled.
+	 */
+	protected LexicalCategory() {
+		// nothing to do
 	}
-	
-	public LexicalCategory(Node node) {
+
+	protected LexicalCategory(Node node) {
 		this.node = node;
 		
 		this.pattern = this.get("pattern");
@@ -58,16 +58,12 @@ public class LexicalCategory extends NodeMappedObject {
 	
 // GETTERS
 
-	public String getDescription() {
-		return this.description;
+	public String getPattern() {
+		return this.pattern;
 	}
 	
-// SETTERS
-	
-	public void setDescription(String description) {
-		this.set("description", description);
-		
-		this.description = description;
+	public String getDescription() {
+		return this.description;
 	}
 	
 // STANDARD METHODS

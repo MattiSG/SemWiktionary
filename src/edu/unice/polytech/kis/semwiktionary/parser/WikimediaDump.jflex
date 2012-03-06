@@ -135,7 +135,7 @@ import info.bliki.wiki.model.WikiModel;
 		
 		PREV_OUT.print("Modèle:" + pattern);
 		
-		currentNMO = new LexicalCategory(pattern);
+		currentNMO = MutableLexicalCategory.obtain(pattern);
 	}
 	
 	private void resetFlags() {
@@ -384,7 +384,7 @@ space = ({whitespace}|{newline})
 {
 	[^|]+
 	{
-		((LexicalCategory) currentNMO).setDescription(yytext());
+		((MutableLexicalCategory) currentNMO).setDescription(yytext());
 	}
 	
 	.

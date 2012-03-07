@@ -458,15 +458,23 @@ space = ({whitespace}|{newline})
 		yybegin(SIMPLENYM);
 	}
 	
-	"apr"|"pron"|"trad"|"voir"|"réf"|"note"
+	"voc"|"apr"|"drv"|"étym"|"pron"|"trad"|"voir"|"réf"|"cf"|"note"
 	{ // all these sections are deliberately ignored
-		// apr: similar vocabulary ("vocabulaire apparenté")
+		// voc, apr: similar vocabulary ("vocabulaire apparenté")
+		// drv: derivative words
+		// étym: etymology
 		// pron: pronunciations
 		// trad: translations
 		// voir, réf: external references
+		// cf: internal references
 		// note: contributors' notes
 		
 		yybegin(TRASH);
+	}
+	
+	"}}"
+	{ // the "{{-}}" marker is used in tables, as a column separator
+		yybegin(SECTION);
 	}
 	
 	.

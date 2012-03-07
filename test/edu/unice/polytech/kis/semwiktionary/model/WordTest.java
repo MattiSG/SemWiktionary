@@ -44,4 +44,28 @@ public class WordTest {
 		for (String someWord : expected.keySet())
 			assertEquals("Title of word '" + someWord + "' was not properly fetched from database!", someWord, Word.find(someWord).getTitle());
 	}
+	
+	@Test
+	public void deletionIsForbidden() {
+		for (String someWord : expected.keySet()) {
+			Word subject = Word.find(someWord);
+			
+			boolean exceptionWasRaised = false;
+			try {
+				subject.delete();
+			} catch (RuntimeException e) {
+				assertEquals("An exception was thrown on Word deletion, but not an IllegalAccessException",
+							 java.lang.IllegalAccessException.class,
+							 e.getCause().getClass());
+							 
+				exceptionWasRaised = true;
+			}
+			
+			assertTrue("Exception was not raised on Word '" + subject + "' deletion! (should be forbidden and allowed only on MutableWord)", exceptionWasRaised);
+			
+			assertEquals("Deletion was forbidden, but the Word '" + subject + "' was still deleted :-|",
+						 subject.getTitle(),
+						 Word.find(someWord).getTitle());
+		}
+	}
 }

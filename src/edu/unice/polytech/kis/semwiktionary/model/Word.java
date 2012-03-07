@@ -7,7 +7,6 @@ import java.util.LinkedList;
 
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.index.Index;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Traverser.Order;
 
@@ -25,21 +24,7 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 public class Word extends NodeMappedObject {
 
 // PROPERTIES
-	
-	/** The Neo4j's index key to be used to index word nodes.
-	 * More info on [Neo4j Index doc](http://api.neo4j.org/current/org/neo4j/graphdb/index/Index.html).
-	 *
-	 *@see	org.neo4j.graphdb.index.IndexManager#forNodes
-	 */
-	public static final String INDEX_KEY = "words";
-	
-	/**Index of all words available in the database.
-	 * More info on [Neo4j Index doc](http://api.neo4j.org/current/org/neo4j/graphdb/index/Index.html).
-	 *
-	 *@see	org.neo4j.graphdb.index.IndexManager#forNodes
-	 */
-	protected static Index<Node> index = Database.getIndexForName(INDEX_KEY);
-	
+
 	/** The actual natural language word this instance represents.
 	 */
 	protected String title;
@@ -47,6 +32,10 @@ public class Word extends NodeMappedObject {
 	/** Definitions of this Word, in parsing order.
 	 */
 	protected List<Definition> definitions = new LinkedList<Definition>();
+	
+	/** Parts of speech, or “Lexical categories”, for this word.
+	*/
+	protected List<LexicalCategory> lexicalCategories = new LinkedList<LexicalCategory>();
 	
 	
 // STATIC METHODS
@@ -58,14 +47,7 @@ public class Word extends NodeMappedObject {
 	 * @return	The complete Word object created or null if the word is not in the database.
 	 */
 	public static Word find(String word) {
-		Node result;
-		try {
-			 result = (Node) index.get(INDEX_KEY, word).getSingle();
-		} catch (java.util.NoSuchElementException e) { // there were multiple results for this query
-			throw new RuntimeException("Inconsistent database: multiple nodes found for word '" + word + "' in index!", e );
-		}
-		
-		return (result == null ? null : new Word(result));
+		return NodeMappedObject.<Word>findAndInstanciateSingleOf(Word.class, word);
 	}
 	
 	/** Tests if the given Word exists in the database.
@@ -84,7 +66,7 @@ public class Word extends NodeMappedObject {
 	
 // CONSTRUCTORS
 
-	/** Initializes all fields when `create()`ing a new word.
+	/** Initializes all fields when creating a new word.
 	 *
 	 *@return	An empty shell to be filled.
 	 */
@@ -118,6 +100,10 @@ public class Word extends NodeMappedObject {
 			this.fetchDefinitions();
 		
 		return this.definitions;
+	}
+	
+	public Collection<LexicalCategory> getLexicalCategories() {
+		return this.<LexicalCategory>get(Relation.LEXICAL_CATEGORY);
 	}
 	
 	/** Returns all synonyms of this Word.
@@ -169,7 +155,6 @@ public class Word extends NodeMappedObject {
 	protected void fetchDefinitions() {
 		this.definitions.addAll(this.<Definition>get(Relation.DEFINITION));
 	}
-	
 	
 // STANDARD METHODS
 	

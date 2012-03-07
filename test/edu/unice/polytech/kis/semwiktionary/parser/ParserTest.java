@@ -16,6 +16,7 @@ import java.util.HashMap;
 
 import edu.unice.polytech.kis.semwiktionary.model.Word;
 import edu.unice.polytech.kis.semwiktionary.model.Definition;
+import edu.unice.polytech.kis.semwiktionary.model.LexicalCategory;
 import edu.unice.polytech.kis.semwiktionary.model.Example;
 
 
@@ -24,6 +25,7 @@ public class ParserTest {
 	public static final String TEST_FILE = "test/resources/frwiktionary-test-extracts.xml"; // relative to ant build file
 	
 	private static List<String> unexpectedTitles;
+	private static Map<String, String> expectedModels;
 	private static Map<String, List<Definition>> expected;
 	
 	
@@ -31,9 +33,16 @@ public class ParserTest {
 	public static void classSetUp() throws Exception {
 		expected = generateExpectedContent();
 		
-		unexpectedTitles = new ArrayList<String>(2);
+		expectedModels = new HashMap<String, String>(2);
+		expectedModels.put("-nom-", "Nom commun");
+		expectedModels.put("-conj-coord-", "Conjonction de coordination");
+		
+		
+		unexpectedTitles = new ArrayList<String>(4);
 		unexpectedTitles.add("MediaWiki:Disclaimers");
 		unexpectedTitles.add("Discussion utilisateur:Hippietrail");
+		for (String modelName : expectedModels.keySet())
+			unexpectedTitles.add("Modèle:" + modelName);
 		
 		FileInputStream fileInputStream = new FileInputStream(new File(TEST_FILE));
 
@@ -41,6 +50,7 @@ public class ParserTest {
 		try {
 			lexer.yylex(); // store in db
 		} catch (Exception e) {
+			e.printStackTrace();
 			fail("Parser failed and threw an exception! (" + e + ")\nSee parser log for details.");
 		}
 	}
@@ -108,11 +118,31 @@ public class ParserTest {
 		}
 	}
 	
+
+	@Test
+	public void pagesThatAreNotWordsAreNotIndexedAsWords() {
+		for (String someWord : unexpectedTitles)
+			assertFalse(someWord + " should not exist as a word!", Word.exists(someWord));
+	}
+	
 	
 	@Test
-	public void pagesThatAreNotWordsAreNotStored() {
-		for (String someWord : unexpectedTitles)
-			assertFalse(someWord + " should exist in the database!", Word.exists(someWord));
+	public void modelsAreStoredAsModels() {
+		for (Map.Entry currentModel : expectedModels.entrySet()) {
+			LexicalCategory cat = LexicalCategory.find((String) (currentModel.getKey()));
+			
+			assertNotNull("Missing lexical category for '" + currentModel.getKey() + "'", cat);
+			assertEquals(currentModel.getValue(), cat.getDescription());
+		}
+	}
+	
+	@Test
+	public void modelsDescriptionIsProperlyStored() {
+		for (Map.Entry currentModel : expectedModels.entrySet()) {
+			LexicalCategory cat = LexicalCategory.find((String) (currentModel.getKey()));
+			
+			assertEquals(currentModel.getValue(), cat.getDescription());
+		}
 	}
 	
 	
@@ -307,7 +337,40 @@ public class ParserTest {
 		
 		result.put("formothion", definitions);
 
+
+		definitions = new ArrayList<Definition>(6);
 		
+		definitions.add(new Definition("Action, charge, ou manière de gouverner, de régir, d’administrer quelque chose, en particulier dans le domaine politique.", 1)
+						.addDomain("vieilli")
+						.addExample("Elle jouit avec un si tranquille orgueil de son autorité domestique, que je ne me sens pas le courage de tenter un coup d'État contre le gouvernement de mes armoires. — (Anatole France, Le crime de Sylvestre Bonnard)")
+						.addExample("Le régime municipal, devenu un mode d'administration, fut réduit au gouvernement des affaires locales, des intérêts civils de la cité. — (Guizot, Histoire générale de la civilisation en Europe, Leçon 7, 1828)")
+						.addExample("Peut-être parce que, depuis le XI siècle, la seule théorie politique de l'islam a été celle de l'obéissance passive à toute autorité de facto, le gouvernement par consentement reste un concept inconnu : l'autocratie a été la véritable et, pour l'essentiel, l'unique expérience. — (P.J. Vatikiotis, L'Islam et l'État, 1987, traduction de Odette Guitard, 1992, p.38)"));
+						
+		definitions.add(new Definition("Pouvoir qui gouverne un État.", 2)
+						.addExample("La France démocratique, dans un accès d'indignation, renversa le gouvernement de la France bourgeoise et se proclama libre sous un gouvernement républicain. — (Daniel Stern, Histoire de la Révolution de 1848)")
+						.addExample("Sumner Maine fait observer que les rapports des gouvernements et des citoyens ont été bouleversés de fond en comble depuis la fin du XVIII siècle ; […]. — (Georges Sorel,  Réflexions sur la violence, Chap.III, Les préjugés contre  la violence, 1908, p.142)")
+						.addExample("Ainsi vous voyez que j'aurais pu réussir et, comme tant d'autres, vivre du budget; mais je n'ai jamais voulu rien accepter d'aucun gouvernement, si ce n'est du suffrage universel. — (Réponse de M. Raspail père à l'avocat général, lors du procès de François-Vincent Raspail le 12 février 1874)")
+						.addExample("Une société ne saurait subsister sans un gouvernement. — (Montesquieu)")
+						.addExample("Le gouvernement ordonne une répression sanglante. Arrestations, pendaisons, exécutions sommaire plongent Tripoli dans un bain de sang. — (Tewfik Farès, 1911 : la Libye en guerre, déjà, dans Libération (journal) du 18 mars 2011, p.S12)"));
+						
+		definitions.add(new Definition("Organisation, structure politique de l’État.", 3)
+						.addExample("Toute nation a le gouvernement qu'elle mérite. Jean de Maistre"));
+						
+		definitions.add(new Definition("Ceux qui gouvernent un état et particulièrement le pouvoir exécutif.", 4)
+						.addExample("Le gouvernement a pris des mesures impopulaires.")
+						.addExample("Adresser une demande au gouvernement par l'entremise de son député.")
+						.addExample("Ces deux gouvernements étaient d’accord pour signer ce traité."));
+						
+		definitions.add(new Definition("Charge de gouverneur dans une province, dans une ville, dans une place forte, dans une maison royale.", 5)
+						.addDomain("histoire") 
+						.addExample("Le roi lui donna le gouvernement de Normandie."));
+						
+		definitions.add(new Definition("La ville et le pays qui sont sous le pouvoir de ce gouverneur.", 6)
+						.addDomain("par ext")
+						.addExample("\"Le roi de Navarre et le duc d'Anjou ont fui la cour et se sont retirés, l'un dans son royaume, l'autre dans son gouvernement.\" — (Alexandre Dumas père, Henri III)"));
+		
+		result.put("gouvernement", definitions);
+						
 		return result;
 	}
 }

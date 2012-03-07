@@ -16,8 +16,10 @@ import java.io.FileInputStream;
 import org.neo4j.graphdb.Node;
 
 import edu.unice.polytech.kis.semwiktionary.parser.WikimediaDump;
+import edu.unice.polytech.kis.semwiktionary.model.NodeMappedObject;
 import edu.unice.polytech.kis.semwiktionary.model.Word;
 import edu.unice.polytech.kis.semwiktionary.model.Definition;
+import edu.unice.polytech.kis.semwiktionary.model.LexicalCategory;
 import edu.unice.polytech.kis.semwiktionary.model.Example;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
 import edu.unice.polytech.kis.semwiktionary.database.Database;
@@ -87,7 +89,7 @@ public class SemWiktionary {
 	}
 	
 	public static long count() {
-		return Database.getIndexForName(Word.INDEX_KEY).query(Word.INDEX_KEY, "*").size();
+		return NodeMappedObject.count(Word.class);
 	}
 	
 	public static void lookup(String input) {
@@ -98,6 +100,11 @@ public class SemWiktionary {
 			return;
 		}
 		
+		print("(");
+		for (LexicalCategory category : word.getLexicalCategories())
+			print(category + ", ");
+		
+		println(")");
 		
 		println("———————————");
 		
@@ -115,19 +122,19 @@ public class SemWiktionary {
 		}
 		
 		println("\n-=[ SYNONYMS ]=-  (words with same meaning)");
-		
-		for (Word syn : word.getSynonyms())
-			println("= " + syn.getTitle());
+				
+		for (Word synonym : word.getSynonyms())
+			println("= " + synonym);
 		
 		println("\n-=[ ANTONYMS ]=-  (words with opposite meaning)");
 		
-		for (Word ant : word.getAntonyms())
-			println("≠ " + ant.getTitle());
+		for (Word antonym : word.getAntonyms())
+			println("≠ " + antonym);
 		
 		println("\n-=[ TROPONYMS ]=-  (verbs that details this verb’s meaning)");
 
-		for (Word tro : word.getTroponyms())
-			println("∋ " + tro.getTitle());
+		for (Word troponym : word.getTroponyms())
+			println("∋ " + troponym);
 		
 		println("\n-=[ HYPONYMS ]=-  (words which meaning is included by this one’s)");
 		

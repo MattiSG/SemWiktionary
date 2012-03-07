@@ -122,11 +122,11 @@ public class SemWiktionary {
 		println("------HYPONYMS------");
 		
 		for (Word hyp1 : word.getHyponyms()) {
-			println("* " + hyp1.getTitle());
+			println("> " + hyp1.getTitle());
 			for (Word hyp2 : hyp1.getHyponyms()) {
-				println("** " + hyp2.getTitle());
+				println(" > " + hyp2.getTitle());
 				for (Word hyp3 : hyp2.getHyponyms()) {
-					println("*** " + hyp3.getTitle());
+					println("  > " + hyp3.getTitle());
 				}
 			}
 		}
@@ -134,11 +134,11 @@ public class SemWiktionary {
 		println("-----HYPERONYMS-----");
 		
 		for (Word hyp1 : word.getHyperonyms()) {
-			println("* " + hyp1.getTitle());
+			println("< " + hyp1.getTitle());
 			for (Word hyp2 : hyp1.getHyperonyms()) {
-				println("** " + hyp2.getTitle());
+				println(" < " + hyp2.getTitle());
 				for (Word hyp3 : hyp2.getHyperonyms()) {
-					println("*** " + hyp3.getTitle());
+					println("  < " + hyp3.getTitle());
 				}
 			}
 		}
@@ -146,11 +146,11 @@ public class SemWiktionary {
 		println("------MERONYMS------");
 		
 		for (Word mer1 : word.getMeronyms()) {
-			println("* " + mer1.getTitle());
+			println("⋁ " + mer1.getTitle());
 			for (Word mer2 : mer1.getMeronyms()) {
-				println("** " + mer2.getTitle());
+				println(" ⋁ " + mer2.getTitle());
 				for (Word mer3 : mer2.getMeronyms()) {
-					println("*** " + mer3.getTitle());
+					println("  ⋁ " + mer3.getTitle());
 				}
 			}
 		}
@@ -158,11 +158,11 @@ public class SemWiktionary {
 		println("------HOLONYMS------");
 		
 		for (Word hol1 : word.getHolonyms()) {
-			println("* " + hol1.getTitle());
+			println("⋀ " + hol1.getTitle());
 			for (Word hol2 : hol1.getHolonyms()) {
-				println("** " + hol2.getTitle());
+				println(" ⋀ " + hol2.getTitle());
 				for (Word hol3 : hol2.getHolonyms()) {
-					println("*** " + hol3.getTitle());
+					println("  ⋀ " + hol3.getTitle());
 				}
 			}
 		}

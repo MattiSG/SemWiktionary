@@ -38,7 +38,7 @@ public class LexicalCategory extends NodeMappedObject {
 		// this method does exactly the same as NodeMappedObject.findAndInstanciateSingle, but is less dynamic to improve performance
 		Node result;
 		try {
-			result = Database.getIndexForName("LexicalCategory").get(pattern, true).getSingle();
+			result = Database.getIndexForName("LexicalCategory").get(NodeMappedObject.INDEX_KEY, pattern).getSingle();
 		} catch (java.util.NoSuchElementException e) { // there were multiple results for this query
 			throw new RuntimeException("Inconsistent database: multiple nodes found for word '" + pattern + "' in index!", e );
 		}

@@ -50,7 +50,7 @@ public class Word extends NodeMappedObject {
 		// this method does exactly the same as NodeMappedObject.findAndInstanciateSingle, but is less dynamic to improve performance
 		Node result;
 		try {
-			result = Database.getIndexForName("Word").get(word, true).getSingle();
+			result = Database.getIndexForName("Word").get(NodeMappedObject.INDEX_KEY, word).getSingle();
 		} catch (java.util.NoSuchElementException e) { // there were multiple results for this query
 			throw new RuntimeException("Inconsistent database: multiple nodes found for word '" + word + "' in index!", e );
 		}

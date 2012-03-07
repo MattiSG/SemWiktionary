@@ -44,7 +44,7 @@ public class LazyPatternsManager {
 		
 		Transaction tx = Database.getDbService().beginTx();
 
-		IndexHits<Node> hits = index.get(pattern, true); // we can't index on a key only, so the value we associated to the key is always "true"
+		IndexHits<Node> hits = index.get(NodeMappedObject.INDEX_KEY, pattern);
 
 		try {
 			for (Node currentNode : hits) {

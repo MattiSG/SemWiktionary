@@ -25,6 +25,10 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
 public abstract class NodeMappedObject {
 
 // PROPERTIES
+
+	/** The key from the key-value pair on which an element will be indexed.
+	 */
+	public static final String INDEX_KEY = "title";
 		
 	/** The database storage for this item.
 	 *	See conceptual documentation for database layout.
@@ -144,7 +148,7 @@ public abstract class NodeMappedObject {
 		Transaction tx = Database.getDbService().beginTx();
 		
 		try {
-			getIndex(indexKey).add(this.node, key, true); // we can't index on a key only, so the value we associate to the key is always "true"
+			getIndex(indexKey).add(this.node, INDEX_KEY, key);
 			
 			tx.success();
 		} finally {
@@ -219,7 +223,7 @@ public abstract class NodeMappedObject {
 	* This is only the number of elements _indexed_. Even though that fits the definition of _accessible_, this is not a totally accurate way of counting elements, especially with redirections.
 	*/
 	public static long count(Class<? extends NodeMappedObject> type) {
-		return getIndex(type).query("*", true).size();
+		return getIndex(type).query(INDEX_KEY, "*").size();
 	}
 	
 	/** Handles index lookup and instanciation if a matching object is found.
@@ -240,7 +244,7 @@ public abstract class NodeMappedObject {
 		
 			constructor = resultClass.getDeclaredConstructor(Node.class); // get*Declared*Constructor allows bypassing public-only access
 			result = (Node) (getIndex(indexKey)
-							 .get(query, true) // we can't index on a key only, so the value we associate to the key is always "true"
+							 .get(INDEX_KEY, query)
 							 .getSingle());
 							 
 		} catch (NoSuchMethodException e) {

@@ -600,6 +600,12 @@ space = ({whitespace}|{newline})
 		// ignore HTML tags
 		yybegin(PATTERN);
 	}
+	
+	"!--"([^-]|"-"[^-]|"--"[^&])+"--&gt;"
+	{
+		// ignore HTML comments
+		yypopstate();
+	}
 
 	.
 	{

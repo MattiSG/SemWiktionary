@@ -267,6 +267,17 @@ space = ({whitespace}|{newline})
 	yybegin(XML);
 }
 
+"&lt;"
+{ // HTML tags entrance
+	yypushstate();
+	yybegin(CHARS_HTML);
+}
+
+"&amp;"
+{ // HTML entity replacement
+	buffer += "&";
+}
+
 
 <XML>
 {
@@ -477,7 +488,7 @@ space = ({whitespace}|{newline})
 		logError("Unexpected pattern value: '" + yytext() + "'");
 	}
 	
-	"}}"|"&gt;"|" "
+	"}}"|" "
 	{
 		yypopstate();
 	}
@@ -565,17 +576,6 @@ space = ({whitespace}|{newline})
 		buffer += "\n" + yytext();
 	}
 
-	"&lt;"
-	{
-		yypushstate();
-		yybegin(CHARS_HTML);
-	}
-
-	"&amp;"
-	{
-		buffer += "&";
-	}
-
 	{newline}
 	{
 		buffer = convertToPlainText(buffer).trim();	// convert before testing for emptiness: `''` is not empty, but the plaintext equivalent is ""
@@ -598,7 +598,6 @@ space = ({whitespace}|{newline})
 	"small"|"/small"
 	{
 		// ignore HTML tags
-		yybegin(PATTERN);
 	}
 	
 	"!--"([^-]|"-"[^-]|"--"[^&])+"--&gt;"
@@ -606,11 +605,17 @@ space = ({whitespace}|{newline})
 		// ignore HTML comments
 		yypopstate();
 	}
+	
+	"&gt;"
+	{ // HTML tags exit
+		yypopstate();
+	}
 
 	.
 	{
-		yypushback(1);
-		yybegin(PATTERN);
+		// in CHARS_HTML: suppress output, unknown tag
+		
+		logError("Unknown HTML tag (following lines decompose the tag): '" + yytext() + "'");
 	}
 }
 
@@ -651,17 +656,6 @@ space = ({whitespace}|{newline})
 	{ //TODO: this should be generalized to "{{" -> PATTERN, and PATTERN contain all DEFINITION_DOMAIN triggers
 		yypushstate();
 		yybegin(FCHIM_PATTERN);
-	}
-
-	"&lt;"
-	{
-		yypushstate();
-		yybegin(CHARS_HTML);
-	}
-
-	"&amp;"
-	{
-		buffer += "&";
 	}
 	
 	{newline}

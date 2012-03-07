@@ -35,6 +35,8 @@ public abstract class NodeMappedObject {
 	*/
 	private static Map<Class, String> indexKeysCache = new HashMap<Class, String>();
 	
+	/** Initializes this `NodeMappedObject`'s `Node` in database.
+	*/
 	protected NodeMappedObject initNode() {
 		Transaction tx = Database.getDbService().beginTx();
 		
@@ -49,6 +51,8 @@ public abstract class NodeMappedObject {
 		return this;
 	}
 	
+	/** Returns this `NodeMappedObject`'s `Node` in database.
+	*/
 	public Node getNode() {
 		return this.node;
 	}
@@ -121,8 +125,10 @@ public abstract class NodeMappedObject {
 	   return result;
 	}
 	
-	/**
+	/** Indexes the current `NodeMappedObject` on the passed key on its default index.
+	*
 	*@return	this	for chainability
+	*@see	getIndexKey
 	*/
 	protected NodeMappedObject indexAs(String key) {
 		return indexAsOn(key, getIndexKey());
@@ -148,7 +154,7 @@ public abstract class NodeMappedObject {
 		return this;
 	}
 	
-	/** Gets the key of the database index for this inheriting type of `NodeMappedObject`.
+	/** Gets the default key of the database index for the current `NodeMappedObject`.
 	*
 	*@return either the value of the `static String INDEX_KEY` field or, if not specified, the type's name (ex: `"Word"` for `Word`).
 	*@throw	RuntimeException	if the `INDEX_KEY` field is specified, but is not `static` and `public`
@@ -158,13 +164,13 @@ public abstract class NodeMappedObject {
 	}
 	
 	
-	/** Gets the key of the database index for this inheriting type of `NodeMappedObject`.
-	 * memoized by `indexKeysCache`
+	/** Gets the key of the database index for the passed type.
+	 * Memoized by `indexKeysCache`.
 	 *
 	 *@return either the value of the `static String INDEX_KEY` field or, if not specified, the type's name (ex: `"Word"` for `Word`).
 	 *@throw	RuntimeException	if the `INDEX_KEY` field is specified, but is not `static` and `public`
 	 */
-	private static String getIndexKey(Class type) {
+	protected static String getIndexKey(Class type) {
 		String indexKey = indexKeysCache.get(type);
 				
 		if (indexKey == null) { // not cached yet
@@ -184,7 +190,7 @@ public abstract class NodeMappedObject {
 		return indexKey;	
 	}
 	
-	/** Gets the index of nodes for the type of this NodeMappedObject-refining.
+	/** Gets the index of nodes for this `NodeMappedObject`.
 	 * Uses the default `getIndexKey()` key to obtain the index.
 	 *
 	 *@see	getIndexKey
@@ -194,7 +200,7 @@ public abstract class NodeMappedObject {
 	}
 	
 	/** Gets the index of nodes for the given type.
-	 * Uses the default `getIndexKey(Class)` key to obtain the index.
+	 * Uses `getIndexKey(Class)` key to obtain the index.
 	 *
 	 *@see	getIndexKey
 	 */
@@ -307,7 +313,9 @@ public abstract class NodeMappedObject {
 		}
 	}
 	
-// OVERRIDES	
+// OVERRIDES
+	/** Two `NodeMappedObject`s are equal if their nodes are equal.
+	*/
 	@Override
 	public boolean equals(Object o) {
 		if (! this.getClass().isInstance(o))
@@ -320,6 +328,6 @@ public abstract class NodeMappedObject {
 	
 	@Override
 	public String toString() {
-		return "Raw object mapped on node <" + this.node + ">";
+		return "NodeMappedObject<" + this.node + ">";
 	}
 }

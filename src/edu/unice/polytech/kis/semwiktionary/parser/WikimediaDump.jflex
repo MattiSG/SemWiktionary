@@ -71,22 +71,12 @@ import info.bliki.wiki.model.WikiModel;
 												"http://fr.wiktionary.org/wiki/${title}");
 	private PlainTextConverter converter = new PlainTextConverter();
 	
-	private long timer = System.nanoTime();
-	private static final long FIRST_TICK = System.nanoTime();
+	private long timer = System.currentTimeMillis();
+	private static final long FIRST_TICK = System.currentTimeMillis();
 	
-	
-	/** Returns nanoseconds since the last `tick()` call.
-	*/
-	private long tick() {
-		long result = System.nanoTime() - timer;
-		
-		timer = System.nanoTime();
-		
-		return result;
-	}
 
 	private void initParser() {
-		PREV_OUT.println("Word,Parsing time (ns),Syntax errors,Parser errors");
+		PREV_OUT.println("Word,Syntax errors,Parser errors");
 		PREV_OUT.print("**Init**"); // for logging purposes
 	
 		definitionsBuffer = new Vector<String>(BUFFER_SIZE, 2); // second param is increment size.
@@ -143,7 +133,6 @@ import info.bliki.wiki.model.WikiModel;
 	*/
 	private void logWord() {
 		PREV_OUT.println(","
-						 + tick() + ","
 						 + (syntaxErrorFlag ? "y" : "n") + ","
 						 + (errorFlag ? "y" : "n")
 						);

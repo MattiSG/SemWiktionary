@@ -104,6 +104,24 @@ public class SemWiktionary {
 		}
 		
 		println('"' + word.getTitle() + '"');
+		
+		
+		println("-----DEFINITIONS----");
+		
+		for (Definition def : word.getDefinitions()) {
+			println(def.getPosition() + ". \"" + def.getContent() + "\"");
+			
+			for (String dom : def.getDomains())
+				if (! dom.isEmpty())
+					println("(" + dom + ") ");
+			
+			for (String ex : def.getExamples())
+				if (! ex.isEmpty())
+					println("\t• \"" + ex + "\"");
+			
+			println("\t---");
+		}
+		
 		println("------SYNONYMS------");
 		
 		for (Word syn : word.getSynonyms())
@@ -165,22 +183,6 @@ public class SemWiktionary {
 					println("  ⋀ " + hol3.getTitle());
 				}
 			}
-		}
-		
-		println("-----DEFINITIONS----");
-		
-		for (Definition def : word.getDefinitions()) {
-			println(def.getPosition() + ". \"" + def.getContent() + "\"");
-
-			for (String dom : def.getDomains())
-				if (! dom.isEmpty())
-					println("(" + dom + ") ");
-			
-			for (String ex : def.getExamples())
-				if (! ex.isEmpty())
-					println("\t• \"" + ex + "\"");
-			
-			println("\t---");
 		}
 	}
 }

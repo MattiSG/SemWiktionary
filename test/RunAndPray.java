@@ -18,6 +18,7 @@ import edu.unice.polytech.kis.semwiktionary.database.DatabaseTest;
 	
 	edu.unice.polytech.kis.semwiktionary.parser.ParserTest.class, // after this test suite, data will be stored in database
 	edu.unice.polytech.kis.semwiktionary.model.WordTest.class,
+	edu.unice.polytech.kis.semwiktionary.parser.HTMLEntitiesParsingTest.class,
 	edu.unice.polytech.kis.semwiktionary.model.SynonymsTest.class,
 	edu.unice.polytech.kis.semwiktionary.model.AntonymsTest.class,
 	edu.unice.polytech.kis.semwiktionary.model.TroponymsTest.class

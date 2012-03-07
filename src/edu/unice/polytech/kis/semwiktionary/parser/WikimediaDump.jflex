@@ -192,7 +192,7 @@ import info.bliki.wiki.model.WikiModel;
 	private void leaveSection() {
 		initSection();
 		
-		yybegin(CONTENT_WORD);
+		yybegin(WORD_ENTRY);
 	}
 	
 	private void logError(String text) {
@@ -266,17 +266,15 @@ space = ({whitespace}|{newline})
 // in a <page> element of the XML, i.e. an entry in the dictionary
 %xstate PAGE
 
-// if a section block is considered useless, we'll switch to this trash state to safely ignore everything
-%xstate TRASH
+// <title> of a <page>, considered as a word
+%xstate TITLE
+
+// <content> node of a <page>, waiting for a hook to the word's contents, such as a level 1 or 3 header (== {{ or {{-).
+%xstate WORD_ENTRY
 //@}
 
 // These states are inclusive, i.e. they may match with non-state-specific patterns.
 //@{
-// <title> of a <page>, considered as a word
-%state TITLE
-
-// <content> node of a <page>, considered as a word entry
-%state CONTENT_WORD
 
 // <content> node of a <page>, considered as a pattern definition entry
 %state CONTENT_MODEL
@@ -396,7 +394,7 @@ space = ({whitespace}|{newline})
 		String title = yytext();
 		initWord(title.substring(0, title.length() - 1));
 		
-		yypushstate(CONTENT_WORD); // so that <PAGE> redirects to handling a word
+		yypushstate(WORD_ENTRY); // so that <PAGE> redirects to handling a word
 		
 		yybegin(PAGE);
 	}
@@ -456,7 +454,7 @@ space = ({whitespace}|{newline})
 	}
 }
 
-<CONTENT_WORD>
+<WORD_ENTRY>
 {
 	"== {{="
 	{
@@ -468,15 +466,17 @@ space = ({whitespace}|{newline})
 		yybegin(H3);
 	}
 	
-	"</text>"
-	{
+	"<"
+	{ // since the dumpfile has its XML characters escaped, this is the </text> end tag
+	  // that was the last section, the word is over: return in XML state
 		yybegin(XML);
 	}
 
-	([^={<]|"="[^=]|"=="[^ ]|"== "[^{]|"== {{-"|"{"[^{]|"{{"[^-])+|.
+	([^={<]|"="[^=]|"=="[^ ]|"== "[^{]|"== {{-"|"{"[^{]|"{{"[^-]|"{{-}")+|.
 	{
 		// "== {{-" is for "== {{-car-}} =="
-		// in CONTENT_WORD: suppress output
+		// "{{-}" is for "{{-}}" (tables marker)
+		// in WORD_ENTRY: suppress output
 	}
 }
 
@@ -485,13 +485,13 @@ space = ({whitespace}|{newline})
 	"fr="
 	{
 		currentNMO.set("lang", "fr");
-		yybegin(CONTENT_WORD);
+		yybegin(WORD_ENTRY);
 	}
 	
 	"conv="
 	{
 		currentNMO.set("lang", "conv");
-		yybegin(CONTENT_WORD);
+		yybegin(WORD_ENTRY);
 	}
 	
 	.
@@ -535,7 +535,7 @@ space = ({whitespace}|{newline})
 		// cf: internal references
 		// note: contributors' notes
 
-		yybegin(TRASH);
+		yybegin(WORD_ENTRY);
 	}
 
 	
@@ -574,7 +574,7 @@ space = ({whitespace}|{newline})
 }
 
 <SECTION>
-{ // an entrance into that state with a non-consumed newline will switch to <CONTENT_WORD>
+{ // an entrance into that state with a non-consumed newline will switch to <WORD_ENTRY>
 	"{{"
 	{
 		yypushstate();
@@ -986,24 +986,5 @@ space = ({whitespace}|{newline})
 	":"|{newline}
 	{
 		yypopstate();
-	}
-}
-
-<TRASH>
-{	
-	"{{-"
-	{ // the trash is valid for a section only
-		yybegin(H3);
-	}
-
-	"<"
-	{ // since the dumpfile has its XML characters escaped, this is the </text> end tag
-	  // that was the last section, the word is over: return in XML state
-		yybegin(XML);
-	}
-	
-	([^{<]|"{"[^{]|"{{"[^-]|"{{-}")+
-	{
-		// Trash
 	}
 }

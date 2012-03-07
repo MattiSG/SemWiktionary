@@ -457,7 +457,18 @@ space = ({whitespace}|{newline})
 		currentRelation = relationsMap.get(buffer.substring(0, buffer.length() - 4));
 		yybegin(SIMPLENYM);
 	}
-
+	
+	"apr"|"pron"|"trad"|"voir"|"réf"|"note"
+	{ // all these sections are deliberately ignored
+		// apr: similar vocabulary ("vocabulaire apparenté")
+		// pron: pronunciations
+		// trad: translations
+		// voir, réf: external references
+		// note: contributors' notes
+		
+		yybegin(TRASH);
+	}
+	
 	.
 	{
 		yypushback(1);

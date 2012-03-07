@@ -601,9 +601,14 @@ space = ({whitespace}|{newline})
 		currentNMO.set("pronunciation", yytext());
 	}
 	
-	"|"|"}"
+	"|"
 	{
-		// not only "}}" in case of missing ending curly bracket
+		yybegin(PATTERN);
+	}
+	
+	"}"
+	{ // not only "}}" in case of missing ending curly bracket
+		yypushback(1);
 		yybegin(PATTERN);
 	}
 }

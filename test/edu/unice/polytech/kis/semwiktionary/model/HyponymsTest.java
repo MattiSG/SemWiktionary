@@ -103,15 +103,9 @@ public class HyponymsTest {
 		for (String subjectStr : EXPECTED_HYPONYMS.keySet()) {
 			subject = Word.find(subjectStr);
 			
-			for (String expHyp : EXPECTED_HYPONYMS.get(subjectStr)) {
-				boolean exists = false;
-				for (Word actHyp : subject.getHyponyms()) {
-					if (actHyp.equals(Word.find(expHyp))) {
-						exists = true;
-					}
-				}
-				assertTrue("The hyponym " + expHyp + " of word " + subject + " does not exist.", exists);
-			}
+			for (String expHyp : EXPECTED_HYPONYMS.get(subjectStr))
+				assertTrue("The hyponym " + expHyp + " of word " + subject + " does not exist.",
+						   subject.getHyponyms().contains(Word.find(expHyp)));
 		}
 	}
 }

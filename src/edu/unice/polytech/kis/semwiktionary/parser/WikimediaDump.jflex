@@ -61,7 +61,8 @@ import info.bliki.wiki.model.WikiModel;
 	private boolean currentComplexNymIsNarrower;
 	
 	private String buffer = ""; // an all-purpose buffer, to be initialized by groups that need it
-	
+	private String title = "";
+
 	private Vector<String> definitionsBuffer;
 	private Map<String, Relation> relationsMap;
 
@@ -303,6 +304,7 @@ space = ({whitespace}|{newline})
 // simple relations such as synonyms, antonyms and troponyms
 %state SIMPLENYM
 %state SPNM_WORD
+%state REDIRECT
 %state CHARS_HTML
 
 // complex relations such as hyponyms, hyperonyms, holonyms and meronyms
@@ -375,6 +377,13 @@ space = ({whitespace}|{newline})
 	
 	"<text xml:space=\"preserve\">"
 	{
+		initWord(title);
+		yypopstate();	// the <TITLE> state has filled the stack with the proper state
+	}
+
+	"<text xml:space=\"preserve\">#" // REDIRECT
+	{
+		yypushback(1);
 		yypopstate();	// the <TITLE> state has filled the stack with the proper state
 	}
 	
@@ -396,8 +405,7 @@ space = ({whitespace}|{newline})
 {
 	[^<:]+"<"
 	{
-		String title = yytext();
-		initWord(title.substring(0, title.length() - 1));
+		title = yytext().substring(0, yytext().length()-1);		
 		
 		yypushstate(WORD_ENTRY); // so that <PAGE> redirects to handling a word
 		
@@ -470,6 +478,11 @@ space = ({whitespace}|{newline})
 	{
 		yybegin(H3);
 	}
+
+	"#REDIRECT "
+	{
+		yybegin(REDIRECT);
+	}
 	
 	"<"
 	{ // since the dumpfile has its XML characters escaped, this is the </text> end tag
@@ -477,11 +490,30 @@ space = ({whitespace}|{newline})
 		yybegin(XML);
 	}
 
-	([^={<]|"="[^=]|"=="[^ ]|"== "[^{]|"== {{-"|"{"[^{]|"{{"[^-]|"{{-}")+|.
+	([^={<#]|"="[^=]|"=="[^ ]|"== "[^{]|"== {{-"|"{"[^{]|"{{"[^-]|"{{-}")+|.
 	{
 		// "== {{-" is for "== {{-car-}} =="
 		// "{{-}" is for "{{-}}" (tables marker)
 		// in WORD_ENTRY: suppress output
+	}
+}
+
+<REDIRECT>
+{
+	([^\r\n\[\]]|"["[^\[]|"]"[^]])+
+	{
+		MutableWord redirNMO = MutableWord.obtain(yytext());
+		redirNMO.indexAs(title);
+	}
+
+	"[["
+	{
+		
+	}
+
+	"]]"
+	{
+		yybegin(WORD_ENTRY);
 	}
 }
 

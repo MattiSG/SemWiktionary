@@ -101,9 +101,9 @@ import info.bliki.wiki.model.WikiModel;
 		resetComplexNymsList();
 	}
 	
-	/** Reset the list of complexNyms : the list is cleared, and his size is forced to BUFFER_SIZE.
-	 *  If a user has made an error, the case is put at null and the algorithm ignores it
-	 *  Example : * to *** (the second depth list is missing)
+	/** Reset the list of complexNyms: the list is cleared, and its size is forced to `BUFFER_SIZE`.
+	 *  If a user has made a syntax error, the list entry is set to `null` and is ignored.
+	 *  _Example: * to *** (element at depth 2 is missing)_
 	 */
 	private void resetComplexNymsList() {
 		complexDepth = 1;

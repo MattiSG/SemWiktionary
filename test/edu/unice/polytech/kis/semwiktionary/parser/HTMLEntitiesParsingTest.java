@@ -26,7 +26,8 @@ public class HTMLEntitiesParsingTest {
 	public static void init() {
 		actualExample = Word.find("océan")
 							.getDefinitions().get(0)
-							.getExamples().get(0);
+							.getExamples().get(1)
+							.getContent();
 	}
 	
 	@Test

@@ -59,13 +59,8 @@ public class HyperonymsTest {
 			subject = Word.find(subjectStr);
 			
 			for (String expHyp : EXPECTED_HYPERONYMS.get(subjectStr)) {
-				boolean exists = false;
-				for (Word actHyp : subject.getHyperonyms()) {
-					if (actHyp.equals(Word.find(expHyp))) {
-						exists = true;
-					}
-				}
-				assertTrue("The hyperonym " + expHyp + " of word " + subject + " does not exist.", exists);
+				assertTrue("The hyperonym " + expHyp + " of word " + subject + " does not exist.",
+						   subject.getHyperonyms().contains(Word.find(expHyp)));
 			}
 		}
 	}

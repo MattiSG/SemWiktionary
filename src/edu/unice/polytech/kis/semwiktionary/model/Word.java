@@ -173,7 +173,19 @@ public class Word extends NodeMappedObject {
 	
 // STANDARD METHODS
 	
+	@Override
 	public String toString() {
 		return this.getTitle();
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this.getClass().isInstance(o))
+			return this.title.equals(((Word) o).getTitle());
+		
+		if (String.class.isInstance(o))
+			return this.title.equals(o);
+		
+		return false;
 	}
 }

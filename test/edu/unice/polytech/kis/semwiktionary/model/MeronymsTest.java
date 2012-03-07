@@ -55,13 +55,8 @@ public class MeronymsTest {
 			subject = Word.find(subjectStr);
 			
 			for (String expMer : EXPECTED_MERONYMS.get(subjectStr)) {
-				boolean exists = false;
-				for (Word actMer : subject.getMeronyms()) {
-					if (actMer.equals(Word.find(expMer))) {
-						exists = true;
-					}
-				}
-				assertTrue("The meronym " + expMer + " of word " + subject + " does not exist.", exists);
+				assertTrue("The meronym " + expMer + " of word " + subject + " does not exist.",
+						   subject.getMeronyms().contains(Word.find(expMer)));
 			}
 		}
 	}

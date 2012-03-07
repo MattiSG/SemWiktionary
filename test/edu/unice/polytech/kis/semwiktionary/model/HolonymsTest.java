@@ -61,16 +61,10 @@ public class HolonymsTest {
 	public void allHolonymsExist() {
 		for (String subjectStr : EXPECTED_HOLONYMS.keySet()) {
 			subject = Word.find(subjectStr);
-			
-			for (String expHol : EXPECTED_HOLONYMS.get(subjectStr)) {
-				boolean exists = false;
-				for (Word actHol : subject.getHolonyms()) {
-					if (actHol.equals(Word.find(expHol))) {
-						exists = true;
-					}
-				}
-				assertTrue("The meronym " + expHol + " of word " + subject + " does not exist.", exists);
-			}
+
+			for (String expHol : EXPECTED_HOLONYMS.get(subjectStr))
+				assertTrue("The meronym " + expHol + " of word " + subject + " does not exist.",
+						   subject.getHolonyms().contains(Word.find(expHol)));
 		}
 	}
 }

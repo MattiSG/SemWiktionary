@@ -66,11 +66,11 @@ public class SemWiktionary {
 			
 	
 		println("Welcome to the SemWiktionary lookup interface!\n" +
-				"===================================================");
+				"♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒");
 		println("Hit ctrl-C to exit.\n");
 		
 		while (true) {
-			println("\nEnter a word and press enter or ctrl-D to look it up: ");
+			println("\nEnter a word and press enter to look it up: ");
 			
 			Scanner sc = new Scanner(System.in);
 			String lookedup = sc.next();
@@ -87,11 +87,9 @@ public class SemWiktionary {
 		Word word = Word.find(input);
 		
 		if (word == null) {
-			println("*The word '" + input + "' was not found in the database!*");
+			println("* The word '" + input + "' was not found in the database! *");
 			return;
 		}
-		
-		println('"' + word.getTitle() + '"');
 		
 		
 		println("———————————");

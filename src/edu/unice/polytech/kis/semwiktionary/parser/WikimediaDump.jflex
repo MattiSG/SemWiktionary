@@ -597,19 +597,13 @@ space = ({whitespace}|{newline})
 
 	"small"|"/small"
 	{
-		// ignore le treatment of small characters
-		yybegin(PATTERN);
-	}
-
-	" "
-	{
-		buffer += yytext();
-		yypushback(1);
+		// ignore HTML tags
 		yybegin(PATTERN);
 	}
 
 	.
 	{
+		yypushback(1);
 		yybegin(PATTERN);
 	}
 }

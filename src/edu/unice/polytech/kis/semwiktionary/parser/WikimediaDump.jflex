@@ -48,7 +48,7 @@ import info.bliki.wiki.model.WikiModel;
 	private int definitionDepth = -1; // the depth is the number of sharps (#) in front of a definition, minus one (that's optimization to have only one substraction for the 0-based indexed list). So, to trigger comparisons, we need to be negative.
 	
 	private Vector<Word> complexNyms;	// Used for hyponyms, hyperonyms, holonyms, and meronyms
-	private int complexDepth = 1;		// Used to calculate the depth of the list (number of '*')
+	private int complexDepth;		// Used to calculate the depth of the list (number of '*')
 	
 	/**Used for complexNym algorithm :
 	 *
@@ -98,10 +98,19 @@ import info.bliki.wiki.model.WikiModel;
 		relationsMap.put("holo", Relation.MERONYM);
 		
 		complexNyms = new Vector<Word>(BUFFER_SIZE, 2); // second param is increment size.
-		complexNyms.setSize(BUFFER_SIZE); // The size is force : if a user has made an error, the case is put at null and the algorithm ignores it
-					// (ex: * to *** (the second depth list is missing)
+		resetComplexNymsList();
 	}
 	
+	/** Reset the list of complexNyms : the list is cleared, and his size is forced to BUFFER_SIZE.
+	 *  If a user has made an error, the case is put at null and the algorithm ignores it
+	 *  Example : * to *** (the second depth list is missing)
+	 */
+	private void resetComplexNymsList() {
+		complexDepth = 1;
+		complexNyms.clear();
+		complexNyms.setSize(BUFFER_SIZE);
+	}
+
 	private void yypushstate() {
 		statesStack.push(yystate());
 	}
@@ -273,13 +282,14 @@ space = ({whitespace}|{newline})
 
 // simple relations such as synonyms, antonyms and troponyms
 %state SIMPLENYM
-%state SPNM_CONTEXT
 %state SPNM_WORD
 
 // complex relations such as hyponyms, hyperonyms, holonyms and meronyms
 %state COMPLEXNYM
-%state CPNM_CONTEXT
 %state CPNM_WORD
+
+// context for any relation (simple and complex relations)
+%state NYM_CONTEXT
 
 // inside a {{source}} pattern (origin of a quotation)
 %state SOURCE
@@ -689,7 +699,7 @@ space = ({whitespace}|{newline})
 
 	":"{optionalSpaces}|"'''"|";"
 	{
-		yybegin(SPNM_CONTEXT);
+		yypushstate(NYM_CONTEXT);
 	}
 
 	"*"([^\[]|"["[^\[])*"[["
@@ -705,19 +715,6 @@ space = ({whitespace}|{newline})
 	([^-:;'*\r\n]|"-"[^}])+|.|{newline}
 	{
 		// in SimpleNym: suppress output
-	}
-}
-
-<SPNM_CONTEXT>
-{
-	([^:\n\r]+)
-	{
-		//TODO: context is not handled yet
-	}
-
-	":"|{newline}
-	{
-		yybegin(SIMPLENYM);
 	}
 }
 
@@ -758,7 +755,7 @@ space = ({whitespace}|{newline})
 	
 	":"{optionalSpaces}|"'''"|";"
 	{
-		yybegin(CPNM_CONTEXT);
+		yypushstate(NYM_CONTEXT);
 	}
 
 	"*"+{optionalSpaces}"[["
@@ -773,29 +770,13 @@ space = ({whitespace}|{newline})
 
 	{newline}{newline}
 	{
-		complexDepth = 1;
-		complexNyms.clear();
-		complexNyms.setSize(BUFFER_SIZE);
-
+		resetComplexNymsList();
 		leaveSection();
 	}
 
 	([^-:;'*\r\n]|"-"[^}])+|.|{newline}
 	{
 		// in ComplexNym: suppress output
-	}
-}
-
-<CPNM_CONTEXT>
-{
-	([^:\n\r]+)
-	{
-		// Context is not handled yet
-	}
-
-	":"|{newline}
-	{
-		yybegin(COMPLEXNYM);
 	}
 }
 
@@ -828,6 +809,19 @@ space = ({whitespace}|{newline})
 			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( ");
 			e.printStackTrace(System.err);
 		}
+	}
+}
+
+<NYM_CONTEXT>
+{
+	([^:\n\r]+)
+	{
+		//TODO: context is not handled yet
+	}
+
+	":"|{newline}
+	{
+		yypopstate();
 	}
 }
 

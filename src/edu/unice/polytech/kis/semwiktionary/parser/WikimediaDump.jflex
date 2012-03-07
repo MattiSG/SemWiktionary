@@ -346,6 +346,11 @@ space = ({whitespace}|{newline})
 	buffer += "&";
 }
 
+"&quot;"
+{ // HTML entity replacement
+	buffer += '"';
+}
+
 
 <XML>
 {

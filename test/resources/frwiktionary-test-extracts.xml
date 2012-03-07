@@ -415,6 +415,157 @@
     </revision>
   </page>
   <page>
+    <title>gouvernement</title>
+    <id>405</id>
+    <revision>
+      <id>9680134</id>
+      <timestamp>2011-11-21T18:08:54Z</timestamp>
+      <contributor>
+        <username>MalafayaBot</username>
+        <id>20439</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.2) (robot Ajoute : [[cy:gouvernement]], [[fj:gouvernement]], [[mg:gouvernement]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+
+{{-étym-}}
+: Du verbe [[gouverner]] avec suffixe [[-ment]].
+
+{{-nom-|fr}}
+{{fr-rég|ɡu.vɛʁ.nə.mã}}
+'''gouvernement''' {{pron|ɡu.vɛʁ.nə.mã|fr}} {{m}}
+# {{vieilli|fr}} [[action|Action]], [[charge]], ou manière de [[gouverner]], de [[régir]], d’[[administrer]] quelque chose, en particulier dans le domaine politique.
+#* ''Elle jouit avec un si tranquille orgueil de son autorité domestique, que je ne me sens pas le courage de tenter un coup d'État contre le '''gouvernement''' de mes armoires.'' {{source|[[w:Anatole France|Anatole France]], ''Le crime de Sylvestre Bonnard''}}
+#* ''Le régime municipal, devenu un mode d'administration, fut réduit au '''gouvernement''' des affaires locales, des intérêts civils de la cité.'' {{source|[[w:François Guizot|Guizot]], ''Histoire générale de la civilisation en Europe'', Leçon 7, 1828}}
+#* ''Peut-être parce que, depuis le XI{{e}} siècle, la seule théorie politique de l'islam a été celle de l'obéissance passive à toute autorité ''de facto'', le '''gouvernement''' par consentement reste un concept inconnu : l'autocratie a été la véritable et, pour l'essentiel, l'unique expérience.'' {{source|P.J. Vatikiotis, ''L'Islam et l'État'', 1987, traduction de Odette Guitard, 1992, p.38}}
+# [[pouvoir|Pouvoir]] qui gouverne un [[État]].
+#* ''La France démocratique, dans un accès d'indignation, renversa le '''gouvernement''' de la France bourgeoise et se proclama libre sous un '''gouvernement''' républicain.'' {{source|Daniel Stern, ''Histoire de la Révolution de 1848''}}
+#* ''Sumner Maine fait observer que les rapports des '''gouvernements''' et des citoyens ont été bouleversés de fond en comble depuis la fin du XVIII{{e}} siècle ; […].'' {{source|{{w|Georges Sorel}},  ''Réflexions sur la violence'', Chap.III, ''Les préjugés contre  la violence'', 1908, p.142}}
+#* ''Ainsi vous voyez que j'aurais pu réussir et, comme tant d'autres, vivre du budget; mais je n'ai jamais voulu rien accepter d'aucun '''gouvernement''', si ce n'est du suffrage universel.'' {{source|Réponse de M. Raspail père à l'avocat général, lors du procès de {{w|François-Vincent Raspail}} le 12 février 1874}}
+#* ''Une société ne saurait subsister sans un '''gouvernement'''.'' {{source|[[w:Montesquieu|Montesquieu]]}}
+#* ''Le '''gouvernement''' ordonne une répression sanglante. Arrestations, pendaisons, exécutions sommaire plongent Tripoli dans un bain de sang.'' {{source|Tewfik Farès, ''1911 : la Libye en guerre, déjà'', dans {{w|Libération (journal)}} du 18 mars 2011, p.S12}}
+# [[organisation|Organisation]], [[structure]] [[politique]] de l’[[État]].
+#* ''Toute nation a le '''gouvernement''' qu'elle mérite.'' [[w:Jean de Maistre|Jean de Maistre]]
+# Ceux qui gouvernent un état et particulièrement le [[pouvoir]] [[exécutif]].
+#* ''Le '''gouvernement''' a pris des mesures impopulaires.''
+#* ''Adresser une demande au '''gouvernement''' par l'entremise de son député.''
+#* ''Ces deux gouvernements étaient d’accord pour signer ce traité.''
+# {{histoire|fr}} [[charge|Charge]] de [[gouverneur]] dans une [[province]], dans une [[ville]], dans une [[place]] [[fort]]e, dans une maison [[royal]]e.
+#* ''Le roi lui donna le '''gouvernement''' de Normandie.''
+# {{histoire|fr}} {{par ext}}  La [[ville]] et le [[pays]] qui sont sous le pouvoir de ce gouverneur.
+#* ''&quot;Le roi de Navarre et le duc d'Anjou ont fui la cour et se sont retirés, l'un dans son royaume, l'autre dans son '''gouvernement'''.&quot;'' {{source|[[w:Alexandre Dumas|Alexandre Dumas père]], ''Henri III''}}
+
+{{-trad-}}
+{{(}}
+* {{T|af}} : {{trad-|af|regering}}, {{trad-|af|beheersing}}
+* {{T|sq}} : {{trad+|sq|qeveri}} {{f}}
+* {{T|de}} : {{trad+|de|Regierung}} {{f}}, {{trad-|de|Regieren}}
+* {{T|en}} : {{trad+|en|government}}, {{trad+|en|administration}}, {{trad+|en|control}}, {{trad+|en|reign}}, {{trad+|en|rule}}, {{trad+|en|governance}}, {{trad+|en|regulation}}, {{trad+|en|ruling}}, {{trad+|en|ascendancy}}, {{trad+|en|ascendance}}
+* {{T|ar}} : {{trad+|ar|حكومة|R=ḥukûma|dif=حُكومة}}
+* {{T|bn}} : {{trad+|bn|সরকার}}
+* {{T|bs}} : {{trad-|bs|vlada}} {{f}}
+* {{T|ca}} : {{trad+|ca|govern}}
+* {{T|zh}} : {{trad+|zh|政府|R=zhèngfǔ}}
+* {{T|ko}} : {{trad+|ko|정부}} (jŏŋ.bu)
+* {{T|hr}} : {{trad-|hr|vlada}} {{f}}
+* {{T|da}} : {{trad-|da|regering}} {{f}}, {{trad+|da|styre}}
+* {{T|es}} : {{trad+|es|gobierno}} {{m}}; {{trad-|es|governamiento}} {{m}}, {{trad+|es|mando}}
+* {{T|eo}} : {{trad-|eo|registaro}}, {{trad-|eo|regado}}
+* {{T|fo}} : {{trad-|fo|ríkisstjórn}}
+* {{T|fi}} : {{trad+|fi|hallitus}}; {{trad+|fi|valtio}}
+* {{T|fy}} : {{trad-|fy|regear}}
+* {{T|cy}} : {{trad+|cy|llywodraeth}} {{m}}
+* {{T|el}} : {{trad+|el|κυβέρνηση}} (kubérnēsē) {{f}}
+* {{T|he}} : {{trad+|he|ממשלה}}
+* {{T|hbo}} : {{trad--|hbo|ממשלה|dif=מֶמְשָׁלָה}} {{f}}
+* {{T|hi}} : {{trad+|hi|सरकार}}
+* {{T|hu}} : {{trad+|hu|kormány}}
+* {{T|io}} : {{trad+|io|guvernado}}
+* {{T|id}} : {{trad-|id|pemerintah}}
+* {{T|is}} : {{trad-|is|stjórn}}; {{trad-|is|ríkisstjórn}}
+{{-}}
+* {{T|it}} : {{trad+|it|governo}} {{m}}
+* {{T|ja}} : {{trad+|ja|政府}}
+* {{T|la}} : {{trad-|la|regimen}}, {{trad-|la|regimentum}}
+* {{T|lt}} : {{trad+|lt|vyriausybė}}
+* {{T|lb}} : {{trad-|lb|Regierung}} {{f}}
+* {{T|ms}} : {{trad+|ms|kerajaan}}
+* {{T|mi}} : {{trad-|mi|kāwanatanga}}
+* {{T|nl}} : {{trad+|nl|regering}} {{f}}, {{trad+|nl|overheid}}, {{trad+|nl|gouvernement}}, {{trad+|nl|bestuur}}, {{trad+|nl|bewind}}, {{trad-|nl|heerschappij}}
+* {{T|no}} : {{trad-|no|regjering}}
+* {{T|nn}} : {{trad-|nn|styresmakt}}
+* {{T|pap}} : {{trad--|pap|gobernashon}}
+* {{T|pl}} : {{trad+|pl|rząd}}; {{trad+|pl|rada}} {{trad-|pl|ministrów}} {{f}}
+* {{T|pt}} : {{trad+|pt|governo}} {{m}}
+* {{T|ro}} : {{trad+|ro|guvern}} {{n}}
+* {{T|ru}} : {{trad+|ru|управление}} (upravlěniě) {{n}}, {{trad+|ru|правительство}}, {{trad+|ru|власть}}
+* {{T|ses}} : {{trad--|ses|gofornamaŋ}}
+* {{T|sr}} : {{trad-|sr|влада}} (vlada) {{f}}
+* {{T|sl}} : {{trad+|sl|vladavina}} {{f}}
+* {{T|sv}} : {{trad+|sv|styrelse}}, {{trad+|sv|regering}}
+* {{T|tl}} : {{trad-|tl|pámahaláan}}
+* {{T|cs}} : {{trad+|cs|vláda}} {{f}}
+* {{T|th}} : {{trad+|th|รัฐบาล}}
+* {{T|tr}} : {{trad+|tr|hükümet}}, {{trad+|tr|yönetim}}
+* {{T|vi}} : {{trad+|vi|chính}} {{trad+|vi|phủ}}; {{trad+|vi|sự}} {{trad+|vi|cai}} {{trad+|vi|trị}}
+* {{T|yi}} : {{trad-|yi|רעגירונג}} (regirung) {{f}}
+* {{T|zu}} : {{trad-|zu|uhulumeni}}
+{{)}}
+
+{{-pron-}}
+{{ébauche-pron|fr}}
+* {{pron-rég|France &lt;!--  précisez svp la ville ou la région --&gt;||audio=Fr-gouvernement.ogg}}
+
+{{-voir-}}
+* {{WP}}
+* {{Wikiquote}} 
+
+{{-réf-}}
+* {{R:DAF8}}
+
+== {{=nl=}} ==
+{{-étym-}}
+: {{ébauche-étym|nl}}
+
+{{-nom-|nl}}
+'''gouvernement''' 
+# [[gouvernement|Gouvernement]].
+
+{{-syn-}}
+* [[overheid]]
+* [[regering]]
+
+[[ast:gouvernement]]
+[[cs:gouvernement]]
+[[cy:gouvernement]]
+[[de:gouvernement]]
+[[el:gouvernement]]
+[[en:gouvernement]]
+[[es:gouvernement]]
+[[et:gouvernement]]
+[[fi:gouvernement]]
+[[fj:gouvernement]]
+[[gl:gouvernement]]
+[[hu:gouvernement]]
+[[id:gouvernement]]
+[[io:gouvernement]]
+[[ja:gouvernement]]
+[[ko:gouvernement]]
+[[li:gouvernement]]
+[[lo:gouvernement]]
+[[lt:gouvernement]]
+[[mg:gouvernement]]
+[[nl:gouvernement]]
+[[no:gouvernement]]
+[[pl:gouvernement]]
+[[ru:gouvernement]]
+[[sv:gouvernement]]
+[[vi:gouvernement]]
+[[zh:gouvernement]]
+[[zh-min-nan:gouvernement]]</text>
+    </revision>
+  </page>
+  <page>
     <title>cercle</title>
     <id>841</id>
     <revision>

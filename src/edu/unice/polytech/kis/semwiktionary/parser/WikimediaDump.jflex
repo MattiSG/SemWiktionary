@@ -589,7 +589,7 @@ space = ({whitespace}|{newline})
 
 <CHARS_HTML>
 {
-	"br"{newline}*"/"
+	"br"{space}*"/"?
 	{
 		buffer += "\n";
 		yybegin(PATTERN);

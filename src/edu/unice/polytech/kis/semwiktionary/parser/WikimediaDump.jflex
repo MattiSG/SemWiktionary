@@ -767,14 +767,8 @@ space = ({whitespace}|{newline})
 		buffer += "«";
 		yypopstate();
 	}
-	
-	" "
-	{ // we entered here with "&lt;", so we matched an encoded "<" followed by a space: a quick `grep` will show that users mean the HTML entity
-		buffer += "<";
-		yypopstate();
-	}
 
-	([^& ]|"&"[^g]|"&g"[^t]|"&gt"[^;])+"&gt;"
+	([^&]|"&"[^g]|"&g"[^t]|"&gt"[^;])+"&gt;"
 	{
 		// ignore every HTML tag
 		yypopstate();
@@ -994,17 +988,15 @@ space = ({whitespace}|{newline})
 }
 
 
-"<"
-{
-	// fallback for all Mediawiki cases: this is a match for "</text>", but we don't write it fully in order to avoid the longest-match rule to take precedence
-	logSyntaxError("Out of page, error on word '" + currentNMO + "'");
-	yybegin(XML);
-}
-
 "&lt;"
 { // HTML tags entrance
 	yypushstate();
 	yybegin(CHARS_HTML);
+}
+
+"&lt; "
+{ // we matched an encoded "<" followed by a space: a quick `grep` will show that users mean the HTML entity
+	buffer += "<";
 }
 
 "&gt;"
@@ -1028,3 +1020,10 @@ space = ({whitespace}|{newline})
 { // HTML entity replacement
 	buffer += '"';
 }
+
+"<"
+{ // fallback for all Mediawiki cases: this is a match for "</text>", but we don't write it fully in order to avoid the longest-match rule to take precedence
+	logSyntaxError("Out of page, error on word '" + currentNMO + "'");
+	yybegin(XML);
+}
+

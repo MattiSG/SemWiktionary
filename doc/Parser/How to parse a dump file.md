@@ -24,7 +24,13 @@ You will first need to deflate the dump file you previously downloaded, then:
 
     git clone git://github.com/MattiSG/SemWiktionary.git # or download a zipball
     cd SemWiktionary
-    
+
+If you have already done a parsing earlier, please note that you must reset your database before starting a new one.
+It is **necessary** to avoid multiple storage of words in the database that could make the following error : "Inconsistent database."
+You can easily delete the database with the following command :
+
+    ant erase_db
+
 Use your favorite editor to modify the parser file to make it fulfill your needs, `src/edu/unice/polytech/kis/semwiktionary/parser/WikimediaDump.jflex`.
 
 Before starting parsing the full database, **remove the `%debug` line** in the parser file (`.jflex`). That will give a significant speedup, and avoid generating several hundreds megabytes of log files. Then:

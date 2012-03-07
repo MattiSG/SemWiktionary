@@ -162,6 +162,12 @@ public class Word extends NodeMappedObject {
 		return this.<Word>get(Relation.MERONYM, Direction.INCOMING);
 	}
 	
+	/** Returns all words with a related meaning of this Word.
+	 */
+	public Collection<Word> getRelatedVoc() {
+		return this.<Word>get(Relation.RELATEDVOC);
+	}
+
 // DATABASE ACCESS
 	
 	/** Loads the definitions for this Word from the database.

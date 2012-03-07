@@ -97,6 +97,7 @@ import info.bliki.wiki.model.WikiModel;
 		relationsMap.put("hyper", Relation.HYPONYM);
 		relationsMap.put("méro", Relation.MERONYM);
 		relationsMap.put("holo", Relation.MERONYM);
+		relationsMap.put("voc", Relation.RELATEDVOC);
 		
 		complexNyms = new Vector<Word>(BUFFER_SIZE, 2); // second param is increment size.
 		resetComplexNymsList();
@@ -428,7 +429,7 @@ space = ({whitespace}|{newline})
 		yybegin(NATURE);
 	}
 	
-	("syn"|"ant"|"tropo")"-}}"{newline}
+	("syn"|"ant"|"tropo"|"voc")"-}}"{newline}
 	{
 		buffer = yytext();
 		currentRelation = relationsMap.get(buffer.substring(0, buffer.length() - 4));

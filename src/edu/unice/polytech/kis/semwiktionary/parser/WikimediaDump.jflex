@@ -284,6 +284,7 @@ space = ({whitespace}|{newline})
 // simple relations such as synonyms, antonyms and troponyms
 %state SIMPLENYM
 %state SPNM_WORD
+%state CHARS_HTML
 
 // complex relations such as hyponyms, hyperonyms, holonyms and meronyms
 %state COMPLEXNYM
@@ -304,6 +305,17 @@ space = ({whitespace}|{newline})
 	// fallback for all cases
 	logSyntaxError("Out of page, error on word '" + currentWord.getTitle() + "'");
 	yybegin(XML);
+}
+
+"&lt;"
+{ // HTML tags entrance
+	yypushstate();
+	yybegin(CHARS_HTML);
+}
+
+"&amp;"
+{ // HTML entity replacement
+	buffer += "&";
 }
 
 
@@ -526,12 +538,12 @@ space = ({whitespace}|{newline})
 		yybegin(FCHIM_PATTERN);
 	}
 
-	[^|}]+|"|"
+	[^|}&]+|"|"
 	{
 		logError("Unexpected pattern value: '" + yytext() + "'");
 	}
 	
-	"}}"
+	"}}"|" "
 	{
 		yypopstate();
 	}
@@ -541,6 +553,7 @@ space = ({whitespace}|{newline})
 		logSyntaxError("Unbalanced bracket in pattern in '" + currentWord.getTitle() + "'");
 		yypopstate();
 	}
+	
 }
 
 
@@ -607,7 +620,7 @@ space = ({whitespace}|{newline})
 		yybegin(PATTERN);
 	}
 
-	([^\r\n{]|"{"[^{])+|"{{"
+	([^\r\n{&<]|"{"[^{])+|"{{"
 	{
 		buffer += yytext();
 	}
@@ -616,7 +629,7 @@ space = ({whitespace}|{newline})
 	{
 		// the colon means we're in the same example, but on another line
 		buffer += "\n" + yytext();
-	}	
+	}
 
 	{newline}
 	{
@@ -628,6 +641,27 @@ space = ({whitespace}|{newline})
 		
 		yypushback(1);	// <SECTION> needs it to match
 		yybegin(SECTION);
+	}
+}
+
+<CHARS_HTML>
+{
+	"br"{space}*"/"?{space}*"&gt;"
+	{
+		buffer += "\n";
+		yypopstate();
+	}
+	
+	"!--"([^-]|"-"[^-]|"--"[^&])+"--&gt;"
+	{
+		// ignore HTML comments
+		yypopstate();
+	}
+
+	([^&]|"&"[^g]|"&g"[^t]|"&gt"[^;])+"&gt;"
+	{
+		// ignore every HTML tag
+		yypopstate();
 	}
 }
 

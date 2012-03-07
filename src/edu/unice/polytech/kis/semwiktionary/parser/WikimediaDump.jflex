@@ -264,7 +264,9 @@ space = ({whitespace}|{newline})
 
 // All states declarations are on their own line to minimize conflicts.
 
-// These states are exclusive, i.e. they may match only with patterns namespaced by them.
+/** These states are exclusive, i.e. they may match only with patterns namespaced by them.
+* All XML-level states should be exclusive
+*/
 //@{
 // outermost state
 %xstate XML
@@ -279,7 +281,9 @@ space = ({whitespace}|{newline})
 %xstate WORD_ENTRY
 //@}
 
-// These states are inclusive, i.e. they may match with non-state-specific patterns.
+/** These states are inclusive, i.e. they may match with non-state-specific patterns.
+* Most MEDIAWIKI-level states should be inclusive, to allow default emergency fallbacks to be used in case a state can not match some characters.
+*/
 //@{
 
 // <content> node of a <page>, considered as a pattern definition entry

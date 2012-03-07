@@ -601,14 +601,9 @@ space = ({whitespace}|{newline})
 		yypopstate();
 	}
 
-	[^&]|"&"[^g]|"&g"[^t]|"&gt"[^;]
+	([^&]|"&"[^g]|"&g"[^t]|"&gt"[^;])+"&gt;"
 	{
 		// ignore every HTML tag
-	}
-
-	"&gt;"
-	{
-		// HTML tag exists
 		yypopstate();
 	}
 }

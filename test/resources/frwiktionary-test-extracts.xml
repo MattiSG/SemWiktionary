@@ -2920,4 +2920,100 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
 [[vi:ravivage]]</text>
     </revision>
   </page>
+  <page>
+    <title>baccalauréat</title>
+    <id>144201</id>
+    <revision>
+      <id>9452551</id>
+      <timestamp>2011-09-19T23:22:02Z</timestamp>
+      <contributor>
+        <username>JackBot</username>
+        <id>12968</id>
+      </contributor>
+      <minor />
+      <comment>[[Wiktionnaire:Structure des articles|Autoformatage]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+{{-étym-}}
+: Du {{étyl|la|fr|mot=bacca|sens=baie,  olive, arbre à baies}} et ''[[laureatus#la|laureatus]]'' « couvert de laurier », « orné de laurier », « couronné de laurier » d’où « triomphant ».
+
+{{-nom-|fr}}
+{{fr-rég|ba.ka.lɔ.ʁe.a}}
+'''baccalauréat''' {{pron|ba.ka.lɔ.ʁe.a|fr}} {{m}}
+# {{Belgique|fr}} {{Québec|fr}} Premier [[grade]] [[universitaire]], qui s'effectue en trois ans. {{note}} En Belgique, ce terme est utilisé depuis septembre 2004 suite à l'application de la réforme européenne de Bologne.
+#* ''Je suis en première (année) '''baccalauréat''' en langues.''
+# {{Belgique|fr}} Le terme s'applique également aux études supérieures de type court proposées par les Hautes Ecoles de Belgique. Ce type d'études s'appelait autrefois [[graduat]]. 
+#* ''Elle a un '''baccalauréat''' en comptabilité.''
+# {{France|fr}} Examen de fin d'études secondaires.
+#* ''Passer son '''baccalauréat'''.''
+#* ''En France on prend le '''baccalauréat''' pour en finir avec ses études, on fait sa première communion pour en finir avec la religion, on se marie pour en finir avec l'amour.'' {{source|[[w:Ernest Bersot|Ernest Bersot]], ''Études et discours (1868-1878)'', (1879) p. 138}}
+# {{vieilli|fr}} Le [[premier]] [[degré]] qu’on prend dans une [[faculté]], avant la [[licence]] et le [[doctorat]].
+#* ''Être accepté au '''baccalauréat'''.''
+#* ''Les examens du '''baccalauréat'''.''
+#* ''Candidat au '''baccalauréat'''.''
+
+{{-syn-}}
+* [[candidature]]
+; examen de fin d'études secondaires.
+* [[matu]]
+
+{{-apr-}}
+{{(}}
+* [[bachelier]]
+* [[bachoter]]
+{{)}}
+
+{{-voc-}}
+{{(}}
+* [[maîtrise]]
+* [[doctorat]]
+* [[licence]]
+{{-}}
+* [[diplôme]]
+* [[certificat]]
+{{)}}
+
+{{-trad-}}
+{{(}}
+* {{T|af}} : {{trad-|af|eindeksamen}}, {{trad-|af|einddiploma}}
+* {{T|de}} : {{trad+|de|Abi}}, {{trad+|de|Abitur}}, {{trad-|de|Reifeprüfung}}, {{trad-|de|Abiturientenprüfung}}, {{trad+|de|Matura}}, {{trad-|de|Abiturzeugnis}}, {{trad-|de|Reifezeugnis}}
+* {{T|en}} : {{trad-|en|leaving examination}}, {{trad-|en|leaving certificate}}
+* {{T|da}} : {{trad-|da|afgangseksamen}}
+* {{T|eo}} : {{trad-|eo|abiturienteco}}, {{trad-|eo|abiturienta ekzameno}}, {{trad-|eo|abiturienta diplomo}}
+* {{T|fo}} : {{trad-|fo|fráfaringarpróvtøka}}, {{trad-|fo|fráfaringarprógv}}
+* {{T|li}} : {{trad+|li|sjoealoetkómme}}, {{trad+|li|bak}}
+* {{T|nl}} : {{trad+|nl|eindexamen}}, {{trad-|nl|abituriënten-examen}}, {{trad-|nl|einddiploma}}
+{{)}}
+
+{{-holo-}}
+* [[diplôme]]
+
+{{-pron-}}
+* {{pron-rég|France &lt;!--  précisez svp la ville ou la région --&gt;|le ba.ka.lo.ʁea|audio=Fr-baccalauréat.ogg|titre=le baccalauréat}}
+
+{{-homo-}}
+* [[baccalauréats]]
+
+{{-voir-}}
+* {{WP}}
+
+{{-réf-}}
+* {{Import:DAF8}}
+{{clé de tri|baccalaureat}}
+
+[[Catégorie:français de Belgique]]
+[[Catégorie:Lexique en français de l’éducation]]
+
+[[de:baccalauréat]]
+[[el:baccalauréat]]
+[[en:baccalauréat]]
+[[fi:baccalauréat]]
+[[io:baccalauréat]]
+[[ko:baccalauréat]]
+[[lt:baccalauréat]]
+[[pl:baccalauréat]]
+[[tr:baccalauréat]]
+[[vi:baccalauréat]]
+[[zh:baccalauréat]]</text>
+    </revision>
+  </page>
 </mediawiki>

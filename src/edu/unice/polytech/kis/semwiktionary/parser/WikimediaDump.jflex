@@ -699,7 +699,8 @@ space = ({whitespace}|{newline})
 
 	":"{optionalSpaces}|"'''"|";"
 	{
-		yypushstate(NYM_CONTEXT);
+		yypushstate();
+		yybegin(NYM_CONTEXT);
 	}
 
 	"*"([^\[]|"["[^\[])*"[["
@@ -755,7 +756,8 @@ space = ({whitespace}|{newline})
 	
 	":"{optionalSpaces}|"'''"|";"
 	{
-		yypushstate(NYM_CONTEXT);
+		yypushstate();
+		yybegin(NYM_CONTEXT);
 	}
 
 	"*"+{optionalSpaces}"[["

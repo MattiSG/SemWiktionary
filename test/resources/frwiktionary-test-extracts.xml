@@ -3516,6 +3516,65 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
     </revision>
   </page>
   <page>
+    <title>sang bleu</title>
+    <id>434466</id>
+    <revision>
+      <id>9543656</id>
+      <timestamp>2011-10-12T19:07:36Z</timestamp>
+      <contributor>
+        <username>JackPotte</username>
+        <id>6137</id>
+      </contributor>
+      <minor />
+      <text xml:space="preserve">== {{=fr=}} ==
+
+{{-étym-}}
+:Cette locution serait le calque de l’{{étyl|es|fr|mot=sangre azul}} : les grandes familles [[castillan]]es se flattaient de leur [[ascendance]] exempte de [[sang]] [[étranger]], [[maure]] ou [[juif]]. Leurs représentants avaient un [[teint]] plus clair et leurs [[veine]]s bleutées étaient ainsi apparentes.
+
+{{-nom-|fr}}
+'''sang bleu''' {{pron|sɑ̃ blø|fr}} {{m}} 
+# [[synonyme|Synonyme]] de ''[[noblesse]]''.
+#*''Ainsi lui Jacques l'Aumône se trouvait être de '''sang''' non seulement '''bleu''' mais royal. À sa majorité, il hérite du château d'Amboise et ne tarde pas à se marier avec la fille du roi d'Italie.'' {{source|Queneau, ''Loin de Rueil'', 1944, p. 35}}
+
+{{-exp-}}
+* [[avoir le sang bleu]]
+
+{{-trad-}}
+{{(}}
+* {{T|en}} : {{trad+|en|blue-blood}}
+* {{T|da}} : {{trad-|da|blåt blod}}
+* {{T|eo}} : {{trad-|eo|blusanga}}
+* {{T|el}} : {{trad+|el|γαλαζοαίματος|R=galazoématos}}
+* {{T|is}} : {{trad-|is|blátt blóð}}
+* {{T|pl}} : {{trad+|pl|błękitna krew}}
+* {{T|sv}} : {{trad-|sv|blått blod}}
+* {{T|cs}} : {{trad-|cs|modrá krev}}
+{{)}}
+
+{{-homo-}}
+* [[sangbleu]]
+
+[[Catégorie:Lexique en français de la noblesse]]
+
+[[pl:sang bleu]]</text>
+  </revision>
+  </page>
+  <page>
+  <title>avoir le sang bleu</title>
+    <id>30398</id>
+    <redirect />
+    <revision>
+      <id>8418766</id>
+      <timestamp>2011-01-17T06:05:58Z</timestamp>
+      <contributor>
+        <username>ArséniureDeGallium</username>
+        <id>1944</id>
+      </contributor>
+      <comment>Redirection vers [[sang bleu]]</comment>
+      <text xml:space="preserve">#REDIRECT [[sang bleu]]</text>
+    </revision>
+  </page>
+  <page>
     <title>Modèle:-conj-coord-</title>
     <id>40929</id>
     <restrictions>edit=autoconfirmed:move=autoconfirmed</restrictions>

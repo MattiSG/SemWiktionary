@@ -619,7 +619,7 @@ space = ({whitespace}|{newline})
 		leaveSection();
 	}
 
-	([^{<\r\n])+|"{"[^{]|.|{newline}
+	([^{<\r\n&])+|"{"[^{]|.|{newline}
 	{
 		// in Section: suppress output
 	}
@@ -769,7 +769,7 @@ space = ({whitespace}|{newline})
 		yypopstate();
 	}
 	
-	"!--"([^-]|"-"[^-]|"--"[^&])+"--&gt;"
+	"!--"([^-]|"-"[^-]|"--"[^&]|"--&"[^g])+"--&gt;"
 	{
 		// ignore HTML comments
 		yypopstate();
@@ -881,7 +881,7 @@ space = ({whitespace}|{newline})
 		leaveSection();
 	}
 
-	([^-:;'*\r\n]|"-"[^}])+|.|{newline}
+	([^-:;'*\r\n&]|"-"[^}])+|.|{newline}
 	{
 		// in SimpleNym: suppress output
 	}
@@ -944,7 +944,7 @@ space = ({whitespace}|{newline})
 		leaveSection();
 	}
 
-	([^-:;'*\r\n]|"-"[^}])+|.|{newline}
+	([^-:;'*\r\n&]|"-"[^}])+|.|{newline}
 	{
 		// in ComplexNym: suppress output
 	}

@@ -582,14 +582,17 @@ space = ({whitespace}|{newline})
 		yypopstate();
 	}
 	
+
+	"|"|"("|"-"|")"
+	{
+		// in PATTERN
+		// ignore | (parameter separators)
+		// ignore (-) (tables markers, presentational only)
+	}
+	
 	[^|}]+
 	{
 		logError("Unexpected pattern value: '" + yytext() + "'");
-	}
-	
-	"|"
-	{
-		// in PATTERN: ignore pipes (parameter separators)
 	}
 }
 

@@ -25,6 +25,11 @@ import info.bliki.wiki.model.WikiModel;
 							  PREV_ERR = System.err;
 							  
 	private final static int LOG_FREQUENCY = 100; // a count message will be output to the console on every multiple of this frequency
+	/** Some nested elements (definitions and hierarchical relations) need to be stored in list-type structures. This variable defines their size.
+	* The size needs to be set in advance to allow for badly-nested elements.
+	* Most common seen maximal value is 3. As a security, we set it to a much higher value.
+	*/
+	private final static int BUFFER_SIZE = 8;
 	
 	private Stack<Integer> statesStack = new Stack<Integer>();
 	private MutableWord currentWord;
@@ -41,6 +46,16 @@ import info.bliki.wiki.model.WikiModel;
 	private Definition currentDefinition;
 	private int definitionCount = 0;
 	private int definitionDepth = -1; // the depth is the number of sharps (#) in front of a definition, minus one (that's optimization to have only one substraction for the 0-based indexed list). So, to trigger comparisons, we need to be negative.
+	
+	private Vector<Word> complexNyms;	// Used for hyponyms, hyperonyms, holonyms, and meronyms
+	private int complexDepth;		// Used to calculate the depth of the list (number of '*')
+	
+	/**Used for complexNym algorithm :
+	 *
+	 * - `true` = more and more precise (ex: hyponyms)
+	 * - `false` = less and less precise (ex: hyperonyms)
+	 */
+	private boolean currentComplexNymIsNarrower;
 	
 	private String buffer = ""; // an all-purpose buffer, to be initialized by groups that need it
 	
@@ -71,14 +86,31 @@ import info.bliki.wiki.model.WikiModel;
 		PREV_OUT.println("Word,Parsing time (ns),Syntax errors,Parser errors");
 		PREV_OUT.print("**Init**"); // for logging purposes
 	
-		definitionsBuffer = new Vector<String>(8); // maximum level of foreseeable nested definitions
+		definitionsBuffer = new Vector<String>(BUFFER_SIZE, 2); // second param is increment size.
 		relationsMap = new HashMap<String, Relation>(3);
 
 		relationsMap.put("syn", Relation.SYNONYM);
 		relationsMap.put("ant", Relation.ANTONYM);
 		relationsMap.put("tropo", Relation.TROPONYM);
+		relationsMap.put("hypo", Relation.HYPONYM);
+		relationsMap.put("hyper", Relation.HYPONYM);
+		relationsMap.put("méro", Relation.MERONYM);
+		relationsMap.put("holo", Relation.MERONYM);
+		
+		complexNyms = new Vector<Word>(BUFFER_SIZE, 2); // second param is increment size.
+		resetComplexNymsList();
 	}
 	
+	/** Reset the list of complexNyms: the list is cleared, and its size is forced to `BUFFER_SIZE`.
+	 *  If a user has made a syntax error, the list entry is set to `null` and is ignored.
+	 *  _Example: * to *** (element at depth 2 is missing)_
+	 */
+	private void resetComplexNymsList() {
+		complexDepth = 1;
+		complexNyms.clear();
+		complexNyms.setSize(BUFFER_SIZE);
+	}
+
 	private void yypushstate() {
 		statesStack.push(yystate());
 	}
@@ -207,7 +239,6 @@ newline = (\r|\n|\r\n)
 optionalSpaces = ({whitespace}*)
 space = ({whitespace}|{newline})
 
-
 // All states declarations are on their own line to minimize conflicts.
 
 // These states are exclusive, i.e. they may match only with patterns namespaced by them.
@@ -248,9 +279,17 @@ space = ({whitespace}|{newline})
 %state DEFINITION
 %state DEFINITION_DOMAIN
 %state DEFINITION_EXAMPLE
+
+// simple relations such as synonyms, antonyms and troponyms
 %state SIMPLENYM
-%state SPNM_CONTEXT
 %state SPNM_WORD
+
+// complex relations such as hyponyms, hyperonyms, holonyms and meronyms
+%state COMPLEXNYM
+%state CPNM_WORD
+
+// context for any relation (simple and complex relations)
+%state NYM_CONTEXT
 
 // inside a {{source}} pattern (origin of a quotation)
 %state SOURCE
@@ -381,6 +420,20 @@ space = ({whitespace}|{newline})
 		buffer = yytext();
 		currentRelation = relationsMap.get(buffer.substring(0, buffer.length() - 4));
 		yybegin(SIMPLENYM);
+	}
+
+	"hypo"|"méro"
+	{
+		currentComplexNymIsNarrower = true;
+		currentRelation = relationsMap.get(yytext());
+		yybegin(COMPLEXNYM);
+	}
+	
+	"hyper"|"holo"
+	{
+		currentComplexNymIsNarrower = false;
+		currentRelation = relationsMap.get(yytext());
+		yybegin(COMPLEXNYM);
 	}
 
 	.
@@ -646,7 +699,8 @@ space = ({whitespace}|{newline})
 
 	":"{optionalSpaces}|"'''"|";"
 	{
-		yybegin(SPNM_CONTEXT);
+		yypushstate();
+		yybegin(NYM_CONTEXT);
 	}
 
 	"*"([^\[]|"["[^\[])*"[["
@@ -662,19 +716,6 @@ space = ({whitespace}|{newline})
 	([^-:;'*\r\n]|"-"[^}])+|.|{newline}
 	{
 		// in SimpleNym: suppress output
-	}
-}
-
-<SPNM_CONTEXT>
-{
-	([^:\n\r]+)
-	{
-		//TODO: context is not handled yet
-	}
-
-	":"|{newline}
-	{
-		yybegin(SIMPLENYM);
 	}
 }
 
@@ -696,15 +737,112 @@ space = ({whitespace}|{newline})
 	}
 }
 
+<COMPLEXNYM>
+{
+	"-}}"
+	{
+		complexNyms.set(0, currentWord);
+	}
+	
+	"{{"[()|]"}}"
+	{
+		// Wiki syntax for tables
+	}
+	
+	"{{"[^}\n\r]*"}}"
+	{
+		// Context or formatting : ignore
+	}
+	
+	":"{optionalSpaces}|"'''"|";"
+	{
+		yypushstate();
+		yybegin(NYM_CONTEXT);
+	}
+
+	"*"+{optionalSpaces}"[["
+	{
+		complexDepth = 1;
+		while (yytext().charAt(complexDepth) == '*') {
+			++complexDepth;
+		}
+		
+		yybegin(CPNM_WORD);
+	}
+
+	{newline}{newline}
+	{
+		resetComplexNymsList();
+		leaveSection();
+	}
+
+	([^-:;'*\r\n]|"-"[^}])+|.|{newline}
+	{
+		// in ComplexNym: suppress output
+	}
+}
+
+<CPNM_WORD>
+{
+	"]]"{optionalSpaces}("("[^)]")")*
+	{	
+		yybegin(COMPLEXNYM);
+	}
+
+	([^\]]|"]"[^\]])+
+	{
+		try {
+			// We get the word object associated to the parsed text and set it in the vector
+			MutableWord currentNym = MutableWord.obtain(yytext());
+			complexNyms.set(complexDepth, currentNym);
+			
+			// We find the last word of the list to link it with
+			int emptyDepth = 1;
+			while (complexNyms.get(complexDepth - emptyDepth) == null)
+				++emptyDepth;
+			
+			// We create the relation between the two words
+			if (currentComplexNymIsNarrower)
+				complexNyms.get(complexDepth - emptyDepth).set(currentRelation, currentNym);
+			else
+				currentNym.set(currentRelation, complexNyms.get(complexDepth - emptyDepth));
+				
+		} catch (Exception e) {
+			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( ");
+			e.printStackTrace(System.err);
+		}
+	}
+}
+
+<NYM_CONTEXT>
+{
+	([^:\n\r]+)
+	{
+		//TODO: context is not handled yet
+	}
+
+	":"|{newline}
+	{
+		yypopstate();
+	}
+}
+
 <TRASH>
 {
-	([^\r\n]|{newline}[^\r\n])*
+	([^\r\n<]|{newline}[^\r\n])*
 	{
 		// Trash
 	}
 
 	{newline}{newline}
 	{
+		// We leave the section : return in MEDIAWIKI state.
 		yybegin(MEDIAWIKI);
+	}
+
+	"<"
+	{
+		// That was the last section, the word is over because of the </page> tag : return in XML state.
+		yybegin(XML);
 	}
 }

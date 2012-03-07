@@ -58,7 +58,7 @@ public class SemWiktionary {
 			}
 			
 			for (String arg: args) {
-				lookup(arg);
+				lookup(arg.replace('_', ' '));
 				println("\n");
 			}
 			return;
@@ -104,22 +104,70 @@ public class SemWiktionary {
 		}
 		
 		println('"' + word.getTitle() + '"');
-		println("--------------------");
+		println("------SYNONYMS------");
 		
 		for (Word syn : word.getSynonyms())
 			println("= " + syn.getTitle());
 		
-		println("--------------------");
+		println("------ANTONYMS------");
 		
 		for (Word ant : word.getAntonyms())
 			println("≠ " + ant.getTitle());
 		
-		println("--------------------");
+		println("------TROPONYMS-----");
 
 		for (Word tro : word.getTroponyms())
 			println("∋ " + tro.getTitle());
 		
-		println("--------------------");
+		println("------HYPONYMS------");
+		
+		for (Word hyp1 : word.getHyponyms()) {
+			println("* " + hyp1.getTitle());
+			for (Word hyp2 : hyp1.getHyponyms()) {
+				println("** " + hyp2.getTitle());
+				for (Word hyp3 : hyp2.getHyponyms()) {
+					println("*** " + hyp3.getTitle());
+				}
+			}
+		}
+		
+		println("-----HYPERONYMS-----");
+		
+		for (Word hyp1 : word.getHyperonyms()) {
+			println("* " + hyp1.getTitle());
+			for (Word hyp2 : hyp1.getHyperonyms()) {
+				println("** " + hyp2.getTitle());
+				for (Word hyp3 : hyp2.getHyperonyms()) {
+					println("*** " + hyp3.getTitle());
+				}
+			}
+		}
+		
+		println("------MERONYMS------");
+		
+		for (Word mer1 : word.getMeronyms()) {
+			println("* " + mer1.getTitle());
+			for (Word mer2 : mer1.getMeronyms()) {
+				println("** " + mer2.getTitle());
+				for (Word mer3 : mer2.getMeronyms()) {
+					println("*** " + mer3.getTitle());
+				}
+			}
+		}
+		
+		println("------HOLONYMS------");
+		
+		for (Word hol1 : word.getHolonyms()) {
+			println("* " + hol1.getTitle());
+			for (Word hol2 : hol1.getHolonyms()) {
+				println("** " + hol2.getTitle());
+				for (Word hol3 : hol2.getHolonyms()) {
+					println("*** " + hol3.getTitle());
+				}
+			}
+		}
+		
+		println("-----DEFINITIONS----");
 		
 		for (Definition def : word.getDefinitions()) {
 			println(def.getPosition() + ". \"" + def.getContent() + "\"");

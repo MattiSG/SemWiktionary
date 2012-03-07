@@ -370,6 +370,14 @@ public class ParserTest {
 						.addExample("\"Le roi de Navarre et le duc d'Anjou ont fui la cour et se sont retirés, l'un dans son royaume, l'autre dans son gouvernement.\" — (Alexandre Dumas père, Henri III)"));
 		
 		result.put("gouvernement", definitions);
+		
+		
+		definitions = new ArrayList<Definition>(1);
+		
+		definitions.add(new Definition("(Belgique) Parler beaucoup.", 1)
+						.addExample("Il ne fait que berdeller."));
+						
+		result.put("berdeller", definitions);
 						
 		return result;
 	}

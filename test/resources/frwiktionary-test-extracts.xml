@@ -4251,4 +4251,27 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
 {{clé de tri|Saint claude}}</text>
     </revision>
   </page>
+  <page>
+    <title>berdeller</title>
+    <id>12780</id>
+    <revision>
+      <id>6364194</id>
+      <timestamp>2009-10-11T15:21:54Z</timestamp>
+      <contributor>
+        <username>Daahbot</username>
+        <id>1041</id>
+      </contributor>
+      <minor />
+      <comment>Bot : mise en forme des exemples et citations</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+
+{{-étym-}}
+: {{ébauche-étym|fr}}
+
+{{-verb-|fr}}
+'''berdeller''' {{1ergroupe}}
+# (''Belgique'') [[parler|Parler]] beaucoup.
+#* ''Il ne fait que '''berdeller'''.''</text>
+    </revision>
+  </page>
 </mediawiki>

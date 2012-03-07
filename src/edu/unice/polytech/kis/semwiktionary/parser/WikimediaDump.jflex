@@ -334,30 +334,6 @@ space = ({whitespace}|{newline})
 %%
 
 
-"</page>"
-{
-	// fallback for all cases
-	logSyntaxError("Out of page, error on word '" + currentNMO + "'");
-	yybegin(XML);
-}
-
-"&lt;"
-{ // HTML tags entrance
-	yypushstate();
-	yybegin(CHARS_HTML);
-}
-
-"&amp;"
-{ // HTML entity replacement
-	buffer += "&";
-}
-
-"&quot;"
-{ // HTML entity replacement
-	buffer += '"';
-}
-
-
 <XML>
 {
 	"<page>"
@@ -617,6 +593,7 @@ space = ({whitespace}|{newline})
 	
 	"</text>"
 	{
+		initSection();
 		yybegin(XML);
 	}
 	
@@ -754,8 +731,8 @@ space = ({whitespace}|{newline})
 		buffer += "\n" + yytext();
 	}
 
-	{newline}
-	{
+	{newline}|"<"
+	{ // "<" for the rare cases where an example ends a <text> node
 		buffer = convertToPlainText(buffer).trim();	// convert before testing for emptiness: `''` is not empty, but the plaintext equivalent is ""
 		if (! buffer.isEmpty()) {
 			currentExample.setContent(buffer);	
@@ -998,4 +975,28 @@ space = ({whitespace}|{newline})
 	{
 		yypopstate();
 	}
+}
+
+
+"<"
+{
+	// fallback for all Mediawiki cases: this is a match for "</text>", but we don't write it fully in order to avoid the longest-match rule to take precedence
+	logSyntaxError("Out of page, error on word '" + currentNMO + "'");
+	yybegin(XML);
+}
+
+"&lt;"
+{ // HTML tags entrance
+	yypushstate();
+	yybegin(CHARS_HTML);
+}
+
+"&amp;"
+{ // HTML entity replacement
+	buffer += "&";
+}
+
+"&quot;"
+{ // HTML entity replacement
+	buffer += '"';
 }

@@ -802,14 +802,19 @@ space = ({whitespace}|{newline})
 }
 
 <TRASH>
-{
-	([^\r\n]|{newline}[^\r\n])*
-	{
-		// Trash
+{	
+	"{{-"
+	{ // the trash is valid for a section only
+		yybegin(H3);
 	}
 
-	{newline}{newline}
+	"<"
+	{ // since the dumpfile has its XML characters escaped, this is the </text> end tag
+		yybegin(XML);
+	}
+	
+	([^{<]|"{"[^{]|"{{"[^-]|"{{-}")+
 	{
-		yybegin(CONTENT_WORD);
+		// Trash
 	}
 }

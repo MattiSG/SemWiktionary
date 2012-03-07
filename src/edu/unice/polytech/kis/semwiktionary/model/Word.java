@@ -47,7 +47,15 @@ public class Word extends NodeMappedObject {
 	 * @return	The complete Word object created or null if the word is not in the database.
 	 */
 	public static Word find(String word) {
-		return NodeMappedObject.<Word>findAndInstanciateSingleOf(Word.class, word);
+		// this method does exactly the same as NodeMappedObject.findAndInstanciateSingle, but is less dynamic to improve performance
+		Node result;
+		try {
+			result = Database.getIndexForName("Word").get(word, true).getSingle();
+		} catch (java.util.NoSuchElementException e) { // there were multiple results for this query
+			throw new RuntimeException("Inconsistent database: multiple nodes found for word '" + word + "' in index!", e );
+		}
+		
+		return (result == null ? null : new Word(result));
 	}
 	
 	/** Tests if the given Word exists in the database.

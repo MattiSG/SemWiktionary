@@ -36,7 +36,15 @@ public class LexicalCategory extends NodeMappedObject {
 	 * @return	The complete LexicalCategory object created or null if no match is found in the database.
 	 */
 	public static LexicalCategory find(String pattern) {
-		return NodeMappedObject.<LexicalCategory>findAndInstanciateSingleOf(LexicalCategory.class, pattern);
+		// this method does exactly the same as NodeMappedObject.findAndInstanciateSingle, but is less dynamic to improve performance
+		Node result;
+		try {
+			result = Database.getIndexForName("LexicalCategory").get(pattern, true).getSingle();
+		} catch (java.util.NoSuchElementException e) { // there were multiple results for this query
+			throw new RuntimeException("Inconsistent database: multiple nodes found for word '" + pattern + "' in index!", e );
+		}
+		
+		return (result == null ? null : new LexicalCategory(result));
 	}
 	
 // CONSTRUCTORS

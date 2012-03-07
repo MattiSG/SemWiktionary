@@ -198,7 +198,7 @@ public abstract class NodeMappedObject {
 	 *
 	 *@see	getIndexKey
 	 */
-    private static Index<Node> getIndex(Class type) {
+    protected static Index<Node> getIndex(Class type) {
 		return getIndex(getIndexKey(type));
 	}
 	
@@ -218,6 +218,7 @@ public abstract class NodeMappedObject {
 	
 	/** Handles index lookup and instanciation if a matching object is found.
 	* The index used is the name of the `resultClass` parameter.
+	* **WARNING: This method is great for prototyping, but its performances do not allow usage on the full parser file.**
 	*
 	*@param	resultClass	the destination type of the found object
 	*@param	query	the index lookup query

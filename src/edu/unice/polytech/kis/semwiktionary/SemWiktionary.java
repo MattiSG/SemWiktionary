@@ -80,19 +80,7 @@ public class SemWiktionary {
 	}
 	
 	public static long count() {
-		print( "Counting… " );
-		
-		long start = System.nanoTime(),
-			 count = 0;
-		
-		for (Node word : Database.getIndexForName(Word.INDEX_KEY).query(Word.INDEX_KEY, "*")) {
-			count++;
-			if ((count % 10000) == 0)
-				print(".");
-		}
-		
-		println(" (took " + ((System.nanoTime() - start) / 10E9) + "s)");
-		return count;
+		return Database.getIndexForName(Word.INDEX_KEY).query(Word.INDEX_KEY, "*").size();
 	}
 	
 	public static void lookup(String input) {

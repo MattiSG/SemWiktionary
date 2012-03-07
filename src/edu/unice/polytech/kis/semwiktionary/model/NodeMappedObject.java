@@ -124,7 +124,7 @@ public abstract class NodeMappedObject {
 	/**
 	*@return	this	for chainability
 	*/
-	protected NodeMappedObject indexAs(String key) {
+	public NodeMappedObject indexAs(String key) {
 		return indexAsOn(key, getIndexKey());
 	}
 	

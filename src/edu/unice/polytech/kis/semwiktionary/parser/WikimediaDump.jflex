@@ -761,8 +761,20 @@ space = ({whitespace}|{newline})
 		// ignore HTML comments
 		yypopstate();
 	}
+	
+	"&lt;"
+	{ // we entered here with "&lt;", so we matched an encoded "<" followed by another "<": a quick `grep` will show that users mean the HTML entities
+		buffer += "«";
+		yypopstate();
+	}
+	
+	" "
+	{ // we entered here with "&lt;", so we matched an encoded "<" followed by a space: a quick `grep` will show that users mean the HTML entity
+		buffer += "<";
+		yypopstate();
+	}
 
-	([^&]|"&"[^g]|"&g"[^t]|"&gt"[^;])+"&gt;"
+	([^& ]|"&"[^g]|"&g"[^t]|"&gt"[^;])+"&gt;"
 	{
 		// ignore every HTML tag
 		yypopstate();
@@ -993,6 +1005,18 @@ space = ({whitespace}|{newline})
 { // HTML tags entrance
 	yypushstate();
 	yybegin(CHARS_HTML);
+}
+
+"&gt;"
+{
+	// it can happen that this is part of the content (cf. "primitive", mathematical definition)
+	//&gt; is caught in CHARS_HTML after &lt;, so this fallback may simply replace the entity
+	buffer += ">";
+}
+
+"&gt;&gt;"
+{
+	buffer += "»";
 }
 
 "&amp;"

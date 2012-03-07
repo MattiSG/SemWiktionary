@@ -4274,4 +4274,73 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
 #* ''Il ne fait que '''berdeller'''.''</text>
     </revision>
   </page>
+  <page>
+    <title>primitive</title>
+    <id>18268</id>
+    <revision>
+      <id>8751923</id>
+      <timestamp>2011-03-08T13:28:33Z</timestamp>
+      <contributor>
+        <username>Luckas-bot</username>
+        <id>9945</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.1) (robot Ajoute: [[tr:primitive]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+
+{{-flex-adj-|fr}}
+'''primitive''' {{pron|pʁi.mi.tiv}}
+# Féminin singulier de '''[[primitif]]'''.
+
+{{-flex-nom-|fr}}
+'''primitive''' {{pron|pʁi.mi.tiv}}
+# Féminin singulier de '''[[primitif]]'''.
+
+{{-nom-|fr}}
+'''primitive''' {{pron|pʁi.mi.tiv}} {{f}}
+# {{mathématiques|fr}} '''''Primitive''' d’une fonction ''f : Fonction [[quelconque]] dont la [[dérivée]] donne la fonction ''f''.
+#* ''On appelle logarithme népérien, noté ln, la '''primitive''' de la fonction f(x) = 1/x  (x&gt;o) s'annulant pour x=1.'' {{source|P. Thuillier &amp; J.-C. Belloc, ''Mathémathiques, T.1 : Analyse'', 1971, p.130}}
+# {{informatique|fr}} [[instruction|Instruction]], [[commande]] ou [[structure]] de [[base]], dans un [[langage]] de [[programmation]].
+#* ''En Java, les chaînes de caractères ''(String)'', caractères ''(char)'', entiers ''(int)'' et booléens ''(boolean)'' sont des '''primitives'''.''
+# {{term|Graphisme}} [[élément|Élément]] [[graphique]] de base, à partir duquel on peut [[construire]] des [[objet]]s [[plus]] [[complexe]]s.
+#* ''La droite, le plan, la sphère sont des '''primitives'''.''
+
+{{-homo-}}
+* [[primitives]] {{cf|primitif}}
+
+&lt;!-- pas d’{{-anagr-}} --&gt;
+
+== {{=en=}} ==
+
+{{-étym-}}
+: Du {{étyl|la|en|mot=primitivus}}.
+
+{{-adj-|en}}
+'''primitive'''
+# [[primitif|Primitif]].
+
+[[cs:primitive]]
+[[el:primitive]]
+[[en:primitive]]
+[[es:primitive]]
+[[et:primitive]]
+[[fi:primitive]]
+[[hu:primitive]]
+[[id:primitive]]
+[[io:primitive]]
+[[it:primitive]]
+[[kn:primitive]]
+[[ku:primitive]]
+[[ml:primitive]]
+[[my:primitive]]
+[[pl:primitive]]
+[[ru:primitive]]
+[[sv:primitive]]
+[[ta:primitive]]
+[[te:primitive]]
+[[tr:primitive]]
+[[vi:primitive]]
+[[zh:primitive]]</text>
+    </revision>
+  </page>
 </mediawiki>

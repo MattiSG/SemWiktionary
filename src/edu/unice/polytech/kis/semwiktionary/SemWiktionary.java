@@ -9,7 +9,7 @@
 package edu.unice.polytech.kis.semwiktionary;
 
 
-import java.util.Scanner;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 
@@ -69,11 +69,17 @@ public class SemWiktionary {
 				"♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒♒");
 		println("Hit ctrl-C to exit.\n");
 		
+		BufferedReader reader = new BufferedReader(new java.io.InputStreamReader(System.in));
+		
 		while (true) {
 			println("\nEnter a word and press enter to look it up: ");
 			
-			Scanner sc = new Scanner(System.in);
-			String lookedup = sc.next();
+			String lookedup = "";
+			try {
+				lookedup = reader.readLine();
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
 			
 			lookup(lookedup);
 		}

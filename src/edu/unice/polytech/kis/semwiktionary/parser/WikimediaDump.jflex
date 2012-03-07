@@ -594,28 +594,17 @@ space = ({whitespace}|{newline})
 		buffer += "\n";
 		yypopstate();
 	}
-
-	"small"|"/small"
-	{
-		// ignore HTML tags
-	}
 	
 	"!--"([^-]|"-"[^-]|"--"[^&])+"--&gt;"
 	{
 		// ignore HTML comments
 		yypopstate();
 	}
-	
-	"&gt;"
-	{ // HTML tags exit
-		yypopstate();
-	}
 
-	.
+	[^&]|"&"[^g]|"&g"[^t]|"&gt"[^;]
 	{
-		// in CHARS_HTML: suppress output, unknown tag
-		
-		logError("Unknown HTML tag (following lines decompose the tag): '" + yytext() + "'");
+		// ignore every HTML tag
+		yypopstate();
 	}
 }
 

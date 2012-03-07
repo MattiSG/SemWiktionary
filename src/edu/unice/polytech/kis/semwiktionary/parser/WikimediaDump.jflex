@@ -77,6 +77,7 @@ import info.bliki.wiki.model.WikiModel;
 		relationsMap.put("syn", Relation.SYNONYM);
 		relationsMap.put("ant", Relation.ANTONYM);
 		relationsMap.put("tropo", Relation.TROPONYM);
+		relationsMap.put("voc", Relation.RELATEDVOC);
 	}
 	
 	private void yypushstate() {
@@ -376,7 +377,7 @@ space = ({whitespace}|{newline})
 		yybegin(NATURE);
 	}
 	
-	("syn"|"ant"|"tropo")"-}}"{newline}
+	("syn"|"ant"|"tropo"|"voc")"-}}"{newline}
 	{
 		buffer = yytext();
 		currentRelation = relationsMap.get(buffer.substring(0, buffer.length() - 4));

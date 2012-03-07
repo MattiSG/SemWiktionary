@@ -176,7 +176,7 @@ public abstract class NodeMappedObject {
 	}
 	
 	/** Gets the index of nodes for the type of this NodeMappedObject-refining.
-	 * Uses the default `getIndexKey()` key for the index.
+	 * Uses the default `getIndexKey()` key to obtain the index.
 	 *
 	 *@see	getIndexKey
 	 */
@@ -184,11 +184,27 @@ public abstract class NodeMappedObject {
 		return getIndex(getIndexKey());
 	}
 	
+	/** Gets the index of nodes for the given type.
+	 * Uses the default `getIndexKey(Class)` key to obtain the index.
+	 *
+	 *@see	getIndexKey
+	 */
+    private static Index<Node> getIndex(Class type) {
+		return getIndex(getIndexKey(type));
+	}
+	
 	/** Gets the index of nodes for the NodeMappedObject-refining type passed in parameter.
 	 * The key used for the index is the one passed in parameter.
 	 */
 	private static Index<Node> getIndex(String indexKey) {
 		return Database.getIndexForName(indexKey); // more info on [Neo4j Index doc](http://api.neo4j.org/current/org/neo4j/graphdb/index/Index.html)
+	}
+	
+	/** Counts the number of elements of the given type accessible in the database.
+	* This is only the number of elements _indexed_. Even though that fits the definition of _accessible_, this is not a totally accurate way of counting elements, especially with redirections.
+	*/
+	public static long count(Class<? extends NodeMappedObject> type) {
+		return getIndex(type).query("*", true).size();
 	}
 	
 	/** Handles index lookup and instanciation if a matching object is found.
@@ -287,7 +303,7 @@ public abstract class NodeMappedObject {
 		
 		NodeMappedObject comparedTo = (NodeMappedObject) o;
 		
-		return comparedTo.node == this.node;
+		return comparedTo.node.equals(this.node);
 	}
 	
 	@Override

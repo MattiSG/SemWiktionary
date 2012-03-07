@@ -6,9 +6,13 @@ import java.util.LinkedList;
 import java.util.ArrayList;
 
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Direction;
+import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Transaction;
 
 import edu.unice.polytech.kis.semwiktionary.database.Database;
+import edu.unice.polytech.kis.semwiktionary.database.Relation;
+import edu.unice.polytech.kis.semwiktionary.model.Example;
 
 
 public class Definition extends NodeMappedObject {
@@ -19,8 +23,8 @@ public class Definition extends NodeMappedObject {
 	 */
 	private String content;
 	/** The examples of this content.
-	 */
-	private List<String> listExample;
+	*/
+	private List<Example> listExample = new LinkedList<Example>();
 	/** The domains of this definition.
 	 */
 	private List<String> listDomain;
@@ -45,7 +49,6 @@ public class Definition extends NodeMappedObject {
 		this.setContent(definition)
 			.setPosition(position);
 		
-		this.listExample = new LinkedList<String>();
 		this.listDomain = new LinkedList<String>();
 	}
 	
@@ -68,10 +71,9 @@ public class Definition extends NodeMappedObject {
 	
 	/** Returns all examples of this definition.
 	 */
-	public List<String> getExamples() {
-		if (listExample == null) {
-			listExample = new ArrayList<String>(1);
-			listExample.add(this.get("example"));
+	public List<Example> getExamples() {
+		if (listExample.isEmpty()) {
+			this.fetchExamples();
 		}
 		
 		return this.listExample;
@@ -95,16 +97,33 @@ public class Definition extends NodeMappedObject {
 	}
 
 // MODIFIERS
-	
+
+	/** Adds the given example to this definition.
+	 * The passed in `String` will be automatically wrapped in an `Example`.
+	 *
+	 * @param	exampleContent	The content of the example to add.
+	 * @return	this	for chainability
+	 */
+	public Definition addExample(String exampleContent) {
+		return this.addExample(new Example(exampleContent));
+	}
+		
 	/** Adds the given example to this definition.
 	 *
 	 * @param	example	The example to add
 	 * @return	this	for chainability
 	 */
-	public Definition addExample(String example) {
+	public Definition addExample(Example example) {
+		Database.link(this.node, example.node, Relation.EXAMPLE);
 		this.listExample.add(example);
-		this.set("example", example); // TODO: this stores only the last one
 		
+		return this;
+	}
+	
+	public Definition addExamples(Iterable<Example> examples) {
+		for (Example example : examples)
+			this.addExample(example);
+
 		return this;
 	}
 	
@@ -139,11 +158,38 @@ public class Definition extends NodeMappedObject {
 		
 		return this;
 	}
+	
+// DATABASE ACCESS
+	
+	/** Loads the examples for this Definition from the database.
+	 */
+	protected void fetchExamples() {
+		this.listExample.addAll(this.<Example>get(Relation.EXAMPLE));
+	}
 
 // DESTRUCTORS
 	
 	protected void onDelete() {
 		// nothing to propagate
+	}
+	
+	public Definition clearExamples() {
+		Transaction tx = Database.getDbService().beginTx();
+		
+		try {
+			for (Relationship relation : node.getRelationships(Direction.OUTGOING, Relation.EXAMPLE))
+				relation.delete(); // delete the relationship first to be able to delete the linked nodes
+			for (Example example : this.listExample)
+				example.delete(); // let the Example delete itself
+			
+			tx.success();
+		} finally {
+			tx.finish();
+		}
+		
+		this.listExample.clear();
+		
+		return this;
 	}
 
 // OVERRIDES

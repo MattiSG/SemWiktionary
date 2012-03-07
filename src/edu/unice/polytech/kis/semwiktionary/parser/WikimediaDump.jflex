@@ -27,6 +27,11 @@ import info.bliki.wiki.model.WikiModel;
 							  PREV_ERR = System.err;
 							  
 	private final static int LOG_FREQUENCY = 100; // a count message will be output to the console on every multiple of this frequency
+	/** Some nested elements (definitions and hierarchical relations) need to be stored in list-type structures. This variable defines their size.
+	* The size needs to be set in advance to allow for badly-nested elements.
+	* Most common seen maximal value is 3. As a security, we set it to a much higher value.
+	*/
+	private final static int BUFFER_SIZE = 8;
 	
 	private Stack<Integer> statesStack = new Stack<Integer>();
 	private NodeMappedObject currentNMO;
@@ -41,8 +46,19 @@ import info.bliki.wiki.model.WikiModel;
 	//@}
 
 	private Definition currentDefinition;
+	private Example currentExample;
 	private int definitionCount = 0;
 	private int definitionDepth = -1; // the depth is the number of sharps (#) in front of a definition, minus one (that's optimization to have only one substraction for the 0-based indexed list). So, to trigger comparisons, we need to be negative.
+	
+	private Vector<NodeMappedObject> complexNyms;	// Used for hyponyms, hyperonyms, holonyms, and meronyms
+	private int complexDepth;		// Used to calculate the depth of the list (number of '*')
+	
+	/**Used for complexNym algorithm :
+	 *
+	 * - `true` = more and more precise (ex: hyponyms)
+	 * - `false` = less and less precise (ex: hyperonyms)
+	 */
+	private boolean currentComplexNymIsNarrower;
 	
 	private String buffer = ""; // an all-purpose buffer, to be initialized by groups that need it
 	
@@ -73,16 +89,33 @@ import info.bliki.wiki.model.WikiModel;
 		PREV_OUT.println("Word,Parsing time (ns),Syntax errors,Parser errors");
 		PREV_OUT.print("**Init**"); // for logging purposes
 	
-		definitionsBuffer = new Vector<String>(8); // maximum level of foreseeable nested definitions
+		definitionsBuffer = new Vector<String>(BUFFER_SIZE, 2); // second param is increment size.
 		relationsMap = new HashMap<String, Relation>(3);
 
 		relationsMap.put("syn", Relation.SYNONYM);
 		relationsMap.put("ant", Relation.ANTONYM);
 		relationsMap.put("tropo", Relation.TROPONYM);
+		relationsMap.put("hypo", Relation.HYPONYM);
+		relationsMap.put("hyper", Relation.HYPONYM);
+		relationsMap.put("méro", Relation.MERONYM);
+		relationsMap.put("holo", Relation.MERONYM);
+		
+		complexNyms = new Vector<NodeMappedObject>(BUFFER_SIZE, 2); // second param is increment size.
+		resetComplexNymsList();
 	}
 	
+	/** Reset the list of complexNyms: the list is cleared, and its size is forced to `BUFFER_SIZE`.
+	 *  If a user has made a syntax error, the list entry is set to `null` and is ignored.
+	 *  _Example: * to *** (element at depth 2 is missing)_
+	 */
+	private void resetComplexNymsList() {
+		complexDepth = 1;
+		complexNyms.clear();
+		complexNyms.setSize(BUFFER_SIZE);
+	}
+
 	/** Pushes the current state to the states stack.
-	*/
+	 */
 	private void yypushstate() {
 		yypushstate(yystate());
 	}
@@ -223,7 +256,6 @@ newline = (\r|\n|\r\n)
 optionalSpaces = ({whitespace}*)
 space = ({whitespace}|{newline})
 
-
 // All states declarations are on their own line to minimize conflicts.
 
 // These states are exclusive, i.e. they may match only with patterns namespaced by them.
@@ -269,9 +301,18 @@ space = ({whitespace}|{newline})
 %state DEFINITION
 %state DEFINITION_DOMAIN
 %state DEFINITION_EXAMPLE
+
+// simple relations such as synonyms, antonyms and troponyms
 %state SIMPLENYM
-%state SPNM_CONTEXT
 %state SPNM_WORD
+%state CHARS_HTML
+
+// complex relations such as hyponyms, hyperonyms, holonyms and meronyms
+%state COMPLEXNYM
+%state CPNM_WORD
+
+// context for any relation (simple and complex relations)
+%state NYM_CONTEXT
 
 // <title> node of a "Modèle:-***-" page, describing a pattern
 %state MODEL
@@ -294,6 +335,17 @@ space = ({whitespace}|{newline})
 	// fallback for all cases
 	logSyntaxError("Out of page, error on word '" + currentNMO + "'");
 	yybegin(XML);
+}
+
+"&lt;"
+{ // HTML tags entrance
+	yypushstate();
+	yybegin(CHARS_HTML);
+}
+
+"&amp;"
+{ // HTML entity replacement
+	buffer += "&";
 }
 
 
@@ -458,6 +510,20 @@ space = ({whitespace}|{newline})
 		yybegin(SIMPLENYM);
 	}
 	
+	"hypo"|"méro"
+	{
+		currentComplexNymIsNarrower = true;
+		currentRelation = relationsMap.get(yytext());
+		yybegin(COMPLEXNYM);
+	}
+	
+	"hyper"|"holo"
+	{
+		currentComplexNymIsNarrower = false;
+		currentRelation = relationsMap.get(yytext());
+		yybegin(COMPLEXNYM);
+	}
+	
 	"voc"|"apr"|"drv"|"étym"|"pron"|"trad"|"voir"|"réf"|"cf"|"note"
 	{ // all these sections are deliberately ignored
 		// voc, apr: similar vocabulary ("vocabulaire apparenté")
@@ -468,9 +534,10 @@ space = ({whitespace}|{newline})
 		// voir, réf: external references
 		// cf: internal references
 		// note: contributors' notes
-		
+
 		yybegin(TRASH);
 	}
+
 	
 	"}}"
 	{ // the "{{-}}" marker is used in tables, as a column separator
@@ -532,6 +599,7 @@ space = ({whitespace}|{newline})
 	{newline}#+("*"|":"){optionalSpaces}
 	{
 		// the colon is not standard, but is used in some words ("siège")
+		currentExample = new Example();
 		buffer = "";
 		yybegin(DEFINITION_EXAMPLE);
 	}
@@ -571,7 +639,7 @@ space = ({whitespace}|{newline})
 		yybegin(FCHIM_PATTERN);
 	}
 	
-	"}}"
+	"}}"|" "
 	{
 		yypopstate();
 	}
@@ -582,7 +650,6 @@ space = ({whitespace}|{newline})
 		yypopstate();
 	}
 	
-
 	"|"|"("|"-"|")"
 	{
 		// in PATTERN
@@ -665,7 +732,7 @@ space = ({whitespace}|{newline})
 		yybegin(PATTERN);
 	}
 
-	([^\r\n{]|"{"[^{])+|"{{"
+	([^\r\n{&<]|"{"[^{])+|"{{"
 	{
 		buffer += yytext();
 	}
@@ -674,16 +741,39 @@ space = ({whitespace}|{newline})
 	{
 		// the colon means we're in the same example, but on another line
 		buffer += "\n" + yytext();
-	}	
+	}
 
 	{newline}
 	{
 		buffer = convertToPlainText(buffer).trim();	// convert before testing for emptiness: `''` is not empty, but the plaintext equivalent is ""
-		if (! buffer.isEmpty())
-			currentDefinition.addExample(buffer);
+		if (! buffer.isEmpty()) {
+			currentExample.setContent(buffer);	
+			currentDefinition.addExample(currentExample);
+		}
 		
 		yypushback(1);	// <SECTION> needs it to match
 		yybegin(SECTION);
+	}
+}
+
+<CHARS_HTML>
+{
+	"br"{space}*"/"?{space}*"&gt;"
+	{
+		buffer += "\n";
+		yypopstate();
+	}
+	
+	"!--"([^-]|"-"[^-]|"--"[^&])+"--&gt;"
+	{
+		// ignore HTML comments
+		yypopstate();
+	}
+
+	([^&]|"&"[^g]|"&g"[^t]|"&gt"[^;])+"&gt;"
+	{
+		// ignore every HTML tag
+		yypopstate();
 	}
 }
 
@@ -694,6 +784,20 @@ space = ({whitespace}|{newline})
 		// in SOURCE: suppress output
 	}
 
+	"}}"{newline}
+	{
+		buffer += ")";
+		yypushback(1);	// <DEFINITION_EXAMPLE> needs it to match
+		yybegin(DEFINITION_EXAMPLE);
+	}
+
+	"}}."{newline}
+	{
+		buffer += ").";
+		yypushback(1);	// <DEFINITION_EXAMPLE> needs it to match
+		yybegin(DEFINITION_EXAMPLE);
+	}
+
 	([^\r\n}{w]|"}"[^}]|"{"[^{]|"w"[^\|])+
 	{
 		buffer += yytext();
@@ -701,7 +805,6 @@ space = ({whitespace}|{newline})
 
 	{newline}
 	{
-		buffer += ")";
 		yypushback(1);	// <DEFINITION_EXAMPLE> needs it to match
 		yybegin(DEFINITION_EXAMPLE);
 	}
@@ -759,7 +862,8 @@ space = ({whitespace}|{newline})
 
 	":"{optionalSpaces}|"'''"|";"
 	{
-		yybegin(SPNM_CONTEXT);
+		yypushstate();
+		yybegin(NYM_CONTEXT);
 	}
 
 	"*"([^\[]|"["[^\[])*"[["
@@ -775,19 +879,6 @@ space = ({whitespace}|{newline})
 	([^-:;'*\r\n]|"-"[^}])+|.|{newline}
 	{
 		// in SimpleNym: suppress output
-	}
-}
-
-<SPNM_CONTEXT>
-{
-	([^:\n\r]+)
-	{
-		//TODO: context is not handled yet
-	}
-
-	":"|{newline}
-	{
-		yybegin(SIMPLENYM);
 	}
 }
 
@@ -809,6 +900,95 @@ space = ({whitespace}|{newline})
 	}
 }
 
+<COMPLEXNYM>
+{
+	"-}}"
+	{
+		complexNyms.set(0, currentNMO);
+	}
+	
+	"{{"[()|]"}}"
+	{
+		// Wiki syntax for tables
+	}
+	
+	"{{"[^}\n\r]*"}}"
+	{
+		// Context or formatting : ignore
+	}
+	
+	":"{optionalSpaces}|"'''"|";"
+	{
+		yypushstate();
+		yybegin(NYM_CONTEXT);
+	}
+
+	"*"+{optionalSpaces}"[["
+	{
+		complexDepth = 1;
+		while (yytext().charAt(complexDepth) == '*') {
+			++complexDepth;
+		}
+		
+		yybegin(CPNM_WORD);
+	}
+
+	{newline}{newline}
+	{
+		resetComplexNymsList();
+		leaveSection();
+	}
+
+	([^-:;'*\r\n]|"-"[^}])+|.|{newline}
+	{
+		// in ComplexNym: suppress output
+	}
+}
+
+<CPNM_WORD>
+{
+	"]]"{optionalSpaces}("("[^)]")")*
+	{	
+		yybegin(COMPLEXNYM);
+	}
+
+	([^\]]|"]"[^\]])+
+	{
+		try {
+			// We get the word object associated to the parsed text and set it in the vector
+			MutableWord currentNym = MutableWord.obtain(yytext());
+			complexNyms.set(complexDepth, currentNym);
+			
+			// We find the last word of the list to link it with
+			int emptyDepth = 1;
+			while (complexNyms.get(complexDepth - emptyDepth) == null)
+				++emptyDepth;
+			
+			// We create the relation between the two words
+			if (currentComplexNymIsNarrower)
+				complexNyms.get(complexDepth - emptyDepth).set(currentRelation, currentNym);
+			else
+				currentNym.set(currentRelation, complexNyms.get(complexDepth - emptyDepth));
+		} catch (Exception e) {
+			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentNMO + "'  :( ");
+			e.printStackTrace(System.err);
+		}
+	}
+}
+
+<NYM_CONTEXT>
+{
+	([^:\n\r]+)
+	{
+		//TODO: context is not handled yet
+	}
+
+	":"|{newline}
+	{
+		yypopstate();
+	}
+}
+
 <TRASH>
 {	
 	"{{-"
@@ -818,6 +998,7 @@ space = ({whitespace}|{newline})
 
 	"<"
 	{ // since the dumpfile has its XML characters escaped, this is the </text> end tag
+	  // that was the last section, the word is over: return in XML state
 		yybegin(XML);
 	}
 	

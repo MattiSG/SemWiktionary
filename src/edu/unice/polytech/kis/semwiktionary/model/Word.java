@@ -124,6 +124,30 @@ public class Word extends NodeMappedObject {
 		return this.<Word>get(Relation.TROPONYM);
 	}
 	
+	/** Returns all hyponyms of this Word.
+	 */
+	public Collection<Word> getHyponyms() {
+		return this.<Word>get(Relation.HYPONYM, Direction.OUTGOING);
+	}
+	
+	/** Returns all hyperonyms of this Word.
+	 */
+	public Collection<Word> getHyperonyms() {
+		return this.<Word>get(Relation.HYPONYM, Direction.INCOMING);
+	}
+	
+	/** Returns all meronyms of this Word.
+	 */
+	public Collection<Word> getMeronyms() {
+		return this.<Word>get(Relation.MERONYM, Direction.OUTGOING);
+	}
+	
+	/** Returns all holonyms of this Word.
+	 */
+	public Collection<Word> getHolonyms() {
+		return this.<Word>get(Relation.MERONYM, Direction.INCOMING);
+	}
+	
 // DATABASE ACCESS
 	
 	/** Loads the definitions for this Word from the database.
@@ -137,5 +161,16 @@ public class Word extends NodeMappedObject {
 	@Override
 	public String toString() {
 		return this.getTitle();
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this.getClass().isInstance(o))
+			return this.title.equals(((Word) o).getTitle());
+		
+		if (String.class.isInstance(o))
+			return this.title.equals(o);
+		
+		return false;
 	}
 }

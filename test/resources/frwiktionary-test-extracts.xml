@@ -823,12 +823,9 @@ Quelques infos sur [[Discuter:accueil|cette page]] &lt;small&gt;Attention : les 
 {{fr-accord-mixte|m=vieux|pm=vjø|fs=vieille|pf=vjɛj}}
 '''vieux''' ('''vieil''' devant une voyelle ou un ''h'' muet)
 # D’un [[certain]] [[âge]] ([[relatif]] à un [[autre]]).
+#* ''Dernièrement, j'avais eu la maladresse de m’enrhumer en pleine chaleur. Voilà pourtant ce que c'est que de devenir '''vieux''' : on ne peut résister à rien.'' {{source|{{w|Émile Thirion}}, ''La Politique au village'', p. 125, Fischbacher, 1896}}
 #* ''Il ne rendait visite qu'à sa mère et encore, cette dernière, entourée de '''vieilles''' personnes ridicules et sujette elle-même à des radotages, lui agaçait les nerfs […].'' {{source|{{w|Francis Carco}}, ''L'Homme de Minuit'', 1938}}
 #* ''Je suis le plus '''vieux''' de ma classe.''
-#* ''Elle est bien '''vieille'''.''
-#* '''''Vieux''' cheval.''
-#* '''''Vieille''' ville.''
-#* '''''Vieil''' oiseau.''
 #* ''Un '''vieil''' homme, une '''vieille''' femme.''
 #* ''De '''vieilles''' gens.''
 #* ''Se faire '''vieux''''' : [[vieillir|Vieillir]], [[prendre de l’âge]] : ''Cet acteur se fait '''vieux'''.''
@@ -2094,6 +2091,149 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
     </revision>
   </page>
   <page>
+    <title>océan</title>
+    <id>23911</id>
+    <revision>
+      <id>9691632</id>
+      <timestamp>2011-11-25T11:56:30Z</timestamp>
+      <contributor>
+        <username>JackBot</username>
+        <id>12968</id>
+      </contributor>
+      <minor />
+      <comment>[[Wiktionnaire:Structure des articles|Autoformatage]]</comment>
+      <text xml:space="preserve">{{voir|Océan|oceán|ocean}}
+
+== {{=fr=}} ==
+{{-étym-}}
+: Du {{étyl|la|fr|mot=Oceanus}}, [[emprunté]] au {{étyl|grc|fr|mot=Ὠκεανός|tr=Ôkeanos}} (« Océan », [[dieu]] de la [[mer]] ou « ''[[Atlantique]]'' »).
+
+{{-nom-|fr}}
+{{fr-rég|ɔ.se.ɑ̃}}
+[[Image:World map ocean locator-fr.svg|thumb|Carte des '''océans''']]
+'''océan''' {{pron|ɔ.se.ɑ̃|fr}} {{m}}
+# Étendue d’eau salée couvrant la majeure partie de la terre.
+#* ''Naviguer sur l’'''océan'''. — Une île perdue dans l’immensité de l’'''océan'''.''
+#* ''Ne jouerons-nous jamais&lt;br
+/&gt;Ne serait-ce qu’une heure,&lt;br
+/&gt;Rien que quelques minutes, &lt;br
+/&gt;'''Océan''' solennel,&lt;br
+
+/&gt;Sans que tu aies cet air&lt;br
+/&gt;De t’occuper ailleurs ?''  {{source|[[q:Eugène Guillevic|Eugène Guillevic]], ''Carnac'', 1961}}
+# Chacune des quatre ou cinq [[division]]s [[majeur]]es de l’océan :
+#* ''L’'''océan''' Atlantique.''
+# {{par ext}} Grande étendue d’eau.
+#* ''[…] et, à cet instant précis, le halètement sourd d’une locomotive et son cri rauque montant dans un jet de vapeur, m’emplirent d'un tel tumulte de sensations heurtées qu’eussé-je vu l’'''océan''' surgir et balayer de contraste le hideux mur de l’hôpital Lariboisière, ma stupéfaction n’aurait pas été plus profonde.'' {{source|{{w|Francis Carco}}, ''Messieurs les vrais de vrai'', 1927}}
+#* ''Lors de mon voyage en Grèce j’ai pu admirer la beauté de l’'''océan''' qui s’offrait à mes yeux.''
+# {{figuré|fr}} Grande étendue.
+#* ''Vers l’est, l’'''océan''' nuageux s’étendait bleu sombre à perte de vue, et Bert crut qu’il contemplait l’hémisphère entier du monde.'' {{source|[[w:H.G. Wells|H.G. Wells]], ''{{w|La Guerre dans les Airs}}'', 1908 - Traduit en 1910 par Henry-D. Davray &amp; B. Kozakiewicz, Mercure de France, p.95, éd. 1921}}
+#* ''Rocamadour : le Mont-Saint-Michel  d’un '''océan''' de pierre et tout aussi émouvant que celui des flots.'' {{source|Ludovic Naudeau, ''La France se regarde. Le problème de la natalité'' -1931}}
+
+{{-apr-}}
+* [[interocéanique]]
+* [[océanaute]]
+* [[océane]]
+* [[océanesque]]
+* [[océanide]]
+* [[Océanides]]
+* [[Océanie]]
+* [[océanien]]
+* [[océanique]]
+* [[océaniste]]
+* [[océanographe]]
+* [[océanographie]]
+* [[océanographique]]
+* [[océanologie]]
+* [[océanologique]]
+* [[océanologue]]
+* [[transocéanien]]
+* [[transocéanique]]
+
+{{-exp-}}
+* [[océan des âges]], {{poés|nocat=1}} Le [[temps]].
+
+{{-hypo-}}
+* [[Atlantique]]
+* [[Pacifique]]
+* [[océan Indien]]
+* [[océan Arctique]]
+* [[océan Austral]] ou [[océan Antarctique]]
+
+{{-trad-}}
+{{(}}
+* {{T|af}} : {{trad-|af|oseaan}}
+* {{T|de}} : {{trad+|de|Ozean}}, {{trad+|de|Weltmeer}}
+* {{T|en}} : {{trad+|en|ocean}}
+* {{T|bg}} : {{trad-|bg|океан|R=okean}} {{m}} (1)
+* {{T|ca}} : {{trad+|ca|oceà}}
+* {{T|zh}} : {{trad+|zh|大洋|R=dàyáng}}
+* {{T|ko}} : {{trad+|ko|대양|R=daeyang}}
+* {{T|da}} : {{trad-|da|ocean}}
+* {{T|es}} : {{trad+|es|océano}}
+{{-}}
+* {{T|eo}} : {{trad+|eo|oceano}}
+* {{T|fo}} : {{trad-|fo|hav}}
+* {{T|fi}} : {{trad+|fi|valtameri}}
+* {{T|fy}} : {{trad-|fy|oseaan}}
+* {{T|gd}} : {{trad-|gd|cuan}}
+* {{T|el}} : {{trad+|el|ωκεανός|R=okeanόs}} {{m}}
+* {{T|io}} : {{trad+|io|oceano}}
+* {{T|iu}} : {{trad-|iu|ᐃᒫᓗᒃ|R=[[imaaluk]]}}
+* {{T|is}} : {{trad+|is|haf}}, {{trad+|is|úthaf}}
+{{-}}
+* {{T|ja}} : {{trad-|ja|大洋|R=taiyō}}
+* {{T|lui}} : {{trad--|lui|mo̱o̱mat}}
+* {{T|nl}} : {{trad+|nl|oceaan}}, {{trad-|nl|wereldzee}}
+* {{T|pap}} : {{trad--|pap|osean}}
+* {{T|pt}} : {{trad+|pt|oceano}}
+* {{T|se}} : {{trad--|se|áhpi}}, {{trad--|se|mearra}}
+* {{T|sk}} : {{trad-|sk|oceán}}
+* {{T|sv}} : {{trad+|sv|ocean}}
+* {{T|cs}} : {{trad+|cs|oceán}}
+{{)}}
+
+{{-pron-}}
+{{pron|ɔ.se.ɑ̃|fr}}
+* {{pron-rég|France &lt;!--  précisez svp la ville ou la région --&gt;|titre=un océan|œ̃n.o.s.eɑ̃|audio=Fr-océan.ogg}}
+
+{{-anagr-}}
+* [[canoë]]
+
+{{-voir-}}
+* {{WP}}
+
+{{-réf-}}
+* {{Import:DAF8}}
+
+{{clé de tri|ocean}}
+
+[[cs:océan]]
+[[de:océan]]
+[[el:océan]]
+[[en:océan]]
+[[et:océan]]
+[[fi:océan]]
+[[fj:océan]]
+[[gl:océan]]
+[[hu:océan]]
+[[id:océan]]
+[[io:océan]]
+[[ja:océan]]
+[[ko:océan]]
+[[lo:océan]]
+[[lt:océan]]
+[[mg:océan]]
+[[mi:océan]]
+[[oc:océan]]
+[[pl:océan]]
+[[ro:océan]]
+[[sv:océan]]
+[[vi:océan]]
+[[wo:océan]]</text>
+    </revision>
+  </page>
+  <page>
     <title>Chordata</title>
     <id>49521</id>
     <revision>
@@ -2654,6 +2794,156 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
     </revision>
   </page>
   <page>
+    <title>céréale</title>
+    <id>9858</id>
+    <revision>
+      <id>9434922</id>
+      <timestamp>2011-09-16T04:12:14Z</timestamp>
+      <contributor>
+        <username>JackBot</username>
+        <id>12968</id>
+      </contributor>
+      <minor />
+      <comment>[[Wiktionnaire:Structure des articles|Autoformatage]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+{{-étym-}}
+: Du [[latin]] ''[[cerealis]]'' (« [[relatif]] à [[Cérès]] », [[déesse]] des [[moissons]]).
+: Même racine indo-européenne que ''[[creare]]'' (« [[créer]] ») et ''[[crescere]]'' (« [[croître]] »).
+
+{{-nom-|fr}}
+{{fr-rég|se.ʁe.al}}
+[[Image:Getreide.jpg|thumbnail|250px|right|[[épis|Épis]] d’[[orge]], de [[blé]] et de [[seigle]]]]
+'''céréale''' {{pron|se.ʁe.al}} {{f}}
+# [[plante|Plante]] cultivée principalement pour ses [[grain]]s utilisés dans l’[[alimentation]] de l’[[homme]] et de [[certain]]s animaux [[domestique]]s. Toutefois elle est parfois cultivée pour utiliser toute la plante comme [[fourrage]].
+#* ''Cette phytohormone de synthèse présentée sous forme de sels de sodium et de potassium, est surtout utilisée en cultures de '''céréales''' pour détruire le gaillet-gratteron et le mouron.''  {{source|Index phytosanitaire de l'{{w|ACTA}} ; 1961, p.113}}
+#* '' Le [[papillon]] de nuit ([[hétérocère]]) suivant se nourrit de '''céréales''' : &lt;br /&gt;
+:::[[noctuelle gamma]], ''Autographa gamma'' (Noctuidae). ''
+# [[graine|Graine]] de ces plantes.
+#* ''Cette farine est composée de deux '''céréales''', [[blé]] et [[épeautre]]''.
+
+{{-apr-}}
+* [[Cérès]]
+
+{{-drv-}}
+* [[céréalier]], [[céréalière]]
+* [[céréaliculture]]
+
+{{-hypo-}}
+* [[avoine]]
+* [[blé]]
+* [[épeautre]]
+* [[escourgeon]]
+* [[froment]]
+* [[orge]]
+* [[maïs]]
+* [[seigle]]
+* [[sorgho]]
+* [[triticale]]
+
+{{-trad-}}
+{{(}}
+* {{T|de}} : {{trad+|de|Getreide}} {{n}}
+* {{T|en}} : {{trad+|en|cereal}}
+* {{T|es}} : {{trad+|es|cereal}} {{m}}
+* {{T|eo}} : {{trad-|eo|cerealo}}
+* {{T|io}} : {{trad+|io|cerealo}}
+* {{T|el}} : {{trad+|el|δημητριακό|R=dhimitriakó}} {{n}}
+{{-}}
+* {{T|hbo}} : {{trad--|hbo|דגן|dif=דָּגָן}} {{m}}
+* {{T|io}} : {{trad+|io|cerealo}}
+* {{T|id}} : {{trad-|id|serealia}}
+* {{T|it}} : {{trad-|it|cereale}} {{m}}
+* {{T|nl}} : {{trad+|nl|graan}}
+* {{T|oc}} : {{trad-|oc|cereala}} 
+{{)}}
+
+{{-hyper-}}
+* [[plante]]
+** [[culture]]
+*** [[féculent]]
+
+{{-hypo-}}
+{{(|Plante, graine''' (1, 2)}}
+* [[alpiste des canaries]] ([[Phalaris canariensis]])
+* [[avoine]] ([[Avena sativa]])
+* [[blé]] 
+** [[blé amidonnier]] ([[Triticum dicoccum]])
+** [[blé dur]] ([[Triticum durum]])
+** [[blé tendre]], [[froment]] ([[Triticum aestivum]])
+** [[blé poulard]] ([[Triticum turgidum]])
+** [[engrain]] ([[Triticum monoccocum]])
+** [[épeautre]] ([[Triticum spelta]])
+** [[pain]]
+** [[pâte]]
+** [[semoule]]
+* [[coix]] ([[Coix lachryma-jobi]])
+* [[éleusine cultivée]] ([[Eleusine coracana L.]])
+* [[fonio]] ([[Digitaria exilis]])
+* [[kamut]] ([[Triticum turgidum ssp. turanicum]])
+* [[maïs]] ([[Zea mays]])
+* [[mil]], [[millet]]
+** [[millet commun]] ([[panicum miliaceum]])
+** [[millet des oiseaux]] ([[Setaria italica]])
+** [[millet japonais]] ([[Echinochloa frumentacea]])
+** [[millet perle]] ([[Pennisetum glaucum]])
+* [[orge]] ([[Hordeum vulgare]])
+** [[orge perlée]]
+* [[quinoa]]
+* [[riz]] ([[Oryza sativa]])
+** [[riz sauvage]] ([[Zizania palustris]])
+* [[sarrasin]] ([[Fagopyrum esculentum]])
+* [[seigle]] ([[Secale cereale]])
+* [[sésame]]
+* [[sorgho]] ([[Sorghum bicolor]])
+* [[teff]] ([[Eragrostis tef]])
+* [[triticale]]
+{{)}}
+
+{{-méro-}}
+'''Plante''' (1) :
+* [[grain]]
+
+{{-holo-}}
+'''Graine''' (2) :
+* [[alimentation]]
+* [[diète]]
+
+{{-adj-|fr}}
+{{fr-rég|se.ʁe.al|mf=1}}
+'''céréale''' {{pron|se.ʁe.al|fr}} {{mf}}
+# Qui [[produit]] des [[graine]]s [[propre]]s à la [[nourriture]] de l’[[homme]] et de [[certain]]s animaux [[domestique]]s.
+#* ''Les plantes '''céréales'''.''
+
+{{-var-ortho-}}
+* [[céréal]]
+
+{{-pron-}}
+* {{pron-rég|France &lt;!--  précisez svp la ville ou la région --&gt;|se.ʁe.al|audio=Fr-céréale.ogg}}
+
+{{-homo-}}
+* [[céréales]]
+
+{{-voir-}}
+* [[w:céréale|céréale]] sur Wikipedia
+
+{{-réf-}}
+* {{R:DAF8}}
+{{clé de tri|cereale}}
+
+[[de:céréale]]
+[[en:céréale]]
+[[es:céréale]]
+[[et:céréale]]
+[[fi:céréale]]
+[[hu:céréale]]
+[[io:céréale]]
+[[pl:céréale]]
+[[pt:céréale]]
+[[vi:céréale]]
+[[zh:céréale]]</text>
+    </revision>
+  </page>
+  <page>
     <title>handshake</title>
     <id>118840</id>
     <revision>
@@ -2965,6 +3255,695 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
 {{Documentation}}
 [[Catégorie:Modèles de type de mot du Wiktionnaire|Nom commun]]
 &lt;/noinclude&gt;</text>
+    </revision>
+  </page>
+  <page>
+    <title>slave</title>
+    <id>4590</id>
+    <revision>
+      <id>9535248</id>
+      <timestamp>2011-10-09T00:15:32Z</timestamp>
+      <contributor>
+        <username>JackBot</username>
+        <id>12968</id>
+      </contributor>
+      <minor />
+      <comment>[[Wiktionnaire:Structure des articles|Autoformatage]]</comment>
+      <text xml:space="preserve">{{voir/slave}}
+
+== {{=fr=}} ==
+
+{{-étym-}}
+: D'une racine [[vieux slave]] dont est issu le latin ''[[sclavus]]''. Deux hypothèses sont généralement retenues pour expliquer le mot « slave ».
+# la plus évidente et la plus simple consiste à rattacher le nom au [[vieux slave]] ''[[slava]]'' (« renommée », « gloire ») dont sont issus ''[[sláva]]'' ''[[sława]]'' et [[слава]] ''slava''. Autrement dit, les Slaves se seraient eux-mêmes qualifiés de « [[glorieux]] ».
+# L’autre hypothèse part du [[vieux slave]] ''slovo'' (« mot », « parole »), les Slaves se définissant entre eux comme ceux qui savent parler, dont le langage est compréhensible. Cette hypothèse s’appuie notamment sur le fait que dans les langues slaves le terme désignant un Allemand (le peuple voisin le plus immédiat) est dérivé d’un adjectif signifiant « non-parlant » : en polonais et en tchèque, les mots ''[[niemy]]''/''[[němý]]'' signifient « muet », et ''[[Niemiec]]'', ''[[Němec]]'' signifient « Allemand ».
+
+{{-adj-|fr}}
+{{fr-rég|mf=oui|slav}}
+'''slave''' {{pron|slav|fr}} {{mf}}
+# Caratéristique des [[peuple]]s d’Europe Centrale ou Orientale dont la [[langue]] fait partie du groupe des langues slaves.
+#* ''Elle a le charme '''slave''' des Slovaques.''
+
+{{-drv-}}
+* [[panslave]]
+* [[panslavisme]]
+* [[protoslave]]
+* [[slavisant]]
+* [[slaviser]]
+* [[slavistique]]
+* [[slavon]] ou [[vieux slave]]
+* [[Slavonie]]
+* [[slavophile]]
+* [[slavophone]]
+* [[Slovaque]], [[slovaque]], [[Slovaquie]]
+* [[Slovène]], [[slovène]], [[Slovénie]]
+
+{{-trad-}}
+{{(}}
+* {{T|de}} : {{trad+|de|slawisch}}
+* {{T|en}} : {{trad+|en|Slavic}}
+* {{T|be}} : {{trad-|be|славянскі|R=slavjánski}}
+* {{T|bs}} : {{trad-|bs|slavenski}}
+* {{T|bg}} : {{trad-|bg|славянски|R=slavjanski}}
+* {{T|es}} : {{trad+|es|eslavo}}
+* {{T|eo}} : {{trad-|eo|slava}}
+* {{T|el}} : {{trad+|el|σλαβικός|R=slavikόs}}
+* {{T|hu}} : {{trad-|hu|szláv}}
+* {{T|it}} : {{trad+|it|slavo}}
+* {{T|mk}} : {{trad-|mk|словенски|R=slóvenski}}
+* {{T|nl}} : {{trad-|nl|slavisch}}
+* {{T|pl}} : {{trad+|pl|słowiański}}
+* {{T|pt}} : {{trad+|pt|eslavo}}
+* {{T|ru}} : {{trad+|ru|славянский|R=slavjánskij}}
+* {{T|sr}} : {{trad-|sr|словенски|R=slovenski}}
+* {{T|cs}} : {{trad+|cs|slovanský}}
+* {{T|uk}} : {{trad-|uk|слов’янський|R=slov’ians’kyj}}
+{{)}}
+
+{{-nom-|fr}}
+'''slave''' {{pron|slav}} {{m}}
+# [[langue|Langue]] parlée par les peuples '''slaves'''.
+#* ''Le russe est du '''slave'''.''
+#* ''Le vieux '''slave'''.''
+
+{{-syn-}}
+* [[langue slave]] (2)
+
+{{-voc-}}
+* [[glagolitique]]
+
+{{-trad-}}
+{{(}}
+* {{T|en}} : {{trad+|en|Slavic}} language
+* {{T|es}} : {{trad+|es|eslavo}}
+* {{T|pt}} : {{trad+|pt|eslavo}}
+{{)}}
+
+{{-hypo-}}
+* Famille occidentale
+** [[polonais]]
+** [[tchèque]]
+** [[slovaque]]
+** [[sorabe]]
+*** [[haut-sorabe]]
+*** [[bas-sorabe]] ou [[lusacien]]
+** [[kachoube]] ou [[cachoube]]
+** [[polabe]]
+** [[slovince]] ou [[vieux-poméranien]]
+* Famille méridionale
+** [[serbo-croate]] ou [[croato-serbe]] :
+*** [[bosniaque]] ou [[bosnien]]
+*** [[croate]]
+*** [[serbe]]
+*** [[monténégrin]]
+** [[bulgare]]
+** [[macédonien]]
+** [[slovène]]
+* Famille orientale
+** [[biélorusse]]
+** [[russe]]
+** [[rusyn]]
+** [[ruthène]]
+** [[ukrainien]]
+
+{{-anagr-}}
+* [[laves]], [[lavés]]
+* [[vêlas]]
+
+{{-pron-}}
+* {{pron-rég|France|slav|audio=Fr-slave.ogg}}
+
+{{-voir-}}
+* {{WP}}
+
+== {{=en=}} ==
+
+{{-étym-}}
+: {{ébauche-étym|en}}
+
+{{-nom-|en}}
+{{en-nom-rég}}
+'''slave'''
+# [[esclave|Esclave]].
+
+{{-drv-}}
+* {{lien|anti-slavery|en}}
+* {{lien|pro-slavery|en}}
+* {{lien|slavery|en}}
+* {{lien|slaveholder|en}} (''maître (esclavagiste)'')
+
+{{-adj-|en}}
+'''slave'''
+# D'[[esclave]].
+# [[esclave|Esclave]].
+
+{{-pron-}}
+* {{pron-rég|États-Unis &lt;!--  précisez svp la ville ou la région --&gt;||audio=En-us-slave.ogg}}
+
+{{-voir-}}
+* {{WP|Slave|lang=en|titre=slave}}
+* {{WP|Slave_(disambiguation)|lang=en|titre=slave (tous les sens)}}
+* {{WP|Esclavage|titre=esclave}}
+* {{WP|Esclave|titre=esclave (tous les sens)}}
+
+[[am:slave]]
+[[ang:slave]]
+[[ar:slave]]
+[[cs:slave]]
+[[de:slave]]
+[[el:slave]]
+[[en:slave]]
+[[eo:slave]]
+[[es:slave]]
+[[et:slave]]
+[[fa:slave]]
+[[fi:slave]]
+[[hu:slave]]
+[[io:slave]]
+[[it:slave]]
+[[ja:slave]]
+[[kk:slave]]
+[[kn:slave]]
+[[ko:slave]]
+[[ku:slave]]
+[[lo:slave]]
+[[lt:slave]]
+[[ml:slave]]
+[[ms:slave]]
+[[my:slave]]
+[[no:slave]]
+[[pl:slave]]
+[[ru:slave]]
+[[simple:slave]]
+[[sv:slave]]
+[[ta:slave]]
+[[te:slave]]
+[[th:slave]]
+[[uk:slave]]
+[[vi:slave]]
+[[zh:slave]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>tube digestif</title>
+    <id>269129</id>
+    <revision>
+      <id>8408030</id>
+      <timestamp>2011-01-14T14:36:21Z</timestamp>
+      <contributor>
+        <username>Luckas-bot</username>
+        <id>9945</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.1) (robot Ajoute: [[es:tube digestif]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+{{-étym-}}
+: {{cf|tube|digestif}}
+
+{{-loc-nom-|fr}}
+{{fr-accord-mf|
+|p=tubes digestifs
+|pron=tyb di.ʒɛs.tif
+}}
+'''tube digestif''' {{m}}
+# [[système|Système]] d'[[organe]]s des animaux pluricellulaires qui prend la [[nourriture]], la [[digérer|digère]] pour en extraire de l'[[énergie]] et des [[nutriment]]s, et évacue le [[surplus]].
+#* ''Le rôle essentiel du '''tube digestif''' est d'assimiler, d'absorber les nutriments dans la circulation sanguine et lymphatique.''
+
+{{-syn-}}
+* [[système gastro-intestinal]]
+* [[appareil digestif]]
+* [[boyau]]x
+
+{{-trad-}}
+{{(}}
+* {{T|en}} : {{trad+|en|digestive tract}}
+{{)}}
+{{-hyper-}}
+* [[anatomie]]
+
+{{-méro-}}
+&lt;small&gt;De l'entrée vers la sortie du tube digestif.&lt;/small&gt;
+* [[bouche]] ou [[cavité orale]]
+* [[œsophage]]
+* [[estomac]]
+* [[foie]]
+* [[intestin]]s :
+** [[intestin grêle]], qui a trois parties :
+*** [[duodénum]]
+*** [[jéjunum]]
+*** [[iléon]]
+** [[gros intestin]], qui a trois parties :
+*** [[cæcum]]
+*** [[côlon]]
+*** [[rectum]]
+* [[anus]]
+
+{{-holo-}}
+* [[corps]]
+* [[corps humain]]
+* [[animal]]
+
+{{-voir-}}
+* {{WP}}
+
+[[Catégorie:Lexique en français de la zoologie]]
+
+[[es:tube digestif]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>carré</title>
+    <id>5091</id>
+    <revision>
+      <id>9700653</id>
+      <timestamp>2011-11-28T02:28:53Z</timestamp>
+      <contributor>
+        <username>JackBot</username>
+        <id>12968</id>
+      </contributor>
+      <minor />
+      <comment>[[Wiktionnaire:Structure des articles|Autoformatage]]</comment>
+      <text xml:space="preserve">{{voir|carre}}
+== {{=fr=}} ==
+
+{{-étym-}}
+: Du {{étyl|la|fr|mot=quadratus}}, devenu ''[[quarré]]'' ou ''[[carrez]]'' en moyen français, et enfin ''[[carré]]'' depuis l’époque moderne.
+
+{{-adj-|fr}}
+{{fr-accord-rég|ka.ʁe}}
+'''carré'''
+# {{mathématiques|fr}} [[dont|Dont]] les [[quatre]] [[côté]]s sont [[égal|égaux]], et [[former|forment]] un [[angle]] [[droit]] entre [[chacun]] d’[[eux]].
+#*''Une place '''carrée'''.''
+#*''La Maison '''Carrée''' de Nîmes, la Place '''Carrée''' à Paris''.
+# {{marine|fr}} [[quadrangulaire|Quadrangulaire]].
+#* ''Voiles carrées'' ou ''Voiles à trait '''carré''''' : [[voile|Voiles]] dont les [[vergue]]s sont [[hisser|hissées]] par le [[milieu]] et [[croiser|croisent]] le [[mât]] à angle droit.
+# {{arithmétique|fr}} Qui a [[rapport]] avec le carré (nombre résultant de la multiplication d’un nombre par lui-même).
+#* ''Trois est la racine '''carrée''' de neuf.''
+#* ''Quatre est la racine '''carrée''' de seize.''
+# {{familier|fr}} [[large|Large]] des [[épaule]]s, [[athlétiquement]] [[bâtir|bâti]], [[parler|en parlant]] d’un [[homme]], de sa [[carrure]], de sa [[physionomie]].
+#* ''C’était un homme de quarante-huit à cinquante ans, de moyenne taille, mais aux formes athlétiques et '''carrées''', et qui semblait, tant ses mouvements étaient en harmonie avec ceux de son cheval, avoir été taillé dans le même bloc de rocher.'' {{source|[[w:Alexandre Dumas|Alexandre Dumas]], ''[[s:Othon l’archer|Othon l’archer]]'', 1839}}
+# {{figuré|fr}} {{familier|fr}} Se dit d’une [[personne]] [[juste]] et [[droit]]e dans ses [[conviction]]s, et qui ne s’en [[détourne]] pas.
+#* ''Victor Hugo a toujours été très '''carré''' concernant les droits de l’homme.''
+
+{{-drv-}}
+{{(}}
+* [[bataillon carré]]
+* [[bonnet carré]]
+* [[dernier carré]]
+{{-}}
+*[[khi-carré]]
+* [[partie carrée]]
+* [[racine carrée]]
+{{)}}
+{{(|Unités de surface}}
+* [[centimètre carré]]
+* [[décimètre carré]]
+* [[kilomètre carré]]
+{{-}}
+* [[mètre carré]]
+* [[mile carré]]
+* [[mille carré]]
+{{-}}
+*[[millimètre carré]]
+* [[pied carré]]
+* [[pouce carré]]
+{{)}}
+
+{{-trad-}}
+{{(|Mathématique : Dont les quatre côtés sont parallèles et égaux entre eux|1}}
+* {{T|de}} : {{trad+|de|quadratisch}}
+* {{T|en}} : {{trad+|en|square}}
+* {{T|eo}} : {{trad-|eo|kvadrata}}
+{{-}}
+* {{T|pt}} : {{trad+|pt|quadrado}}
+* {{T|vo}} : {{trad+|vo|kvadik}}
+{{)}}
+{{(|Marine : voile carrée|2}}
+* {{T|en}} : {{trad+|en|square}}
+* {{T|es}} : {{trad-|es|cuadrada}}
+{{)}}
+{{(|Arithmétique : qui a un rapport avec le carré|3}}
+* {{T|en}} : {{trad+|en|square}}
+* {{T|eo}} : {{trad-|eo|kvadrata}}
+{{)}}
+{{(|Large d’épaule|4}}
+* {{T|en}} : {{trad-|en|square-shouldered}}
+{{)}}
+{{(|Juste et droit dans ses convictions|5}}
+* {{T|en}} : {{trad+|en|straightforward}}
+{{)}}
+
+{{-nom-|fr}}
+{{fr-rég|ka.ʁe}}
+[[Image:Square - black simple.svg|thumb|Un '''carré simple'''. (1)]]
+[[Image:Rack Carré d'agneau.JPG|thumb|Un '''carré''' d’agneau. (8)]]
+'''carré''' {{m}}
+# {{géom|fr}} Figure géométrique plane ayant [[quatre]] [[côté]]s égaux et quatre [[angle droit|angles droits]].
+#* ''L’aire d’un '''carré''' se calcule en multipliant la longueur d’un côté par lui-même.''
+# {{mathématiques|fr}} Nombre résultant de la multiplication d’un nombre par lui-même.
+#* ''Seize est le '''carré''' de quatre''.
+#* ''Zéro, un, quatre, neuf et seize sont les cinq premiers '''carrés''' parfaits''.
+# {{mathématiques|fr}} {{par extension|fr}} Objet mathématique résultant de la multiplication d’un objet mathématique par lui-même.
+#* ''Le '''carré''' d'une matrice se calcule en la multipliant par elle-même.''
+# {{militaire|fr}} [[bataillon|Bataillon]] qui a autant de [[file]]s que de [[rang]]s, autant de [[profondeur]] que de [[front]], [[troupe]], [[régiment]] d’[[infanterie]] disposé de [[manière]] à [[faire face]] de quatre côtés, soit [[intérieurement]], soit [[extérieurement]].
+#* ''[…] le commandant donne l’ordre à sa troupe de se former en '''carré''' […] La foule regarde étonnée, cette manœuvre […]'' {{source|Alfred Barbou, ''Les Trois Républiques françaises'', 1879}}  
+#* ''Le '''carré''' de Waterloo''.''
+# {{marine|fr}} [[pièce|Pièce]] [[commun]]e autour de [[laquelle]] [[ranger|sont rangées]] les [[cabine]]s des [[officier]]s.
+#* ''Au '''carré''', dans les cabines et les laboratoires, le désordre est inexprimable […]'' {{source|{{w|Jean-Baptiste Charcot}}, ''Dans la mer du Groenland'', 1928}}
+# {{term|jeu}} Association de quatre cartes de même hauteur.
+#* ''Il a abattu un '''carré''' de dames.''
+# ''(Norme [[AFNOR]])'' Format de papier de 45×65 cm.
+# {{term|coiffure}} ''Coupe au '''carré''''' : Se dit d’une coupe dans laquelle tous les [[cheveu]]x ont même longueur et tombent au niveau des [[épaule]]s.
+# {{figuré|fr}} '''''Carré''' d’amis'' (par analogie avec l’expression ''[[cercle]] d’amis'') : Ensemble des personnes que l’on considère comme des [[ami]]s proches.
+# {{boucherie|fr}} [[morceau|Morceau]] de [[viande]] d’[[agneau]] ou de [[porc]] rassemblant l’ensemble des [[côte]]s découvertes, secondes et premières.
+# {{urbanisme|fr}} Petit [[jardin public]], souvent établi au milieu d’une [[place]].
+#* ''La commune compte déjà 113 rues, places, '''carrés''', etc.'' {{source|Alphonse Guillaume G. Wauters, ''Histoire des environs de Bruxelles'', 1855}}
+# {{métal|fr}} {{mécanique|fr}} [[barre|Barre]] [[laminer|laminée]] de [[section]] carrée.
+# {{ferro|fr}} [[clé|Clé]] à [[tige]] carrée, servant à [[actionner]] les [[accessoire]]s des [[voiture]]s à [[voyageur]]s.
+# {{archéo|fr}} [[unité|Unité]] d’un [[quadrillage]] de [[fouille]] d’un [[site]] [[archéologique]].
+#* ''Généralement, l’inventaire est alors conçu d’une façon continue, par '''carré''' de fouille et quelles que soient les couches.'' {{source|Marcel Otte, ''Lire le passé : Méthodes de fouilles archéologiques'', Éditions de l’Université de Liège, 2003}}
+
+{{-syn-}}
+{{urbanisme|nocat=1}} :
+* [[square]] ''(considéré un anglicisme au Canada)''
+
+{{-drv-}}
+{{(}}
+* [[carré d’agneau]]
+* [[carré de chocolat]]
+* [[carré latin]]
+{{-}}
+* [[carré magique]]
+* [[carré parfait]]
+*[[faux-carré]]
+{{)}}
+
+{{-trad-}}
+{{(|Géométrie : figure géométrique plane|1}}
+* {{T|als}} : {{trad--|als|Quadrat}} 
+* {{T|de}} : {{trad+|de|Quadrat}}
+* {{T|en}} : {{trad+|en|square}}
+* {{T|ar}} : {{trad-|ar|مربع|R=}}
+* {{T|an}} : {{trad-|an|quadrato}}
+* {{T|ast}} : {{trad-|ast|cuadráu}}
+* {{T|ay}} : {{trad-|ay|pusi k'uchuni}}
+* {{T|eu}} : {{trad-|eu|lauki}}
+* {{T|be}} : {{trad-|be|квадрат|R=kvadrat}}
+* {{T|be-x-old}} : {{trad--|be-x-old|квадрат|R=kvadrat}}
+* {{T|bs}} : {{trad-|bs|kvadrat}}
+* {{T|bg}} : {{trad-|bg|квадра|R=kvadra}}
+* {{T|ca}} : {{trad+|ca|quadrat}}
+* {{T|zh}} : {{trad+|zh|正方形|R=}}
+* {{T|hr}} : {{trad-|hr|kvadrat}}, {{trad+|hr|četvorina}}
+* {{T|ko}} : {{trad-|ko|정사각형|R=jeongsaganhyeong}}
+* {{T|da}} : {{trad-|da|kvadrat}}
+* {{T|es}} : {{trad+|es|cuadrado}}
+* {{T|eo}} : {{trad-|eo|kvadrato}}
+* {{T|fi}} : {{trad+|fi|neliö}}
+{{-}}
+* {{T|ga}} : {{trad+|ga|cearnóg}}
+* {{T|gl}} : {{trad+|gl|cadrado}}
+* {{T|gan}} : {{trad--|gan|方形|R=}}
+* {{T|ka}} : {{trad-|ka|კვადრატი|R=}}
+* {{T|he}} : {{trad+|he|ריבוע|R=}}
+* {{T|ht}} : {{trad--|ht|kare}}
+* {{T|hsb}} : {{trad-|hsb|kwadrat}}
+* {{T|hu}} : {{trad+|hu|négyzet}}
+* {{T|hi}} : {{trad-|hi|वर्गाकार|R=vargākār}}
+* {{T|id}} : {{trad-|id|persegi}}
+* {{T|it}} : {{trad+|it|quadrato}}
+* {{T|ja}} : {{trad+|ja|正方形|R=seihōkei}}
+* {{T|cy}} : {{trad+|cy|sgwâr}}
+* {{T|ku}} : {{trad-|ku|çarçik}}
+* {{T|el}} : {{trad+|el|τετράγωνο|R=tetrágono}}
+* {{T|li}} : {{trad-|li|veerkant}}
+* {{T|lt}} : {{trad-|lt|kvadratas}}
+* {{T|lv}} : {{trad-|lv|kvadrāts}}
+* {{T|mk}} : {{trad-|mk|квадрат|R=kvadrat}}
+* {{T|ml}} : {{trad+|ml|സമചതുരം|R=}}
+{{-}}
+* {{T|nl}} : {{trad+|nl|vierkant}}
+* {{T|no}} : {{trad+|no|kvadrat}}
+* {{T|pms}} : {{trad--|pms|quadrà}}
+* {{T|fa}} : {{trad+|fa|مربع|R=}}
+* {{T|pl}} : {{trad+|pl|kwadrat}}
+* {{T|pl}} : {{trad+|pl|quadrado}}
+* {{T|qu}} : {{trad-|qu|t’asra}}
+* {{T|ro}} : {{trad-|ro|pătrat}}
+* {{T|ru}} : {{trad+|ru|квадрат|R=kvadrat}}
+* {{T|sr}} : {{trad+|sr|квадрат|R=kvadrat}}
+* {{T|sh}} : {{trad-|sh|kvadrat}}
+* {{T|scn}} : {{trad+|scn|quatratu}}
+* {{T|sk}} : {{trad-|sk|štvorec}}
+* {{T|sl}} : {{trad+|sl|kvadrat}}
+* {{T|sv}} : {{trad+|sv|kvadrat}}
+* {{T|sw}} : {{trad+|sw|mraba}}
+* {{T|tl}} : {{trad+|tl|parisukat}}
+* {{T|cs}} : {{trad+|cs|čtverec}}
+* {{T|tr}} : {{trad+|tr|kare}}
+* {{T|vo}} : {{trad+|vo|kvad}}
+{{-}}
+{{)}}
+{{(|Mathématiques : nombre résultant de la multiplication d’un nombre par lui-même|2}}
+* {{T|en}} : {{trad+|en|square}}
+* {{T|eo}} : {{trad-|eo|kvadrato}}
+* {{T|ja}} : {{trad+|ja|平方|R=heihō}}, {{trad-|ja|自乗|R=jijō}}
+{{)}}
+{{(|Militaire : organisation défensive d’un bataillon|3}}
+{{ébauche-trad|fr}}
+* &lt;!--{{T|en}} : {{trad|en|}}--&gt;
+{{-}}
+{{)}}
+{{(|Marine : carré des officiers|4}}
+{{ébauche-trad|fr}}
+* &lt;!--{{T|en}} : {{trad|en|}}--&gt;
+{{-}}
+{{)}}
+{{(|Jeu : Association de quatre cartes de même hauteur|5}}
+* {{T|en}} : {{trad+|en|quads}}, {{trad+|en|four of a kind}}
+* {{T|es}} : {{trad-|es|póquer}}
+{{-}}
+* {{T|eo}} : {{trad-|eo|kvaropo}}
+* {{T|it}} : {{trad+|it|poker}}
+{{-}}
+{{)}}
+{{(|Norme AFNOR: Format de papier de 45×65 cm|6}}
+{{ébauche-trad|fr}}
+* &lt;!--{{T|en}} : {{trad|en|}}--&gt;
+{{-}}
+{{)}}
+{{(|Coiffure: Coupe au carré|7}}
+{{ébauche-trad|fr}}
+* &lt;!--{{T|en}} : {{trad|en|}}--&gt;
+{{-}}
+{{)}}
+{{(|Ensemble des personnes que l’on considère comme des amis proches.|8}}
+{{ébauche-trad|fr}}
+* &lt;!--{{T|en}} : {{trad|en|}}--&gt;
+{{-}}
+{{)}}
+{{(|Boucherie: Morceau de viande d’agneau ou de porc|9}}
+* {{T|en}} : {{trad+|en|rack}}, {{trad-|en|lean eye}}
+* {{T|cs}} : {{trad+|cs|karé}}
+{{-}}
+{{)}}
+{{(|Urbanisme : Petit jardin public, souvent établi au milieu d’une place|10}}
+{{ébauche-trad|fr}}
+* &lt;!--{{T|en}} : {{trad|en|}}--&gt;
+{{-}}
+{{)}}
+{{(|Barre laminée de section carrée|11}}
+* {{T|en}} : {{trad-|en|square bar}}
+{{-}}
+{{)}}
+{{(|Chemin de fer: Clé à tige carrée|12}}
+* {{T|en}} : {{trad-|en|carriage key}}
+{{-}}
+{{)}}
+{{(|Archéologie : Unité d’un quadrillage de fouille|13}}
+* {{T|en}} : {{trad-|en|excavation plot}}
+{{-}}
+{{)}}
+{{(|Traduction à trier}}
+* {{T|de|trier}} : {{trad-|de|Karree}}, {{trad+|de|Viereck}}
+* {{T|da|trier}} : {{trad+|da|firkant}}
+* {{T|fy|trier}} : {{trad-|fy|fjouwerkant}}
+* {{T|nl|trier}} : {{trad-|nl|carré}}, {{trad+|nl|ruitje}}, {{trad+|nl|kwadraat}}, {{trad+|nl|vak}}
+* {{T|pap|trier}} : {{trad--|pap|firkant}}, {{trad--|pap|kuadrá}}, {{trad--|pap|kuadrat}}
+{{-}}
+* {{T|fa|trier}} : {{trad+|fa|مربع}}
+* {{T|pt|trier}} : {{trad+|pt|quadro}}
+* {{T|srn|trier}} : {{trad--|srn|fokanti}}
+* {{T|sv|trier}} : {{trad+|sv|fyrkant}}
+{{)}}
+
+{{-hyper-}}
+: {{géom|nocat=1}} :
+* [[polygone]]
+** [[quadrilatère]]
+*** [[trapèze]]
+**** [[parallélogramme]]
+***** [[losange]]
+***** [[rectangle]]
+: {{mathématiques|nocat=1}} :
+* [[puissance]]
+
+{{-flex-verb-|fr}}
+{{fr-verbe-flexion|pp=oui}}
+'''carré''' {{pron|ka.ʁe|fr}}
+# ''Participe passé masculin singulier du verbe'' [[carrer]].
+
+{{-pron-}}
+* {{pron|ka.ʁe|fr}}
+* {{pron|kɑ.ʁe|fr}} {{CA|nocat=1}} {{popu|nocat=1}}
+* {{pron-rég|France &lt;!--  précisez svp la ville ou la région --&gt;|ka.ʁe|audio=Fr-carré.ogg}}
+
+{{-homo-}}
+* [[carai]], [[caré]], [[carée]], [[carées]], [[carer]], [[carés]], [[carez]] {{cf|carer}}
+* [[carrai]], [[carrée]], [[carrées]], [[carrer]], [[carrés]], [[carrez]] {{cf|carrer}}
+* [[quarrai]], [[quarré]], [[quarrée]], [[quarrées]], [[quarrés]], [[quarrez]] {{cf|quarrer}}
+
+{{-anagr-}}
+* [[carer]]
+* [[racer]]
+
+{{-voir-}}
+* {{WP}}
+
+{{-réf-}}
+* {{Import:DAF8}}
+
+[[Catégorie:Lexique en français du poker]]
+
+== {{=nl=}} ==
+
+{{-étym-}}
+:{{ébauche-étym|nl}}
+
+{{-nom-|nl}}
+'''carré''' {{pron||nl}}
+# [[carré#fr|Carré]].
+
+{{-syn-}}
+* [[kwadraat]]
+* [[ruitje]]
+* [[vak]]
+* [[vierkant]]
+
+{{clé de tri|carre}}
+
+[[ar:carré]]
+[[cs:carré]]
+[[cy:carré]]
+[[de:carré]]
+[[el:carré]]
+[[en:carré]]
+[[et:carré]]
+[[fi:carré]]
+[[gl:carré]]
+[[hu:carré]]
+[[id:carré]]
+[[io:carré]]
+[[ko:carré]]
+[[lv:carré]]
+[[pl:carré]]
+[[pt:carré]]
+[[sv:carré]]
+[[vi:carré]]
+[[zh:carré]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>Saint-Claude</title>
+    <id>364265</id>
+    <revision>
+      <id>9669605</id>
+      <timestamp>2011-11-19T00:27:32Z</timestamp>
+      <contributor>
+        <username>JackBot</username>
+        <id>12968</id>
+      </contributor>
+      <minor />
+      <comment>[[Wiktionnaire:Structure des articles|Autoformatage]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+
+{{-étym-}}
+: {{ébauche-étym|fr}}
+
+{{-nom-pr-|fr}}
+{{fr-inv|inv_titre=Nom Propre|sɛ̃.klod}}
+'''Saint-Claude''' {{pron|sɛ̃.klod|fr}} {{msing}}, {{invar}}
+# {{géographie|fr}} [[commune|Commune]] de [[France]], [[chef-lieu d’arrondissement départemental]], dans le [[département]] du [[Jura]], dans la [[région administrative|région]] de la [[Franche-Comté]].
+#* '''''Saint-Claude''' est la capitale mondiale de la pipe.''
+# {{géographie|fr}} [[commune|Commune]] de [[France]], située dans l’[[arrondissement départemental]] de [[Basse-Terre]], dans le [[département]] de la [[Guadeloupe]] dans la [[région administrative]] de la [[Guadeloupe]].
+# {{géographie|fr}} [[municipalité|Municipalité]] [[canadien]]ne située dans la province de [[Québec]], région administrative de l’[[Estrie]], [[municipalité régionale de comté]] ([[MRC]]) du [[Val-Saint-François]].
+
+{{-gent-}}
+: ''commune française (Jura)'' :
+{{(}}
+* [[Sanclaudien]]
+* [[sanclaudien]]
+{{-}}
+* [[San-Claudien]]
+* [[san-claudien]]
+{{-}}
+* [[San Claudien]]
+* [[san claudien]]
+{{)}}
+: ''commune française (Guadeloupe)'' :
+{{(}}
+* [[Saint-Claudien]], [[Saint-Claudienne]]
+* [[saint-claudien]], [[saint-claudienne]]
+{{)}}
+: ''municipalité canadienne (Québec)'' :
+{{(}}
+* [[Claudien]], [[Claudienne]]
+* [[claudien]], [[claudienne]]
+{{)}}
+
+{{-voc-}}
+* [[la Soufrière]]
+
+{{-trad-}}
+{{(}}
+* {{ébauche-trad}}
+{{)}}
+
+{{-holo-}}
+{{(}}
+: ''commune française (Jura)'' :
+* [[France]]
+** [[Franche-Comté]]
+*** [[Jura]]
+{{-}}
+: ''commune française (Guadeloupe)'' :
+* [[France]]
+** [[Guadeloupe]]
+*** [[Basse-Terre]]
+{{-}}
+: ''municipalité canadienne (Québec)'' :
+* [[Canada]]
+** [[Québec]]
+*** [[Estrie]]
+**** [[Val-Saint-François]]
+{{)}}
+
+{{-pron-}}
+* {{pron-rég|France (Île-de-France)|sɛ̃.klod|audio=Fr-Paris--Saint-Claude.ogg}}
+
+{{-voir-}}
+* {{WP|Saint-Claude (Jura)|titre=Saint-Claude (Jura)}}
+* {{WP|Saint-Claude (Guadeloupe)|titre=Saint-Claude (Guadeloupe)}}
+* {{WP|Saint-Claude (Québec)|titre=Saint-Claude (Québec)}}
+* {{WP}}
+
+{{-réf-}}
+* {{mercihabitants}}
+
+[[Catégorie:Sous-préfectures de France en français]]
+[[Catégorie:Localités de France en français]]
+[[Catégorie:Localités du Québec en français]]
+{{clé de tri|Saint claude}}</text>
     </revision>
   </page>
 </mediawiki>

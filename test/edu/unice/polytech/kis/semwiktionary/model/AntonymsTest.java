@@ -37,7 +37,7 @@ public class AntonymsTest {
 		
 	@Test
 	public void allAntonymsExist() {
-		Collection<Word> actualSynonyms = subject.getAntonyms();
-		ReflectionAssert.assertReflectionEquals(expectedAntonyms, actualSynonyms, ReflectionComparatorMode.LENIENT_ORDER);
+		Collection<Word> actualAntonyms = subject.getAntonyms();
+		ReflectionAssert.assertReflectionEquals(expectedAntonyms, actualAntonyms, ReflectionComparatorMode.LENIENT_ORDER);
 	}
 }

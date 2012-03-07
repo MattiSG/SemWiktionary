@@ -255,17 +255,6 @@
 		</java>
 	</target>
 
-	<target name="run" depends="compile" description="Run the tool">
-		<java classname="${main_class}" fork="true">
-			<classpath>
-				<pathelement location="${bin}" />
-				<fileset refid="lib.jars"/>
-			</classpath>
-		</java>
-	</target>
-	
-	<target name="srun" depends="junit, run" description="Securely run the tool" />
-
 	<target name="erase_db" description="Drop all database content">
 		<delete dir="${data}" />
 	</target>

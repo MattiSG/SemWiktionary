@@ -137,6 +137,6 @@ public abstract class NodeMappedObject {
 		
 		NodeMappedObject comparedTo = (NodeMappedObject) o;
 		
-		return comparedTo.node == this.node;
+		return comparedTo.node.equals(this.node);
 	}
 }

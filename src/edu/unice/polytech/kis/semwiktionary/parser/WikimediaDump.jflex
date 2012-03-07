@@ -589,10 +589,10 @@ space = ({whitespace}|{newline})
 
 <CHARS_HTML>
 {
-	"br"{space}*"/"?
+	"br"{space}*"/"?{space}*"&gt;"
 	{
 		buffer += "\n";
-		yybegin(PATTERN);
+		yypopstate();
 	}
 
 	"small"|"/small"

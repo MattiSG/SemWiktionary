@@ -277,6 +277,8 @@ public abstract class NodeMappedObject {
 				this.getIndex(indexKey).remove(this.node);
 			
 			this.node.delete();
+			
+			tx.success();
 		} finally {
 			tx.finish();
 		}

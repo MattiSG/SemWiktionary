@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.LinkedList;
 
-import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.Node;
 
 import edu.unice.polytech.kis.semwiktionary.database.Database;

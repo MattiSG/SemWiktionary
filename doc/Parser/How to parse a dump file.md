@@ -38,16 +38,22 @@ Error during the parsing process
 --------------------------------
 
 Errors might occur while parsing the Wiktionary dump file.
-Indeed, we created our parser considering the data that exist in the file and that were the most important to collect.
-But these informations may change over time, and the parser will crash if the file contains a string that is not handle by the parser.
+Indeed, we created our parser considering the data that existed in the file and that was the most important to collect, but these informations may change over time. The parser will crash if the file contains a string that is not handled.
+
 In that case, you can correct the parsing rules following these steps :
+
 - The standard output prints the title of a word when it starts to parse it, so the last word displayed is the word that produced the crash.
-- Now make a grep to obtain this whole word between the _<page>_ tags and add it to a test file which contains a subset of words.
-	**Exemple :** `grep -A 500 -B 1 "<title>fleur</title>" Wiktionary.xml`
-- Replace the `%debug` line in the parser file.
-- Try to parse again on this test file.
-- Open the `log/parser-output.txt` and `log/parser-error.txt`. Here you can have explainations on the crash.
+- Now make a `grep` to obtain this whole word between the `<page>` tags and add it to the test file that contains a subset of words in `test/resources`.
+	
+	_Example, considering the word "fleur" was responsible for the crash:_
+	
+	`grep -A 300 -B 1 "<title>fleur</title>" wiktionaryDumpFile.xml`
+	
+- Add the `%debug` line back in the parser file.
+- Try to parse again on this test file, either with `wiktionary --load` or directly with `ant junit`.
+- Open the `log/parser-output.txt` and `log/parser-error.txt` files, so you can have explanations on the crash.
 - Correct the parser.
-- Create JUnit tests if necessary to avoid future regressions.
+- Create JUnit tests that check the validity of the word you added to the test suite, to avoid future regressions.
 - Remove the `%debug` in the parser file again.
-- Restart the parsing on the whole file.
+- Restart the parsing process on the whole file.
+- Once the whole file has been processed, publish your changes and make a pull request for them to be integrated in the main repository.

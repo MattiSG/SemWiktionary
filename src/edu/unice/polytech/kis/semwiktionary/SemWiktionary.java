@@ -18,6 +18,7 @@ import org.neo4j.graphdb.Node;
 import edu.unice.polytech.kis.semwiktionary.parser.WikimediaDump;
 import edu.unice.polytech.kis.semwiktionary.model.Word;
 import edu.unice.polytech.kis.semwiktionary.model.Definition;
+import edu.unice.polytech.kis.semwiktionary.model.Example;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
 import edu.unice.polytech.kis.semwiktionary.database.Database;
 
@@ -101,15 +102,14 @@ public class SemWiktionary {
 		println("———————————");
 		
 		for (Definition def : word.getDefinitions()) {
-			println(def.getPosition() + ". " + def.getContent());
+			println(def.getPosition() + ". " + def);
 			
 			for (String dom : def.getDomains())
 				if (! dom.isEmpty())
 					println("(" + dom + ") ");
 			
-			for (String ex : def.getExamples())
-				if (! ex.isEmpty())
-					println("\t• “" + ex + "”");
+			for (Example ex : def.getExamples())
+				println("\t• “" + ex + "”");
 			
 			println("\t—————");
 		}

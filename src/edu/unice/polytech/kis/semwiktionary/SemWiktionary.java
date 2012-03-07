@@ -106,10 +106,10 @@ public class SemWiktionary {
 		println('"' + word.getTitle() + '"');
 		
 		
-		println("-----DEFINITIONS----");
+		println("———————————");
 		
 		for (Definition def : word.getDefinitions()) {
-			println(def.getPosition() + ". \"" + def.getContent() + "\"");
+			println(def.getPosition() + ". " + def.getContent());
 			
 			for (String dom : def.getDomains())
 				if (! dom.isEmpty())
@@ -117,27 +117,27 @@ public class SemWiktionary {
 			
 			for (String ex : def.getExamples())
 				if (! ex.isEmpty())
-					println("\t• \"" + ex + "\"");
+					println("\t• “" + ex + "”");
 			
-			println("\t---");
+			println("\t—————");
 		}
 		
-		println("------SYNONYMS------");
+		println("\n-=[ SYNONYMS ]=-  (words with same meaning)");
 		
 		for (Word syn : word.getSynonyms())
 			println("= " + syn.getTitle());
 		
-		println("------ANTONYMS------");
+		println("\n-=[ ANTONYMS ]=-  (words with opposite meaning)");
 		
 		for (Word ant : word.getAntonyms())
 			println("≠ " + ant.getTitle());
 		
-		println("------TROPONYMS-----");
+		println("\n-=[ TROPONYMS ]=-  (verbs that details this verb’s meaning)");
 
 		for (Word tro : word.getTroponyms())
 			println("∋ " + tro.getTitle());
 		
-		println("------HYPONYMS------");
+		println("\n-=[ HYPONYMS ]=-  (words which meaning is included by this one’s)");
 		
 		for (Word hyp1 : word.getHyponyms()) {
 			println("> " + hyp1.getTitle());
@@ -149,7 +149,7 @@ public class SemWiktionary {
 			}
 		}
 		
-		println("-----HYPERONYMS-----");
+		println("\n-=[ HYPERONYMS ]=-  (words which meaning includes this one’s)");
 		
 		for (Word hyp1 : word.getHyperonyms()) {
 			println("< " + hyp1.getTitle());
@@ -161,19 +161,7 @@ public class SemWiktionary {
 			}
 		}
 		
-		println("------MERONYMS------");
-		
-		for (Word mer1 : word.getMeronyms()) {
-			println("⋁ " + mer1.getTitle());
-			for (Word mer2 : mer1.getMeronyms()) {
-				println(" ⋁ " + mer2.getTitle());
-				for (Word mer3 : mer2.getMeronyms()) {
-					println("  ⋁ " + mer3.getTitle());
-				}
-			}
-		}
-		
-		println("------HOLONYMS------");
+		println("\n-=[ HOLONYMS ]=-  (more general meaning)");
 		
 		for (Word hol1 : word.getHolonyms()) {
 			println("⋀ " + hol1.getTitle());
@@ -181,6 +169,18 @@ public class SemWiktionary {
 				println(" ⋀ " + hol2.getTitle());
 				for (Word hol3 : hol2.getHolonyms()) {
 					println("  ⋀ " + hol3.getTitle());
+				}
+			}
+		}
+		
+		println("\n-=[ MERONYMS ]=-  (more precise meaning)");
+		
+		for (Word mer1 : word.getMeronyms()) {
+			println("⋁ " + mer1.getTitle());
+			for (Word mer2 : mer1.getMeronyms()) {
+				println(" ⋁ " + mer2.getTitle());
+				for (Word mer3 : mer2.getMeronyms()) {
+					println("  ⋁ " + mer3.getTitle());
 				}
 			}
 		}

@@ -5,6 +5,7 @@ import java.util.Vector;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Stack;
+import java.text.NumberFormat;
 
 import edu.unice.polytech.kis.semwiktionary.model.*;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
@@ -25,6 +26,12 @@ import info.bliki.wiki.model.WikiModel;
 
 	private final PrintStream PREV_OUT = System.out,
 							  PREV_ERR = System.err;
+	/** Total number of words to parse.
+	* Allows to provide an estimate of ending time.
+	* Last updated for november 2011. To update this value, simply calculate it with:
+	*     egrep '<title>[^:<]</title>' path/to/dumpfile.xml | wc -l
+	*/
+	private final static double TOTAL_WORDS = 2124047.0; // YES, this should be a double. So we can calculate floating percentages.
 							  
 	private final static int LOG_FREQUENCY = 100; // a count message will be output to the console on every multiple of this frequency
 	/** Some nested elements (definitions and hierarchical relations) need to be stored in list-type structures. This variable defines their size.
@@ -150,8 +157,16 @@ import info.bliki.wiki.model.WikiModel;
 		
 		wordCount++;
 		
-		if ((wordCount % LOG_FREQUENCY) == 0)
-			PREV_ERR.println("\t\t\t\t\t\t\t" + wordCount + " WORDS PARSED!");
+		if ((wordCount % LOG_FREQUENCY) == 0) {
+			double percentage = wordCount / TOTAL_WORDS;
+			double elapsedHours = (System.currentTimeMillis() - FIRST_TICK) / 3.6E6;
+			double remainingHours = elapsedHours / percentage;
+			
+			PREV_ERR.println("\t\t\t\t" + wordCount + " WORDS PARSED!\t"
+							 + NumberFormat.getInstance().format(percentage) + "%\t"
+							 + "(around " + NumberFormat.getInstance().format(remainingHours) + " hours left, "
+							 + NumberFormat.getInstance().format(elapsedHours) + "h spent)");
+		}
 	}
 	
 	private void initModel(String pattern) {
@@ -220,6 +235,8 @@ import info.bliki.wiki.model.WikiModel;
 		System.err.println("Files '" + OUTPUT_FILE + "' and/or '" + ERROR_FILE + "' could not be created!");
 		throw new RuntimeException(e);
 	}
+	
+	NumberFormat.getInstance().setMaximumFractionDigits(2); // for percentages and times formatting
 
 	initParser();
 	

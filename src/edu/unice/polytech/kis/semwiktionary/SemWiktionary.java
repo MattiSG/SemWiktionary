@@ -120,6 +120,12 @@ public class SemWiktionary {
 			println("∋ " + tro.getTitle());
 		
 		println("--------------------");
+
+		for (Word rel : word.getRelatedVoc())
+			println("↔ " + rel.getTitle());
+		
+		println("--------------------");
+
 		
 		for (Definition def : word.getDefinitions()) {
 			println(def.getPosition() + ". \"" + def.getContent() + "\"");

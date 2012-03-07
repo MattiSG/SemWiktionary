@@ -148,6 +148,16 @@ public class MutableWord extends Word {
 		
 		return this;
 	}
+
+	/** Adds the word given in parameter to the current word object as a word with a related meaning.
+	 * @param relatedWord The related word to add to this Word
+	 * @return This MutableWord, for chainability
+	 */
+	public MutableWord addRelatedVoc(Word relatedVoc) {
+		Database.link(this.node, relatedVoc.node, Relation.RELATEDVOC);
+		
+		return this;
+	}	
 	
 // DELETE FUNCTIONS
 	
@@ -212,6 +222,15 @@ public class MutableWord extends Word {
 	 */
 	public MutableWord clearTroponyms() {
 		this.delete(Relation.TROPONYM);
+		
+		return this;
+	}
+
+	/** Deletes all related vocabulary words associated to this Word.
+	 * @return This MutableWord, for chainability
+	 */
+	public MutableWord clearRelatedVoc() {
+		this.delete(Relation.RELATEDVOC);
 		
 		return this;
 	}

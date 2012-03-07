@@ -2,6 +2,8 @@ package edu.unice.polytech.kis.semwiktionary.model;
 
 
 import java.util.Collection;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.LinkedList;
 import java.lang.reflect.Constructor;
@@ -28,6 +30,10 @@ public abstract class NodeMappedObject {
 	 *	See conceptual documentation for database layout.
 	 */
 	protected Node node;
+	
+	/** A heuristic is used to automatically determine a class' index key. However, this heuristic is very costly (relies on reflexivity and potential exceptions), so we cache its results in this map.
+	*/
+	private static Map<Class, String> indexKeysCache = new HashMap<Class, String>();
 	
 	protected NodeMappedObject initNode() {
 		Transaction tx = Database.getDbService().beginTx();
@@ -153,23 +159,26 @@ public abstract class NodeMappedObject {
 	
 	
 	/** Gets the key of the database index for this inheriting type of `NodeMappedObject`.
+	 * memoized by `indexKeysCache`
 	 *
 	 *@return either the value of the `static String INDEX_KEY` field or, if not specified, the type's name (ex: `"Word"` for `Word`).
 	 *@throw	RuntimeException	if the `INDEX_KEY` field is specified, but is not `static` and `public`
 	 */
 	private static String getIndexKey(Class type) {
-		String indexKey;
-		
-		// TODO: cache a class=>key map to avoid costly exception-based lookup
-		
-		try {
-			indexKey = (String) (type
-								 .getDeclaredField("INDEX_KEY")    // any indexable class should declare a static INDEX_KEY field
-								 .get(null)); // since the field is static, we get it for the `null` instance
-		} catch (java.lang.NoSuchFieldException e) {
-			indexKey = type.getSimpleName(); // unfortunately, there is no way to test for a field presence other than throw a costly exception…
-		} catch (java.lang.IllegalAccessException e) {
-			throw new RuntimeException("Class '" + type + "' does not specify a public 'INDEX_KEY' static field, and wants to use automatic lookup.", e);
+		String indexKey = indexKeysCache.get(type);
+				
+		if (indexKey == null) { // not cached yet
+			try {
+				indexKey = (String) (type
+									 .getDeclaredField("INDEX_KEY")    // any indexable class should declare a static INDEX_KEY field
+									 .get(null)); // since the field is static, we get it for the `null` instance
+			} catch (java.lang.NoSuchFieldException e) {
+				indexKey = type.getSimpleName(); // unfortunately, there is no way to test for a field presence other than throw a costly exception…
+			} catch (java.lang.IllegalAccessException e) {
+				throw new RuntimeException("Class '" + type + "' does not specify a public 'INDEX_KEY' static field, and wants to use automatic lookup.", e);
+			}
+			
+			indexKeysCache.put(type, indexKey);
 		}
 		
 		return indexKey;	

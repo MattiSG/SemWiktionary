@@ -551,12 +551,6 @@ space = ({whitespace}|{newline})
 	{
 		yybegin(FCHIM_PATTERN);
 	}
-
-	[^|}]+|"|"
-	{
-		
-		logError("Unexpected pattern value: '" + yytext() + "'");
-	}
 	
 	"}}"
 	{
@@ -567,6 +561,16 @@ space = ({whitespace}|{newline})
 	{
 		logSyntaxError("Unbalanced bracket in pattern in '" + currentNMO + "'");
 		yypopstate();
+	}
+	
+	[^|}]+
+	{
+		logError("Unexpected pattern value: '" + yytext() + "'");
+	}
+	
+	"|"
+	{
+		// in PATTERN: ignore pipes (parameter separators)
 	}
 }
 

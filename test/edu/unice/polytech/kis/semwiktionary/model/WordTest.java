@@ -44,17 +44,4 @@ public class WordTest {
 		for (String someWord : expected.keySet())
 			assertEquals("Title of word '" + someWord + "' was not properly fetched from database!", someWord, Word.find(someWord).getTitle());
 	}
-	
-	@Test
-	public void definitionsMatch() {
-		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
-			Word currentWord = Word.find(currentEntry.getKey());
-			List<Definition> expectedDefinitions = currentEntry.getValue();
-			
-			fail("No support for multiple examples yet. Test deactivated to avoid too verbose details."); //TODO
-			
-			ReflectionAssert.assertReflectionEquals(expectedDefinitions, currentWord.getDefinitions());
-		}
-	}
-	
 }

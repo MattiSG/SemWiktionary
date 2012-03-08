@@ -159,18 +159,19 @@ import info.bliki.wiki.model.WikiModel;
 		
 		if ((wordCount % LOG_FREQUENCY) == 0) {
 			double ratio = wordCount / TOTAL_WORDS;
-			double elapsedMs = (System.currentTimeMillis() - FIRST_TICK);
+			long elapsedMs = (System.currentTimeMillis() - FIRST_TICK);
 			double remainingMs = elapsedMs / ratio;
 			
 			PREV_ERR.println("\t\t\t\t" + wordCount + " WORDS PARSED!\t"
 							 + NumberFormat.getInstance().format(ratio * 100) + "%\t(around "
-							 + String.format("%d h %02d m",
+							 + String.format("%dh%02dm",
 											 Math.round(remainingMs / 3.6E6),
-											 Math.round(remainingMs / 3.6E6) / 60)
+											 Math.round((remainingMs / 1000) % 3600 / 60))
 							 +  " left, "
-							 + String.format("%d h %02d m",
-											 Math.round(elapsedMs / 3.6E6),
-											 Math.round(elapsedMs / 3.6E6) / 60)
+							 + String.format("%dh%02dm%02ds",
+											 elapsedMs / 3600000,
+											 (elapsedMs / 1000) % 3600 / 60,
+											 (elapsedMs / 1000) % 60)
 							 + " since beginning)");
 		}
 	}

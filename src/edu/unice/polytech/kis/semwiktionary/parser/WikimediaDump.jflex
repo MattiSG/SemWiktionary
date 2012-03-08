@@ -158,14 +158,20 @@ import info.bliki.wiki.model.WikiModel;
 		wordCount++;
 		
 		if ((wordCount % LOG_FREQUENCY) == 0) {
-			double percentage = wordCount / TOTAL_WORDS;
-			double elapsedHours = (System.currentTimeMillis() - FIRST_TICK) / 3.6E6;
-			double remainingHours = elapsedHours / percentage;
+			double ratio = wordCount / TOTAL_WORDS;
+			double elapsedMs = (System.currentTimeMillis() - FIRST_TICK);
+			double remainingMs = elapsedMs / ratio;
 			
 			PREV_ERR.println("\t\t\t\t" + wordCount + " WORDS PARSED!\t"
-							 + NumberFormat.getInstance().format(percentage) + "%\t"
-							 + "(around " + NumberFormat.getInstance().format(remainingHours) + " hours left, "
-							 + NumberFormat.getInstance().format(elapsedHours) + "h spent)");
+							 + NumberFormat.getInstance().format(ratio * 100) + "%\t(around "
+							 + String.format("%d h %02d m",
+											 Math.round(remainingMs / 3.6E6),
+											 Math.round(remainingMs / 3.6E6) / 60)
+							 +  " left, "
+							 + String.format("%d h %02d m",
+											 Math.round(elapsedMs / 3.6E6),
+											 Math.round(elapsedMs / 3.6E6) / 60)
+							 + " since beginning)");
 		}
 	}
 	
@@ -246,7 +252,7 @@ import info.bliki.wiki.model.WikiModel;
 %eof{
 	logWord();
 	
-	PREV_ERR.println("Total time: " + ((System.nanoTime() - FIRST_TICK) / 10E9) + "s");
+	PREV_ERR.println("Total time: " + ((System.currentTimeMillis() - FIRST_TICK) / 1E3) + "s");
 	PREV_ERR.println("Parsed words:  " + wordCount);
 	PREV_ERR.println("Parsed models: " + modelCount);
 

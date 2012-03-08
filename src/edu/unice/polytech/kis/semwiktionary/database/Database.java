@@ -21,6 +21,8 @@ import edu.unice.polytech.kis.semwiktionary.model.Definition;
 import edu.unice.polytech.kis.semwiktionary.model.MutableWord;
 import edu.unice.polytech.kis.semwiktionary.model.Word;
 
+import edu.unice.polytech.kis.semwiktionary.parser.WikimediaDump;
+
 
 /**Singleton class to access the unique SemWiktionary database.
  */
@@ -83,15 +85,15 @@ public class Database {
 	 * @return the created node or null in case of error (unlikely)
 	 */
 	public static Node createNodeWithProperty(String property, String propValue) {
-		Transaction tx = getDbService().beginTx();
+		//Transaction tx = getDbService().beginTx();
 		Node node;
 		
 		try {
 			node = getDbService().createNode();
 			node.setProperty(property, propValue);
-			tx.success();
+			WikimediaDump.tx.success();
 		} finally {
-		    tx.finish();
+		    //tx.finish();
 		}
 		
 		return node; 
@@ -106,14 +108,14 @@ public class Database {
 	/** Adds the given relationship between the two given nodes.
 	 */
 	public static Relationship link(Node from, Node to, RelationshipType relationType) {
-		Transaction tx = getDbService().beginTx();
+		//Transaction tx = getDbService().beginTx();
 		Relationship relationship;
 		
 		try {
 			relationship = from.createRelationshipTo(to, relationType);
-			tx.success();
+			WikimediaDump.tx.success();
 		} finally {
-		    tx.finish();
+		    //tx.finish();
 		}
 		
 		return relationship;

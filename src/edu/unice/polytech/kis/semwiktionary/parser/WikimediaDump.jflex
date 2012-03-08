@@ -6,7 +6,10 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Stack;
 
+import org.neo4j.graphdb.Transaction;
+
 import edu.unice.polytech.kis.semwiktionary.model.*;
+import edu.unice.polytech.kis.semwiktionary.database.Database;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
 import edu.unice.polytech.kis.semwiktionary.database.LazyPatternsManager;
 
@@ -42,6 +45,7 @@ import info.bliki.wiki.model.WikiModel;
 	private Stack<Integer> statesStack = new Stack<Integer>();
 	private NodeMappedObject currentNMO;
 	private Relation currentRelation;
+	public static Transaction tx;
 	
 	/**@name	Flags
 	*These flags are used to give parsing information for a word to the user. They are reset between each word
@@ -99,6 +103,14 @@ import info.bliki.wiki.model.WikiModel;
 		complexNyms = new Vector<NodeMappedObject>(BUFFER_SIZE, 2); // second param is increment size.
 		resetComplexNymsList();
 	}
+
+	private void initTransaction() {
+		tx = Database.getDbService().beginTx();
+	}
+
+	private void stopTransaction() {		
+		tx.finish();
+	}
 	
 	/** Reset the list of complexNyms: the list is cleared, and its size is forced to `BUFFER_SIZE`.
 	 *  If a user has made a syntax error, the list entry is set to `null` and is ignored.
@@ -145,9 +157,9 @@ import info.bliki.wiki.model.WikiModel;
 	}
 
 	private void initWord(String word) {
-		logWord();
+		//logWord();
 		
-		PREV_OUT.print(word); // output before the parsing starts, to have the culprit in case of a crash
+		//PREV_OUT.print(word); // output before the parsing starts, to have the culprit in case of a crash
 		
 		currentNMO = MutableWord.obtain(word);	//TODO: delay until language was accepted? We currently create the word immediately, even though we might not store anything from it if its language is not supported
 		resetFlags();
@@ -172,7 +184,7 @@ import info.bliki.wiki.model.WikiModel;
 											 elapsedMs / 3600000,
 											 (elapsedMs / 1000) % 3600 / 60,
 											 (elapsedMs / 1000) % 60)
-							 + " since beginning)");
+							 + " since beginning)");			
 		}
 	}
 	
@@ -244,12 +256,13 @@ import info.bliki.wiki.model.WikiModel;
 	}
 
 	initParser();
-	
+	initTransaction();
 	yybegin(XML);
 %init}
 
 %eof{
 	logWord();
+	stopTransaction();
 	
 	PREV_ERR.println("Total time: " + ((System.currentTimeMillis() - FIRST_TICK) / 1E3) + "s");
 	PREV_ERR.println("Parsed words:  " + wordCount);

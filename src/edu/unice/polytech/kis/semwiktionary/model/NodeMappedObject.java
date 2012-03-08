@@ -24,7 +24,9 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
  */
 public abstract class NodeMappedObject {
 
-// PROPERTIES
+	/** PROPERTIES
+	 */
+	//@{
 		
 	/** The database storage for this item.
 	 *	See conceptual documentation for database layout.
@@ -34,6 +36,7 @@ public abstract class NodeMappedObject {
 	/** A heuristic is used to automatically determine a class' index key. However, this heuristic is very costly (relies on reflexivity and potential exceptions), so we cache its results in this map.
 	*/
 	private static Map<Class, String> indexKeysCache = new HashMap<Class, String>();
+	//@}
 	
 	protected NodeMappedObject initNode() {
 		Transaction tx = Database.getDbService().beginTx();
@@ -304,7 +307,10 @@ public abstract class NodeMappedObject {
 		}
 	}
 	
-// OVERRIDES	
+	/** OVERRIDES
+	 */
+	//@{
+
 	@Override
 	public boolean equals(Object o) {
 		if (! this.getClass().isInstance(o))
@@ -319,4 +325,5 @@ public abstract class NodeMappedObject {
 	public String toString() {
 		return "Raw object mapped on node <" + this.node + ">";
 	}
+	//@}
 }

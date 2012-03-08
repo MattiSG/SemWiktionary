@@ -23,7 +23,9 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
  */
 public class Word extends NodeMappedObject {
 
-// PROPERTIES
+	/** PROPERTIES
+	 */
+	//@{
 
 	/** The actual natural language word this instance represents.
 	 */
@@ -36,9 +38,11 @@ public class Word extends NodeMappedObject {
 	/** Parts of speech, or “Lexical categories”, for this word.
 	*/
 	protected List<LexicalCategory> lexicalCategories = new LinkedList<LexicalCategory>();
-	
-	
-// STATIC METHODS
+	//@}
+
+	/** STATIC METHODS
+	 */
+	//@{
 	
 	/** Finds a word in the database from its title.
 	 * Constructs a Word object with all its properties (definition, synonyms).
@@ -63,8 +67,11 @@ public class Word extends NodeMappedObject {
 			return false;
 		}
 	}
-	
-// CONSTRUCTORS
+	//@}
+
+	/** CONSTRUCTORS
+	 */
+	//@{
 
 	/** Initializes all fields when creating a new word.
 	 *
@@ -84,8 +91,11 @@ public class Word extends NodeMappedObject {
 		this.node = node;
 		this.title = this.get("title");
 	}
+	//@}
 
-// ACCESSORS
+	/** ACCESSORS
+	 */
+	//@{
 	
 	/** Returns the natural language word this instance models.
 	 */
@@ -147,16 +157,22 @@ public class Word extends NodeMappedObject {
 	public Collection<Word> getHolonyms() {
 		return this.<Word>get(Relation.MERONYM, Direction.INCOMING);
 	}
-	
-// DATABASE ACCESS
+	//@}
+
+	/** DATABASE ACCESS
+	 */
+	//@{
 	
 	/** Loads the definitions for this Word from the database.
 	 */
 	protected void fetchDefinitions() {
 		this.definitions.addAll(this.<Definition>get(Relation.DEFINITION));
 	}
-	
-// STANDARD METHODS
+	//@}
+
+	/** STANDARD METHODS
+	 */
+	//@{
 	
 	@Override
 	public String toString() {
@@ -173,4 +189,5 @@ public class Word extends NodeMappedObject {
 		
 		return false;
 	}
+	//@}
 }

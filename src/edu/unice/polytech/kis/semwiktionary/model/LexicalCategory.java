@@ -18,7 +18,9 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
  */
 public class LexicalCategory extends NodeMappedObject {
 
-// PROPERTIES
+	/** PROPERTIES
+	 */
+	//@{
 
 	/** The pattern that represents this lexical category in the Wiktionary.
 	 */
@@ -27,8 +29,11 @@ public class LexicalCategory extends NodeMappedObject {
 	/** The human-readable name of this lexical category.
 	*/
 	protected String description;
-	
-// LOOKUP
+	//@}
+
+	/** LOOKUP
+	 */
+	//@{
 
 	/** Finds a lexical category in the database from its pattern.
 	 *
@@ -38,8 +43,11 @@ public class LexicalCategory extends NodeMappedObject {
 	public static LexicalCategory find(String pattern) {
 		return NodeMappedObject.<LexicalCategory>findAndInstanciateSingleOf(LexicalCategory.class, pattern);
 	}
-	
-// CONSTRUCTORS
+	//@}
+
+	/** CONSTRUCTORS
+	 */
+	//@{
 
 	/** Initializes all fields when creating a new lexical category.
 	 *
@@ -55,8 +63,11 @@ public class LexicalCategory extends NodeMappedObject {
 		this.pattern = this.get("pattern");
 		this.description = this.get("description");
 	}
-	
-// GETTERS
+	//@}
+
+	/** GETTERS
+	 */
+	//@{
 
 	public String getPattern() {
 		return this.pattern;
@@ -65,8 +76,11 @@ public class LexicalCategory extends NodeMappedObject {
 	public String getDescription() {
 		return this.description;
 	}
-	
-// STANDARD METHODS
+	//@}
+
+	/** STANDARD METHODS
+	 */
+	//@{ 
 
 	@Override
 	public String toString() {
@@ -83,4 +97,5 @@ public class LexicalCategory extends NodeMappedObject {
 		
 		return false;
 	}
+	//@}
 }

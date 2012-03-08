@@ -17,7 +17,9 @@ import edu.unice.polytech.kis.semwiktionary.model.Example;
 
 public class Definition extends NodeMappedObject {
 
-// PROPERTIES
+	/** PROPERTIES
+	 */
+	//@{
 	
 	/** The actual definition content.
 	 */
@@ -31,8 +33,11 @@ public class Definition extends NodeMappedObject {
 	/** The position of this definition in the list.
 	 */
 	private int position;
+	//@}
 
-// CONSTRUCTORS
+	/** CONSTRUCTORS
+	 */
+	//@{
 
 	public Definition() {
 		this("", 0);
@@ -60,8 +65,11 @@ public class Definition extends NodeMappedObject {
 		this.content = this.get("content");
 		this.position = new Integer(this.get("position"));
 	}
+	//@}
 	
-// ACCESSORS
+	/** ACCESSORS
+	 */
+	//@{
 	
 	/** Returns the content of this definition.
 	 */
@@ -95,8 +103,11 @@ public class Definition extends NodeMappedObject {
 	public int getPosition() {
 		return position;
 	}
-
-// MODIFIERS
+	//@}
+	
+	/** MODIFIERS
+	 */
+	//@{	
 
 	/** Adds the given example to this definition.
 	 * The passed in `String` will be automatically wrapped in an `Example`.
@@ -158,16 +169,22 @@ public class Definition extends NodeMappedObject {
 		
 		return this;
 	}
+	//@}
 	
-// DATABASE ACCESS
-	
+	/** DATABASE ACCESS
+	 */
+	//@{
+
 	/** Loads the examples for this Definition from the database.
 	 */
 	protected void fetchExamples() {
 		this.listExample.addAll(this.<Example>get(Relation.EXAMPLE));
 	}
-
-// DESTRUCTORS
+	//@}
+	
+	/** DESTRUCTORS
+	 */
+	//@{
 	
 	protected void onDelete() {
 		// nothing to propagate
@@ -191,8 +208,11 @@ public class Definition extends NodeMappedObject {
 		
 		return this;
 	}
-
-// OVERRIDES
+	//@}
+	
+	/** OVERRIDES
+	 */
+	//@{
 	
 	@Override
 	public String toString() {
@@ -209,4 +229,5 @@ public class Definition extends NodeMappedObject {
 		
 		return false;
 	}
+	//@}
 }

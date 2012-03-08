@@ -24,7 +24,9 @@ public class MutableLexicalCategory extends LexicalCategory {
 	 */
 	public static String INDEX_KEY = "LexicalCategory";
 	
-// LOOKUP
+	/** LOOKUP
+	 */
+	//@{
 
 	/** Finds a lexical category in the database from its pattern, or creates a new one if none is found.
 	 *
@@ -38,8 +40,11 @@ public class MutableLexicalCategory extends LexicalCategory {
 				? new MutableLexicalCategory(pattern)
 				: new MutableLexicalCategory(immutableCat));
 	}
-	
-// CONSTRUCTORS
+	//@}
+
+	/** CONSTRUCTORS
+	 */
+	//@{
 
 	private MutableLexicalCategory(String pattern) {
 		this.initNode()
@@ -56,12 +61,16 @@ public class MutableLexicalCategory extends LexicalCategory {
 	public MutableLexicalCategory(LexicalCategory model) {
 		super(model.node);
 	}
+	//@}
 
-// SETTERS
+	/** SETTERS
+	 */
+	//@{
 	
 	public void setDescription(String description) {
 		this.set("description", description);
 		
 		this.description = description;
 	}
+	//@}
 }

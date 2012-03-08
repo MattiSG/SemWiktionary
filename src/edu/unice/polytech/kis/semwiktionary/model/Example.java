@@ -12,13 +12,20 @@ import edu.unice.polytech.kis.semwiktionary.database.Database;
 
 
 public class Example extends NodeMappedObject {
-// PROPERTIES
+	
+	/** PROPERTIES
+	 */
+	//@{
 	
 	/** The actual example content.
 	 */
 	private String content;
 
-// CONSTRUCTORS
+	//@}
+
+	/** CONSTRUCTORS
+	 */
+	//@{
 
 	public Example() {
 		this("");
@@ -41,18 +48,22 @@ public class Example extends NodeMappedObject {
 		
 		this.content = this.get("content");
 	}
-
+	//@}
 	
-// ACCESSORS
+	/** ACCESSORS
+	 */
+	//@{
 	
 	/** Returns the content of this example.
 	 */
 	public String getContent() {
 		return content;
 	}
+	//@}
 	
-	
-// MODIFIERS
+	/** MODIFIERS
+	 */
+	//@{
 	
 	/**
 	* @return	this	for chainability
@@ -63,8 +74,11 @@ public class Example extends NodeMappedObject {
 		
 		return this;
 	}
-
-// DESTRUCTORS
+	//@}
+	
+	/** DESTRUCTORS
+	 */
+	//@{
 	
 	/** Deletes this Example and all attached properties from the database.
 	 */
@@ -79,8 +93,11 @@ public class Example extends NodeMappedObject {
 			tx.finish();
 		}
 	}
-
-// OVERRIDES
+	//@}
+	
+	/** OVERRIDES
+	 */
+	//@{
 	
 	@Override
 	public String toString() {
@@ -96,5 +113,6 @@ public class Example extends NodeMappedObject {
 			return this.content.equals(o);
 		
 		return false;
-	}	
+	}
+	//@}	
 }

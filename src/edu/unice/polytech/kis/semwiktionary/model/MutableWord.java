@@ -24,7 +24,9 @@ public class MutableWord extends Word {
 	*/
 	public static String INDEX_KEY = "Word";
 	
-// STATIC METHODS
+	/** STATIC METHODS
+	 */
+	//@{
 	
 	/** Finds a word in the database from its title, or creates it if it does not exist yet.
 	 * Constructs a MutableWord object and links all of its attached properties (definitions, synonyms…) from the database.
@@ -37,9 +39,11 @@ public class MutableWord extends Word {
 		Word immutableWord = Word.find(word);
 		return (immutableWord == null ? new MutableWord(word) : new MutableWord(immutableWord));
 	}
-	
-	
-// CONSTRUCTORS
+	//@}
+
+	/** CONSTRUCTORS
+	 */
+	//@{
 	
 	/** Initializes all fields when `create()`ing a new word.
 	*
@@ -84,8 +88,11 @@ public class MutableWord extends Word {
 	protected MutableWord(Node node) {
 		super(node);
 	}
-	
-// UPDATE FUNCTIONS
+	//@}
+
+	/** UPDATE FUNCTIONS
+	 */
+	//@{
 	
 	public MutableWord addLexicalCategory(LexicalCategory cat) {
 		Database.link(this.node, cat.node, Relation.LEXICAL_CATEGORY);
@@ -194,7 +201,11 @@ public class MutableWord extends Word {
 		
 		return this;
 	}
-// DELETE FUNCTIONS
+	//@}
+
+	/** DELETE FUNCTIONS
+	 */
+	//@{
 	
 	/** Propagates deletion to definition nodes.
 	*
@@ -288,4 +299,5 @@ public class MutableWord extends Word {
 		
 		return this;
 	}
+	//@}
 }

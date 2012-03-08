@@ -26,6 +26,9 @@ import edu.unice.polytech.kis.semwiktionary.model.Word;
  */
 public class Database {
 	
+	/** PROPERTIES
+	 */
+	 //@{
 	/** Folder containing the database files.
 	 */
 	protected static final String DB_PATH = "./data"; // also update ${data} in ant buildfile
@@ -37,7 +40,11 @@ public class Database {
 	/** Singleton unique instance.
 	 */
 	private static Database instance;
-	
+	//@}
+
+	/** CONSTRUCTORS
+	 */
+	//@{
 	
 	/**Singleton constructor, therefore private.
 	 */
@@ -53,6 +60,8 @@ public class Database {
 	 *
 	 * @param graphDb The database object
 	 */
+	//@}
+	
 	private static void registerShutdownHook(final GraphDatabaseService graphDb) {
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			@Override

@@ -818,7 +818,7 @@ space = ({whitespace}|{newline})
 
 <DEFINITION>
 {
-	([^\r\n{]|"{"[^{])+
+	([^\r\n{<]|"{"[^{])+
 	{
 		buffer += yytext();
 	}

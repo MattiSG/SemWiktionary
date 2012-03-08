@@ -4500,4 +4500,46 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
 [[zh:cérémonie]]</text>
     </revision>
   </page>
+  <page>
+    <title>fauchaisons</title>
+    <id>2303654</id>
+    <revision>
+      <id>9728823</id>
+      <timestamp>2011-12-05T02:55:51Z</timestamp>
+      <contributor>
+        <username>JackBot</username>
+        <id>12968</id>
+      </contributor>
+      <minor />
+      <comment>Création du pluriel de [[fauchaison]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+{{-flex-nom-|fr}}
+{{fr-rég|fo.ʃɛ.zɔ̃|s=fauchaison}}
+'''fauchaisons''' {{pron|fo.ʃɛ.zɔ̃}} {{f}}
+# ''Pluriel de'' [[fauchaison]].</text>
+    </revision>
+  </page>
+  <page>
+    <title>fédéralismes</title>
+    <id>2303655</id>
+    <revision>
+      <id>9728898</id>
+      <timestamp>2011-12-05T03:20:45Z</timestamp>
+      <contributor>
+        <username>WikitanvirBot</username>
+        <id>48028</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.1) (robot Ajoute : [[en:fédéralismes]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+{{-flex-nom-|fr}}
+{{fr-rég|fe.de.ʁa.lism|s=fédéralisme}}
+'''fédéralismes''' {{pron|fe.de.ʁa.lism}} {{m}}
+# ''Pluriel de'' [[fédéralisme]].
+
+{{clé de tri|federalismes}}
+
+[[en:fédéralismes]]</text>
+    </revision>
+  </page>
 </mediawiki>

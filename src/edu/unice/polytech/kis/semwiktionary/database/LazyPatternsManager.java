@@ -43,8 +43,6 @@ public class LazyPatternsManager {
 	*/
 	public static void transferAll(String pattern, NodeMappedObject destination, Relation relType) {
 		Node destinationNode = destination.getNode();
-		
-		//Transaction tx = Database.getDbService().beginTx();
 
 		IndexHits<Node> hits = index.get(NodeMappedObject.INDEX_KEY, pattern);
 
@@ -55,11 +53,10 @@ public class LazyPatternsManager {
 //				System.err.println("> LazyPatternsManager update:\t'" + currentNode.getProperty("title") + "' --[" + relType + "]--> '" +  destination + "'"); //DEBUG
 			}
 			
-			WikimediaDump.tx.success();
+			Database.getTransaction().success();
 		} finally {
 			hits.close();
 			
-		    //tx.finish();
 		}
 	}
 }

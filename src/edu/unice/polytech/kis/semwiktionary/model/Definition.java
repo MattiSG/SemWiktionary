@@ -174,7 +174,6 @@ public class Definition extends NodeMappedObject {
 	}
 	
 	public Definition clearExamples() {
-		Transaction tx = Database.getDbService().beginTx();
 		
 		try {
 			for (Relationship relation : node.getRelationships(Direction.OUTGOING, Relation.EXAMPLE))
@@ -182,9 +181,9 @@ public class Definition extends NodeMappedObject {
 			for (Example example : this.listExample)
 				example.delete(); // let the Example delete itself
 			
-			tx.success();
+			Database.getTransaction().success();
 		} finally {
-			tx.finish();
+			
 		}
 		
 		this.listExample.clear();

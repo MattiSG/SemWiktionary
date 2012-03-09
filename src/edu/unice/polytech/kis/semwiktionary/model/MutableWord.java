@@ -211,17 +211,15 @@ public class MutableWord extends Word {
 	 * @return	This MutableWord, for chainability
 	 */
 	public MutableWord clearDefinitions() {
-		Transaction tx = Database.getDbService().beginTx();
-		
 		try {
 			for (Relationship relation : node.getRelationships(Direction.OUTGOING, Relation.DEFINITION))
 				relation.delete(); // delete the relationship first to be able to delete the linked nodes
 			for (Definition definition : this.definitions)
 				definition.delete(); // let the Definition delete itself
 			
-			tx.success();
+			Database.getTransaction().success();
 		} finally {
-			tx.finish();
+			
 		}
 		
 		this.definitions.clear();

@@ -104,12 +104,12 @@ import info.bliki.wiki.model.WikiModel;
 		resetComplexNymsList();
 	}
 
-	private void initTransaction() {
-		tx = Database.getDbService().beginTx();
+	private void startTransaction() {
+		Database.initTransaction();
 	}
 
 	private void stopTransaction() {		
-		tx.finish();
+		Database.stopTransaction();
 	}
 	
 	/** Reset the list of complexNyms: the list is cleared, and its size is forced to `BUFFER_SIZE`.
@@ -157,9 +157,9 @@ import info.bliki.wiki.model.WikiModel;
 	}
 
 	private void initWord(String word) {
-		//logWord();
+		logWord();
 		
-		//PREV_OUT.print(word); // output before the parsing starts, to have the culprit in case of a crash
+		PREV_OUT.print(word); // output before the parsing starts, to have the culprit in case of a crash
 		
 		currentNMO = MutableWord.obtain(word);	//TODO: delay until language was accepted? We currently create the word immediately, even though we might not store anything from it if its language is not supported
 		resetFlags();
@@ -184,7 +184,9 @@ import info.bliki.wiki.model.WikiModel;
 											 elapsedMs / 3600000,
 											 (elapsedMs / 1000) % 3600 / 60,
 											 (elapsedMs / 1000) % 60)
-							 + " since beginning)");			
+							 + " since beginning)");	
+			stopTransaction();
+			startTransaction();		
 		}
 	}
 	
@@ -256,7 +258,7 @@ import info.bliki.wiki.model.WikiModel;
 	}
 
 	initParser();
-	initTransaction();
+	startTransaction();
 	yybegin(XML);
 %init}
 

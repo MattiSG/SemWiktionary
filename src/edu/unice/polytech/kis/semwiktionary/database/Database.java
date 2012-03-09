@@ -40,12 +40,28 @@ public class Database {
 	 */
 	private static Database instance;
 	
+	private static Transaction tx;
+	
 	
 	/**Singleton constructor, therefore private.
 	 */
 	private Database() {
 		this.graphDb = new EmbeddedGraphDatabase(DB_PATH);
 		registerShutdownHook(this.graphDb);
+	}
+	
+	/** Initial transaction
+	 */
+	public static void initTransaction() {
+		if(getInstance().tx == null)
+			getInstance().tx = getDbService().beginTx();
+	} 
+	
+	/** Stop transaction
+	 */
+	public static void stopTransaction() {
+		if(getInstance().tx != null)
+			getInstance().tx.finish();
 	}
 	
 	/**Method to close the database correctly whatever the close action made by the user.
@@ -79,21 +95,27 @@ public class Database {
 		return getInstance().graphDb;
 	}
 	
+	/** Accessor to transaction
+	 */
+	public static Transaction getTransaction() {
+		return getInstance().tx;
+	}
+	
 	/**Create a new node in the database with the given property.
 	 * @param property The node property 
 	 * @param propValue The property value
 	 * @return the created node or null in case of error (unlikely)
 	 */
 	public static Node createNodeWithProperty(String property, String propValue) {
-		//Transaction tx = getDbService().beginTx();
+		
 		Node node;
 		
 		try {
 			node = getDbService().createNode();
 			node.setProperty(property, propValue);
-			WikimediaDump.tx.success();
+			getInstance().tx.success();
 		} finally {
-		    //tx.finish();
+					    
 		}
 		
 		return node; 
@@ -108,14 +130,13 @@ public class Database {
 	/** Adds the given relationship between the two given nodes.
 	 */
 	public static Relationship link(Node from, Node to, RelationshipType relationType) {
-		//Transaction tx = getDbService().beginTx();
 		Relationship relationship;
 		
 		try {
 			relationship = from.createRelationshipTo(to, relationType);
-			WikimediaDump.tx.success();
+			getInstance().tx.success();
 		} finally {
-		    //tx.finish();
+		    
 		}
 		
 		return relationship;

@@ -69,14 +69,13 @@ public class Example extends NodeMappedObject {
 	/** Deletes this Example and all attached properties from the database.
 	 */
 	public void delete() {
-		Transaction tx = Database.getDbService().beginTx();
 		
 		try {
 			this.node.delete();
 			
-			tx.success();
+			Database.getTransaction().success();
 		} finally {
-			tx.finish();
+			
 		}
 	}
 

@@ -415,6 +415,157 @@
     </revision>
   </page>
   <page>
+    <title>gouvernement</title>
+    <id>405</id>
+    <revision>
+      <id>9680134</id>
+      <timestamp>2011-11-21T18:08:54Z</timestamp>
+      <contributor>
+        <username>MalafayaBot</username>
+        <id>20439</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.2) (robot Ajoute : [[cy:gouvernement]], [[fj:gouvernement]], [[mg:gouvernement]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+
+{{-étym-}}
+: Du verbe [[gouverner]] avec suffixe [[-ment]].
+
+{{-nom-|fr}}
+{{fr-rég|ɡu.vɛʁ.nə.mã}}
+'''gouvernement''' {{pron|ɡu.vɛʁ.nə.mã|fr}} {{m}}
+# {{vieilli|fr}} [[action|Action]], [[charge]], ou manière de [[gouverner]], de [[régir]], d’[[administrer]] quelque chose, en particulier dans le domaine politique.
+#* ''Elle jouit avec un si tranquille orgueil de son autorité domestique, que je ne me sens pas le courage de tenter un coup d'État contre le '''gouvernement''' de mes armoires.'' {{source|[[w:Anatole France|Anatole France]], ''Le crime de Sylvestre Bonnard''}}
+#* ''Le régime municipal, devenu un mode d'administration, fut réduit au '''gouvernement''' des affaires locales, des intérêts civils de la cité.'' {{source|[[w:François Guizot|Guizot]], ''Histoire générale de la civilisation en Europe'', Leçon 7, 1828}}
+#* ''Peut-être parce que, depuis le XI{{e}} siècle, la seule théorie politique de l'islam a été celle de l'obéissance passive à toute autorité ''de facto'', le '''gouvernement''' par consentement reste un concept inconnu : l'autocratie a été la véritable et, pour l'essentiel, l'unique expérience.'' {{source|P.J. Vatikiotis, ''L'Islam et l'État'', 1987, traduction de Odette Guitard, 1992, p.38}}
+# [[pouvoir|Pouvoir]] qui gouverne un [[État]].
+#* ''La France démocratique, dans un accès d'indignation, renversa le '''gouvernement''' de la France bourgeoise et se proclama libre sous un '''gouvernement''' républicain.'' {{source|Daniel Stern, ''Histoire de la Révolution de 1848''}}
+#* ''Sumner Maine fait observer que les rapports des '''gouvernements''' et des citoyens ont été bouleversés de fond en comble depuis la fin du XVIII{{e}} siècle ; […].'' {{source|{{w|Georges Sorel}},  ''Réflexions sur la violence'', Chap.III, ''Les préjugés contre  la violence'', 1908, p.142}}
+#* ''Ainsi vous voyez que j'aurais pu réussir et, comme tant d'autres, vivre du budget; mais je n'ai jamais voulu rien accepter d'aucun '''gouvernement''', si ce n'est du suffrage universel.'' {{source|Réponse de M. Raspail père à l'avocat général, lors du procès de {{w|François-Vincent Raspail}} le 12 février 1874}}
+#* ''Une société ne saurait subsister sans un '''gouvernement'''.'' {{source|[[w:Montesquieu|Montesquieu]]}}
+#* ''Le '''gouvernement''' ordonne une répression sanglante. Arrestations, pendaisons, exécutions sommaire plongent Tripoli dans un bain de sang.'' {{source|Tewfik Farès, ''1911 : la Libye en guerre, déjà'', dans {{w|Libération (journal)}} du 18 mars 2011, p.S12}}
+# [[organisation|Organisation]], [[structure]] [[politique]] de l’[[État]].
+#* ''Toute nation a le '''gouvernement''' qu'elle mérite.'' [[w:Jean de Maistre|Jean de Maistre]]
+# Ceux qui gouvernent un état et particulièrement le [[pouvoir]] [[exécutif]].
+#* ''Le '''gouvernement''' a pris des mesures impopulaires.''
+#* ''Adresser une demande au '''gouvernement''' par l'entremise de son député.''
+#* ''Ces deux gouvernements étaient d’accord pour signer ce traité.''
+# {{histoire|fr}} [[charge|Charge]] de [[gouverneur]] dans une [[province]], dans une [[ville]], dans une [[place]] [[fort]]e, dans une maison [[royal]]e.
+#* ''Le roi lui donna le '''gouvernement''' de Normandie.''
+# {{histoire|fr}} {{par ext}}  La [[ville]] et le [[pays]] qui sont sous le pouvoir de ce gouverneur.
+#* ''&quot;Le roi de Navarre et le duc d'Anjou ont fui la cour et se sont retirés, l'un dans son royaume, l'autre dans son '''gouvernement'''.&quot;'' {{source|[[w:Alexandre Dumas|Alexandre Dumas père]], ''Henri III''}}
+
+{{-trad-}}
+{{(}}
+* {{T|af}} : {{trad-|af|regering}}, {{trad-|af|beheersing}}
+* {{T|sq}} : {{trad+|sq|qeveri}} {{f}}
+* {{T|de}} : {{trad+|de|Regierung}} {{f}}, {{trad-|de|Regieren}}
+* {{T|en}} : {{trad+|en|government}}, {{trad+|en|administration}}, {{trad+|en|control}}, {{trad+|en|reign}}, {{trad+|en|rule}}, {{trad+|en|governance}}, {{trad+|en|regulation}}, {{trad+|en|ruling}}, {{trad+|en|ascendancy}}, {{trad+|en|ascendance}}
+* {{T|ar}} : {{trad+|ar|حكومة|R=ḥukûma|dif=حُكومة}}
+* {{T|bn}} : {{trad+|bn|সরকার}}
+* {{T|bs}} : {{trad-|bs|vlada}} {{f}}
+* {{T|ca}} : {{trad+|ca|govern}}
+* {{T|zh}} : {{trad+|zh|政府|R=zhèngfǔ}}
+* {{T|ko}} : {{trad+|ko|정부}} (jŏŋ.bu)
+* {{T|hr}} : {{trad-|hr|vlada}} {{f}}
+* {{T|da}} : {{trad-|da|regering}} {{f}}, {{trad+|da|styre}}
+* {{T|es}} : {{trad+|es|gobierno}} {{m}}; {{trad-|es|governamiento}} {{m}}, {{trad+|es|mando}}
+* {{T|eo}} : {{trad-|eo|registaro}}, {{trad-|eo|regado}}
+* {{T|fo}} : {{trad-|fo|ríkisstjórn}}
+* {{T|fi}} : {{trad+|fi|hallitus}}; {{trad+|fi|valtio}}
+* {{T|fy}} : {{trad-|fy|regear}}
+* {{T|cy}} : {{trad+|cy|llywodraeth}} {{m}}
+* {{T|el}} : {{trad+|el|κυβέρνηση}} (kubérnēsē) {{f}}
+* {{T|he}} : {{trad+|he|ממשלה}}
+* {{T|hbo}} : {{trad--|hbo|ממשלה|dif=מֶמְשָׁלָה}} {{f}}
+* {{T|hi}} : {{trad+|hi|सरकार}}
+* {{T|hu}} : {{trad+|hu|kormány}}
+* {{T|io}} : {{trad+|io|guvernado}}
+* {{T|id}} : {{trad-|id|pemerintah}}
+* {{T|is}} : {{trad-|is|stjórn}}; {{trad-|is|ríkisstjórn}}
+{{-}}
+* {{T|it}} : {{trad+|it|governo}} {{m}}
+* {{T|ja}} : {{trad+|ja|政府}}
+* {{T|la}} : {{trad-|la|regimen}}, {{trad-|la|regimentum}}
+* {{T|lt}} : {{trad+|lt|vyriausybė}}
+* {{T|lb}} : {{trad-|lb|Regierung}} {{f}}
+* {{T|ms}} : {{trad+|ms|kerajaan}}
+* {{T|mi}} : {{trad-|mi|kāwanatanga}}
+* {{T|nl}} : {{trad+|nl|regering}} {{f}}, {{trad+|nl|overheid}}, {{trad+|nl|gouvernement}}, {{trad+|nl|bestuur}}, {{trad+|nl|bewind}}, {{trad-|nl|heerschappij}}
+* {{T|no}} : {{trad-|no|regjering}}
+* {{T|nn}} : {{trad-|nn|styresmakt}}
+* {{T|pap}} : {{trad--|pap|gobernashon}}
+* {{T|pl}} : {{trad+|pl|rząd}}; {{trad+|pl|rada}} {{trad-|pl|ministrów}} {{f}}
+* {{T|pt}} : {{trad+|pt|governo}} {{m}}
+* {{T|ro}} : {{trad+|ro|guvern}} {{n}}
+* {{T|ru}} : {{trad+|ru|управление}} (upravlěniě) {{n}}, {{trad+|ru|правительство}}, {{trad+|ru|власть}}
+* {{T|ses}} : {{trad--|ses|gofornamaŋ}}
+* {{T|sr}} : {{trad-|sr|влада}} (vlada) {{f}}
+* {{T|sl}} : {{trad+|sl|vladavina}} {{f}}
+* {{T|sv}} : {{trad+|sv|styrelse}}, {{trad+|sv|regering}}
+* {{T|tl}} : {{trad-|tl|pámahaláan}}
+* {{T|cs}} : {{trad+|cs|vláda}} {{f}}
+* {{T|th}} : {{trad+|th|รัฐบาล}}
+* {{T|tr}} : {{trad+|tr|hükümet}}, {{trad+|tr|yönetim}}
+* {{T|vi}} : {{trad+|vi|chính}} {{trad+|vi|phủ}}; {{trad+|vi|sự}} {{trad+|vi|cai}} {{trad+|vi|trị}}
+* {{T|yi}} : {{trad-|yi|רעגירונג}} (regirung) {{f}}
+* {{T|zu}} : {{trad-|zu|uhulumeni}}
+{{)}}
+
+{{-pron-}}
+{{ébauche-pron|fr}}
+* {{pron-rég|France &lt;!--  précisez svp la ville ou la région --&gt;||audio=Fr-gouvernement.ogg}}
+
+{{-voir-}}
+* {{WP}}
+* {{Wikiquote}} 
+
+{{-réf-}}
+* {{R:DAF8}}
+
+== {{=nl=}} ==
+{{-étym-}}
+: {{ébauche-étym|nl}}
+
+{{-nom-|nl}}
+'''gouvernement''' 
+# [[gouvernement|Gouvernement]].
+
+{{-syn-}}
+* [[overheid]]
+* [[regering]]
+
+[[ast:gouvernement]]
+[[cs:gouvernement]]
+[[cy:gouvernement]]
+[[de:gouvernement]]
+[[el:gouvernement]]
+[[en:gouvernement]]
+[[es:gouvernement]]
+[[et:gouvernement]]
+[[fi:gouvernement]]
+[[fj:gouvernement]]
+[[gl:gouvernement]]
+[[hu:gouvernement]]
+[[id:gouvernement]]
+[[io:gouvernement]]
+[[ja:gouvernement]]
+[[ko:gouvernement]]
+[[li:gouvernement]]
+[[lo:gouvernement]]
+[[lt:gouvernement]]
+[[mg:gouvernement]]
+[[nl:gouvernement]]
+[[no:gouvernement]]
+[[pl:gouvernement]]
+[[ru:gouvernement]]
+[[sv:gouvernement]]
+[[vi:gouvernement]]
+[[zh:gouvernement]]
+[[zh-min-nan:gouvernement]]</text>
+    </revision>
+  </page>
+  <page>
     <title>cercle</title>
     <id>841</id>
     <revision>
@@ -1790,6 +1941,160 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
 [[uk:火]]
 [[vi:火]]
 [[zh:火]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>degré</title>
+    <id>7714</id>
+    <revision>
+      <id>9612350</id>
+      <timestamp>2011-11-06T12:08:49Z</timestamp>
+      <contributor>
+        <username>Luckas-bot</username>
+        <id>9945</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.1) (robot Ajoute : [[pl:degré]]</comment>
+      <text xml:space="preserve">{{voir|Degré}}
+== {{=fr=}}==
+{{-étym-}}
+:Du {{étyl|la|fr}} ''[[gradus]]'' (« [[pas]] », « '''degré''' d’[[éloignement]] ou de [[parenté]]», « [[marche]] d’escalier», « [[gradin]] », « [[rang]] »).
+: De par son étymologie latine, '''degré''' est lié à « [[gradation]] », « [[grade]] », « [[gradé]] », « [[graduer]] », « [[gradué]] », « [[graduellement]] », « [[gradin]] », 
+
+{{-nom-|fr}}
+{{fr-rég|də.ɡʁe}}
+'''degré''' {{pron|də.ɡʁe|fr}} {{m}}
+# [[espace|Espace]] compris entre chaque [[marche]] d’un [[escalier]].
+#* ''Au bas de l'escalier, un homme venait à sa rencontre. Il avait mis le pied sur la première marche. Gaspard n'était séparé de lui que par une douzaine de '''degrés'''.'' {{source|{{w|André Dhôtel}}, ''Le Pays où l'on n'arrive jamais'', 1955}}
+# {{particulier}} Marches [[servant]] d’[[entrée]] ou de [[soubassement]] aux grands [[édifices]].
+# {{méton|fr}} {{vieilli|fr}} Escalier.
+#* ''Le grand '''degré''' de Versailles.''
+# {{figuré|fr}} [[étape|Étape]], [[stade]] par où l’on [[passer|passe]] d’un [[état]] dans un [[autre]].
+#* ''Il a passé par tous les '''degrés'''.''
+#* ''Cet emploi fut le premier '''degré''' de sa fortune, de sa faveur.''
+#* ''Parvenir au plus haut '''degré''' de l’éloquence, au plus haut '''degré''' de gloire.''
+#* ''C’est le dernier '''degré''' de l’avilissement.''
+#* ''Ils sont tous deux au même '''degré'''.''
+# {{métrol|fr}} {{géométrie|fr}} [[unité|Unité]] de [[mesure]] d’[[angle]] [[plan]] égale à 1/360&lt;sup&gt;ème&lt;/sup&gt; de la [[circonférence]] d’un [[cercle]]. Son [[symbole]] est '''[[°]]'''.
+#*''Un angle de 90 '''degrés''' est un angle droit.''
+#* ''Les astronomes divisent en '''degrés''', ordinairement sexagésimaux, les cercles fictifs de la sphère céleste.''
+#* ''On appelle '''degrés''' de latitude ceux du méridien, et '''degrés''' de longitude ceux de l’équateur.''
+# {{métrol|fr}} Unité de mesure de la [[température]] sur plusieurs [[échelles]] comme le [[degré Celsius]], le [[kelvin]] et le [[degré Fahrenheit]]. Le symbole est un « ° » qualifié (par ex. '''[[°C]]''', '''[[°F]]''', etc.).
+#*''Comme il faisait une chaleur de trente-trois '''degrés''', le boulevard Bourdon se trouvait absolument désert.'' {{source|[[w:Gustave Flaubert|Gustave Flaubert]], ''[[w:Bouvard et Pécuchet|Bouvard et Pécuchet]]'', ''incipit''}}
+#* '''''Degré''' de feu'' : Le point où il faut que le feu soit poussé pour l’opération chimique qu’on se propose.
+# {{métrol|fr}} Unité de diverses échelles de mesure de la densité, de la viscosité, de la teneur en certaines substances, etc.
+&lt;!--- # {{métrol|fr}} Unité de mesure de la [[pression]] [[atmosphérique]].
+#* ''Le baromètre est descendu à vingt-sept '''degrés'''.'' ---&gt;
+# [[pourcentage|Pourcentage]], [[teneur]] d’[[alcool]] dans un liquide, exprimée en proportion de poids d’alcool pur qui entre dans le mélange.
+#* ''L'essai d'un alcool doit porter tout d'abord sur le '''degré''' alcoolique qui est déterminé au moyen de l’alcoomètre de Gay-Lussac.'' {{source|Cousin &amp; Serres, ''Chimie, physique, mécanique et métallurgie dentaires, 1911}}
+#*''Cette vodka titre 40 '''degrés'''. — De l’alcool à 90 '''degrés'''.''
+# {{par ext|fr}} [[différence|Différence]] de plus ou de moins dans les [[qualités]] [[sensibles]]. [[proportion|Proportion]] ou [[étendue]].
+#* ''Et tout le village bientôt, à des '''degrés''' variant selon la constitution et la force de résistance de chacun, fut en proie à des malaises étranges, symptômes inexplicables d’empoisonnement.'' {{source|{{w|Louis Pergaud}}, ''[[s:Un petit logement|Un petit logement]]'', dans ''{{w|Les Rustiques, nouvelles villageoises}}'', 1921}}
+#*''On était tous au même '''degré''' de confusion.''
+#* '''''Degré''' de chaleur, de froid, de sécheresse, d’humidité, de force, de mouvement, de vitesse, d’intensité, d’accroissement, etc.''
+#* ''Une [[brûlure]] au deuxième '''degré'''.''
+#* ''Ma passion s’accrut à un tel '''degré''', que… '''degré''' d’intelligence.''
+#* '''''Degré''' de tristesse, d’affliction, d’abattement.''
+#* '''''Degré''' d’affection, d’intérêt.''
+#* ''Être insolent au dernier '''degré'''.''
+#* ''Être impertinent au plut haut '''degré'''.''
+#* ''Être ennuyeux au plus haut '''degré'''.''
+#* '''''Degrés''' de comparaison'' ou ''de signification'' : Le positif, le comparatif et le superlatif.
+#* '''''Degré''' de juridiction'' : Chacun des tribunaux devant lesquels une même affaire peut être successivement portée.
+# En parlant de [[parenté]] et de [[consanguinité]], il marque la [[proximité]] ou l’[[éloignement]] qu’il y a entre [[parents]], à l’[[égard]] de la [[ligne]] qui [[leur]] est [[commune]].
+#* ''Parents au premier, au second '''degré'''.''
+#* ''Les parents au-delà du douzième '''degré''' ne succédaient pas.''
+#* ''Les parents au quatrième '''degré''' n’ont pas besoin de dispense pour se marier ensemble.''
+# {{mathématiques|fr}} [[nombre|Nombre]] d’[[inconnues]] dans une équation.
+#* ''Équation du premier, du second, du troisième '''degré'''.''
+# {{vieilli|fr}} [[grades|Grades]] de [[bachelier]], de [[licencié]], de [[docteur]].
+#* ''[[prendre ses degrés|Prendre ses degrés]].''
+#* ''Avoir tous ses '''degrés'''.''
+
+{{-exp-}}
+* [[degré Baumé]]. Symbole: [[°B]]&lt;!--- densité ---&gt;
+* [[degré Celsius]]. Symbole: [[°C]]
+* [[degré Clark]]. Symbole: [[°E]]&lt;!--- dureté de l’eau (concentration en carbonate de calcium) ---&gt;
+* [[degré centigrade]]. Symbole: [[°]]
+* [[degré Dornic]]. Symbole: [[°D]]&lt;!--- acidité du lait (concentration en acide lactique) ---&gt;
+* [[degré Fahrenheit]]. Symbole: [[°F]]
+* [[degré Gay-Lussac]]. Symbole: [[°GL]]&lt;!--- concentration d’alcool par volume ---&gt;
+* [[degré Kelvin]]. Symbole: [[°K]]
+* [[degré KMW]]. Symbole: [[°KMV]]&lt;!--- concetration en sucre du moût de vin KMW = Klosterneuburger MostWaage « Échelle de moût de Klosterneuburg » ---&gt;
+* [[degré Lovibond]]. Symbole: [[°L]]&lt;!--- couleur du miel et de la bière ---&gt;
+* [[degré MacMichael]]. Symbole: [[°McM]]&lt;!--- viscosité du chocolat ---&gt;
+* [[degré Oechsle]]. Symbole: [[°Oe]]&lt;!--- concentration en sucre du moût de vin ---&gt;
+* [[degré Plato]]. Symbole: [[°P]]&lt;!--- concentration en sucre du moût de bière ---&gt;
+* [[degré Quevenne]]. Symbole: [[°Q]]&lt;!--- densité du lait ---&gt;
+* [[degré Rankine]]. Symbole: [[°R]]&lt;!--- température ---&gt;
+* [[degré Réaumur]]. Symbole: [[°Re]]&lt;!--- température ---&gt;
+* [[degré Soxhlet-Henkel]]. Symbole: [[°SH]]&lt;!--- acidité du lait ---&gt;
+* [[degré Therner]]. Symbole: [[°T]]&lt;!--- acidité du lait ---&gt;
+* [[degré Twaddle]]. Symbole: [[°tw]]&lt;!--- densité des liquides plus denses que l’eau ---&gt;
+* [[par degrés]]
+* [[prendre ses degrés]]
+
+{{-méro-}}
+{{(}}
+; subdivision d'un angle
+* [[minute]] = 60{{e}}
+* [[seconde]] = 360{{e}}
+{{-}}
+; subdivision de la mesure d'intensité
+* [[décigrade]] = 10{{e}}
+* [[centigrade]] = 100 {{e}}
+{{)}}
+
+{{-trad-}}
+{{(}}
+* {{T|af}} : {{trad-|af|graad}}
+* {{T|de}} : {{trad+|de|Grad}}, {{trad-|de|Staffel}}, {{trad+|de|Stufe}}
+* {{T|en}} : {{trad+|en|degree}}, {{trad+|en|grade}}
+* {{T|ca}} : {{trad+|ca|grau}}
+* {{T|da}} : {{trad+|da|grad}}
+* {{T|es}} : {{trad+|es|grado}}, {{trad+|es|cargo}}, {{trad+|es|jerarquía}}
+* {{T|eo}} : {{trad-|eo|grado}}
+* {{T|fo}} : {{trad-|fo|stig}}
+* {{T|fi}} : {{trad+|fi|aste}}
+* {{T|fy}} : {{trad-|fy|graad}}
+* {{T|hu}} : {{trad+|hu|fok}}
+* {{T|io}} : {{trad+|io|grado}}
+{{-}}
+* {{T|it}} : {{trad+|it|grado}}
+* {{T|ms}} : {{trad-|ms|derajat}}
+* {{T|nl}} : {{trad+|nl|graad}}, {{trad+|nl|mate}}, {{trad+|nl|trap}}
+* {{T|no}} : {{trad+|no|grad}}
+* {{T|pap}} : {{trad--|pap|grado}}
+* {{T|pl}} : {{trad+|pl|stopień}}
+* {{T|pt}} : {{trad+|pt|grau}}
+* {{T|ru}} : {{trad+|ru|градус}}
+* {{T|sv}} : {{trad+|sv|grad}}
+* {{T|cs}} : {{trad-|cs|stupeň}}
+* {{T|tr}} : {{trad+|tr|aşama}}
+{{)}}
+
+{{-pron-}}
+{{ébauche-pron|fr}}
+* {{pron-rég|France &lt;!--  précisez svp la ville ou la région --&gt;||audio=Fr-degré.ogg}}
+{{clé de tri|degre}}
+
+[[de:degré]]
+[[el:degré]]
+[[en:degré]]
+[[es:degré]]
+[[et:degré]]
+[[fi:degré]]
+[[gl:degré]]
+[[hu:degré]]
+[[id:degré]]
+[[io:degré]]
+[[it:degré]]
+[[ko:degré]]
+[[lt:degré]]
+[[no:degré]]
+[[pl:degré]]
+[[vi:degré]]
+[[wo:degré]]</text>
     </revision>
   </page>
   <page>
@@ -3211,6 +3516,53 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
     </revision>
   </page>
   <page>
+    <title>Modèle:-conj-coord-</title>
+    <id>40929</id>
+    <restrictions>edit=autoconfirmed:move=autoconfirmed</restrictions>
+    <revision>
+      <id>3959783</id>
+      <timestamp>2009-01-01T20:42:47Z</timestamp>
+      <contributor>
+        <username>Koxinga</username>
+        <id>10</id>
+      </contributor>
+      <comment>code pour les liens</comment>
+      <text xml:space="preserve">{{-déf-|Conjonction de coordination|
+|type=Conjonctions de coordination
+|code=conj-coord
+|num={{{num|}}}
+|langue={{{1|}}}
+|ascii={{{2|}}}
+}}&lt;noinclude&gt;
+{{-conj-coord-/Aide}}
+[[Catégorie:Modèles de type de mot du Wiktionnaire|Conjonction de coordination]]
+&lt;/noinclude&gt;</text>
+    </revision>
+  </page>
+  <page>
+    <title>Modèle:-nom-</title>
+    <id>4283</id>
+    <restrictions>sysop</restrictions>
+    <revision>
+      <id>8316060</id>
+      <timestamp>2010-12-21T09:44:19Z</timestamp>
+      <contributor>
+        <username>Darkdadaah</username>
+        <id>532</id>
+      </contributor>
+      <comment>inclusion de la documentation</comment>
+      <text xml:space="preserve">{{-déf-|Nom commun|
+|type=Noms communs
+|code=nom
+|num={{{num|}}}
+|langue={{{1|}}}
+}}&lt;noinclude&gt;
+{{Documentation}}
+[[Catégorie:Modèles de type de mot du Wiktionnaire|Nom commun]]
+&lt;/noinclude&gt;</text>
+    </revision>
+  </page>
+  <page>
     <title>slave</title>
     <id>4590</id>
     <revision>
@@ -3900,6 +4252,255 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
     </revision>
   </page>
   <page>
+    <title>berdeller</title>
+    <id>12780</id>
+    <revision>
+      <id>6364194</id>
+      <timestamp>2009-10-11T15:21:54Z</timestamp>
+      <contributor>
+        <username>Daahbot</username>
+        <id>1041</id>
+      </contributor>
+      <minor />
+      <comment>Bot : mise en forme des exemples et citations</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+
+{{-étym-}}
+: {{ébauche-étym|fr}}
+
+{{-verb-|fr}}
+'''berdeller''' {{1ergroupe}}
+# (''Belgique'') [[parler|Parler]] beaucoup.
+#* ''Il ne fait que '''berdeller'''.''</text>
+    </revision>
+  </page>
+  <page>
+    <title>primitive</title>
+    <id>18268</id>
+    <revision>
+      <id>8751923</id>
+      <timestamp>2011-03-08T13:28:33Z</timestamp>
+      <contributor>
+        <username>Luckas-bot</username>
+        <id>9945</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.1) (robot Ajoute: [[tr:primitive]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+
+{{-flex-adj-|fr}}
+'''primitive''' {{pron|pʁi.mi.tiv}}
+# Féminin singulier de '''[[primitif]]'''.
+
+{{-flex-nom-|fr}}
+'''primitive''' {{pron|pʁi.mi.tiv}}
+# Féminin singulier de '''[[primitif]]'''.
+
+{{-nom-|fr}}
+'''primitive''' {{pron|pʁi.mi.tiv}} {{f}}
+# {{mathématiques|fr}} '''''Primitive''' d’une fonction ''f : Fonction [[quelconque]] dont la [[dérivée]] donne la fonction ''f''.
+#* ''On appelle logarithme népérien, noté ln, la '''primitive''' de la fonction f(x) = 1/x  (x&gt;o) s'annulant pour x=1.'' {{source|P. Thuillier &amp; J.-C. Belloc, ''Mathémathiques, T.1 : Analyse'', 1971, p.130}}
+# {{informatique|fr}} [[instruction|Instruction]], [[commande]] ou [[structure]] de [[base]], dans un [[langage]] de [[programmation]].
+#* ''En Java, les chaînes de caractères ''(String)'', caractères ''(char)'', entiers ''(int)'' et booléens ''(boolean)'' sont des '''primitives'''.''
+# {{term|Graphisme}} [[élément|Élément]] [[graphique]] de base, à partir duquel on peut [[construire]] des [[objet]]s [[plus]] [[complexe]]s.
+#* ''La droite, le plan, la sphère sont des '''primitives'''.''
+
+{{-homo-}}
+* [[primitives]] {{cf|primitif}}
+
+&lt;!-- pas d’{{-anagr-}} --&gt;
+
+== {{=en=}} ==
+
+{{-étym-}}
+: Du {{étyl|la|en|mot=primitivus}}.
+
+{{-adj-|en}}
+'''primitive'''
+# [[primitif|Primitif]].
+
+[[cs:primitive]]
+[[el:primitive]]
+[[en:primitive]]
+[[es:primitive]]
+[[et:primitive]]
+[[fi:primitive]]
+[[hu:primitive]]
+[[id:primitive]]
+[[io:primitive]]
+[[it:primitive]]
+[[kn:primitive]]
+[[ku:primitive]]
+[[ml:primitive]]
+[[my:primitive]]
+[[pl:primitive]]
+[[ru:primitive]]
+[[sv:primitive]]
+[[ta:primitive]]
+[[te:primitive]]
+[[tr:primitive]]
+[[vi:primitive]]
+[[zh:primitive]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>cérémonie</title>
+    <id>302</id>
+    <revision>
+      <id>9703587</id>
+      <timestamp>2011-11-29T00:35:56Z</timestamp>
+      <contributor>
+        <username>Luckas-bot</username>
+        <id>9945</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.1) (robot Ajoute : [[el:cérémonie]], [[es:cérémonie]]</comment>
+      <text xml:space="preserve">{{voir|ceremonie}}
+== {{=fr=}} ==
+
+{{-étym-}}
+: Du {{étyl|la|fr|mot=caeremonia}} (« cérémonie religieuse », « rite ») de ''[[caelum]]'' (« [[ciel]] ») et ''[[munia]]'' (« affaires », « devoirs », « office », « charge », « fonctions »). La forme archaïque de ''caelum'' avait un ''r'' qui survit dans l'adjectif ''[[caeruleus]]'' (« [[céruléen]] », « azuré », « bleu ciel »).
+
+{{-nom-|fr}}
+{{fr-rég|se.ʁe.mo.ni}}
+'''cérémonie''' {{pron|se.ʁe.mo.ni|fr}} {{f}}
+# [[ensemble|Ensemble]] des [[forme]]s [[extérieur]]es et [[régulier|régulières]] du [[culte]] [[religieux]], des [[célébration]]s [[mystique]]s.
+#* ''L'encens, qui était une gomme résineuse, était exclusivement réservé aux '''cérémonies''' religieuses.'' {{source|Marcel Hégelbacher; ''La Parfumerie et la Savonnerie.'' -1924}}
+#* ''La '''cérémonie''' du baptême.''
+#* ''Le mariage s’accompagne d’une '''cérémonie'''.''
+#* ''Le sacre des évêques se fait avec de grandes '''cérémonies'''.''
+#* ''L’ordre des '''cérémonies'''.''
+#* '''''Cérémonie''' funèbre.''
+# {{par ext|fr}} [[formalité|Formalités]] qu’on [[observer|observe]] dans les [[action]]s [[solennel]]les pour les [[rendre]] plus [[éclatant]]es.
+#* ''C'est pour cela, assurait-il, que l'usage s'était introduit dans certaines villes du Midi qu'aux trois fêtes précitées, les chefs de la communauté juive soient giflés publiquement, au cours d'une '''cérémonie''' solennelle, par le seigneur du lieu. […]. Cette '''cérémonie''' portait le nom de colophisation.'' {{source|{{w|Léon Berman}}, ''Histoire des Juifs de France des origines à nos jours'', 1937}}
+#* ''Avec Gasbieha, elle passa des heures à confectionner une robe de '''cérémonie''' pour son amie.'' {{source|{{w|Out-el-Kouloub}}, ''Zaheira'', dans &quot;Trois contes de l'Amour et de la Mort&quot;, 1940}}
+#* ''Grand maître des '''cérémonies''', maître des '''cérémonies''', aide des '''cérémonies''','' officiers qui président aux cérémonies et qui les dirigent.
+# [[acte|Acte]]s de [[civilité]], [[témoignage]]s [[convenir|convenus]] de [[déférence]] que les [[particulier]]s se donnent les uns aux autres.
+#* ''Faire des visites de '''cérémonie'''.''
+#* ''Reconduire quelqu’un en '''cérémonie'''.''
+#* ''Ne faisons point de '''cérémonies'''.''
+#* ''Bannir la '''cérémonie'''.''
+#* ''Il est ennemi des '''cérémonies'''.''
+# {{familier|fr}} [[forme|Forme]], [[pharisianisme]].
+#* ''Faire une chose par '''cérémonie''','' faire une chose pour la forme.
+#* ''Il paraît écouter vos conseils avec déférence, mais ce qu’il en fait c’est par pure '''cérémonie''',''
+#* ''C’est pure '''cérémonie'''.''
+# {{par ext|fr}} [[civilité|Civilité]] [[gênant]]e, [[importun]]e.
+#* ''Sans '''cérémonie''', point de '''cérémonie''','' librement, sans contrainte, sans façons.
+#* ''Assez de '''cérémonies''' !''
+#* ''Faire des '''cérémonies''','' faire des [[façon]]s, des difficultés avant de consentir ou de se résoudre à quelque chose.
+#* ''Il a fait bien des '''cérémonies''' pour en arriver là.''
+
+{{-syn-}}
+
+{{cf|fête}}&lt;ref name=&quot;Rouaix&quot; /&gt;
+
+{{(}}
+* [[rituel]], [[liturgie]] (1)
+* [[préséance]]&lt;ref name=&quot;Rouaix&quot;&gt;''Trouver le mot juste : dictionnaire des idées suggérées par les mots'' par Paul Rouaix en 1987, N°7939, ISBN : 978-2253048404, Ed. Le Livre de Poche.&lt;/ref&gt;
+{{-}}
+* [[protocole]], [[solennité]] (2)
+* [[façonnier]]&lt;ref name=&quot;Rouaix&quot; /&gt;
+{{)}}
+
+{{-apr-}}
+{{(}}
+* [[cérémonial]]
+* [[cérémoniel]]
+{{-}}
+* [[cérémonieusement]]
+* [[cérémonieux]]
+{{)}}
+
+{{-exp-}}
+* [[cérémonie du thé]]
+
+{{-hyper-}}
+* [[célébration]]
+
+{{-hypo-}}
+{{(}}
+* [[adoubement]]
+* [[autodafé]]
+* [[baptême]]
+* [[bénédiction]]
+* [[canonisation]]
+* [[circoncision]]
+* [[commémoration]]
+* [[consécration]]
+* [[couronnement]]
+* [[enterrement]]
+* [[fiançailles]]
+{{-}}
+* [[funérailles]]
+* [[inauguration]]
+* [[initiation]]
+* [[investiture]]
+* [[lustration]]
+* [[mariage]]
+* [[obsèques]]
+* [[onction]] ou [[extrême onction]]
+* [[ordination]]
+* [[purification]]
+* [[sacrifice]] [[expiatoire]]
+{{)}}
+
+{{-trad-}}
+{{(}}
+* {{T|de}} : {{trad+|de|Feierlichkeit}}, {{trad-|de|Förmlichkeit}}, {{trad+|de|Zeremonie}}, {{trad-|de|Höflichkeitsgeste}}
+* {{T|en}} : {{trad+|en|ceremony}}, {{trad+|en|observance}}
+* {{T|da}} : {{trad+|da|ceremoni}}
+* {{T|es}} : {{trad+|es|ceremonia}}
+* {{T|eo}} : {{trad-|eo|ceremonio}}
+* {{T|fy}} : {{trad-|fy|seremoanje}}
+* {{T|el}} : {{trad+|el|εθιμοτυπία}}
+* {{T|hu}} : {{trad-|hu|ceremónia}}
+* {{T|io}} : {{trad+|io|ceremonio}}
+* {{T|id}} : {{trad+|id|upacara}}
+{{-}}
+* {{T|it}} : {{trad+|it|cerimonia}}
+* {{T|ku}} : {{trad+|ku|dêlindêz}}, {{trad+|ku|merasim}}, {{trad+|ku|rêûresm}}, {{trad+|ku|ayîn}}, {{trad+|ku|resmiyet}}, {{trad+|ku|seremonî}}
+* {{T|la}} : {{trad-|la|caeremonia}}, {{trad+|la|caerimonia}}
+* {{T|nl}} : {{trad+|nl|ceremonie}}, {{trad+|nl|plechtigheid}}, {{trad-|nl|plichtplegingen}}
+* {{T|pap}} : {{trad--|pap|seremonia}}
+* {{T|pt}} : {{trad+|pt|cerimônia}}
+* {{T|sv}} : {{trad+|sv|ceremoni}}
+* {{T|cs}} : {{trad-|cs|ceremonie}}, {{trad-|cs|obřad}}
+* {{T|tr}} : {{trad+|tr|tören}}
+{{)}}
+
+{{-pron-}}
+* {{pron-rég|France &lt;!--  précisez svp la ville ou la région --&gt;|se.ʁe.mɔ.ni|audio=Fr-cérémonie.ogg}}
+
+{{-voir-}}
+* {{WP}}
+
+{{-réf-}}
+&lt;references /&gt;
+* {{Import:DAF8}}
+
+{{clé de tri|ceremonie}}
+
+[[cs:cérémonie]]
+[[de:cérémonie]]
+[[el:cérémonie]]
+[[en:cérémonie]]
+[[es:cérémonie]]
+[[et:cérémonie]]
+[[fi:cérémonie]]
+[[hu:cérémonie]]
+[[io:cérémonie]]
+[[it:cérémonie]]
+[[ko:cérémonie]]
+[[ku:cérémonie]]
+[[li:cérémonie]]
+[[pl:cérémonie]]
+[[pt:cérémonie]]
+[[vi:cérémonie]]
+[[zh:cérémonie]]</text>
+   </revision>
+  </page>
+  <page>
     <title>baccalauréat</title>
     <id>144201</id>
     <revision>
@@ -3965,7 +4566,6 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
 
 {{-homo-}}
 * [[baccalauréats]]
-
 {{-voir-}}
 * {{WP}}
 
@@ -3987,6 +4587,48 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
 [[tr:baccalauréat]]
 [[vi:baccalauréat]]
 [[zh:baccalauréat]]</text>
+    </revision>
+  </page>
+  <page>
+    <title>fauchaisons</title>
+    <id>2303654</id>
+    <revision>
+      <id>9728823</id>
+      <timestamp>2011-12-05T02:55:51Z</timestamp>
+      <contributor>
+        <username>JackBot</username>
+        <id>12968</id>
+      </contributor>
+      <minor />
+      <comment>Création du pluriel de [[fauchaison]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+{{-flex-nom-|fr}}
+{{fr-rég|fo.ʃɛ.zɔ̃|s=fauchaison}}
+'''fauchaisons''' {{pron|fo.ʃɛ.zɔ̃}} {{f}}
+# ''Pluriel de'' [[fauchaison]].</text>
+    </revision>
+  </page>
+  <page>
+    <title>fédéralismes</title>
+    <id>2303655</id>
+    <revision>
+      <id>9728898</id>
+      <timestamp>2011-12-05T03:20:45Z</timestamp>
+      <contributor>
+        <username>WikitanvirBot</username>
+        <id>48028</id>
+      </contributor>
+      <minor />
+      <comment>r2.7.1) (robot Ajoute : [[en:fédéralismes]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+{{-flex-nom-|fr}}
+{{fr-rég|fe.de.ʁa.lism|s=fédéralisme}}
+'''fédéralismes''' {{pron|fe.de.ʁa.lism}} {{m}}
+# ''Pluriel de'' [[fédéralisme]].
+
+{{clé de tri|federalismes}}
+
+[[en:fédéralismes]]</text>
     </revision>
   </page>
 </mediawiki>

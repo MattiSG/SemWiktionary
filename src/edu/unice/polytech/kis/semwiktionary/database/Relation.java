@@ -14,6 +14,7 @@ public enum Relation implements RelationshipType {
 	TROPONYM(Word.class),
 	HYPONYM(Word.class),
 	MERONYM(Word.class),
+	LEXICAL_CATEGORY(LexicalCategory.class),
 	RELATEDVOC(Word.class);
 	
 	public Class getDestinationType() {

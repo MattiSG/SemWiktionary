@@ -8,6 +8,7 @@ import java.util.Stack;
 
 import edu.unice.polytech.kis.semwiktionary.model.*;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
+import edu.unice.polytech.kis.semwiktionary.database.LazyPatternsManager;
 
 import info.bliki.wiki.filter.PlainTextConverter;
 import info.bliki.wiki.model.WikiModel;
@@ -19,10 +20,20 @@ import info.bliki.wiki.model.WikiModel;
 	public static final String  OUTPUT_FILE = "log/parser-output.txt",
 								ERROR_FILE = "log/parser-error.txt";
 								
-	public long wordCount = 0;
-
+	public long wordCount = 0,
+				modelCount = 0;
+	
+	private final static String PATTERN_MARKER = "Modèle"; // update in <TITLE> too!
+	private final static int PATTERN_MARKER_LENGTH = PATTERN_MARKER.length() + 1; // depends on the OS. The +1 is for the colon (":").
+	
 	private final PrintStream PREV_OUT = System.out,
 							  PREV_ERR = System.err;
+	/** Total number of words to parse.
+	* Allows to provide an estimate of ending time.
+	* Last updated for november 2011. To update this value, simply calculate it with:
+	*     egrep '<title>[^:<]</title>' path/to/dumpfile.xml | wc -l
+	*/
+	private final static long TOTAL_WORDS = 25;
 							  
 	private final static int LOG_FREQUENCY = 100; // a count message will be output to the console on every multiple of this frequency
 	/** Some nested elements (definitions and hierarchical relations) need to be stored in list-type structures. This variable defines their size.
@@ -32,7 +43,7 @@ import info.bliki.wiki.model.WikiModel;
 	private final static int BUFFER_SIZE = 8;
 	
 	private Stack<Integer> statesStack = new Stack<Integer>();
-	private MutableWord currentWord;
+	private NodeMappedObject currentNMO;
 	private Relation currentRelation;
 	
 	/**@name	Flags
@@ -48,7 +59,7 @@ import info.bliki.wiki.model.WikiModel;
 	private int definitionCount = 0;
 	private int definitionDepth = -1; // the depth is the number of sharps (#) in front of a definition, minus one (that's optimization to have only one substraction for the 0-based indexed list). So, to trigger comparisons, we need to be negative.
 	
-	private Vector<Word> complexNyms;	// Used for hyponyms, hyperonyms, holonyms, and meronyms
+	private Vector<NodeMappedObject> complexNyms;	// Used for hyponyms, hyperonyms, holonyms, and meronyms
 	private int complexDepth;		// Used to calculate the depth of the list (number of '*')
 	
 	/**Used for complexNym algorithm :
@@ -69,22 +80,12 @@ import info.bliki.wiki.model.WikiModel;
 												"http://fr.wiktionary.org/wiki/${title}");
 	private PlainTextConverter converter = new PlainTextConverter();
 	
-	private long timer = System.nanoTime();
-	private static final long FIRST_TICK = System.nanoTime();
+	private long timer = System.currentTimeMillis();
+	private static final long FIRST_TICK = System.currentTimeMillis();
 	
-	
-	/** Returns nanoseconds since the last `tick()` call.
-	*/
-	private long tick() {
-		long result = System.nanoTime() - timer;
-		
-		timer = System.nanoTime();
-		
-		return result;
-	}
 
 	private void initParser() {
-		PREV_OUT.println("Word,Parsing time (ns),Syntax errors,Parser errors");
+		PREV_OUT.println("Word,Syntax errors,Parser errors");
 		PREV_OUT.print("**Init**"); // for logging purposes
 	
 		definitionsBuffer = new Vector<String>(BUFFER_SIZE, 2); // second param is increment size.
@@ -99,7 +100,7 @@ import info.bliki.wiki.model.WikiModel;
 		relationsMap.put("holo", Relation.MERONYM);
 		relationsMap.put("voc", Relation.RELATEDVOC);
 		
-		complexNyms = new Vector<Word>(BUFFER_SIZE, 2); // second param is increment size.
+		complexNyms = new Vector<NodeMappedObject>(BUFFER_SIZE, 2); // second param is increment size.
 		resetComplexNymsList();
 	}
 	
@@ -113,17 +114,21 @@ import info.bliki.wiki.model.WikiModel;
 		complexNyms.setSize(BUFFER_SIZE);
 	}
 
+	/** Pushes the current state to the states stack.
+	 */
 	private void yypushstate() {
-		statesStack.push(yystate());
+		yypushstate(yystate());
 	}
 	
-	/** Shortcut convenience method: pushes state and switches to the passed one.
+	/** Pushes the given state to the states stack.
 	*/
-	private void yypushstate(int newState) {
-		yypushstate();
-		yybegin(newState);
+	private void yypushstate(int state) {
+		statesStack.push(state);
 	}
 	
+	/** Switches the current state to the last one from the states stack.
+	* If the stack is empty, the state defaults to <XML>, to avoid unexitable states.
+	*/
 	private void yypopstate() {
 		try {
 			yybegin(statesStack.pop());
@@ -138,7 +143,6 @@ import info.bliki.wiki.model.WikiModel;
 	*/
 	private void logWord() {
 		PREV_OUT.println(","
-						 + tick() + ","
 						 + (syntaxErrorFlag ? "y" : "n") + ","
 						 + (errorFlag ? "y" : "n")
 						);
@@ -149,17 +153,42 @@ import info.bliki.wiki.model.WikiModel;
 		
 		PREV_OUT.print(word); // output before the parsing starts, to have the culprit in case of a crash
 		
-		currentWord = MutableWord.obtain(word);	//TODO: delay until language was accepted? We currently create the word immediately, even though we might not store anything from it if its language is not supported
+		currentNMO = MutableWord.obtain(word);	//TODO: delay until language was accepted? We currently create the word immediately, even though we might not store anything from it if its language is not supported
 		resetFlags();
 		
 		initSection();
 		
 		wordCount++;
 		
-		if ((wordCount % LOG_FREQUENCY) == 0)
-			PREV_ERR.println("\t\t\t\t\t\t\t" + wordCount + " WORDS PARSED!");
+		if ((wordCount % LOG_FREQUENCY) == 0) {
+			long elapsedMs = (System.currentTimeMillis() - FIRST_TICK);
+			long remainingMs = elapsedMs * TOTAL_WORDS / wordCount;
+			
+			PREV_ERR.println("\t\t\t\t" + wordCount + " WORDS PARSED!\t"
+							 + String.format("%01.2f",
+											 wordCount * 100.0 / TOTAL_WORDS)
+							 + "%\t(around "
+							 + String.format("%dh%02dm",
+											 remainingMs / 3600000,
+											 (remainingMs / 1000) % 3600 / 60)
+							 +  " left, "
+							 + String.format("%dh%02dm%02ds",
+											 elapsedMs / 3600000,
+											 (elapsedMs / 1000) % 3600 / 60,
+											 (elapsedMs / 1000) % 60)
+							 + " since beginning)");
+		}
 	}
 	
+	private void initModel(String pattern) {
+		logWord();
+		
+		PREV_OUT.print(PATTERN_MARKER + " -> " + pattern);
+		
+		currentNMO = MutableLexicalCategory.obtain(pattern);
+		
+		modelCount++;
+	}
 	
 	private void resetFlags() {
 		errorFlag = false;
@@ -178,7 +207,7 @@ import info.bliki.wiki.model.WikiModel;
 	private void leaveSection() {
 		initSection();
 		
-		yybegin(MEDIAWIKI);
+		yybegin(WORD_ENTRY);
 	}
 	
 	private void logError(String text) {
@@ -194,7 +223,7 @@ import info.bliki.wiki.model.WikiModel;
 	private void saveCurrentDefinition() {
 		definitionCount++;
 		currentDefinition.setPosition(definitionCount);
-		currentWord.addDefinition(currentDefinition);
+		((MutableWord) currentNMO).addDefinition(currentDefinition);
 	}
 
 	private String convertToPlainText(String wikiMedia) {
@@ -226,8 +255,9 @@ import info.bliki.wiki.model.WikiModel;
 %eof{
 	logWord();
 	
-	PREV_ERR.println("Total time: " + ((System.nanoTime() - FIRST_TICK) / 10E9) + "s");
-	PREV_ERR.println("Parsed words: " + wordCount);
+	PREV_ERR.println("Total time: " + ((System.currentTimeMillis() - FIRST_TICK) / 1E3) + "s");
+	PREV_ERR.println("Parsed words:  " + wordCount);
+	PREV_ERR.println("Parsed models: " + modelCount);
 
 	// restore outputs
 	System.setOut(PREV_OUT);
@@ -243,7 +273,9 @@ space = ({whitespace}|{newline})
 
 // All states declarations are on their own line to minimize conflicts.
 
-// These states are exclusive, i.e. they may match only with patterns namespaced by them.
+/** These states are exclusive, i.e. they may match only with patterns namespaced by them.
+* All XML-level states should be exclusive
+*/
 //@{
 // outermost state
 %xstate XML
@@ -251,24 +283,29 @@ space = ({whitespace}|{newline})
 // in a <page> element of the XML, i.e. an entry in the dictionary
 %xstate PAGE
 
-// if a section block is considered useless, we'll switch to this trash state to safely ignore everything
-%xstate TRASH
+// <title> of a <page>, considered as a word
+%xstate TITLE
+
+// <content> node of a <page>, waiting for a hook to the word's contents, such as a level 1 or 3 header (== {{ or {{-).
+%xstate WORD_ENTRY
 //@}
 
-// These states are inclusive, i.e. they may match with non-state-specific patterns.
+/** These states are inclusive, i.e. they may match with non-state-specific patterns.
+* Most MEDIAWIKI-level states should be inclusive, to allow default emergency fallbacks to be used in case a state can not match some characters.
+*/
 //@{
-// <title> of a <page>
-%state TITLE
 
-// <content> node of a <page>
-%state MEDIAWIKI
+// <content> node of a <page>, considered as a pattern definition entry
+%state CONTENT_MODEL
 
 %state LANG
 
 // a third-level header
 %state H3
 
-%state NATURE
+// a third-level header with no "well-known" pattern
+%state H3_UNKNOWN
+
 %state SECTION
 
 // any "{{" pattern (template opening)
@@ -294,30 +331,20 @@ space = ({whitespace}|{newline})
 // context for any relation (simple and complex relations)
 %state NYM_CONTEXT
 
+// <title> node of a "PATTERN_MARKER:-***-" page, describing a pattern
+%state MODEL
+
+// <content> node of a "PATTERN_MARKER:-***-" page, describing a pattern
+%state MODEL_CONTENT
+
+// inside a pattern description, a "{{-déf-|" has been matched, so the model is one of a lexical category
+%state LEXICAL_CATEGORY
+
 // inside a {{source}} pattern (origin of a quotation)
 %state SOURCE
 //@}
 
 %%
-
-
-"</page>"
-{
-	// fallback for all cases
-	logSyntaxError("Out of page, error on word '" + currentWord.getTitle() + "'");
-	yybegin(XML);
-}
-
-"&lt;"
-{ // HTML tags entrance
-	yypushstate();
-	yybegin(CHARS_HTML);
-}
-
-"&amp;"
-{ // HTML entity replacement
-	buffer += "&";
-}
 
 
 <XML>
@@ -335,15 +362,15 @@ space = ({whitespace}|{newline})
 }
 
 <PAGE> 
-{
-	"<text xml:space=\"preserve\">"
-	{
-		yybegin(MEDIAWIKI);
-	}
-	
+{	
 	"<title>"
 	{
-		yybegin(TITLE);
+		yybegin(TITLE); // this state is reponsible for filling the states stack with the destination state, depending on the type of page determined from the title's pattern
+	}
+	
+	"<text xml:space=\"preserve\">"
+	{
+		yypopstate();	// the <TITLE> state has filled the stack with the proper state
 	}
 	
 	"</page>" 
@@ -353,6 +380,7 @@ space = ({whitespace}|{newline})
 	
 	([^<]|"<"[^t/]|"<t"[^ei]|"<ti"[^t]|"</"[^p])+
 	{
+		// everything other than the nodes specified above is useless and must be thrown away
 		// this longer regexp improves performance by getting as long matches as possible
 		// in Page: suppress output
 	}
@@ -365,18 +393,68 @@ space = ({whitespace}|{newline})
 	{
 		String title = yytext();
 		initWord(title.substring(0, title.length() - 1));
+		
+		yypushstate(WORD_ENTRY); // so that <PAGE> redirects to handling a word
+		
+		yybegin(PAGE);
+	}
+	
+	 
+	"Modèle:-"[^<]+
+	{ // for example: "-adj-" describes the "adjective" model. We enter this state with the leading dash removed
+		initModel(yytext().substring(PATTERN_MARKER_LENGTH));
+
+		yypushstate(CONTENT_MODEL); // so that <PAGE> redirects to handling a model
+
 		yybegin(PAGE);
 	}
 	
 	.
 	{
-		// if it is anything else than expected (i.e. it contains a colon), then it is not a page we're interested in, we can skip it immediately
+		// if it is anything else than expected, then it is not a page we're interested in, we can skip it immediately
 		yybegin(XML);
 	}
 }
 
+<CONTENT_MODEL>
+{	
+	"{{-déf-|"
+	{
+		// in MODEL_CONTENT: matched -déf-, so that is a lexical category
+		yybegin(LEXICAL_CATEGORY);
+	}
+	
+	[^{<]+
+	{
+		// in MODEL_CONTENT: suppress output.
+		// some models have markings. For example: "&lt;includeonly&gt;"
+	}
+	
+	.
+	{
+		// this is not a known pattern type, so we throw it away
+		yybegin(XML);
+	}
+}
 
-<MEDIAWIKI>
+<LEXICAL_CATEGORY>
+{
+	[^|]+
+	{
+		((MutableLexicalCategory) currentNMO).setDescription(yytext());
+		
+		LexicalCategory newCategory = (LexicalCategory) currentNMO;
+		LazyPatternsManager.transferAll(newCategory.getPattern(), newCategory, Relation.LEXICAL_CATEGORY);
+	}
+	
+	.
+	{
+		// everything else than the title of the lexical category is useless
+		yybegin(XML);
+	}
+}
+
+<WORD_ENTRY>
 {
 	"== {{="
 	{
@@ -388,15 +466,17 @@ space = ({whitespace}|{newline})
 		yybegin(H3);
 	}
 	
-	"</text>"
-	{
+	"<"
+	{ // since the dumpfile has its XML characters escaped, this is the </text> end tag
+	  // that was the last section, the word is over: return in XML state
 		yybegin(XML);
 	}
 
-	([^={<]|"="[^=]|"=="[^ ]|"== "[^{]|"== {{-"|"{"[^{]|"{{"[^-])+|.
+	([^={<]|"="[^=]|"=="[^ ]|"== "[^{]|"== {{-"|"{"[^{]|"{{"[^-]|"{{-}")+|.
 	{
 		// "== {{-" is for "== {{-car-}} =="
-		// in MediaWiki: suppress output
+		// "{{-}" is for "{{-}}" (tables marker)
+		// in WORD_ENTRY: suppress output
 	}
 }
 
@@ -404,14 +484,14 @@ space = ({whitespace}|{newline})
 {
 	"fr="
 	{
-		currentWord.set("lang", "fr");
-		yybegin(MEDIAWIKI);
+		currentNMO.set("lang", "fr");
+		yybegin(WORD_ENTRY);
 	}
 	
 	"conv="
 	{
-		currentWord.set("lang", "conv");
-		yybegin(MEDIAWIKI);
+		currentNMO.set("lang", "conv");
+		yybegin(WORD_ENTRY);
 	}
 	
 	.
@@ -423,19 +503,13 @@ space = ({whitespace}|{newline})
 
 <H3>
 {
-	"verb"|"nom"|"adj"|"noms-vern"
-	{
-		// TODO: add all types
-		yybegin(NATURE);
-	}
-	
 	("syn"|"ant"|"tropo"|"voc")"-}}"{newline}
 	{
 		buffer = yytext();
 		currentRelation = relationsMap.get(buffer.substring(0, buffer.length() - 4));
 		yybegin(SIMPLENYM);
 	}
-
+	
 	"hypo"|"méro"
 	{
 		currentComplexNymIsNarrower = true;
@@ -449,32 +523,60 @@ space = ({whitespace}|{newline})
 		currentRelation = relationsMap.get(yytext());
 		yybegin(COMPLEXNYM);
 	}
+	
+	"apr"|"drv"|"étym"|"homo"|"exp"|"pron"|"trad"|"voir"|"réf"|"cf"|"note"
+	{ // all these sections are deliberately ignored
+		// apr: similar vocabulary ("vocabulaire apparenté")
+		// drv: derivative words
+		// étym: etymology
+		// homo: homophons
+		// exp: associated expressions
+		// pron: pronunciations
+		// trad: translations
+		// voir, réf: external references
+		// cf: internal references
+		// note: contributors' notes
 
-	.
-	{
-		yybegin(TRASH);	// this is not an accepted type
+		yybegin(WORD_ENTRY);
 	}
-}
 
-
-<NATURE>
-{
-	-[^}]*"}}"
-	{
-		// TODO: store type in word
+	
+	"}}"
+	{ // the "{{-}}" marker is used in tables, as a column separator
 		yybegin(SECTION);
 	}
 	
 	.
 	{
-		logSyntaxError("Unparsable nature in '" + currentWord.getTitle());
+		yypushback(1);
+		yybegin(H3_UNKNOWN);	// this is not a "well-known" value
+	}
+}
+
+<H3_UNKNOWN>
+{ // we can't put this directly into <H3> because of the "longest match" rule
+	[^|}]+
+	{
+		String pattern = "-" + yytext();
+
+		LexicalCategory category = LexicalCategory.find(pattern);
+		
+		if (category == null)
+			LazyPatternsManager.register(pattern, currentNMO);
+		else
+			((MutableWord) currentNMO).addLexicalCategory(category);
+		
+		yybegin(SECTION);
+	}
+	
+	.
+	{
 		yybegin(SECTION);
 	}
 }
 
-
 <SECTION>
-{ // an entrance into that state with a non-consumed newline will switch to <MEDIAWIKI>
+{ // an entrance into that state with a non-consumed newline will switch to <WORD_ENTRY>
 	"{{"
 	{
 		yypushstate();
@@ -506,6 +608,7 @@ space = ({whitespace}|{newline})
 	
 	"</text>"
 	{
+		initSection();
 		yybegin(XML);
 	}
 	
@@ -514,7 +617,7 @@ space = ({whitespace}|{newline})
 		leaveSection();
 	}
 
-	([^{<\r\n])+|"{"[^{]|.|{newline}
+	([^{<\r\n&])+|"{"[^{]|.|{newline}
 	{
 		// in Section: suppress output
 	}
@@ -538,11 +641,6 @@ space = ({whitespace}|{newline})
 	{
 		yybegin(FCHIM_PATTERN);
 	}
-
-	[^|}&]+|"|"
-	{
-		logError("Unexpected pattern value: '" + yytext() + "'");
-	}
 	
 	"}}"|" "
 	{
@@ -551,10 +649,21 @@ space = ({whitespace}|{newline})
 	
 	"}"
 	{
-		logSyntaxError("Unbalanced bracket in pattern in '" + currentWord.getTitle() + "'");
+		logSyntaxError("Unbalanced bracket in pattern in '" + currentNMO + "'");
 		yypopstate();
 	}
 	
+	"|"|"("|"-"|")"
+	{
+		// in PATTERN
+		// ignore | (parameter separators)
+		// ignore (-) (tables markers, presentational only)
+	}
+	
+	[^|}]+
+	{
+		logError("Unexpected pattern value: '" + yytext() + "'");
+	}
 }
 
 
@@ -562,12 +671,17 @@ space = ({whitespace}|{newline})
 {
 	[^}|]+
 	{
-		currentWord.set("pronunciation", yytext());
+		currentNMO.set("pronunciation", yytext());
 	}
 	
-	"|"|"}"
+	"|"
 	{
-		// not only "}}" in case of missing ending curly bracket
+		yybegin(PATTERN);
+	}
+	
+	"}"
+	{ // not only "}}" in case of missing ending curly bracket
+		yypushback(1);
 		yybegin(PATTERN);
 	}
 }
@@ -587,7 +701,7 @@ space = ({whitespace}|{newline})
 	
 	(\|[^}]*)?"}"{optionalSpaces}
 	{
-		logSyntaxError("Single bracket in definition domain in '" + currentWord.getTitle() + "'");
+		logSyntaxError("Single bracket in definition domain in '" + currentNMO + "'");
 		yybegin(DEFINITION);
 	}
 }
@@ -632,8 +746,8 @@ space = ({whitespace}|{newline})
 		buffer += "\n" + yytext();
 	}
 
-	{newline}
-	{
+	{newline}|"<"
+	{ // "<" for the rare cases where an example ends a <text> node
 		buffer = convertToPlainText(buffer).trim();	// convert before testing for emptiness: `''` is not empty, but the plaintext equivalent is ""
 		if (! buffer.isEmpty()) {
 			currentExample.setContent(buffer);	
@@ -653,9 +767,15 @@ space = ({whitespace}|{newline})
 		yypopstate();
 	}
 	
-	"!--"([^-]|"-"[^-]|"--"[^&])+"--&gt;"
+	"!--"([^-]|"-"[^-]|"--"[^&]|"--&"[^g])+"--&gt;"
 	{
 		// ignore HTML comments
+		yypopstate();
+	}
+	
+	"&lt;"
+	{ // we entered here with "&lt;", so we matched an encoded "<" followed by another "<": a quick `grep` will show that users mean the HTML entities
+		buffer += "«";
 		yypopstate();
 	}
 
@@ -702,7 +822,7 @@ space = ({whitespace}|{newline})
 
 <DEFINITION>
 {
-	([^\r\n{]|"{"[^{])+
+	([^\r\n{<]|"{"[^{])+
 	{
 		buffer += yytext();
 	}
@@ -718,7 +838,7 @@ space = ({whitespace}|{newline})
 		yybegin(FCHIM_PATTERN);
 	}
 	
-	{newline}
+	{newline}|"<"
 	{
 		String localDefinitionContent = convertToPlainText(buffer).trim();
 		try {
@@ -732,7 +852,7 @@ space = ({whitespace}|{newline})
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 			// this can happen in cases of malformed nesting (i.e. missing a nesting level, like starting a definition list with `##`)
-			logSyntaxError("Definitions nesting error in word '" + currentWord.getTitle() + "': '" + localDefinitionContent + "'. Only content at this nesting level will be stored.");
+			logSyntaxError("Definitions nesting error in word '" + currentNMO + "': '" + localDefinitionContent + "'. Only content at this nesting level will be stored.");
 
 			currentDefinition.setContent(localDefinitionContent); // best recovery we can do: forget about concatenation
 		}
@@ -765,7 +885,7 @@ space = ({whitespace}|{newline})
 		leaveSection();
 	}
 
-	([^-:;'*\r\n]|"-"[^}])+|.|{newline}
+	([^-:;'*\r\n&]|"-"[^}])+|.|{newline}
 	{
 		// in SimpleNym: suppress output
 	}
@@ -781,9 +901,9 @@ space = ({whitespace}|{newline})
 	([^\]]|"]"[^\]])+
 	{
 		try {
-			currentWord.set(currentRelation, MutableWord.obtain(yytext()));
+			currentNMO.set(currentRelation, MutableWord.obtain(yytext()));
 		} catch (Exception e) {
-			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( ");
+			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentNMO + "'  :( ");
 			e.printStackTrace(System.err);
 		}
 	}
@@ -793,7 +913,7 @@ space = ({whitespace}|{newline})
 {
 	"-}}"
 	{
-		complexNyms.set(0, currentWord);
+		complexNyms.set(0, currentNMO);
 	}
 	
 	"{{"[()|]"}}"
@@ -828,7 +948,7 @@ space = ({whitespace}|{newline})
 		leaveSection();
 	}
 
-	([^-:;'*\r\n]|"-"[^}])+|.|{newline}
+	([^-:;'*\r\n&]|"-"[^}])+|.|{newline}
 	{
 		// in ComplexNym: suppress output
 	}
@@ -858,9 +978,8 @@ space = ({whitespace}|{newline})
 				complexNyms.get(complexDepth - emptyDepth).set(currentRelation, currentNym);
 			else
 				currentNym.set(currentRelation, complexNyms.get(complexDepth - emptyDepth));
-				
 		} catch (Exception e) {
-			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentWord.getTitle() + "'  :( ");
+			logError("Oh no! Got an exception while trying to add relation " + currentRelation + " to '" + yytext() + "' from word '" + currentNMO + "'  :( ");
 			e.printStackTrace(System.err);
 		}
 	}
@@ -879,22 +998,43 @@ space = ({whitespace}|{newline})
 	}
 }
 
-<TRASH>
-{
-	([^\r\n<]|{newline}[^\r\n])*
-	{
-		// Trash
-	}
 
-	{newline}{newline}
-	{
-		// We leave the section : return in MEDIAWIKI state.
-		yybegin(MEDIAWIKI);
-	}
-
-	"<"
-	{
-		// That was the last section, the word is over because of the </page> tag : return in XML state.
-		yybegin(XML);
-	}
+"&lt;"
+{ // HTML tags entrance
+	yypushstate();
+	yybegin(CHARS_HTML);
 }
+
+"&lt; "
+{ // we matched an encoded "<" followed by a space: a quick `grep` will show that users mean the HTML entity
+	buffer += "<";
+}
+
+"&gt;"
+{
+	// it can happen that this is part of the content (cf. "primitive", mathematical definition)
+	//&gt; is caught in CHARS_HTML after &lt;, so this fallback may simply replace the entity
+	buffer += ">";
+}
+
+"&gt;&gt;"
+{
+	buffer += "»";
+}
+
+"&amp;"
+{ // HTML entity replacement
+	buffer += "&";
+}
+
+"&quot;"
+{ // HTML entity replacement
+	buffer += '"';
+}
+
+"<"
+{ // fallback for all Mediawiki cases: this is a match for "</text>", but we don't write it fully in order to avoid the longest-match rule to take precedence
+	logSyntaxError("Out of page, error on word '" + currentNMO + "'");
+	yybegin(XML);
+}
+

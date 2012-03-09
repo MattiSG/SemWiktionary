@@ -169,18 +169,8 @@ public class Definition extends NodeMappedObject {
 
 // DESTRUCTORS
 	
-	/** Deletes this Definition and all attached properties from the database.
-	 */
-	public void delete() {
-		Transaction tx = Database.getDbService().beginTx();
-		
-		try {
-			this.node.delete();
-			
-			tx.success();
-		} finally {
-			tx.finish();
-		}
+	protected void onDelete() {
+		// nothing to propagate
 	}
 	
 	public Definition clearExamples() {
@@ -219,5 +209,4 @@ public class Definition extends NodeMappedObject {
 		
 		return false;
 	}
-	
 }

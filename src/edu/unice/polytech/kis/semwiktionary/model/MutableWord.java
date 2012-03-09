@@ -17,6 +17,12 @@ import edu.unice.polytech.kis.semwiktionary.database.Relation;
  * @author	[Matti Schneider-Ghibaudo](http://mattischneider.fr)
  */
 public class MutableWord extends Word {
+
+	/**
+	* We'll share the same index as `Word` but, since the classname is different, we need to override the default "classname" heuristic for finding the index
+	*@see	NodeMappedObject.getIndexKey
+	*/
+	public static String INDEX_KEY = "Word";
 	
 // STATIC METHODS
 	
@@ -29,35 +35,9 @@ public class MutableWord extends Word {
 	 */
 	public static MutableWord obtain(String word) {
 		Word immutableWord = Word.find(word);
-		return (immutableWord == null ? MutableWord.create(word) : new MutableWord(immutableWord));
+		return (immutableWord == null ? new MutableWord(word) : new MutableWord(immutableWord));
 	}
 	
-	/** Creates a new word in the database.
-	 * The word is created even if the same word already exists in the database, **possibly leading to duplicates**. Such a case would be a violation of the constraints, and render the word unusable.
-	 * You should always use the `Word.exists` method to check for existence before creating a new word.
-	 *
-	 * @param	word	The natural language word to add to the database
-	 * @return	The MutableWord model for the word added to the database
-	 */
-	private static MutableWord create(String word) {
-		MutableWord result = new MutableWord();
-		result.title = word;
-		
-		Transaction tx = Database.getDbService().beginTx();
-		
-		try {
-			result.initNode()
-				  .set("title", word);
-			
-			Word.index.add(result.node, Word.INDEX_KEY, word);
-			
-			tx.success();
-		} finally {
-		    tx.finish();
-		}
-
-		return result;
-	}
 	
 // CONSTRUCTORS
 	
@@ -68,6 +48,21 @@ public class MutableWord extends Word {
 	private MutableWord() {
 		super();
 		// nothing else to do
+	}
+	
+	/** Creates a new word in the database.
+	 * The word is created even if the same word already exists in the database, **possibly leading to duplicates**. Such a case would be a violation of the constraints, and render the word unusable.
+	 * You should always use the `Word.exists` method to check for existence before creating a new word.
+	 *
+	 * @param	word	The natural language word to add to the database
+	 * @return	The MutableWord model for the word added to the database
+	 */
+	private MutableWord(String word) {
+		this.initNode()
+			.set("title", word)
+			.indexAs(word);
+			
+		this.title = word;
 	}
 	
 	/** Makes an existing natural-language word mutable, that is, able to modify the database.
@@ -91,6 +86,13 @@ public class MutableWord extends Word {
 	}
 	
 // UPDATE FUNCTIONS
+	
+	public MutableWord addLexicalCategory(LexicalCategory cat) {
+		Database.link(this.node, cat.node, Relation.LEXICAL_CATEGORY);
+		this.lexicalCategories.add(cat);
+		
+		return this;
+	}
 	
 	/** Adds the given Definition to this Word.
 	 * The definition is immediately and transparently stored in the database. No need to `commit` modifications.
@@ -204,17 +206,12 @@ public class MutableWord extends Word {
 	}
 // DELETE FUNCTIONS
 	
-	/** Deletes this word and all of its properties from the database.
-	 */
-	public void delete() {
-		Transaction tx = Database.getDbService().beginTx();
-		try {
-			this.clearDefinitions();
-			Word.index.remove(this.node);
-			this.node.delete();
-		} finally {
-			tx.finish();
-		}
+	/** Propagates deletion to definition nodes.
+	*
+	*@see	clearDefinitions
+	*/
+	protected void onDelete() {
+		this.clearDefinitions();
 	}
 	
 	/** Deletes all definitions for the current Word.
@@ -240,9 +237,20 @@ public class MutableWord extends Word {
 		this.definitions.clear();
 		
 		return this;
-	}	
+	}
 	
-	/** Deletes all synonyms associated to this Word.
+	/** Unlinks all parts of speech associated to this Word.
+	 *
+	 * @return This MutableWord, for chainability
+	 */
+	public MutableWord clearLexicalCategories() {
+		this.delete(Relation.LEXICAL_CATEGORY);
+		
+		return this;
+	}
+	
+	/** Unlinks all synonyms associated to this Word.
+	 *
 	 * @return This MutableWord, for chainability
 	 */
 	public MutableWord clearSynonyms() {
@@ -251,7 +259,8 @@ public class MutableWord extends Word {
 		return this;
 	}
 	
-	/** Deletes all antonyms associated to this Word.
+	/** Unlinks all antonyms associated to this Word.
+	 *
 	 * @return This MutableWord, for chainability
 	 */
 	public MutableWord clearAntonyms() {
@@ -260,7 +269,8 @@ public class MutableWord extends Word {
 		return this;
 	}
 	
-	/** Deletes all troponyms associated to this Word.
+	/** Unlinks all troponyms associated to this Word.
+	 *
 	 * @return This MutableWord, for chainability
 	 */
 	public MutableWord clearTroponyms() {
@@ -278,7 +288,8 @@ public class MutableWord extends Word {
 		return this;
 	}
 	
-	/** Deletes all hyponyms associated to this Word.
+	/** Unlinks all hyponyms associated to this Word.
+	 *
 	 * @return This MutableWord, for chainability
 	 */
 	public MutableWord clearHyponyms() {
@@ -287,17 +298,13 @@ public class MutableWord extends Word {
 		return this;
 	}
 	
-	/** Deletes all meronyms associated to this Word.
+	/** Unlinks all meronyms associated to this Word.
+	 *
 	 * @return This MutableWord, for chainability
 	 */
 	public MutableWord clearMeronyms() {
 		this.delete(Relation.MERONYM);
 		
 		return this;
-	}
-	
-// STANDARD METHODS
-	public String toString() {
-		return super.toString() + "*";
 	}
 }

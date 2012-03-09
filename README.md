@@ -40,7 +40,8 @@ All necessary dependencies are in the `lib` folder, and the API itself is availa
 
 ### Acquiring an already parsed database ###
 
-This is clearly the preferred method, as it will allow you to skip the long task of parsing the Wiktionary yourself. As long as our servers can handle the load, you can download the [full French Wiktionary database](http://dl.mattischneider.fr/semwiktionary/data-v0.1.2.zip) (80 MB ZIP).
+This is clearly the preferred method, as it will allow you to skip the long task of parsing the Wiktionary yourself. As long as our servers can handle the load, you can download the [full French Wiktionary database](http://dl.mattischneider.fr/semwiktionary/) as an archive.
+**Make sure to download the same database version as your access library version.**
 
 You will then have to move the contents of the archive in a `data` folder in the deflated API archive, in order to get the following file hierarchy:
 

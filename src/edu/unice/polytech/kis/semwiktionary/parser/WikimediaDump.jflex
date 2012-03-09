@@ -535,11 +535,13 @@ space = ({whitespace}|{newline})
 		yybegin(COMPLEXNYM);
 	}
 	
-	"voc"|"apr"|"drv"|"étym"|"pron"|"trad"|"voir"|"réf"|"cf"|"note"
+	"voc"|"apr"|"drv"|"étym"|"homo"|"exp"|"pron"|"trad"|"voir"|"réf"|"cf"|"note"
 	{ // all these sections are deliberately ignored
 		// voc, apr: similar vocabulary ("vocabulaire apparenté")
 		// drv: derivative words
 		// étym: etymology
+		// homo: homophons
+		// exp: associated expressions
 		// pron: pronunciations
 		// trad: translations
 		// voir, réf: external references
@@ -831,7 +833,7 @@ space = ({whitespace}|{newline})
 
 <DEFINITION>
 {
-	([^\r\n{]|"{"[^{])+
+	([^\r\n{<]|"{"[^{])+
 	{
 		buffer += yytext();
 	}

@@ -21,10 +21,10 @@ Example
 	Word hello = Word.find("bonjour");	// database lookup
 	
 	for (Word salutation : hello.getSynonyms()) {
-		System.out.println(salutation + " world!");	// all variants of “hello world!”…
+		println(salutation + " world!");	// all variants of “hello world!”…
 		
-		System.out.print("Most usually used in the context of: "); // …with the domain (usage context, e.g. “sociology”)…
-		System.out.println(hello.getDefinitions().get(0).getDomain()); // …of their most common meaning
+		print("Most usually used in the context of: "); // …with the domain (usage context, e.g. “sociology”)…
+		println(hello.getDefinitions().get(0).getDomain()); // …of their most common meaning
 	}
 
 How to use

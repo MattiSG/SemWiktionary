@@ -47,7 +47,7 @@ Langues
 			Mélonymes associés au sens (hiérarchie possible)
 		Troponymes
 			Rappel du sens
-			Mélonymes associés au sens
+			Troponymes associés au sens
 	Prononciations (audio)
 		Prononciations régionales
 			Localité

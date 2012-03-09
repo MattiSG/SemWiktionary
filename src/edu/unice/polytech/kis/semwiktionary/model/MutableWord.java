@@ -150,7 +150,7 @@ public class MutableWord extends Word {
 	}
 
 	/** Adds the word given in parameter to the current word object as a word with a related meaning.
-	 * @param relatedWord The related word to add to this Word
+	 * @param relatedVoc The related word to add to this Word
 	 * @return This MutableWord, for chainability
 	 */
 	public MutableWord addRelatedVoc(Word relatedVoc) {
@@ -162,7 +162,7 @@ public class MutableWord extends Word {
 	/** Adds the word given in parameter to the current word object as an hyponym.
 	 * @param hyponym The hyponym to add to this Word
 	 * @return This MutableWord, for chainability
-	 * @see addHyperonym(Word hyperonym) (opposite method)
+	 * @see #addHyperonym(Word hyperonym) (opposite method)
 	 */
 	public MutableWord addHyponym(Word hyponym) {
 		Database.link(this.node, hyponym.node, Relation.HYPONYM);
@@ -171,9 +171,9 @@ public class MutableWord extends Word {
 	}
 	
 	/** Adds the word given in parameter to the current word object as an hyperonym.
-	 * @param hyponym The hyperonym to add to this Word
+	 * @param hyperonym The hyperonym to add to this Word
 	 * @return This MutableWord, for chainability
-	 * @see addHyponym(Word hyponym) (opposite method)
+	 * @see #addHyponym(Word hyponym) (opposite method)
 	 */
 	public MutableWord addHyperonym(Word hyperonym) {
 		Database.link(hyperonym.node, this.node, Relation.HYPONYM);
@@ -184,7 +184,7 @@ public class MutableWord extends Word {
 	/** Adds the word given in parameter to the current word object as a meronym.
 	 * @param meronym The meronym to add to this Word
 	 * @return This MutableWord, for chainability
-	 * @see addHolonym(Word holonym) (opposite method)
+	 * @see #addHolonym(Word holonym) (opposite method)
 	 */
 	public MutableWord addMeronym(Word meronym) {
 		Database.link(this.node, meronym.node, Relation.MERONYM);
@@ -195,7 +195,7 @@ public class MutableWord extends Word {
 	/** Adds the word given in parameter to the current word object as an holonym.
 	 * @param holonym The holonym to add to this Word
 	 * @return This MutableWord, for chainability
-	 * @see addMeronym(Word meronym) (opposite method)
+	 * @see #addMeronym(Word meronym) (opposite method)
 	 */
 	public MutableWord addHolonym(Word holonym) {
 		Database.link(holonym.node, this.node, Relation.MERONYM);

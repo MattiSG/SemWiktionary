@@ -30,7 +30,8 @@ import edu.unice.polytech.kis.semwiktionary.database.DatabaseTest;
 	edu.unice.polytech.kis.semwiktionary.model.HyponymsTest.class,
 	edu.unice.polytech.kis.semwiktionary.model.HyperonymsTest.class,
 	edu.unice.polytech.kis.semwiktionary.model.MeronymsTest.class,
-	edu.unice.polytech.kis.semwiktionary.model.HolonymsTest.class
+	edu.unice.polytech.kis.semwiktionary.model.HolonymsTest.class,
+	edu.unice.polytech.kis.semwiktionary.model.RelatedVocTest.class
 
 	//database cleanup is done in the @AfterClass below
 })

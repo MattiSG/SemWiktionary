@@ -183,5 +183,11 @@ public class SemWiktionary {
 				}
 			}
 		}
+
+		println("\n-=[ RELATED VOCABULARY ]=-  (related meaning)");
+
+		for (Word rel : word.getRelatedVoc())
+			println("↔ " + rel.getTitle());
+
 	}
 }

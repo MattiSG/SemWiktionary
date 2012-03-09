@@ -95,6 +95,7 @@ import info.bliki.wiki.model.WikiModel;
 		relationsMap.put("hyper", Relation.HYPONYM);
 		relationsMap.put("méro", Relation.MERONYM);
 		relationsMap.put("holo", Relation.MERONYM);
+		relationsMap.put("voc", Relation.RELATEDVOC);
 		
 		complexNyms = new Vector<NodeMappedObject>(BUFFER_SIZE, 2); // second param is increment size.
 		resetComplexNymsList();
@@ -498,8 +499,8 @@ space = ({whitespace}|{newline})
 
 
 <H3>
-{	
-	("syn"|"ant"|"tropo")"-}}"{newline}
+{
+	("syn"|"ant"|"tropo"|"voc")"-}}"{newline}
 	{
 		buffer = yytext();
 		currentRelation = relationsMap.get(buffer.substring(0, buffer.length() - 4));
@@ -520,9 +521,9 @@ space = ({whitespace}|{newline})
 		yybegin(COMPLEXNYM);
 	}
 	
-	"voc"|"apr"|"drv"|"étym"|"homo"|"exp"|"pron"|"trad"|"voir"|"réf"|"cf"|"note"
+	"apr"|"drv"|"étym"|"homo"|"exp"|"pron"|"trad"|"voir"|"réf"|"cf"|"note"
 	{ // all these sections are deliberately ignored
-		// voc, apr: similar vocabulary ("vocabulaire apparenté")
+		// apr: similar vocabulary ("vocabulaire apparenté")
 		// drv: derivative words
 		// étym: etymology
 		// homo: homophons

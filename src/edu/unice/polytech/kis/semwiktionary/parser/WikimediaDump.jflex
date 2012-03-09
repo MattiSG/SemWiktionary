@@ -264,8 +264,6 @@ import info.bliki.wiki.model.WikiModel;
 	System.setErr(PREV_ERR);
 %eof}
 
-word = ([:letter:]+)
-punct = [,;:.\()/…]
 whitespace = [\ \t]
 newline = (\r|\n|\r\n)
 optionalSpaces = ({whitespace}*)

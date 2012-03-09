@@ -22,7 +22,10 @@ import info.bliki.wiki.model.WikiModel;
 								
 	public long wordCount = 0,
 				modelCount = 0;
-
+	
+	private final static String PATTERN_MARKER = "Modèle"; // update in <TITLE> too!
+	private final static int PATTERN_MARKER_LENGTH = PATTERN_MARKER.length() + 1; // depends on the OS. The +1 is for the colon (":").
+	
 	private final PrintStream PREV_OUT = System.out,
 							  PREV_ERR = System.err;
 	/** Total number of words to parse.
@@ -180,7 +183,7 @@ import info.bliki.wiki.model.WikiModel;
 	private void initModel(String pattern) {
 		logWord();
 		
-		PREV_OUT.print("Modèle:" + pattern);
+		PREV_OUT.print(PATTERN_MARKER + " -> " + pattern);
 		
 		currentNMO = MutableLexicalCategory.obtain(pattern);
 		
@@ -328,10 +331,10 @@ space = ({whitespace}|{newline})
 // context for any relation (simple and complex relations)
 %state NYM_CONTEXT
 
-// <title> node of a "Modèle:-***-" page, describing a pattern
+// <title> node of a "PATTERN_MARKER:-***-" page, describing a pattern
 %state MODEL
 
-// <content> node of a "Modèle:-***-" page, describing a pattern
+// <content> node of a "PATTERN_MARKER:-***-" page, describing a pattern
 %state MODEL_CONTENT
 
 // inside a pattern description, a "{{-déf-|" has been matched, so the model is one of a lexical category
@@ -399,7 +402,7 @@ space = ({whitespace}|{newline})
 	 
 	"Modèle:-"[^<]+
 	{ // for example: "-adj-" describes the "adjective" model. We enter this state with the leading dash removed
-		initModel(yytext().substring(8)); // 7 == "Modèle:".length
+		initModel(yytext().substring(PATTERN_MARKER_LENGTH));
 
 		yypushstate(CONTENT_MODEL); // so that <PAGE> redirects to handling a model
 

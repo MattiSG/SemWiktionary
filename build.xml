@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="SemWiktionary" default="junit" basedir=".">
+<project name="SemWiktionary" default="test" basedir=".">
 	<!-- JAVA CLASSES -->	
 		<!-- package prefix -->
 		<property name="package" value="edu.unice.polytech.kis.semwiktionary"/>
@@ -123,7 +123,7 @@
 		</javadoc>	
 	</target>
 	
-	<target name="jflex" depends="init" description="Generate parser">
+	<target name="compile_parser" depends="init" description="Generate parser">
 		<jflex
 			file="${src}/edu/unice/polytech/kis/semwiktionary/parser/WikimediaDump.jflex"
 			destdir="${build}"
@@ -132,7 +132,7 @@
 		/>
 	</target>
 
-	<target name="compile" depends="jflex" description="Compile code">
+	<target name="compile" depends="compile_parser" description="Compile code">
 		<mkdir dir="${bin}"/>
 		<javac deprecation="on" srcdir="${src}:${build}" destdir="${bin}"
 			source="${jdk.dev}" target="${jdk.target}"
@@ -174,7 +174,7 @@
 		</jar>
 	</target>
 
-	<target name="junit" depends="compile_tests">
+	<target name="test" depends="compile_tests">
 		<junit fork="yes" haltonfailure="yes" haltonerror="yes">
 			<formatter type="plain" usefile="false" />
 			<test name="${test.class.name}" />

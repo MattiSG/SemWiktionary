@@ -236,7 +236,7 @@ public abstract class NodeMappedObject {
 	*@throws	RuntimeException	if the `resultClass` does not have a `Node` constructor
 	*@throws	RuntimeException	if several matching nodes were found, as this is a violation of the database structure
 	*/
-	public static <T extends NodeMappedObject> T findAndInstanciateSingleOf(Class<T> resultClass, String query) {
+	protected static <T extends NodeMappedObject> T findAndInstanciateSingleOf(Class<T> resultClass, String query) {
 		Node result;
 		String indexKey = getIndexKey(resultClass);
 		Constructor<T> constructor = null;

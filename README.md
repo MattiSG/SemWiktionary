@@ -26,10 +26,10 @@ Example
 	Word hello = Word.find("bonjour");	// database lookup
 	
 	for (Word salutation : hello.getSynonyms()) {
-		System.out.println(salutation + " world!");	// all variants of “hello world!”…
+		println(salutation + " world!");	// all variants of “hello world!”…
 		
-		System.out.print("Most usually used in the context of: "); // …with the domain (usage context, e.g. “sociology”)…
-		System.out.println(hello.getDefinitions().get(0).getDomain()); // …of their most common meaning
+		print("Most usually used in the context of: "); // …with the domain (usage context, e.g. “sociology”)…
+		println(hello.getDefinitions().get(0).getDomain()); // …of their most common meaning
 	}
 
 How to use
@@ -45,7 +45,8 @@ All necessary dependencies are in the `lib` folder, and the API itself is availa
 
 ### Acquiring an already parsed database ###
 
-This is clearly the preferred method, as it will allow you to skip the long task of parsing the Wiktionary yourself. As long as our servers can handle the load, you can download the [full French Wiktionary database](http://dl.mattischneider.fr/semwiktionary/data-v0.1.2.zip) (80 MB ZIP).
+This is clearly the preferred method, as it will allow you to skip the long task of parsing the Wiktionary yourself. As long as our servers can handle the load, you can download the [full French Wiktionary database](http://dl.mattischneider.fr/semwiktionary/) as an archive.
+**Make sure to download the same database version as your access library version.**
 
 You will then have to move the contents of the archive in a `data` folder in the deflated API archive, in order to get the following file hierarchy:
 
@@ -73,7 +74,7 @@ If you are interested in modifying the parser, generate your own database and so
 Equivalent projects and rationale
 ---------------------------------
 
-- [JWKTL](http://www.ukp.tu-darmstadt.de/software/jwktl/). Not documented, source code access was not allowed by authors (yet?).
+- [JWKTL](http://www.ukp.tu-darmstadt.de/software/jwktl/). Not documented, source code access was not allowed by authors.
 
 [Several](http://rendering.xwiki.org/xwiki/bin/view/Main/Architecture) [tools](http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/extraction_framework/file/2c1eea7da303/wiktionary) parse MediaWiki markup and create an AST from it. However, most of them are both overkill and not specific enough for the Wiktionary dialects (much more structured than Wikipedia, for which most tools are tailored).
 

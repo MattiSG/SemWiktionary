@@ -20,7 +20,7 @@ public class MutableWord extends Word {
 
 	/**
 	* We'll share the same index as `Word` but, since the classname is different, we need to override the default "classname" heuristic for finding the index
-	*@see	NodeMappedObject.getIndexKey
+	*@see	NodeMappedObject#getIndexKey
 	*/
 	public static String INDEX_KEY = "Word";
 	
@@ -112,7 +112,7 @@ public class MutableWord extends Word {
 	 * 
 	 * @param	definitions	The set of Definitions to add to this Word
 	 * @return	This MutableWord, for chainability
-	 * @see		MutableWord#addDefinition
+	 * @see		#addDefinition
 	 */
 	public MutableWord addDefinitions(Iterable<Definition> definitions) {
 		for (Definition definition : definitions)
@@ -122,8 +122,10 @@ public class MutableWord extends Word {
 	}
 
 	/** Adds the word given in parameter to the current word object as a synonym.
+	 *
 	 * @param synonym The synonym to add to this Word
 	 * @return This MutableWord, for chainability
+	 * @see	#addAntonym	Inverse relationship modifier
 	 */
 	public MutableWord addSynonym(Word synonym) {
 		Database.link(this.node, synonym.node, Relation.SYNONYM);
@@ -132,8 +134,10 @@ public class MutableWord extends Word {
 	}
 	
 	/** Adds the word given in parameter to the current word object as an antonym.
+	 * 
 	 * @param antonym The antonym to add to this Word
 	 * @return This MutableWord, for chainability
+	 * @see	#addSynonym	Inverse relationship modifier
 	 */
 	public MutableWord addAntonym(Word antonym) {
 		Database.link(this.node, antonym.node, Relation.ANTONYM);
@@ -152,6 +156,7 @@ public class MutableWord extends Word {
 	}
 
 	/** Adds the word given in parameter to the current word object as a word with a related meaning.
+	 *
 	 * @param relatedVoc The related word to add to this Word
 	 * @return This MutableWord, for chainability
 	 */
@@ -162,9 +167,10 @@ public class MutableWord extends Word {
 	}	
 	
 	/** Adds the word given in parameter to the current word object as an hyponym.
+	 *
 	 * @param hyponym The hyponym to add to this Word
 	 * @return This MutableWord, for chainability
-	 * @see #addHyperonym(Word hyperonym) (opposite method)
+	 * @see #addHyperonym(Word hyperonym) Inverse relationship modifier
 	 */
 	public MutableWord addHyponym(Word hyponym) {
 		Database.link(this.node, hyponym.node, Relation.HYPONYM);
@@ -173,9 +179,10 @@ public class MutableWord extends Word {
 	}
 	
 	/** Adds the word given in parameter to the current word object as an hyperonym.
+	 *
 	 * @param hyperonym The hyperonym to add to this Word
 	 * @return This MutableWord, for chainability
-	 * @see #addHyponym(Word hyponym) (opposite method)
+	 * @see #addHyponym(Word hyponym) Inverse relationship modifier
 	 */
 	public MutableWord addHyperonym(Word hyperonym) {
 		Database.link(hyperonym.node, this.node, Relation.HYPONYM);
@@ -184,9 +191,10 @@ public class MutableWord extends Word {
 	}
 
 	/** Adds the word given in parameter to the current word object as a meronym.
+	 *
 	 * @param meronym The meronym to add to this Word
 	 * @return This MutableWord, for chainability
-	 * @see #addHolonym(Word holonym) (opposite method)
+	 * @see #addHolonym(Word holonym) Inverse relationship modifier
 	 */
 	public MutableWord addMeronym(Word meronym) {
 		Database.link(this.node, meronym.node, Relation.MERONYM);
@@ -195,9 +203,10 @@ public class MutableWord extends Word {
 	}
 
 	/** Adds the word given in parameter to the current word object as an holonym.
+	 *
 	 * @param holonym The holonym to add to this Word
 	 * @return This MutableWord, for chainability
-	 * @see #addMeronym(Word meronym) (opposite method)
+	 * @see #addMeronym(Word meronym) Inverse relationship modifier
 	 */
 	public MutableWord addHolonym(Word holonym) {
 		Database.link(holonym.node, this.node, Relation.MERONYM);

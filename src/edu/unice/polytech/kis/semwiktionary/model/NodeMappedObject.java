@@ -233,8 +233,8 @@ public abstract class NodeMappedObject {
 	*@param	resultClass	the destination type of the found object
 	*@param	query	the index lookup query
 	*@return	an instance of `resultClass` properly initialized from all data in the database, or `null` if no matching result is found
-	*@throw	RuntimeException	if the `resultClass` does not have a `Node` constructor
-	*@throw	RuntimeException	if several matching nodes were found, as this is a violation of the database structure
+	*@throws	RuntimeException	if the `resultClass` does not have a `Node` constructor
+	*@throws	RuntimeException	if several matching nodes were found, as this is a violation of the database structure
 	*/
 	public static <T extends NodeMappedObject> T findAndInstanciateSingleOf(Class<T> resultClass, String query) {
 		Node result;

@@ -19,7 +19,7 @@ public class MutableLexicalCategory extends LexicalCategory {
 
 	/**
 	 * We'll share the same index as `LexicalCategory` but, since the classname is different, we need to override the default "classname" heuristic for finding the index.
-	 *@see	NodeMappedObject.getIndexKey
+	 *@see	NodeMappedObject#getIndexKey
 	 */
 	public static String INDEX_KEY = "LexicalCategory";
 	

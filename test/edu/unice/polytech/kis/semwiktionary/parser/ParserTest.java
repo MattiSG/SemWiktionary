@@ -378,6 +378,21 @@ public class ParserTest {
 						.addExample("Il ne fait que berdeller."));
 						
 		result.put("berdeller", definitions);
+		
+		
+		definitions = new ArrayList<Definition>(1);
+		
+		definitions.add(new Definition("Pluriel de fédéralisme.", 1));
+		
+		result.put("fédéralismes", definitions);
+		
+		
+		definitions = new ArrayList<Definition>(1);
+		
+		definitions.add(new Definition("Pluriel de fauchaison.", 1));
+		
+		result.put("fauchaisons", definitions);
+		
 						
 		return result;
 	}

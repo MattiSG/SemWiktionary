@@ -835,7 +835,7 @@ space = ({whitespace}|{newline})
 		yybegin(FCHIM_PATTERN);
 	}
 	
-	{newline}
+	{newline}|"<"
 	{
 		String localDefinitionContent = convertToPlainText(buffer).trim();
 		try {

@@ -100,11 +100,13 @@ public class SemWiktionary {
 			return;
 		}
 		
-		print("(");
-		for (LexicalCategory category : word.getLexicalCategories())
-			print(category + ", ");
+		String categories = "";
 		
-		println(")");
+		for (LexicalCategory category : word.getLexicalCategories())
+			if (! category.getDescription().isEmpty()) // if no human-readable description is given, it is not worth showing in this interactive human interface
+				categories += (categories.isEmpty() ? "" : ", ") + category;
+		
+		println("(" + categories + ")");
 		
 		println("———————————");
 		

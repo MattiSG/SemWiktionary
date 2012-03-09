@@ -68,7 +68,7 @@ If you are interested in modifying the parser, generate your own database and so
 Equivalent projects and rationale
 ---------------------------------
 
-- [JWKTL](http://www.ukp.tu-darmstadt.de/software/jwktl/). Not documented, source code access was not allowed by authors (yet?).
+- [JWKTL](http://www.ukp.tu-darmstadt.de/software/jwktl/). Not documented, source code access was not allowed by authors.
 
 [Several](http://rendering.xwiki.org/xwiki/bin/view/Main/Architecture) [tools](http://dbpedia.hg.sourceforge.net/hgweb/dbpedia/extraction_framework/file/2c1eea7da303/wiktionary) parse MediaWiki markup and create an AST from it. However, most of them are both overkill and not specific enough for the Wiktionary dialects (much more structured than Wikipedia, for which most tools are tailored).
 

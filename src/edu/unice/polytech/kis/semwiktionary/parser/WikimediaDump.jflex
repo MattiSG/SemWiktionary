@@ -6,8 +6,6 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Stack;
 
-import org.neo4j.graphdb.Transaction;
-
 import edu.unice.polytech.kis.semwiktionary.model.*;
 import edu.unice.polytech.kis.semwiktionary.database.Database;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
@@ -45,7 +43,6 @@ import info.bliki.wiki.model.WikiModel;
 	private Stack<Integer> statesStack = new Stack<Integer>();
 	private NodeMappedObject currentNMO;
 	private Relation currentRelation;
-	public static Transaction tx;
 	
 	/**@name	Flags
 	*These flags are used to give parsing information for a word to the user. They are reset between each word
@@ -102,14 +99,6 @@ import info.bliki.wiki.model.WikiModel;
 		
 		complexNyms = new Vector<NodeMappedObject>(BUFFER_SIZE, 2); // second param is increment size.
 		resetComplexNymsList();
-	}
-
-	private void startTransaction() {
-		Database.initTransaction();
-	}
-
-	private void stopTransaction() {		
-		Database.stopTransaction();
 	}
 	
 	/** Reset the list of complexNyms: the list is cleared, and its size is forced to `BUFFER_SIZE`.
@@ -185,8 +174,9 @@ import info.bliki.wiki.model.WikiModel;
 											 (elapsedMs / 1000) % 3600 / 60,
 											 (elapsedMs / 1000) % 60)
 							 + " since beginning)");	
-			stopTransaction();
-			startTransaction();		
+			Database.validate();
+			Database.close();
+			Database.open();
 		}
 	}
 	
@@ -258,13 +248,13 @@ import info.bliki.wiki.model.WikiModel;
 	}
 
 	initParser();
-	startTransaction();
+	Database.open();
 	yybegin(XML);
 %init}
 
 %eof{
 	logWord();
-	stopTransaction();
+	Database.close();
 	
 	PREV_ERR.println("Total time: " + ((System.currentTimeMillis() - FIRST_TICK) / 1E3) + "s");
 	PREV_ERR.println("Parsed words:  " + wordCount);

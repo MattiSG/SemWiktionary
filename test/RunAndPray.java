@@ -3,7 +3,6 @@ package edu.unice.polytech.kis.semwiktionary.test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-import org.junit.BeforeClass;
 import org.junit.AfterClass;
 
 import edu.unice.polytech.kis.semwiktionary.database.Database;
@@ -38,14 +37,9 @@ import edu.unice.polytech.kis.semwiktionary.database.DatabaseTest;
 })
 
 public class RunAndPray {
-	@BeforeClass
-	public static void setUpTransaction() {
-		Database.initTransaction();
-	}
-	
+
 	@AfterClass
 	public static void classTearDown() {
 		DatabaseTest.deleteDb();
-		Database.stopTransaction();
 	}
 }

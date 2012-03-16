@@ -1,7 +1,6 @@
 package edu.unice.polytech.kis.semwiktionary.model;
 
 
-import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Node;
@@ -211,15 +210,17 @@ public class MutableWord extends Word {
 	 * @return	This MutableWord, for chainability
 	 */
 	public MutableWord clearDefinitions() {
+		Database.open();
+		
 		try {
 			for (Relationship relation : node.getRelationships(Direction.OUTGOING, Relation.DEFINITION))
 				relation.delete(); // delete the relationship first to be able to delete the linked nodes
 			for (Definition definition : this.definitions)
 				definition.delete(); // let the Definition delete itself
 			
-			Database.getTransaction().success();
+			Database.validate();
 		} finally {
-			
+			Database.close();
 		}
 		
 		this.definitions.clear();

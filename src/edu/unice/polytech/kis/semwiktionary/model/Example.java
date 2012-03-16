@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.ArrayList;
 
 import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Transaction;
 
 import edu.unice.polytech.kis.semwiktionary.database.Database;
 
@@ -62,21 +61,6 @@ public class Example extends NodeMappedObject {
 		this.set("content", content);
 		
 		return this;
-	}
-
-// DESTRUCTORS
-	
-	/** Deletes this Example and all attached properties from the database.
-	 */
-	public void delete() {
-		
-		try {
-			this.node.delete();
-			
-			Database.getTransaction().success();
-		} finally {
-			
-		}
 	}
 
 // OVERRIDES

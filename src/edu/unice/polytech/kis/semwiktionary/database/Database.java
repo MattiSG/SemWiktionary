@@ -1,9 +1,5 @@
 /**SemWiktionary
 *Java API to access data from [wiktionary](http://fr.wiktionary.org). Specific target is the French wiktionary.
-*
-*@author	[Matti Schneider-Ghibaudo](http://mattischneider.fr)
-*
-*@version 0.0.0
 */
 
 package edu.unice.polytech.kis.semwiktionary.database;
@@ -40,7 +36,19 @@ public class Database {
 	 */
 	private static Database instance;
 	
-	private static Transaction tx;
+	/** Transaction management is abstracted in this class.
+	* To improve performance, only one transaction is started by the Database.
+	* All calls to the transaction start / stop are managed by this class.
+	*/
+	private static Transaction transaction = null;
+	
+	/** Counts the number of transactions that were asked to be started.
+	* Since only one transaction is started, we need to count how many of them were asked to start, to be sure to stop the transaction only on the last call to `close`.
+	*
+	*@see	open
+	*@see	close
+	*/
+	private static int transactionCount = 0;
 	
 	
 	/**Singleton constructor, therefore private.
@@ -50,18 +58,50 @@ public class Database {
 		registerShutdownHook(this.graphDb);
 	}
 	
-	/** Initial transaction
+	/** Starts a transaction if necessary.
+	 * If a transaction is already currently in use, the current one will be used.
+	 *
+	 *@return	The current Transaction.
+	 *@see	commit
 	 */
-	public static void initTransaction() {
-		if(getInstance().tx == null)
-			getInstance().tx = getDbService().beginTx();
+	public static Transaction open() {
+		if (transactionCount == 0)
+			transaction = getDbService().beginTx();
+			
+		transactionCount++;
+		
+		return transaction;
 	} 
 	
-	/** Stop transaction
+	/** Validates the current transaction.
+	*
+	*@return	The current Transaction.
+	*@throw	RuntimeException	If no transaction was started.
+	*/
+	public static Transaction validate() {
+		if (transactionCount <= 0)
+			throw new RuntimeException("No running transaction!");
+		
+		transaction.success();
+		
+		return transaction;
+	}
+	
+	/** Commits the current transaction.
+	 * **The transaction needs to be `validate`d to be saved!** Otherwise, it will be rolled back.
+	 *
+	 *@throw	RuntimeException	If no transaction was started.
+	 *@see	open
+	 *@see	validate
 	 */
-	public static void stopTransaction() {
-		if(getInstance().tx != null)
-			getInstance().tx.finish();
+	public static void close() {
+		if (transactionCount <= 0)
+			throw new RuntimeException("No running transaction!");
+		
+		transactionCount--;
+		
+		if (transactionCount == 0)
+			transaction.finish();
 	}
 	
 	/**Method to close the database correctly whatever the close action made by the user.
@@ -95,27 +135,22 @@ public class Database {
 		return getInstance().graphDb;
 	}
 	
-	/** Accessor to transaction
-	 */
-	public static Transaction getTransaction() {
-		return getInstance().tx;
-	}
-	
 	/**Create a new node in the database with the given property.
 	 * @param property The node property 
 	 * @param propValue The property value
 	 * @return the created node or null in case of error (unlikely)
 	 */
 	public static Node createNodeWithProperty(String property, String propValue) {
-		
 		Node node;
+		
+		open();
 		
 		try {
 			node = getDbService().createNode();
 			node.setProperty(property, propValue);
-			getInstance().tx.success();
+			validate();
 		} finally {
-					    
+			close();
 		}
 		
 		return node; 
@@ -132,11 +167,13 @@ public class Database {
 	public static Relationship link(Node from, Node to, RelationshipType relationType) {
 		Relationship relationship;
 		
+		open();
+		
 		try {
 			relationship = from.createRelationshipTo(to, relationType);
-			getInstance().tx.success();
+			validate();
 		} finally {
-		    
+		    close();
 		}
 		
 		return relationship;

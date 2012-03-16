@@ -12,7 +12,6 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.index.Index;
 import org.neo4j.graphdb.Direction;
-import org.neo4j.graphdb.Transaction;
 
 import edu.unice.polytech.kis.semwiktionary.database.Database;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
@@ -44,13 +43,14 @@ public abstract class NodeMappedObject {
 	/** Initializes this `NodeMappedObject`'s `Node` in database.
 	*/
 	protected NodeMappedObject initNode() {
-
+		Database.open();
+		
 		try {
 			this.node = Database.getDbService().createNode();
 
-			Database.getTransaction().success();
+			Database.validate();
 		} finally {
-		    
+		    Database.close();
 		}
 
 		return this;
@@ -68,13 +68,13 @@ public abstract class NodeMappedObject {
 	*@return	this, for chainability
 	*/
 	public NodeMappedObject set(String key, String value) {
-		
+		Database.open();
 		try {
 			this.node.setProperty(key, value);
 			
-			Database.getTransaction().success();
+			Database.validate();
 		} finally {
-		    
+		    Database.close();
 		}
 		
 		return this;
@@ -145,13 +145,14 @@ public abstract class NodeMappedObject {
 	 *@return	this	for chainability
 	 */
 	public NodeMappedObject indexAsOn(String key, String indexKey) {
+		Database.open();
 		
 		try {
 			getIndex(indexKey).add(this.node, INDEX_KEY, key);
 			
-			Database.getTransaction().success();
+			Database.validate();
 		} finally {
-		    
+		    Database.close();
 		}
 		
 		return this;
@@ -276,6 +277,7 @@ public abstract class NodeMappedObject {
 	* Transactions are handled within this method.
 	*/
 	public void delete() {
+		Database.open();
 		
 		try {
 			this.onDelete(); // hook for inheriting classes
@@ -286,9 +288,9 @@ public abstract class NodeMappedObject {
 			
 			this.node.delete();
 			
-			Database.getTransaction().success();
+			Database.validate();
 		} finally {
-			
+			Database.close();
 		}
 	}
 	
@@ -303,14 +305,15 @@ public abstract class NodeMappedObject {
 	/** Deletes all relations of the given type linked to this `NodeMappedObject`.
 	*/
 	public void delete(Relation relType) {
+		Database.open();
 		
 		try {
 			for (Relationship relation : this.node.getRelationships(Direction.OUTGOING, relType))
 				relation.delete();
 
-			Database.getTransaction().success();
+			Database.validate();
 		} finally {
-			
+			Database.close();
 		}
 	}
 	

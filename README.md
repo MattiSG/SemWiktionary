@@ -12,7 +12,7 @@ Offer a complete graph database and a Java API to access it that provides the fo
 2. Semantical relations with other words:
 	- synonyms & antonyms;
 	- [troponyms](http://en.wiktionary.org/wiki/troponym);
-	- [hyponyms](http://en.wiktionary.org/wiki/hyponym) & [hyperonyms](http://en.wiktionary.org/wiki/hypernym);
+	- [hyponyms](http://en.wiktionary.org/wiki/hyponym) & [hypernyms](http://en.wiktionary.org/wiki/hypernym);
 	- [holonyms](http://en.wiktionary.org/wiki/holonym) & [meronyms](http://en.wiktionary.org/wiki/meronym),
 	- [meaning-related vocabulary (FR)](http://fr.wiktionary.org/wiki/Modèle:-voc-).
 3. [Lexical class](http://en.wikipedia.org/wiki/Part_of_speech) (noun, adjective, verb…).

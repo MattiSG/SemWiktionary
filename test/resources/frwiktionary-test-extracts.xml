@@ -1944,6 +1944,318 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
     </revision>
   </page>
   <page>
+    <title>manger</title>
+    <id>7599</id>
+    <revision>
+      <id>9728318</id>
+      <timestamp>2011-12-05T00:12:21Z</timestamp>
+      <contributor>
+        <username>JackBot</username>
+        <id>12968</id>
+      </contributor>
+      <minor />
+      <comment>[[Wiktionnaire:Structure des articles|Autoformatage]]</comment>
+      <text xml:space="preserve">== {{=fr=}} ==
+{{-étym-}}
+: Du {{étyl|la|fr}} ''[[manducare]]'' (« [[mâcher]] » et « manger » en latin populaire), lui-même issu de ''[[mandere]]'' (« manger »). L'italien ''[[mangiare]]'' est sans conteste d'origine gallo-romane. Une évolution de ''[[manducare]]'' conforme aux lois de l'évolution phonétique de l'italien aurait donné *''mandocare''. De même, en occitan, ''[[manjar]]'' est dû à la langue d'oïl.
+
+{{-verb-|fr}}
+'''manger''' {{pron|mɑ̃.ʒe|fr}} {{t|fr}} {{1ergroupe|fr}}
+# [[mâcher|Mâcher]] et [[avaler]] un [[aliment]] dans le [[but]] de se [[nourrir]].
+#* '''''Mangez''' donc, lui dit la jeune fille en lui servant un morceau de la hure d’un sanglier.'' {{source|[[w:Alexandre Dumas|Alexandre Dumas]], ''[[s:Othon l’archer|Othon l’archer]]'', 1839}}
+#* ''Tout dernièrement encore, un trois-mâts français, […], avait rebroussé chemin vers le Costa Rica, où il avait dû être condamné car sa coque '''était''' entièrement '''mangée''' par les tarets.'' {{source|{{w|Alain Gerbault}}, ''À la poursuite du soleil''; tome 1 : ''De New-York à Tahiti'', 1929}}
+#* ''Il '''mange''' lentement, handicapé par une mastication pénible, ne dit pas un mot, rit niaisement de loin en loin.'' {{source|{{w|Victor Méric}}, ''Les compagnons de l'Escopette'', 1930, p.213}}
+#* ''Il '''mangea''' quelques mûres qu'il trouva dans les ronces de la lisière, après quoi il chercha à s'orienter.'' {{source|{{w|André Dhôtel}}, ''Le Pays où l'on n'arrive jamais'', 1955}}
+# {{intransitif|fr}} {{par ext}} Prendre un [[repas]].
+#* '' Ils '''mangent''' et boivent, font ripaille, remuent leurs membres, embrassent les filles, sonnent les cloches, s'emplissent de bruit : rudes bacchanales où l'homme se débride, et qui sont la consécration de la vie naturelle : les puritains ne s'y sont pas trompés.'' {{source|{{w|Hippolyte Taine}}, ''Histoire de la littérature anglaise'', V.1, 1856, p.255}}
+#* ''Aussi nous ne '''mangions''' pas tous les jours parce qu’il fallait d’abord que le père malade ne manquât de rien.'' {{source|{{w|Octave Mirbeau}}, ''[[s:La Bonne|La Bonne]]'', dans ''Lettres de ma chaumière'', 1885}}
+#* ''Au bout d'une vingtaine de mètres, il s’arrêta devant un restaurant, une boite à bon marché, et nous invita à entrer avec lui, histoire de '''manger''' et de boire un peu.'' {{source|{{w|Henry Miller}}, ''L'ancien combattant alcoolique au crâne en planche à lessive'', dans ''Max et les Phagocytes'', traduction par Jean-Claude Lefaure, éditions du Chêne, 1947}}
+# {{figuré|fr}} [[consumer|Consumer]], [[dissiper]] en [[folle]]s [[dépense]]s. 
+#* ''En quelques années il '''a mangé''' tout son patrimoine. -  Il '''a mangé''' la dot de sa femme. - Il '''a mangé''' beaucoup d'argent.''
+# {{figuré|fr}} Consumer [[absorber|en absorbant]], [[ronger|en rongeant]], [[miner|en minant]], [[détruire|en détruisant]] d'[[autre]]s [[chose]]s, en parlant des choses. 
+#* ''Ce poêle '''mange''' bien du charbon. Le soleil '''mange''' les couleurs. La rouille '''mange''' le fer.''
+
+{{-syn-}}
+{{(}}
+; Mâcher, avaler pour se nourrir (1) :
+* [[bouffer]] {{familier|nocat=1}}
+{{-}}
+; Prendre un repas (2) :
+* [[becqueter]]
+* [[bouffer]] {{familier|nocat=1}}
+* [[grailler]]
+* [[s’alimenter]]
+* [[se nourrir]]
+* [[se réfecter]]
+* [[se restaurer]]
+* [[se sustenter]]
+{{-}}
+{{)}}
+
+{{-tropo-}}
+{{(}}
+'''Mâcher, avaler pour se nourrir''' (1) :
+* [[avaler]]
+* [[ingérer]]
+* [[ingurgiter]]
+* [[s'empiffrer]]
+* [[se baffrer]]
+* [[se goinfrer]]
+'''Prendre un repas''' (2) :
+* [[déjeuner]]
+* [[dîner]]
+* [[faire bombance]]
+* [[faire bonne chère]]
+* [[faire ripaille]]
+* [[festoyer]]
+* [[pique-niquer]]
+* [[ripailler]]
+* [[se réfecter]]
+* [[souper]]
+{{)}}
+
+{{-ant-}}
+; Prendre un repas (2) :
+* [[jeûner]]
+* se [[serrer la ceinture]]
+
+{{-drv-}}
+{{(}}
+* [[avoir mangé son pain blanc]] (avoir été dans un état heureux, agréable, et il n'y être plus)
+* [[bête à manger du foin]]
+* [[donner à manger]] (tenir une maison où les gens viennent prendre leurs repas en payant)
+* [[entremanger]]
+* [[entremangerie]]
+* [[mangeable]]
+* [[mangeaille]]
+* [[mangeailler]]
+* [[mange-disques]]
+* [[mangeoire]]
+* [[mangeotter]]
+{{-}}
+* [[manger bien]] (manger de bonnes choses, d'une nourriture abondante et de bonne qualité)
+* [[manger dans la main]] (avoir des manières trop familières)
+* [[manger de caresses]] (faire de grandes caresses)
+* [[manger de la vache enragée]] (éprouver beaucoup de privations et de fatigues)
+* [[manger des yeux]] (regarder avidement quelqu'un, quelque chose)
+* [[manger le morceau]]‎
+* [[manger un morceau]]‎
+* [[manger son blé en herbe]] (dépenser d'avance son revenu, manger d'avance une succession)
+* [[manger ses mots]] (omettre des lettres ou des syllabes en prononçant)
+* [[manger son pain blanc]]
+* [[manger une balle]]
+* [[mangerie]]
+* [[mange-tout]]
+* [[mangeur]]
+* [[remanger]]
+* [[salle à manger]]
+{{)}}
+
+{{-exp-}}
+* [[à petit manger, bien boire]]
+* [[il y a à boire et à manger]]
+* [[l'appétit vient en mangeant]] (le désir de s'enrichir ou de s'élever augmente à mesure qu'on acquiert de la fortune ou des honneurs)
+* [[les gros poissons mangent les petits]] (les puissants oppriment les faibles)
+* [[les loups ne se mangent pas entre eux]] (les méchants s'épargnent entre eux)
+* [[qui se fait brebis, le loup le mange]] (qui a trop de bonté, trouve bientôt des gens qui en abusent)
+
+{{-hypo-}}
+* [[avaler]]
+* [[mâcher]]
+* [[mastiquer]]
+
+{{-trad-}}
+{{(|Mâcher et avaler un aliment dans le but de se nourrir}}
+* {{T|de}} : {{trad+|de|essen}}
+* {{T|en}} : to {{trad+|en|eat}}
+* {{T|ar}} : {{trad+|ar|أكل|R=ʾakala|dif=أَكَلَ}}
+* {{T|arz}} : {{trad--|arz|كل|R=kal}}
+* {{T|bm}} : {{trad--|bm|dun}}
+* {{T|br}} : {{trad+|br|debriñ}}
+* {{T|zh}} : {{trad+|zh|吃|R=chī}}
+* {{T|ko}} : {{trad+|ko|먹다|R=meokda}} 
+* {{T|kw}} : {{trad-|kw|dybry}}
+* {{T|da}} : {{trad+|da|æde}}
+* {{T|es}} : {{trad+|es|comer}}
+{{-}}
+* {{T|ro}} : {{trad-|ro|a mânca}}
+* {{T|eo}} : {{trad+|eo|manĝi}}
+* {{T|he}} : {{trad-|he|אוכל}}
+* {{T|hbo}} : {{trad--|hbo|אכל|dif=אֹכֶל}}
+* {{T|io}} : {{trad+|io|manjar}}
+* {{T|ja}} : {{trad+|ja|食べる|R=taberu}}
+* {{T|fa}} : {{trad+|fa|خوردن|R=khordan}} 
+* {{T|sa}} : {{trad-|sa|आह्ड़|R=āhṛ}}
+* {{T|ses}} : {{trad--|ses|ŋaa}}
+* {{T|crh}} : {{trad--|crh|așamaq}}
+* {{T|cs}} : {{trad+|cs|jíst}}
+{{)}}
+{{(|Prendre un repas}}
+* {{T|de}} : {{trad+|de|essen}}
+* {{T|en}} : to {{trad+|en|eat}}
+* {{T|ar}} : {{trad+|ar|أكل|R=ʾakala|dif=أَكَلَ}}
+* {{T|arz}} : {{trad--|arz|كل|R=kal}}
+* {{T|bm}} : {{trad--|bm|dumuni kɛ}}
+* {{T|br}} : {{trad+|br|debriñ}}
+* {{T|zh}} : {{trad+|zh|吃饭|R=chīfàn|tradi=吃飯}}
+* {{T|ja}} : {{trad-|ja|食事する|R=shokujisuru}}
+* {{T|son}} : {{trad--|ses|ŋaa}}
+* {{T|cs}} : {{trad+|cs|jíst}}
+* {{T|tsolyáni}} : {{trad--|tsolyáni|ssáing}}
+* {{T|tr}} : {{trad+|tr|yemek}}
+{{)}}
+
+{{trad-trier}}
+{{(}}
+* {{T|af|trier}} : {{trad-|af|eet}}
+* {{T|sq|trier}} : {{trad-|sq|ha}}
+* {{T|de|trier}} : {{trad+|de|essen}}, {{trad+|de|fressen}}, {{trad+|de|genießen}}, {{trad+|de|speisen}}
+* {{T|ang|trier}} : {{trad-|ang|etan}}
+* {{T|eu|trier}} : {{trad+|eu|jan}}
+* {{T|ca|trier}} : {{trad+|ca|menjar}}
+* {{T|hr|trier}} : {{trad+|hr|jesti}}
+* {{T|fo|trier}} : {{trad-|fo|eta}}
+* {{T|fi|trier}} : {{trad+|fi|syödä}}
+* {{T|fy|trier}} : {{trad+|fy|ite}}
+* {{T|gd|trier}} : {{trad-|gd|ith}}
+* {{T|ka|trier}} : {{trad-|ka|ჭამა}}
+* {{T|hmn|trier}} : {{trad--|hmn|noj}}
+* {{T|hu|trier}} : {{trad+|hu|eszik}}
+* {{T|inh|trier}} : {{trad--|inh|яъа}}
+* {{T|is|trier}} : {{trad+|is|éta}}
+* {{T|it|trier}} : {{trad+|it|mangiare}}
+* {{T|ket|trier}} : {{trad--|ket|дивә}}
+* {{T|rw|trier}} : {{trad-|rw|rya}} (kurya)
+* {{T|ku|trier}} : {{trad+|ku|xwarin}}
+{{-}}
+* {{T|lgg|trier}} : {{trad--|lgg|ṇaː}}
+* {{T|lua|trier}} : {{trad--|lua|kudia}}
+* {{T|ms|trier}} : {{trad+|ms|makan}}
+* {{T|mak|trier}} : {{trad--|mak|ᨂ ᨙᨑ}}
+* {{T|yua|trier}} : {{trad--|yua|hanal}}, {{trad--|yua|hantik}}
+* {{T|nus|trier}} : {{trad--|nus|čam}}
+* {{T|nl|trier}} : {{trad+|nl|eten}}, {{trad+|nl|bikken}}, {{trad+|nl|gebruiken}}, {{trad+|nl|vreten}}, {{trad+|nl|nuttigen}}
+* {{T|niv|trier}} : {{trad--|niv|инь}}
+* {{T|no|trier}} : {{trad+|no|spise}}
+* {{T|oc|trier}} : {{trad+|oc|manjar}}
+* {{T|pap|trier}} : {{trad--|pap|kome}}
+* {{T|pl|trier}} : {{trad+|pl|jeść}}
+* {{T|pt|trier}} : {{trad+|pt|comer}}
+* {{T|ro|trier}} : {{trad+|ro|mînca}}
+* {{T|ru|trier}} : {{trad+|ru|есть}}, {{trad+|ru|съесть}}, {{trad+|ru|обедать}}, {{trad+|ru|пообедать}}, {{trad+|ru|съесть}}
+* {{T|sr|trier}} : {{trad-|sr|јести}}
+* {{T|son|trier}} : {{trad--|son|ɲɛmti}} {{trad--|ses|ŋaa}}&lt;!-- son : Koyraboro Senni, dialecte songhaï --&gt;
+* {{T|srb|trier}} : {{trad--|srb|ʒum}}
+* {{T|srn|trier}} : {{trad--|srn|nyan}}
+* {{T|sv|trier}} : {{trad+|sv|spisa}}, {{trad+|sv|äta}}
+* {{T|tr|trier}} : {{trad+|tr|yemek}}
+* {{T|vi|trier}} : {{trad+|vi|ăn}}
+* {{T|wnk}} : {{trad--|wnk|angu}}
+* {{T|zu|trier}} : {{trad-|zu|ukudla}}
+{{)}}
+
+{{-nom-|fr}}
+{{fr-rég|mɑ̃.ʒe}}
+'''manger''' {{pron|mɑ̃.ʒe|fr}} {{m}}
+# Ce qu’on [[manger|mange]], ce dont on se [[nourrir|nourrit]].
+#* ''Son hôtesse lui accommode son '''manger'''.''
+#* ''Il emporte avec lui son '''manger'''.''
+#* ''Un '''manger''' délicat.''
+#* ''C’est un '''manger''' de roi.''
+# {{familier|fr}} Fait de se nourrir.
+#* ''Il en perd le boire et le '''manger'''.''
+
+{{-drv-}}
+* [[blanc-manger]]
+* [[garde-manger]]
+* [[mangeaille]]
+* [[mangeoire]]
+
+{{-exp-}}
+* [[en oublier le boire et le manger]] 
+* [[perdre le boire et le manger]]
+
+{{-trad-}}
+{{(}}
+* {{T|hbo}} : {{trad--|hbo|אכל|dif=אֹכֶל}}
+{{)}}
+
+{{-pron-}}
+* {{pron-rég|France (Paris)|mɑ̃ː.ˈʒe|audio=Fr-manger-fr-FR-Paris.ogg}}
+* {{pron-rég|France &lt;!--  précisez svp la ville ou la région --&gt;|mɑ̃.ʒe|audio=Fr-manger.ogg}}
+
+{{-homo-}}
+* [[mangeai]], [[mangé]], [[mangée]], [[mangées]], [[mangés]], [[mangez]]
+
+{{-anagr-}}
+* [[gramen]]
+* [[magner]]
+
+{{-réf-}}
+* {{R:DAF8}}
+
+[[Catégorie:Verbes inergatifs en français]]
+
+== {{=en=}} ==
+{{-étym-}}
+: {{ébauche-étym|en}}
+
+{{-nom-|en}}
+{{en-nom-rég|ˈmeɪn.dʒɚ}}
+'''manger'''
+# [[mangeoire|Mangeoire]].
+
+{{-pron-}}
+* {{pron-rég|Royaume Uni &lt;!--  précisez svp la ville ou la région --&gt;|ˈmeɪn.dʒɚ|audio=En-uk-manger.ogg}}
+
+[[ar:manger]]
+[[ca:manger]]
+[[cs:manger]]
+[[cy:manger]]
+[[de:manger]]
+[[el:manger]]
+[[en:manger]]
+[[eo:manger]]
+[[es:manger]]
+[[et:manger]]
+[[fa:manger]]
+[[fi:manger]]
+[[fj:manger]]
+[[gl:manger]]
+[[hr:manger]]
+[[hu:manger]]
+[[id:manger]]
+[[io:manger]]
+[[it:manger]]
+[[ja:manger]]
+[[ka:manger]]
+[[kn:manger]]
+[[ko:manger]]
+[[lb:manger]]
+[[li:manger]]
+[[lt:manger]]
+[[lv:manger]]
+[[mg:manger]]
+[[ml:manger]]
+[[my:manger]]
+[[nl:manger]]
+[[no:manger]]
+[[oc:manger]]
+[[pl:manger]]
+[[pt:manger]]
+[[ro:manger]]
+[[ru:manger]]
+[[sv:manger]]
+[[sw:manger]]
+[[ta:manger]]
+[[te:manger]]
+[[tr:manger]]
+[[vi:manger]]
+[[vo:manger]]
+[[zh:manger]]</text>
+    </revision>
+  </page>
+  <page>
     <title>degré</title>
     <id>7714</id>
     <revision>
@@ -2396,6 +2708,29 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
     </revision>
   </page>
   <page>
+    <title>girafer</title>
+    <id>21735</id>
+    <revision>
+      <id>6373702</id>
+      <timestamp>2009-10-11T20:11:51Z</timestamp>
+      <contributor>
+        <username>Stephane8888</username>
+        <id>1051</id>
+      </contributor>
+      <minor />
+      <text xml:space="preserve">== {{=fr=}} ==
+{{-étym-}}
+: Par analogie avec le long cou de la [[girafe]] pour décrire l’attitude de l’élève qui en classe allonge le cou pour copier sur son camarade.
+
+{{-verb-|fr}}
+'''girafer''' {{pron|ʒi.ʁa.fe}} {{1ergroupe}}
+# {{term|Afrique}} [[copier|Copier]] sur son voisin.
+
+{{-pron-}}
+* {{pron|ʒi.ʁa.fe}}</text>
+    </revision>
+  </page>
+  <page>
     <title>océan</title>
     <id>23911</id>
     <revision>
@@ -2784,318 +3119,6 @@ cjhz1=F|cjhz2=火|cjhz3=F}}
 [[sv:Noël]]
 [[th:Noël]]
 [[zh-min-nan:Noël]]</text>
-    </revision>
-  </page>
-  <page>
-    <title>manger</title>
-    <id>7599</id>
-    <revision>
-      <id>9728318</id>
-      <timestamp>2011-12-05T00:12:21Z</timestamp>
-      <contributor>
-        <username>JackBot</username>
-        <id>12968</id>
-      </contributor>
-      <minor />
-      <comment>[[Wiktionnaire:Structure des articles|Autoformatage]]</comment>
-      <text xml:space="preserve">== {{=fr=}} ==
-{{-étym-}}
-: Du {{étyl|la|fr}} ''[[manducare]]'' (« [[mâcher]] » et « manger » en latin populaire), lui-même issu de ''[[mandere]]'' (« manger »). L'italien ''[[mangiare]]'' est sans conteste d'origine gallo-romane. Une évolution de ''[[manducare]]'' conforme aux lois de l'évolution phonétique de l'italien aurait donné *''mandocare''. De même, en occitan, ''[[manjar]]'' est dû à la langue d'oïl.
-
-{{-verb-|fr}}
-'''manger''' {{pron|mɑ̃.ʒe|fr}} {{t|fr}} {{1ergroupe|fr}}
-# [[mâcher|Mâcher]] et [[avaler]] un [[aliment]] dans le [[but]] de se [[nourrir]].
-#* '''''Mangez''' donc, lui dit la jeune fille en lui servant un morceau de la hure d’un sanglier.'' {{source|[[w:Alexandre Dumas|Alexandre Dumas]], ''[[s:Othon l’archer|Othon l’archer]]'', 1839}}
-#* ''Tout dernièrement encore, un trois-mâts français, […], avait rebroussé chemin vers le Costa Rica, où il avait dû être condamné car sa coque '''était''' entièrement '''mangée''' par les tarets.'' {{source|{{w|Alain Gerbault}}, ''À la poursuite du soleil''; tome 1 : ''De New-York à Tahiti'', 1929}}
-#* ''Il '''mange''' lentement, handicapé par une mastication pénible, ne dit pas un mot, rit niaisement de loin en loin.'' {{source|{{w|Victor Méric}}, ''Les compagnons de l'Escopette'', 1930, p.213}}
-#* ''Il '''mangea''' quelques mûres qu'il trouva dans les ronces de la lisière, après quoi il chercha à s'orienter.'' {{source|{{w|André Dhôtel}}, ''Le Pays où l'on n'arrive jamais'', 1955}}
-# {{intransitif|fr}} {{par ext}} Prendre un [[repas]].
-#* '' Ils '''mangent''' et boivent, font ripaille, remuent leurs membres, embrassent les filles, sonnent les cloches, s'emplissent de bruit : rudes bacchanales où l'homme se débride, et qui sont la consécration de la vie naturelle : les puritains ne s'y sont pas trompés.'' {{source|{{w|Hippolyte Taine}}, ''Histoire de la littérature anglaise'', V.1, 1856, p.255}}
-#* ''Aussi nous ne '''mangions''' pas tous les jours parce qu’il fallait d’abord que le père malade ne manquât de rien.'' {{source|{{w|Octave Mirbeau}}, ''[[s:La Bonne|La Bonne]]'', dans ''Lettres de ma chaumière'', 1885}}
-#* ''Au bout d'une vingtaine de mètres, il s’arrêta devant un restaurant, une boite à bon marché, et nous invita à entrer avec lui, histoire de '''manger''' et de boire un peu.'' {{source|{{w|Henry Miller}}, ''L'ancien combattant alcoolique au crâne en planche à lessive'', dans ''Max et les Phagocytes'', traduction par Jean-Claude Lefaure, éditions du Chêne, 1947}}
-# {{figuré|fr}} [[consumer|Consumer]], [[dissiper]] en [[folle]]s [[dépense]]s. 
-#* ''En quelques années il '''a mangé''' tout son patrimoine. -  Il '''a mangé''' la dot de sa femme. - Il '''a mangé''' beaucoup d'argent.''
-# {{figuré|fr}} Consumer [[absorber|en absorbant]], [[ronger|en rongeant]], [[miner|en minant]], [[détruire|en détruisant]] d'[[autre]]s [[chose]]s, en parlant des choses. 
-#* ''Ce poêle '''mange''' bien du charbon. Le soleil '''mange''' les couleurs. La rouille '''mange''' le fer.''
-
-{{-syn-}}
-{{(}}
-; Mâcher, avaler pour se nourrir (1) :
-* [[bouffer]] {{familier|nocat=1}}
-{{-}}
-; Prendre un repas (2) :
-* [[becqueter]]
-* [[bouffer]] {{familier|nocat=1}}
-* [[grailler]]
-* [[s’alimenter]]
-* [[se nourrir]]
-* [[se réfecter]]
-* [[se restaurer]]
-* [[se sustenter]]
-{{-}}
-{{)}}
-
-{{-tropo-}}
-{{(}}
-'''Mâcher, avaler pour se nourrir''' (1) :
-* [[avaler]]
-* [[ingérer]]
-* [[ingurgiter]]
-* [[s'empiffrer]]
-* [[se baffrer]]
-* [[se goinfrer]]
-'''Prendre un repas''' (2) :
-* [[déjeuner]]
-* [[dîner]]
-* [[faire bombance]]
-* [[faire bonne chère]]
-* [[faire ripaille]]
-* [[festoyer]]
-* [[pique-niquer]]
-* [[ripailler]]
-* [[se réfecter]]
-* [[souper]]
-{{)}}
-
-{{-ant-}}
-; Prendre un repas (2) :
-* [[jeûner]]
-* se [[serrer la ceinture]]
-
-{{-drv-}}
-{{(}}
-* [[avoir mangé son pain blanc]] (avoir été dans un état heureux, agréable, et il n'y être plus)
-* [[bête à manger du foin]]
-* [[donner à manger]] (tenir une maison où les gens viennent prendre leurs repas en payant)
-* [[entremanger]]
-* [[entremangerie]]
-* [[mangeable]]
-* [[mangeaille]]
-* [[mangeailler]]
-* [[mange-disques]]
-* [[mangeoire]]
-* [[mangeotter]]
-{{-}}
-* [[manger bien]] (manger de bonnes choses, d'une nourriture abondante et de bonne qualité)
-* [[manger dans la main]] (avoir des manières trop familières)
-* [[manger de caresses]] (faire de grandes caresses)
-* [[manger de la vache enragée]] (éprouver beaucoup de privations et de fatigues)
-* [[manger des yeux]] (regarder avidement quelqu'un, quelque chose)
-* [[manger le morceau]]‎
-* [[manger un morceau]]‎
-* [[manger son blé en herbe]] (dépenser d'avance son revenu, manger d'avance une succession)
-* [[manger ses mots]] (omettre des lettres ou des syllabes en prononçant)
-* [[manger son pain blanc]]
-* [[manger une balle]]
-* [[mangerie]]
-* [[mange-tout]]
-* [[mangeur]]
-* [[remanger]]
-* [[salle à manger]]
-{{)}}
-
-{{-exp-}}
-* [[à petit manger, bien boire]]
-* [[il y a à boire et à manger]]
-* [[l'appétit vient en mangeant]] (le désir de s'enrichir ou de s'élever augmente à mesure qu'on acquiert de la fortune ou des honneurs)
-* [[les gros poissons mangent les petits]] (les puissants oppriment les faibles)
-* [[les loups ne se mangent pas entre eux]] (les méchants s'épargnent entre eux)
-* [[qui se fait brebis, le loup le mange]] (qui a trop de bonté, trouve bientôt des gens qui en abusent)
-
-{{-hypo-}}
-* [[avaler]]
-* [[mâcher]]
-* [[mastiquer]]
-
-{{-trad-}}
-{{(|Mâcher et avaler un aliment dans le but de se nourrir}}
-* {{T|de}} : {{trad+|de|essen}}
-* {{T|en}} : to {{trad+|en|eat}}
-* {{T|ar}} : {{trad+|ar|أكل|R=ʾakala|dif=أَكَلَ}}
-* {{T|arz}} : {{trad--|arz|كل|R=kal}}
-* {{T|bm}} : {{trad--|bm|dun}}
-* {{T|br}} : {{trad+|br|debriñ}}
-* {{T|zh}} : {{trad+|zh|吃|R=chī}}
-* {{T|ko}} : {{trad+|ko|먹다|R=meokda}} 
-* {{T|kw}} : {{trad-|kw|dybry}}
-* {{T|da}} : {{trad+|da|æde}}
-* {{T|es}} : {{trad+|es|comer}}
-{{-}}
-* {{T|ro}} : {{trad-|ro|a mânca}}
-* {{T|eo}} : {{trad+|eo|manĝi}}
-* {{T|he}} : {{trad-|he|אוכל}}
-* {{T|hbo}} : {{trad--|hbo|אכל|dif=אֹכֶל}}
-* {{T|io}} : {{trad+|io|manjar}}
-* {{T|ja}} : {{trad+|ja|食べる|R=taberu}}
-* {{T|fa}} : {{trad+|fa|خوردن|R=khordan}} 
-* {{T|sa}} : {{trad-|sa|आह्ड़|R=āhṛ}}
-* {{T|ses}} : {{trad--|ses|ŋaa}}
-* {{T|crh}} : {{trad--|crh|așamaq}}
-* {{T|cs}} : {{trad+|cs|jíst}}
-{{)}}
-{{(|Prendre un repas}}
-* {{T|de}} : {{trad+|de|essen}}
-* {{T|en}} : to {{trad+|en|eat}}
-* {{T|ar}} : {{trad+|ar|أكل|R=ʾakala|dif=أَكَلَ}}
-* {{T|arz}} : {{trad--|arz|كل|R=kal}}
-* {{T|bm}} : {{trad--|bm|dumuni kɛ}}
-* {{T|br}} : {{trad+|br|debriñ}}
-* {{T|zh}} : {{trad+|zh|吃饭|R=chīfàn|tradi=吃飯}}
-* {{T|ja}} : {{trad-|ja|食事する|R=shokujisuru}}
-* {{T|son}} : {{trad--|ses|ŋaa}}
-* {{T|cs}} : {{trad+|cs|jíst}}
-* {{T|tsolyáni}} : {{trad--|tsolyáni|ssáing}}
-* {{T|tr}} : {{trad+|tr|yemek}}
-{{)}}
-
-{{trad-trier}}
-{{(}}
-* {{T|af|trier}} : {{trad-|af|eet}}
-* {{T|sq|trier}} : {{trad-|sq|ha}}
-* {{T|de|trier}} : {{trad+|de|essen}}, {{trad+|de|fressen}}, {{trad+|de|genießen}}, {{trad+|de|speisen}}
-* {{T|ang|trier}} : {{trad-|ang|etan}}
-* {{T|eu|trier}} : {{trad+|eu|jan}}
-* {{T|ca|trier}} : {{trad+|ca|menjar}}
-* {{T|hr|trier}} : {{trad+|hr|jesti}}
-* {{T|fo|trier}} : {{trad-|fo|eta}}
-* {{T|fi|trier}} : {{trad+|fi|syödä}}
-* {{T|fy|trier}} : {{trad+|fy|ite}}
-* {{T|gd|trier}} : {{trad-|gd|ith}}
-* {{T|ka|trier}} : {{trad-|ka|ჭამა}}
-* {{T|hmn|trier}} : {{trad--|hmn|noj}}
-* {{T|hu|trier}} : {{trad+|hu|eszik}}
-* {{T|inh|trier}} : {{trad--|inh|яъа}}
-* {{T|is|trier}} : {{trad+|is|éta}}
-* {{T|it|trier}} : {{trad+|it|mangiare}}
-* {{T|ket|trier}} : {{trad--|ket|дивә}}
-* {{T|rw|trier}} : {{trad-|rw|rya}} (kurya)
-* {{T|ku|trier}} : {{trad+|ku|xwarin}}
-{{-}}
-* {{T|lgg|trier}} : {{trad--|lgg|ṇaː}}
-* {{T|lua|trier}} : {{trad--|lua|kudia}}
-* {{T|ms|trier}} : {{trad+|ms|makan}}
-* {{T|mak|trier}} : {{trad--|mak|ᨂ ᨙᨑ}}
-* {{T|yua|trier}} : {{trad--|yua|hanal}}, {{trad--|yua|hantik}}
-* {{T|nus|trier}} : {{trad--|nus|čam}}
-* {{T|nl|trier}} : {{trad+|nl|eten}}, {{trad+|nl|bikken}}, {{trad+|nl|gebruiken}}, {{trad+|nl|vreten}}, {{trad+|nl|nuttigen}}
-* {{T|niv|trier}} : {{trad--|niv|инь}}
-* {{T|no|trier}} : {{trad+|no|spise}}
-* {{T|oc|trier}} : {{trad+|oc|manjar}}
-* {{T|pap|trier}} : {{trad--|pap|kome}}
-* {{T|pl|trier}} : {{trad+|pl|jeść}}
-* {{T|pt|trier}} : {{trad+|pt|comer}}
-* {{T|ro|trier}} : {{trad+|ro|mînca}}
-* {{T|ru|trier}} : {{trad+|ru|есть}}, {{trad+|ru|съесть}}, {{trad+|ru|обедать}}, {{trad+|ru|пообедать}}, {{trad+|ru|съесть}}
-* {{T|sr|trier}} : {{trad-|sr|јести}}
-* {{T|son|trier}} : {{trad--|son|ɲɛmti}} {{trad--|ses|ŋaa}}&lt;!-- son : Koyraboro Senni, dialecte songhaï --&gt;
-* {{T|srb|trier}} : {{trad--|srb|ʒum}}
-* {{T|srn|trier}} : {{trad--|srn|nyan}}
-* {{T|sv|trier}} : {{trad+|sv|spisa}}, {{trad+|sv|äta}}
-* {{T|tr|trier}} : {{trad+|tr|yemek}}
-* {{T|vi|trier}} : {{trad+|vi|ăn}}
-* {{T|wnk}} : {{trad--|wnk|angu}}
-* {{T|zu|trier}} : {{trad-|zu|ukudla}}
-{{)}}
-
-{{-nom-|fr}}
-{{fr-rég|mɑ̃.ʒe}}
-'''manger''' {{pron|mɑ̃.ʒe|fr}} {{m}}
-# Ce qu’on [[manger|mange]], ce dont on se [[nourrir|nourrit]].
-#* ''Son hôtesse lui accommode son '''manger'''.''
-#* ''Il emporte avec lui son '''manger'''.''
-#* ''Un '''manger''' délicat.''
-#* ''C’est un '''manger''' de roi.''
-# {{familier|fr}} Fait de se nourrir.
-#* ''Il en perd le boire et le '''manger'''.''
-
-{{-drv-}}
-* [[blanc-manger]]
-* [[garde-manger]]
-* [[mangeaille]]
-* [[mangeoire]]
-
-{{-exp-}}
-* [[en oublier le boire et le manger]] 
-* [[perdre le boire et le manger]]
-
-{{-trad-}}
-{{(}}
-* {{T|hbo}} : {{trad--|hbo|אכל|dif=אֹכֶל}}
-{{)}}
-
-{{-pron-}}
-* {{pron-rég|France (Paris)|mɑ̃ː.ˈʒe|audio=Fr-manger-fr-FR-Paris.ogg}}
-* {{pron-rég|France &lt;!--  précisez svp la ville ou la région --&gt;|mɑ̃.ʒe|audio=Fr-manger.ogg}}
-
-{{-homo-}}
-* [[mangeai]], [[mangé]], [[mangée]], [[mangées]], [[mangés]], [[mangez]]
-
-{{-anagr-}}
-* [[gramen]]
-* [[magner]]
-
-{{-réf-}}
-* {{R:DAF8}}
-
-[[Catégorie:Verbes inergatifs en français]]
-
-== {{=en=}} ==
-{{-étym-}}
-: {{ébauche-étym|en}}
-
-{{-nom-|en}}
-{{en-nom-rég|ˈmeɪn.dʒɚ}}
-'''manger'''
-# [[mangeoire|Mangeoire]].
-
-{{-pron-}}
-* {{pron-rég|Royaume Uni &lt;!--  précisez svp la ville ou la région --&gt;|ˈmeɪn.dʒɚ|audio=En-uk-manger.ogg}}
-
-[[ar:manger]]
-[[ca:manger]]
-[[cs:manger]]
-[[cy:manger]]
-[[de:manger]]
-[[el:manger]]
-[[en:manger]]
-[[eo:manger]]
-[[es:manger]]
-[[et:manger]]
-[[fa:manger]]
-[[fi:manger]]
-[[fj:manger]]
-[[gl:manger]]
-[[hr:manger]]
-[[hu:manger]]
-[[id:manger]]
-[[io:manger]]
-[[it:manger]]
-[[ja:manger]]
-[[ka:manger]]
-[[kn:manger]]
-[[ko:manger]]
-[[lb:manger]]
-[[li:manger]]
-[[lt:manger]]
-[[lv:manger]]
-[[mg:manger]]
-[[ml:manger]]
-[[my:manger]]
-[[nl:manger]]
-[[no:manger]]
-[[oc:manger]]
-[[pl:manger]]
-[[pt:manger]]
-[[ro:manger]]
-[[ru:manger]]
-[[sv:manger]]
-[[sw:manger]]
-[[ta:manger]]
-[[te:manger]]
-[[tr:manger]]
-[[vi:manger]]
-[[vo:manger]]
-[[zh:manger]]</text>
     </revision>
   </page>
   <page>

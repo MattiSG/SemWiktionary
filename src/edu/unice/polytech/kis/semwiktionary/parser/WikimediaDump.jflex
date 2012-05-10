@@ -32,9 +32,9 @@ import info.bliki.wiki.model.WikiModel;
 	/** Total number of words to parse.
 	* Allows to provide an estimate of ending time.
 	* Last updated for november 2011. To update this value, simply calculate it with:
-	*     egrep '<title>[^:<]</title>' path/to/dumpfile.xml | wc -l
+	*     egrep '<title>[^:<]+</title>' path/to/dumpfile.xml | wc -l
 	*/
-	private final static long TOTAL_WORDS = 25;
+	private final static long TOTAL_WORDS = 2124047;
 							  
 	private final static int LOG_FREQUENCY = 100; // a count message will be output to the console on every multiple of this frequency
 	/** Some nested elements (definitions and hierarchical relations) need to be stored in list-type structures. This variable defines their size.

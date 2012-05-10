@@ -12,6 +12,7 @@ import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import edu.unice.polytech.kis.semwiktionary.model.Word;
@@ -23,15 +24,53 @@ import edu.unice.polytech.kis.semwiktionary.model.Example;
 public class ParserTest {
 	
 	public static final String TEST_FILE = "test/resources/frwiktionary-test-extracts.xml"; // relative to ant build file
+
+	private static final List<String> expectedTitles = Arrays.asList(
+		"accueil",
+		"dictionnaire",
+		"gouvernement",
+		"cercle",
+		"lire",
+		"vieux",
+		"encyclopédie",
+		"siège",
+		"manchot",
+		"火",
+		"manger",
+		"degré",
+		"moduler",
+		"chinois",
+		"avant-midi",
+		"girafer",
+		"océan",
+		"Chordata",
+		"Noël",
+		"céréale",
+		"handshake",
+		"expulser",
+		"pratiquant",
+		"formothion",
+		"ravivage",
+		"slave",
+		"tube digestif",
+		"carré",
+		"Saint-Claude",
+		"berdeller",
+		"primitive",
+		"cérémonie",
+		"baccalauréat",
+		"fauchaisons",
+		"fédéralismes"
+	);
 	
 	private static List<String> unexpectedTitles;
 	private static Map<String, String> expectedModels;
-	private static Map<String, List<Definition>> expected;
+	private static Map<String, List<Definition>> expectedDefinitionsMap;
 	
 	
 	@BeforeClass
 	public static void classSetUp() throws Exception {
-		expected = generateExpectedContent();
+		expectedDefinitionsMap = generateExpectedContent();
 		
 		expectedModels = new HashMap<String, String>(2);
 		expectedModels.put("-nom-", "Nom commun");
@@ -58,13 +97,15 @@ public class ParserTest {
 	
 	@Test
 	public void allWordsExist() {
-		for (String someWord : expected.keySet())
-			assertTrue("'" + someWord + "' pretends not to exist in the database (check with WordTest first)!", Word.exists(someWord));
+		for (String someWord : expectedTitles)
+			assertTrue("'" + someWord + "' was not found in the database!\n"
+					   + "(check with WordTest first to make sure the retrieval method is not to blame)",
+					   Word.exists(someWord));
 	}
 	
 	@Test
 	public void properNumberOfDefinitionsWereParsed() {
-		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
+		for (Map.Entry<String, List<Definition>> currentEntry : expectedDefinitionsMap.entrySet()) {
 			Word currentWord = Word.find(currentEntry.getKey());
 
 			assertEquals("Bad number of definitions for word " + currentWord, currentEntry.getValue().size(), currentWord.getDefinitions().size());
@@ -73,7 +114,7 @@ public class ParserTest {
 	
 	@Test
 	public void definitionsWereParsedInCorrectOrder() {
-		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
+		for (Map.Entry<String, List<Definition>> currentEntry : expectedDefinitionsMap.entrySet()) {
 			Word currentWord = Word.find(currentEntry.getKey());
 			List<Definition> expectedDefinitions = currentEntry.getValue();
 			
@@ -88,7 +129,7 @@ public class ParserTest {
 	
 	@Test
 	public void definitionsContentIsCorrect() {
-		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
+		for (Map.Entry<String, List<Definition>> currentEntry : expectedDefinitionsMap.entrySet()) {
 			Word currentWord = Word.find(currentEntry.getKey());
 			List<Definition> expectedDefinitions = currentEntry.getValue();
 			
@@ -103,7 +144,7 @@ public class ParserTest {
 	
 	@Test
 	public void examplesWereProperlyParsed() {
-		for (Map.Entry<String, List<Definition>> currentEntry : expected.entrySet()) {
+		for (Map.Entry<String, List<Definition>> currentEntry : expectedDefinitionsMap.entrySet()) {
 			Word currentWord = Word.find(currentEntry.getKey());
 			List<Definition> expectedDefinitions = currentEntry.getValue();
 						

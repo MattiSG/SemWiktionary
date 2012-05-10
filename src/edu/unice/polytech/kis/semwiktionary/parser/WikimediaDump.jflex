@@ -687,7 +687,7 @@ space = ({whitespace}|{newline})
 		yybegin(PRONUNCIATION); // yes, it could be that there are multiple pronunciations, but this is very rare. For the moment at least, we'll store only the last one.
 	}
 	
-	{newline}|([^p\r\n]|"p"[^r\r\n]|"pr"[^o\r\n]|"pro"[^n\r\n]|"pron"[^|\r\n])+
+	{newline}|([^p\r\n<]|"p"[^r\r\n<]|"pr"[^o\r\n<]|"pro"[^n\r\n<]|"pron"[^|\r\n<])+
 	{
 		// in PRONUNCIATION_BLOCK: suppress output
 	}

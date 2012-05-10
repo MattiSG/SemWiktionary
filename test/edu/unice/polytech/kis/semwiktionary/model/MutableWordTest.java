@@ -115,4 +115,19 @@ public class MutableWordTest {
 		for (Relationship r : subject.node.getRelationships(Direction.OUTGOING, Relation.DEFINITION))
 			fail("At least one relationship was found in the database!");
 	}
+	
+	@Test
+	public void pronuciationSetGet() {
+		try {
+			subject.setPronunciation(MUTABLEWORD_DEFINITION_1);
+		} catch (Exception e) {
+			fail("Exception while trying to set the pronunciation of a MutableWord! ("
+				 + e.toString() + ")");
+		}
+		
+		assertEquals("Pronuciation for '" + subject + "' was not properly set or accessed!",
+					 MUTABLEWORD_DEFINITION_1,
+					 subject.getPronunciation());
+	}
+	
 }

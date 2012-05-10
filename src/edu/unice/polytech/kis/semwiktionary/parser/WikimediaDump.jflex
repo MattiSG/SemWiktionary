@@ -274,6 +274,7 @@ newline = (\r|\n|\r\n)
 optionalSpaces = ({whitespace}*)
 space = ({whitespace}|{newline})
 
+
 // All states declarations are on their own line to minimize conflicts.
 
 /** These states are exclusive, i.e. they may match only with patterns namespaced by them.
@@ -309,6 +310,12 @@ space = ({whitespace}|{newline})
 // a third-level header with no "well-known" pattern
 %state H3_UNKNOWN
 
+// a {{-pron-}} block, that is, a list of pronunciations
+%state PRONUNCIATION_BLOCK
+
+// a {{pron}} pattern, or the pronunciation info inside a word pattern
+%state PRONUNCIATION
+
 %state SECTION
 
 // any "{{" pattern (template opening)
@@ -317,7 +324,6 @@ space = ({whitespace}|{newline})
 // an {{fchim}} pattern
 %state FCHIM_PATTERN
 
-%state PRONUNCIATION
 %state DEFINITION
 %state DEFINITION_DOMAIN
 %state DEFINITION_EXAMPLE
@@ -513,6 +519,11 @@ space = ({whitespace}|{newline})
 		yybegin(SIMPLENYM);
 	}
 	
+	"pron-}}"
+	{
+		yybegin(PRONUNCIATION_BLOCK);
+	}
+	
 	"hypo"|"méro"
 	{
 		currentComplexNymIsNarrower = true;
@@ -527,14 +538,13 @@ space = ({whitespace}|{newline})
 		yybegin(COMPLEXNYM);
 	}
 	
-	"apr"|"drv"|"étym"|"homo"|"exp"|"pron"|"trad"|"voir"|"réf"|"cf"|"note"
+	"apr"|"drv"|"étym"|"homo"|"exp"|"trad"|"voir"|"réf"|"cf"|"note"
 	{ // all these sections are deliberately ignored
 		// apr: similar vocabulary ("vocabulaire apparenté")
 		// drv: derivative words
 		// étym: etymology
 		// homo: homophons
 		// exp: associated expressions
-		// pron: pronunciations
 		// trad: translations
 		// voir, réf: external references
 		// cf: internal references
@@ -666,6 +676,26 @@ space = ({whitespace}|{newline})
 	[^|}]+
 	{
 		logError("Unexpected pattern value: '" + yytext() + "'");
+	}
+}
+
+<PRONUNCIATION_BLOCK>
+{
+	"pron|"
+	{
+		yypushstate();
+		yybegin(PRONUNCIATION); // yes, it could be that there are multiple pronunciations, but this is very rare. For the moment at least, we'll store only the last one.
+	}
+	
+	{newline}|([^p\r\n]|"p"[^r\r\n]|"pr"[^o\r\n]|"pro"[^n\r\n]|"pron"[^|\r\n])+
+	{
+		// in PRONUNCIATION_BLOCK: suppress output
+	}
+	
+	{newline}{newline}
+	{
+		yypushback(1);
+		yybegin(SECTION);
 	}
 }
 

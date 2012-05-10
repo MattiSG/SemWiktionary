@@ -100,8 +100,9 @@ public class SemWiktionary {
 			return;
 		}
 		
+		println("/" + word.getPronunciation() + "/");
+
 		String categories = "";
-		
 		for (LexicalCategory category : word.getLexicalCategories())
 			if (! category.getDescription().isEmpty()) // if no human-readable description is given, it is not worth showing in this interactive human interface
 				categories += (categories.isEmpty() ? "" : ", ") + category;

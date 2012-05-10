@@ -85,6 +85,16 @@ public class MutableWord extends Word {
 	}
 	
 // UPDATE FUNCTIONS
+
+	/** Sets the string given in parameter as the pronunciation of the current word.
+	 * @param	pron	The pronunciation to set to this Word.
+	 * @return	This `MutableWord`, for chainability
+	 */
+	public MutableWord setPronunciation(String pron) {
+		this.set("pronunciation", pron);
+		
+		return this;
+	}
 	
 	public MutableWord addLexicalCategory(LexicalCategory cat) {
 		Database.link(this.node, cat.node, Relation.LEXICAL_CATEGORY);
@@ -212,6 +222,8 @@ public class MutableWord extends Word {
 		
 		return this;
 	}
+	
+	
 // DELETE FUNCTIONS
 	
 	/** Propagates deletion to definition nodes.

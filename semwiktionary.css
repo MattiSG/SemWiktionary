@@ -152,8 +152,10 @@ hr {
 .download {
 	float: right;
 	display: block;
-	width: 10em;
+	width: 12em;
 	text-align: center;
+	font-size: 80%;
+	padding: .7em 0;
 	
 	background-color: #62b0ff;
 }

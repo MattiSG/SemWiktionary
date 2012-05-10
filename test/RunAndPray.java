@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 import org.junit.AfterClass;
 
+import edu.unice.polytech.kis.semwiktionary.database.Database;
 import edu.unice.polytech.kis.semwiktionary.database.DatabaseTest;
 
 
@@ -37,6 +38,7 @@ import edu.unice.polytech.kis.semwiktionary.database.DatabaseTest;
 })
 
 public class RunAndPray {
+
 	@AfterClass
 	public static void classTearDown() {
 		DatabaseTest.deleteDb();

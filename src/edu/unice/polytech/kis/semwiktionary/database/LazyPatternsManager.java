@@ -4,9 +4,10 @@ package edu.unice.polytech.kis.semwiktionary.database;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.index.Index;
 import org.neo4j.graphdb.index.IndexHits;
-import org.neo4j.graphdb.Transaction;
 
 import edu.unice.polytech.kis.semwiktionary.model.NodeMappedObject;
+import edu.unice.polytech.kis.semwiktionary.parser.WikimediaDump;
+
 
 
 /** This class helps managing so-called “lazy patterns”.
@@ -42,7 +43,7 @@ public class LazyPatternsManager {
 	public static void transferAll(String pattern, NodeMappedObject destination, Relation relType) {
 		Node destinationNode = destination.getNode();
 		
-		Transaction tx = Database.getDbService().beginTx();
+		Database.open();
 
 		IndexHits<Node> hits = index.get(NodeMappedObject.INDEX_KEY, pattern);
 
@@ -53,11 +54,10 @@ public class LazyPatternsManager {
 //				System.err.println("> LazyPatternsManager update:\t'" + currentNode.getProperty("title") + "' --[" + relType + "]--> '" +  destination + "'"); //DEBUG
 			}
 			
-			tx.success();
+			Database.validate();
 		} finally {
 			hits.close();
-			
-		    tx.finish();
+			Database.close();			
 		}
 	}
 }

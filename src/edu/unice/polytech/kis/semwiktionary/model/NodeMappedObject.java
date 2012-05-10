@@ -12,10 +12,11 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.index.Index;
 import org.neo4j.graphdb.Direction;
-import org.neo4j.graphdb.Transaction;
 
 import edu.unice.polytech.kis.semwiktionary.database.Database;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
+
+import edu.unice.polytech.kis.semwiktionary.parser.WikimediaDump;
 
 
 /** Provides basic management for items stored as nodes in a Neo4j graph database.
@@ -42,14 +43,14 @@ public abstract class NodeMappedObject {
 	/** Initializes this `NodeMappedObject`'s `Node` in database.
 	*/
 	protected NodeMappedObject initNode() {
-		Transaction tx = Database.getDbService().beginTx();
+		Database.open();
 		
 		try {
 			this.node = Database.getDbService().createNode();
 
-			tx.success();
+			Database.validate();
 		} finally {
-		    tx.finish();
+		    Database.close();
 		}
 
 		return this;
@@ -67,14 +68,13 @@ public abstract class NodeMappedObject {
 	*@return	this, for chainability
 	*/
 	public NodeMappedObject set(String key, String value) {
-		Transaction tx = Database.getDbService().beginTx();
-		
+		Database.open();
 		try {
 			this.node.setProperty(key, value);
 			
-			tx.success();
+			Database.validate();
 		} finally {
-		    tx.finish();
+		    Database.close();
 		}
 		
 		return this;
@@ -145,14 +145,14 @@ public abstract class NodeMappedObject {
 	 *@return	this	for chainability
 	 */
 	public NodeMappedObject indexAsOn(String key, String indexKey) {
-		Transaction tx = Database.getDbService().beginTx();
+		Database.open();
 		
 		try {
 			getIndex(indexKey).add(this.node, INDEX_KEY, key);
 			
-			tx.success();
+			Database.validate();
 		} finally {
-		    tx.finish();
+		    Database.close();
 		}
 		
 		return this;
@@ -277,7 +277,7 @@ public abstract class NodeMappedObject {
 	* Transactions are handled within this method.
 	*/
 	public void delete() {
-		Transaction tx = Database.getDbService().beginTx();
+		Database.open();
 		
 		try {
 			this.onDelete(); // hook for inheriting classes
@@ -288,9 +288,9 @@ public abstract class NodeMappedObject {
 			
 			this.node.delete();
 			
-			tx.success();
+			Database.validate();
 		} finally {
-			tx.finish();
+			Database.close();
 		}
 	}
 	
@@ -305,15 +305,15 @@ public abstract class NodeMappedObject {
 	/** Deletes all relations of the given type linked to this `NodeMappedObject`.
 	*/
 	public void delete(Relation relType) {
-		Transaction tx = Database.getDbService().beginTx();
+		Database.open();
 		
 		try {
 			for (Relationship relation : this.node.getRelationships(Direction.OUTGOING, relType))
 				relation.delete();
 
-			tx.success();
+			Database.validate();
 		} finally {
-			tx.finish();
+			Database.close();
 		}
 	}
 	

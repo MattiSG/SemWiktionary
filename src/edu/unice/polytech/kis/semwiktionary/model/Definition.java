@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Relationship;
-import org.neo4j.graphdb.Transaction;
 
 import edu.unice.polytech.kis.semwiktionary.database.Database;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
@@ -174,7 +173,7 @@ public class Definition extends NodeMappedObject {
 	}
 	
 	public Definition clearExamples() {
-		Transaction tx = Database.getDbService().beginTx();
+		Database.open();
 		
 		try {
 			for (Relationship relation : node.getRelationships(Direction.OUTGOING, Relation.EXAMPLE))
@@ -182,9 +181,9 @@ public class Definition extends NodeMappedObject {
 			for (Example example : this.listExample)
 				example.delete(); // let the Example delete itself
 			
-			tx.success();
+			Database.validate();
 		} finally {
-			tx.finish();
+			Database.close();
 		}
 		
 		this.listExample.clear();

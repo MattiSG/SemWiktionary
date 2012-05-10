@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Stack;
 
 import edu.unice.polytech.kis.semwiktionary.model.*;
+import edu.unice.polytech.kis.semwiktionary.database.Database;
 import edu.unice.polytech.kis.semwiktionary.database.Relation;
 import edu.unice.polytech.kis.semwiktionary.database.LazyPatternsManager;
 
@@ -176,7 +177,10 @@ import info.bliki.wiki.model.WikiModel;
 											 elapsedMs / 3600000,
 											 (elapsedMs / 1000) % 3600 / 60,
 											 (elapsedMs / 1000) % 60)
-							 + " since beginning)");
+							 + " since beginning)");	
+			Database.validate();
+			Database.close();
+			Database.open();
 		}
 	}
 	
@@ -248,12 +252,13 @@ import info.bliki.wiki.model.WikiModel;
 	}
 
 	initParser();
-	
+	Database.open();
 	yybegin(XML);
 %init}
 
 %eof{
 	logWord();
+	Database.close();
 	
 	PREV_ERR.println("Total time: " + ((System.currentTimeMillis() - FIRST_TICK) / 1E3) + "s");
 	PREV_ERR.println("Parsed words:  " + wordCount);

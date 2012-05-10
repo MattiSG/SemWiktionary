@@ -16,6 +16,7 @@ Offer a complete graph database and a Java API to access it that provides the fo
 	- [holonyms](http://en.wiktionary.org/wiki/holonym) & [meronyms](http://en.wiktionary.org/wiki/meronym),
 	- [meaning-related vocabulary (FR)](http://fr.wiktionary.org/wiki/Modèle:-voc-).
 3. [Lexical class](http://en.wikipedia.org/wiki/Part_of_speech) (noun, adjective, verb…).
+4. Pronunciation.
 
 Example
 -------
@@ -45,7 +46,7 @@ All necessary dependencies are in the `lib` folder, and the API itself is availa
 
 ### Acquiring an already parsed database ###
 
-This is clearly the preferred method, as it will allow you to skip the long task of parsing the Wiktionary yourself. As long as our servers can handle the load, you can download the [full French Wiktionary database](http://dl.mattischneider.fr/semwiktionary/) as an archive.
+This is clearly the preferred method, as it will allow you to skip the burden of parsing the Wiktionary yourself. As long as our servers can handle the load, you can download the [full French Wiktionary database](http://dl.mattischneider.fr/semwiktionary/) as an archive.
 **Make sure to download the same database version as your access library version.**
 
 You will then have to move the contents of the archive in a `data` folder in the deflated API archive, in order to get the following file hierarchy:

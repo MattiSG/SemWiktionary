@@ -68,22 +68,9 @@ li {
 	margin-bottom: 1em;
 }
 
-ul.examples {
+p.detail {
 	font-style: italic;
-	padding-left: 0;
-	list-style-type: none;
-}
-
-ul.examples li {
 	font-size: 80%;
-}
-
-ul.examples li:before {
-	content: "“";
-}
-
-ul.examples li:after {
-	content: "”";
 }
 
 /*** DETAILS ***/

@@ -107,6 +107,7 @@ p.detail {
 #details section {
 	padding-top: 2em;
 	padding-bottom: 2em;
+	clear: both;
 }
 
 #details p {

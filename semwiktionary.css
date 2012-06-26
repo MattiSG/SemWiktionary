@@ -3,7 +3,7 @@ body {
 	background-image: url(img/paper.png);
 	width: 100%;
 	padding: 0;
-	margin: 0;
+	margin: 1em 0 0 0;
 }
 
 section {
@@ -40,7 +40,9 @@ a:hover {
 
 /*** HEADER ***/
 h1 {
-	margin-bottom: 0;
+	margin: 0;
+	padding-top: .5em;
+	padding-left: 3em;
 	line-height: 1.2;
 }
 
@@ -58,9 +60,9 @@ h1 {
 }
 
 #logo {
-	float: right;
-	max-width: 4em;
-	max-height: 4em;
+	float: left;
+	max-width: 3em;
+	max-height: 3em;
 }
 
 /*** DEFINITIONS ***/
@@ -143,7 +145,7 @@ hr {
 	width: 12em;
 	text-align: center;
 	font-size: 80%;
-	padding: .7em 0;
+	padding: .5em 0;
 	
 	background-color: #62b0ff;
 }
